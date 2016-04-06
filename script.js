@@ -6,6 +6,20 @@ var numSubtasks = 0;
 
 var personaShown = 0; //toggle when user clicks view/hide persona button
 
+/* This stuff needs to run when the extension starts */
+
+function init(){
+	//start up the sidebar
+	toggleSidebar();
+	var sidebardom =$("#mySidebar").get();
+	//$("#welcomeText").hide();
+	console.log(sidebardom);
+	
+}
+init();
+
+
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.greeting == "takeScreenShot"){
@@ -383,7 +397,42 @@ function toggleSidebar() {
 		";
 		document.body.appendChild(sidebar);
 		sidebarOpen = true;
-		$("#mySidebar").html('<!DOCTYPE html> <html> 	<head> 		<link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.css"> 		<link rel="stylesheet" href="styles.css"> 		<script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script> 		<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script> 		<script src="popup.js"></script> 		<title>GenderMag</title> 	</head>  	<body> 		<span id="welcomeText">Welcome to the GenderMag Tool</span> 		 		<hr> 		 		<p id="beginSetup">Before you get started with the GenderMag walkthrough, 		please record some information that will help identify this session.</p> 		 		<div id="getTeam"> 			<label id="teamPrompt">What is the name of your team?</label><br> 			<input id="teamInput" type="text" placeholder="eg Mobile Group"> 			<input type="submit" id="submitTeam"><br> 		</div> 		 		<span class="setup" id="teamName"></span><br> 		 		<div id="getPersona"> 			<label id="personaPrompt">Select a Persona</label> 			<select id="personaSelection" name="persona"> 				<option value="Abby">Abby</option> 				<option value="Tim">Tim</option> 				<option value="Patrick">Patrick</option> 				<option value="Patricia">Patricia</option> 			</select> 		 			<button id="submitPersona">Submit</button><br> 		</div> 		 		<button id="viewPersona" personaShown="false"></button><br>		 		 		<span class="setup" id="personaName"></span> 		<span class="setup" id="taskName"></span> 		 		<div id="getTask"> 			<label id="taskPrompt"></label><br> 			<input id="taskInput" type="text" placeholder="eg Needs to fire Sue"> 			<input type="submit" id="submitTask" value="Create Scenario"><br> 		</div> 		 				 		<div class="accordion" id="subtasks"> 		</div> 			 		<div id="getSubtask"> 			<div id="subtaskPrompt"></div> 			<input id="subtaskInput" type="text" placeholder="eg Search for \'Sue\'"> 			<input type="submit" id="submitSubtask" value="Add Subgoal"> 		</div> 		 		<button id="saveAndExit">Save and Exit</button>  	</body> </html>');	
+		
+		var welcomeText = $("<span/>", {
+			id: "welcomeText",
+			html: "Welcome to the GenderMag Tool"
+		}).appendTo($("#mySidebar"));
+		
+		$("#mySidebar").append("<hr>");
+		
+		var beginSetup = $("<p/>", {
+			id: "beginSetup",
+			html: "Before you get started with the GenderMag walkthrough, please record some information that will help identify this session."
+		}).appendTo($("#mySidebar"));
+		
+		var getTeam = $("<div/>", {
+			id: "getTeam",
+			html: "Welcome to the GenderMag Tool"
+		}).appendTo($("#mySidebar"));
+		
+		$("#getTeam").append("<br>");
+		
+		var teamPrompt = $("<label/>", {
+			id: "teamPrompt",
+			html: "What is the name of your team?"
+		}).appendTo(getTeam);
+		
+		var teamInput = $("<input/>", {
+			id: "teamInput",
+			type: "text",
+			placeholder: "eg Mobile Group",
+			html: "What is the name of your team?"
+		}).appendTo(getTeam);
+		
+		$("#getTeam").append("<br>");
+		
+		
+		//$("#mySidebar").html('<span class="setup" id="teamName"></span><br> 		 		<div id="getPersona"> 			<label id="personaPrompt">Select a Persona</label> 			<select id="personaSelection" name="persona"> 				<option value="Abby">Abby</option> 				<option value="Tim">Tim</option> 				<option value="Patrick">Patrick</option> 				<option value="Patricia">Patricia</option> 			</select> 		 			<button id="submitPersona">Submit</button><br> 		</div> 		 		<button id="viewPersona" personaShown="false"></button><br>		 		 		<span class="setup" id="personaName"></span> 		<span class="setup" id="taskName"></span> 		 		<div id="getTask"> 			<label id="taskPrompt"></label><br> 			<input id="taskInput" type="text" placeholder="eg Needs to fire Sue"> 			<input type="submit" id="submitTask" value="Create Scenario"><br> 		</div> 		 				 		<div class="accordion" id="subtasks"> 		</div> 			 		<div id="getSubtask"> 			<div id="subtaskPrompt"></div> 			<input id="subtaskInput" type="text" placeholder="eg Search for \'Sue\'"> 			<input type="submit" id="submitSubtask" value="Add Subgoal"> 		</div> 		 		<button id="saveAndExit">Save and Exit</button>');	
 		
 	}
 }

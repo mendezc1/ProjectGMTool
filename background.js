@@ -8,7 +8,7 @@ console.log( 'Background.html starting!' );
 		chrome.pageAction.show(tab.id);
 	});
 	
-	chrome.tabs.onUpdated.addListener(function() {
+/*	chrome.tabs.onUpdated.addListener(function() {
 	  //chrome.tabs.executeScript(null, { file: "./jquery-ui-1.11.4.custom/jquery-ui.js" }, function() {
 		chrome.tabs.getSelected(null, function(tab) {
 			chrome.tabs.sendRequest(
@@ -24,7 +24,8 @@ console.log( 'Background.html starting!' );
 		});
 	  //});   
 	});
-	/*Send request to current tab when page action is clicked*/
+
+*/	/*Send request to current tab when page action is clicked*/
 	chrome.pageAction.onClicked.addListener(function(tab) {
 		chrome.tabs.getSelected(null, function(tab) {
 			chrome.tabs.sendRequest(
