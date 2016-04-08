@@ -393,7 +393,8 @@ function toggleSidebar() {
 		$("#beginSetup").hide();
 		$("#getTeam").hide();
 		$("#teamName").hide();
-		$("#toggleSidebar").html("Open Sidebar")
+		//charles writes a function here
+		$("#toggleSidebar").html("Open Sidebar");
 		sidebarOpen = false;
 		
 	}
@@ -495,9 +496,7 @@ function toggleSidebar() {
 		var personaSelectionPatricia = $("<option/>", {
 			value: "Patricia",
 			html: "Patricia"
-		}).appendTo(personaSelection);
-		
-		$("#getPersona").append("<br>");
+		}).appendTo(personaSelection);		
 		
 		var submitPersona = $("<input/>", { 
 			class: "submitPersona", 
@@ -505,8 +504,14 @@ function toggleSidebar() {
 			value: "Submit" 
 		}).appendTo(getPersona);
 		
+		$("#getPersona").append("<br>");
+		
 		//Chris: add persona submission logic here
-		/*****************************************/
+		$(submitPersona).click(function() {
+			var personaName = $(personaSelection).val();
+			$("#getPersona").html("Persona Name: " + personaName);
+		});
+		
 		
 		$("#getPersona").append("<br>");
 		
