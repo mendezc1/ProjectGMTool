@@ -512,15 +512,80 @@ function toggleSidebar() {
 			$("#getPersona").html("Persona Name: " + personaName);
 		});
 		
-		
-		$("#getPersona").append("<br>");
-		
-		
-		
+		var viewPersona = $("<button/>", {
+			id: "viewPersona",
+			personaShown: "false"
+		}).appendTo("#mySidebar");
 
-		//$("#mySidebar").html('	<button id="viewPersona" personaShown="false"></button><br>		 		 		<span class="setup" id="personaName"></span> 		<span class="setup" id="taskName"></span> 		 		<div id="getTask"> 			<label id="taskPrompt"></label><br> 			<input id="taskInput" type="text" placeholder="eg Needs to fire Sue"> 			<input type="submit" id="submitTask" value="Create Scenario"><br> 		</div> 		 				 		<div class="accordion" id="subtasks"> 		</div> 			 		<div id="getSubtask"> 			<div id="subtaskPrompt"></div> 			<input id="subtaskInput" type="text" placeholder="eg Search for \'Sue\'"> 			<input type="submit" id="submitSubtask" value="Add Subgoal"> 		</div> 		 		<button id="saveAndExit">Save and Exit</button>');
-		
-		
+		$("#mySidebar").append("<br>");
+
+		var personaName = $("<span/>", {
+			id: "personaName",
+			class: "setup"
+		}).appendTo($("#mySidebar"));
+
+		var taskName = $("<span/>", {
+			id: "taskName",
+			class: "setup"
+		}).appendTo($("#mySidebar"));
+
+		var getTask = $("<div/>", {
+			id: "getTask"
+		}).appendTo($("#mySidebar"));
+
+		var taskPrompt = $("<label/>", {
+			id: "taskPrompt",
+		}).appendTo(getTask);	
+
+		$("#getTeam").append("<br>");
+
+		var taskInput = $("<input/>", {
+			id: "taskInput",
+			type: "text",
+			placeholder: "eg Needs to fire Sue"
+		}).appendTo(getTask);	
+
+		var submitTask = $("<input/>", {
+			type: "submit",
+			id: "submitTask",
+			value: "Create Scenario"
+		}).appendTo(getTask);
+				
+		$(getTask).append("<br>");
+
+		var subtasks = $("<div/>", {
+			class: "accordion",
+			id: "subtasks"
+		});
+
+		var getSubtask = $("<div/>", {
+			id: "getSubtask"
+		}).appendTo($("#mySidebar"));
+
+		var subtaskPrompt = $("<div/>", {
+			id: "subtaskPrompt"
+		}).appendTo($(getSubtask));
+
+		var subtaskInput = $("<input/>", {
+			id: "subtaskInput",
+			type: "text",
+			placeholder: "eg Search for 'Sue'"
+		}).appendTo(getSubtask);
+
+		var submitSubtask = $("<input/>", { 
+			class: "submitSubtask", 
+			type: "submit", 
+			value: "Add Subgoal" 
+		}).appendTo(getSubtask);
+
+		var saveAndExit = $("<button/>", {
+			id: "saveAndExit",
+			html: "Save and Exit"
+			
+		}).appendTo($("#mySidebar"));
+
+		$("#getPersona").append("<br>");
+				
 		var closeSidebar = $("<button/>", {
 			id: "toggleSidebar",
 			html: "Close Sidebar"
