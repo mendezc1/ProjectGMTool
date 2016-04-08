@@ -464,6 +464,57 @@ function toggleSidebar() {
 			$("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
 		});
 		
+		$("#getTeam").append("<br>");
+		
+		var getPersona = $("<div/>", {
+			id: "getPersona"
+		}).appendTo($("#mySidebar"));
+		
+		var personaPrompt = $("<label/>", {
+			id: "personaPrompt",
+			html: "Select a Persona"
+		}).appendTo(getPersona);
+		
+		var personaSelection = $("<select/>", {
+			id: "personaSelection",
+			name: "persona"
+		}).appendTo(getPersona);
+		
+		var personaSelectionAbby = $("<option/>", {
+			value: "Abby",
+			html: "Abby"
+		}).appendTo(personaSelection);
+		var personaSelectionTim = $("<option/>", {
+			value: "Tim",
+			html: "Tim"
+		}).appendTo(personaSelection);
+		var personaSelectionPatrick = $("<option/>", {
+			value: "Patrick",
+			html: "Patrick"
+		}).appendTo(personaSelection);
+		var personaSelectionPatricia = $("<option/>", {
+			value: "Patricia",
+			html: "Patricia"
+		}).appendTo(personaSelection);
+		
+		$("#getPersona").append("<br>");
+		
+		var submitPersona = $("<input/>", { 
+			class: "submitPersona", 
+			type: "submit", 
+			value: "Submit" 
+		}).appendTo(getPersona);
+		
+		//Chris: add persona submission logic here
+		/*****************************************/
+		
+		$("#getPersona").append("<br>");
+		
+		
+		
+
+		//$("#mySidebar").html('	<button id="viewPersona" personaShown="false"></button><br>		 		 		<span class="setup" id="personaName"></span> 		<span class="setup" id="taskName"></span> 		 		<div id="getTask"> 			<label id="taskPrompt"></label><br> 			<input id="taskInput" type="text" placeholder="eg Needs to fire Sue"> 			<input type="submit" id="submitTask" value="Create Scenario"><br> 		</div> 		 				 		<div class="accordion" id="subtasks"> 		</div> 			 		<div id="getSubtask"> 			<div id="subtaskPrompt"></div> 			<input id="subtaskInput" type="text" placeholder="eg Search for \'Sue\'"> 			<input type="submit" id="submitSubtask" value="Add Subgoal"> 		</div> 		 		<button id="saveAndExit">Save and Exit</button>');
+		
 		
 		var closeSidebar = $("<button/>", {
 			id: "toggleSidebar",
@@ -473,7 +524,7 @@ function toggleSidebar() {
 		$(closeSidebar).click(function(){
 			toggleSidebar();
 		});
-		//$("#mySidebar").html('<span class="setup" id="teamName"></span><br> 		 		<div id="getPersona"> 			<label id="personaPrompt">Select a Persona</label> 			<select id="personaSelection" name="persona"> 				<option value="Abby">Abby</option> 				<option value="Tim">Tim</option> 				<option value="Patrick">Patrick</option> 				<option value="Patricia">Patricia</option> 			</select> 		 			<button id="submitPersona">Submit</button><br> 		</div> 		 		<button id="viewPersona" personaShown="false"></button><br>		 		 		<span class="setup" id="personaName"></span> 		<span class="setup" id="taskName"></span> 		 		<div id="getTask"> 			<label id="taskPrompt"></label><br> 			<input id="taskInput" type="text" placeholder="eg Needs to fire Sue"> 			<input type="submit" id="submitTask" value="Create Scenario"><br> 		</div> 		 				 		<div class="accordion" id="subtasks"> 		</div> 			 		<div id="getSubtask"> 			<div id="subtaskPrompt"></div> 			<input id="subtaskInput" type="text" placeholder="eg Search for \'Sue\'"> 			<input type="submit" id="submitSubtask" value="Add Subgoal"> 		</div> 		 		<button id="saveAndExit">Save and Exit</button>');	
+			
 		console.log("end of if");
 	}		
 }
