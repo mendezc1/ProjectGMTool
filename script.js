@@ -3,7 +3,7 @@ var pronoun = "";
 var possessive = "";
 var numScreenShots = 0;
 var numSubtasks = 0;
-
+var sidebarOpen = false;
 var personaShown = 0; //toggle when user clicks view/hide persona button
 
 /* This stuff needs to run when the extension starts */
@@ -20,18 +20,6 @@ init();
 
 
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.greeting == "takeScreenShot"){
-      	takeScreenShot();
-		console.log("useraction ", request.userAction); //TAYLOR! This is the action the user took
-		//$("#subtaskInput").val("Clicked button");  // TAYLOR! This is what I've tried so far to get the text box filled 
-
-		sendResponse({farewell: "Screenshot taken"});
-	}
-	
-});
-
 function today() {
 	var date = new Date();
 	var month = date.getMonth() + 1;
@@ -46,26 +34,16 @@ function now() {
 	return date.getHours() + ":" + date.getMinutes();
 }
 
-
 function callOverlay(){
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {greeting: "overlayScreen", closeSidebar: personaShown, selection: personaName}, function(response) {
-			chrome.extension.getBackgroundPage().console.log("response from script.js ", response);
-			if(response.farewell == "removeScreenShotButton"){
-				chrome.extension.getBackgroundPage().console.log("renaming screenshot button");
-				$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
-				numScreenShots++;
-			}
-		});
-	});
-	
+	$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
+	numScreenShots++;
 }
 
 
 function takeScreenShot() {
 	chrome.windows.getCurrent(function (win) {    
     	chrome.tabs.captureVisibleTab(win.id,{"format": "png"}, function(imgUrl) {
-            chrome.extension.getBackgroundPage().console.log("The image url", imgUrl);   //TAYLOR! This code is what I've tried so far to put a link to the screenshot near the retake screenshot button.
+            chrome.extension.getBackgroundPage().console.log("The image url", imgUrl);  
 			var screenShotLink = $("<a>", {
 				id: "screenShotLink" + numSubtasks + "-" + numScreenShots,
 				html: "Click here, then show me the action",
@@ -282,8 +260,7 @@ function addQuestions(element, questions, actionNum) {
 		class: "responseBoxLabel"
 	}).appendTo(container);
 		
-	//Add label for "Yes" checkbox
-	//	var yesLabel = $("<span/>", { html: "Yes" }).appendTo(container);
+
 		
 		$("<br>").appendTo(container);
 		//Add response field for yes
@@ -293,21 +270,11 @@ function addQuestions(element, questions, actionNum) {
 			placeholder: "Why?",
 		}).appendTo(container);
 		
-	//	$("<br>").appendTo(container);
+
 		
 		
 		
-		//Add "No" checkbox
-/*		var noCheckbox = $("<input/>", {
-			id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "noCheckbox",
-			type: "checkbox",
-		    value: "No"
-		}).appendTo(container);
-*/		
-		//Add label for "No" checkbox
-		//var noLabel = $("<span/>", { html: "No" }).appendTo(container);
-		
-		//$("<br>").appendTo(container);
+
 		
 		//Add response field for no
 		var noResponse = $("<textArea/>", {
@@ -315,20 +282,7 @@ function addQuestions(element, questions, actionNum) {
 			placeholder: "Why not?",
 			class: "responseBox"
 		}).appendTo(container);
-		
-		//$("<br>").appendTo(container);
-		
-		//Add "Maybe" checkbox
-		/*var noCheckbox = $("<input/>", {
-			id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "maybeCheckbox",
-			type: "checkbox",
-		    value: "Maybe"
-		}).appendTo(container);
-		*/
-		//Add label for "Maybe" checkbox
-		//var noLabel = $("<span/>", { html: "Maybe" }).appendTo(container);
-		
-		//$("<br>").appendTo(container);
+
 		
 		//Add response field for maybe
 		var noResponse = $("<textArea/>", {
@@ -337,16 +291,7 @@ function addQuestions(element, questions, actionNum) {
 			class: "responseBox"
 		}).appendTo(container);
 		
-	//	$("<br>").appendTo(container);
-		/*
-		//Add checkboxes for Yes facets
-		addFacetCheckboxes(yesFacets, i, actionNum, "Y");
-		yesFacets.appendTo(container);
-		
-		//Add checkboxes for No facets
-		addFacetCheckboxes(noFacets, i, actionNum, "N");
-		noFacets.after(yesFacets);
-		*/
+
 		var question = $("<span/>", { html: "Which of the persona's facets did you use to answer the above question?" }).appendTo(container);
 		question.addClass("cwQuestion");
 		//Add checkboxes for Maybe facets
@@ -355,11 +300,7 @@ function addQuestions(element, questions, actionNum) {
 					
 		container.appendTo(element);
 	}
-//	var removeSubtask = $("<button>", {
-//		class: "removeSubtask",
-//		id: "Remove" + numSubtasks,
-//		html: "Remove This Subgoal"
-//	}).appendTo(container);
+
 }
 
 /*Handle requests from background.html*/
@@ -375,20 +316,16 @@ function handleRequest(
 chrome.extension.onRequest.addListener(handleRequest);
 
 /*Small function wich create a sidebar(just to illustrate my point)*/
-var sidebarOpen = true;
+
 function toggleSidebar() {
 	if(sidebarOpen) {
+		console.log("in if");
 		var el = document.getElementById('mySidebar');
-		el.style.cssText = "\
-			position:fixed;\
-			top:30%;\
-			bottom:30%;\
-			width:3%;\
-			height:20%\
-			background:white;\
-			box-shadow:inset 0 0 1em black;\
-			z-index:999999;\
-		"
+		el.style.top = "30%";
+		el.style.bottom = "30%";
+		el.style.width = "5%";
+		el.style.height = "20%"
+
 		$("#welcomeText").hide();
 		$("#beginSetup").hide();
 		$("#getTeam").hide();
@@ -404,14 +341,16 @@ function toggleSidebar() {
 		var sidebar = document.createElement('div');
 		sidebar.id = "mySidebar";
 		sidebar.style.cssText = "\
+			top: 0px;\
+			left: 0px;\
 			position:fixed;\
-			top:0px;\
-			left:0px;\
 			width:30%;\
 			height:100%;\
-			background:white;\
-			box-shadow:inset 0 0 1em black;\
-			z-index:999999;\
+			overflow:auto;\
+			border-right:2px ridge #fe9;\
+			padding:20px;\
+			background-color: white;\
+			z-index: 9999999;\
 		";
 		document.body.appendChild(sidebar);
 		sidebarOpen = true;
@@ -499,19 +438,14 @@ function toggleSidebar() {
 		}).appendTo(personaSelection);		
 		
 		var submitPersona = $("<input/>", { 
+			id: "submitPersona",
 			class: "submitPersona", 
 			type: "submit", 
 			value: "Submit" 
 		}).appendTo(getPersona);
 		
 		$("#getPersona").append("<br>");
-		
-		//Chris: add persona submission logic here
-		$(submitPersona).click(function() {
-			var personaName = $(personaSelection).val();
-			$("#getPersona").html("Persona Name: " + personaName);
-		});
-		
+	
 		var viewPersona = $("<button/>", {
 			id: "viewPersona",
 			personaShown: "false"
@@ -519,7 +453,7 @@ function toggleSidebar() {
 
 		$("#mySidebar").append("<br>");
 
-		var personaName = $("<span/>", {
+		var personaName2 = $("<span/>", {
 			id: "personaName",
 			class: "setup"
 		}).appendTo($("#mySidebar"));
@@ -529,6 +463,7 @@ function toggleSidebar() {
 			class: "setup"
 		}).appendTo($("#mySidebar"));
 
+		
 		var getTask = $("<div/>", {
 			id: "getTask"
 		}).appendTo($("#mySidebar"));
@@ -554,9 +489,9 @@ function toggleSidebar() {
 		$(getTask).append("<br>");
 
 		var subtasks = $("<div/>", {
-			class: "accordion",
-			id: "subtasks"
-		});
+			id: "subtasks",
+			class: "accordion"
+		}).appendTo($("#mySidebar"));
 
 		var getSubtask = $("<div/>", {
 			id: "getSubtask"
@@ -573,10 +508,12 @@ function toggleSidebar() {
 		}).appendTo(getSubtask);
 
 		var submitSubtask = $("<input/>", { 
+			id: "submitSubtask",
 			class: "submitSubtask", 
 			type: "submit", 
 			value: "Add Subgoal" 
 		}).appendTo(getSubtask);
+		
 
 		var saveAndExit = $("<button/>", {
 			id: "saveAndExit",
@@ -585,107 +522,55 @@ function toggleSidebar() {
 		}).appendTo($("#mySidebar"));
 
 		$("#getPersona").append("<br>");
-				
+		
+
+		//Get persona name
+		$("#submitPersona").click(function() {
+			personaName = $("#personaSelection").val();
+			$("#personaName").html("Persona Name: " + personaName + "<br>");
+			if ((personaName == "Tim") || (personaName == "Patrick")) {
+				pronoun = "he";
+				possessive = "his";
+			} else {
+				pronoun = "she";
+				possessive = "her";
+			}
+		
+			$("#getPersona").children().remove();
+			$("#getPersona").remove();
+		
+			//Show task
+			$("#getTask").children().fadeTo(500, 1).attr("disabled", false);
+			$("#taskPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
+			//Show button to view persona
+			$("#viewPersona").show().html("Show " + personaName);
+			personaShown = true;
+		});
+	
+		//Get task name
+		$('#submitTask').click(function() {
+			var taskName = $("#taskInput").val();
+			$("#taskName").html("Scenario Description: " + taskName);
+			
+			$("#getTask").children().remove();
+			$("#getTask").remove();
+		
+			//Show subtask
+			$("#getSubtask").children().fadeTo(500, 1).attr("disabled",  false);
+			$("#beginSetup").remove();
+			$("#subtaskPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+		});
+		
 		var closeSidebar = $("<button/>", {
-			id: "toggleSidebar",
-			html: "Close Sidebar"
+				id: "toggleSidebar",
+				html: "Close Sidebar"
 		}).appendTo("#mySidebar");
 		
 		$(closeSidebar).click(function(){
 			toggleSidebar();
 		});
-			
-		console.log("end of if");
-	}		
-}
-
-
-$(document).ready(function() {
-	console.log("ayy");
-	
-	//Reload previous html
-	var prevHTML = localStorage.getItem("popupHTML");
-	if (prevHTML != null) {
-	
-		$("body").html(prevHTML);
-		//Restore user input (state before they clicked away from popup)
-		$(document).each(function() {
-			allInput = ($(this).find(':input'));
-		});
-	
-		for (var i = 0; i < allInput.length; i++) {
-			var id = allInput[i]["id"];
-			var type = allInput[i]["type"]
 		
-			var value = localStorage.getItem(id);
-			
-			if (type == "checkbox") {
-				$("#" + id).attr("checked", $.parseJSON(value)); //convert string to bool
-			} else if (type != "submit") {
-				$("#" + id).val(value);
-			}
-		}
-    	
-    	//Restore global variables
-    	personaName = localStorage.getItem("personaName");
-    	pronoun = localStorage.getItem("pronoun");
-    	possessive = localStorage.getItem("possessive");
-    	numSubtasks = localStorage.getItem("numSubtasks");
-    	//personaShown = localStorage.getItem("personaShown");
-    	
-	} else {
 		
-		$("#viewPersona").hide();
-		$("#getPersona").children().fadeTo(0, 0.6).attr("disabled",  true);
-		$("#getTask").children().fadeTo(0, 0.6).attr("disabled",  true);
-		$("#getSubtask").children().fadeTo(0, 0.6).attr("disabled",  true);
-	}
-	
-	//According menu
-    $(function() {
-    	$(".accordion").accordion({ heightStyle: "content", collapsible: true });
-  	});
-
-
-	
-	//Get persona name
-	$("#submitPersona").click(function() {
-		personaName = $("#personaSelection").val();
-		$("#personaName").html("Persona Name: " + personaName + "<br>");
-		
-		if ((personaName == "Tim") || (personaName == "Patrick")) {
-			pronoun = "he";
-			possessive = "his";
-		} else {
-			pronoun = "she";
-			possessive = "her";
-		}
-		
-		$("#getPersona").children().remove();
-		$("#getPersona").remove();
-		
-		//Show task
-		$("#getTask").children().fadeTo(500, 1).attr("disabled", false);
-		$("#taskPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
-		//Show button to view persona
-		$("#viewPersona").show().html("Show " + personaName);
-		personaShown = true;
-	});
-	
-	//Get task name
-	$('#submitTask').click(function() {
-		var taskName = $("#taskInput").val();
-		$("#taskName").html("Scenario Description: " + taskName);
-		
-		$("#getTask").children().remove();
-		$("#getTask").remove();
-		
-		//Show subtask
-		$("#getSubtask").children().fadeTo(500, 1).attr("disabled",  false);
-		$("#beginSetup").remove();
-		$("#subtaskPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
-	});
-	
 	//Get Subtask
 	$("#submitSubtask").click(function() {
 		numSubtasks++;
@@ -713,9 +598,7 @@ $(document).ready(function() {
 		                possessive + " overall goal?<br>"];
 		
 		addQuestions(questionContainer, question, 0);
-			
-		
-
+					
 		//Container to hold ideal actions (questions and responses) for this subtask
 		var idealActions = $("<div/>", { id: "S" + numSubtasks + "Actions" });
 		
@@ -738,13 +621,7 @@ $(document).ready(function() {
 		//Reset subtask form
 		$("#subtaskInput").val("");
 		$("#subtaskPrompt").html("Are there any more subgoals?");
-		$("#submitSubtask").val("Add New Subgoal");
-				
-	//	$(".screenShot").click(function(){
-	//		callOverlay();
-	//	});
-		
-		
+		$("#submitSubtask").val("Add New Subgoal");								
 	});
 	
 	//Show persona details
@@ -756,15 +633,12 @@ $(document).ready(function() {
 			personaShown = true;
 			$(this).html("Show " + personaName);
 		}
-		
-		//Open persona view
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, {greeting: "toggleSidebar", selection: personaName}, function(response) {
-				chrome.extension.getBackgroundPage().console.log("resp ", response);
-			});
-		});
 	});
-	
+			//According menu
+		$(function() {
+			$(".accordion").accordion({ heightStyle: "content", collapsible: true });
+		});
+		
 	//Add ideal action
 	$("body").on("click", "input.submitAction", function() {
 		//Current subgoal
@@ -877,7 +751,60 @@ $(document).ready(function() {
 		localStorage.clear();		
 	});
 	
-});
+
+		
+		console.log("end of if");
+	}	
+}
+
+
+$(document).ready(function() {
+	console.log("ayy");
+	
+	//Reload previous html
+	var prevHTML = localStorage.getItem("popupHTML");
+	if (prevHTML != null) {
+	
+		$("body").html(prevHTML);
+		//Restore user input (state before they clicked away from popup)
+		$(document).each(function() {
+			allInput = ($(this).find(':input'));
+		});
+	
+		for (var i = 0; i < allInput.length; i++) {
+			var id = allInput[i]["id"];
+			var type = allInput[i]["type"]
+		
+			var value = localStorage.getItem(id);
+			
+			if (type == "checkbox") {
+				$("#" + id).attr("checked", $.parseJSON(value)); //convert string to bool
+			} else if (type != "submit") {
+				$("#" + id).val(value);
+			}
+		}
+    	
+    	//Restore global variables
+    	personaName = localStorage.getItem("personaName");
+    	pronoun = localStorage.getItem("pronoun");
+    	possessive = localStorage.getItem("possessive");
+    	numSubtasks = localStorage.getItem("numSubtasks");
+    	//personaShown = localStorage.getItem("personaShown");
+    	
+	} else {
+		
+		$("#viewPersona").hide();
+		$("#getPersona").children().fadeTo(0, 0.6).attr("disabled",  true);
+		$("#getTask").children().fadeTo(0, 0.6).attr("disabled",  true);
+		$("#getSubtask").children().fadeTo(0, 0.6).attr("disabled",  true);
+	}
+	
+
+
+
+	
+
+});	
 
 // When user clicks off of tool or closes tool
 $(window).unload(function () {
