@@ -17,8 +17,24 @@ function init(){
 	
 }
 init();
+function collapseSidebar(e){
+	$("#mySidebar").children().each(function(){
+		$(this).hide();
+	});
+	$("#mySidebar").animate({width: "1%",
+    height: "10%"}, 400);
+	e.stopPropagation();
+	$("#mySidebar").on("click",function(e) {
+		$("#mySidebar").animate({,height:"100%"}, 400);
+		$("#mySidebar").children().each(function(){
+			$(this).show();
+		});
+		e.stopPropagation();
+		$("#mySidebar").prop('onclick',null).off('click');
+	
+	})
 
-
+}
 
 function today() {
 	var date = new Date();
@@ -658,10 +674,9 @@ function toggleSidebar() {
 				html: "Close Sidebar"
 		}).appendTo("#mySidebar");
 		
-		$(closeSidebar).click(function(){
-			toggleSidebar();
+		$(closeSidebar).click(function(e){
+			collapseSidebar(e);
 		});
-		
 		
 	//Get Subtask
 	$("#submitSubtask").click(function() {
