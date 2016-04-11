@@ -511,9 +511,7 @@ function toggleSidebar() {
 			$("#getTeam").children().hide();
 			$("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
 		});
-		
-		$("#getTeam").append("<br>");
-		
+				
 		var getPersona = $("<div/>", {
 			id: "getPersona"
 		}).appendTo($("#mySidebar"));
@@ -552,7 +550,7 @@ function toggleSidebar() {
 			value: "Submit" 
 		}).appendTo(getPersona);
 		
-		$("#getPersona").append("<br>");
+
 	
 		var viewPersona = $("<button/>", {
 			id: "viewPersona",
