@@ -25,12 +25,12 @@ function collapseSidebar(e){
     height: "10%"}, 400);
 	e.stopPropagation();
 	$("#mySidebar").on("click",function(e) {
-		$("#mySidebar").animate({,height:"100%"}, 400);
+		$("#mySidebar").animate({width : "400px",height:"100%"}, 400);
 		$("#mySidebar").children().each(function(){
 			$(this).show();
 		});
-		e.stopPropagation();
 		$("#mySidebar").prop('onclick',null).off('click');
+		e.stopPropagation();
 	
 	})
 
