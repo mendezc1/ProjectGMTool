@@ -25,15 +25,20 @@ function collapseSidebar(e){
     height: "10%"}, 400);
 	e.stopPropagation();
 	$("#mySidebar").on("click",function(e) {
-		$("#mySidebar").animate({width : "400px",height:"100%"}, 400);
+		expandSidebar();
+		e.stopPropagation();
+	})
+	sidebarOpen = false;
+
+}
+
+function expandSidebar(){
+	$("#mySidebar").animate({width : "400px",height:"100%"}, 400);
 		$("#mySidebar").children().each(function(){
 			$(this).show();
 		});
 		$("#mySidebar").prop('onclick',null).off('click');
-		e.stopPropagation();
-	
-	})
-
+		sidebarOpen = true;
 }
 
 function today() {
@@ -422,8 +427,20 @@ function handleRequest(
 	//These last two ones isn't important for this example, if you want know more about it visit: http://code.google.com/chrome/extensions/messaging.html
 	sender, sendResponse
 	) {
-	if (request.callFunction == "toggleSidebar")
-		toggleSidebar();
+	if (request.callFunction == "toggleSidebar"){
+		if(sidebarOpen){
+			$(document).ready(function(){
+				$("#mySidebar").hide();
+				sidebarOpen = false;
+			});
+		}
+		else{
+			$(document).ready(function(){
+				$("#mySidebar").show();
+				sidebarOpen = true;
+			});
+		}
+	}
 }
 chrome.extension.onRequest.addListener(handleRequest);
 
@@ -556,8 +573,6 @@ function toggleSidebar() {
 			id: "viewPersona",
 			personaShown: "false"
 		}).appendTo("#mySidebar");
-
-		$("#mySidebar").append("<br>");
 
 		var personaName2 = $("<span/>", {
 			id: "personaName",
