@@ -17,8 +17,8 @@
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js"]
-			
+			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js"],
+			"css": [ "styles.css", "jquery-ui-1.11.4.custom/jquery-ui.css" ]
 		}
 	],
 	"permissions": ["storage", "tabs", "<all_urls>"]

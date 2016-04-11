@@ -1,4 +1,5 @@
 console.log( 'Background.html starting!' );
+var screenShotURL;
 	/*Put page action icon on all tabs*/
 	chrome.tabs.onUpdated.addListener(function(tabId) {
 		chrome.pageAction.show(tabId);
@@ -24,8 +25,24 @@ console.log( 'Background.html starting!' );
 		});
 	  //});   
 	});
-
-*/	/*Send request to current tab when page action is clicked*/
+	
+*/	
+	chrome.runtime.onMessage.addListener(
+		function(request, sender, sendResponse) {
+			if (request.greeting == "takeScreenShot"){	
+				chrome.extension.getBackgroundPage().console.log("After image");
+	
+				chrome.windows.getCurrent(function (win) {    
+				chrome.tabs.captureVisibleTab(win.id,{"format": "png"}, function(imgUrl) {
+					screenShotURL = imgUrl
+					chrome.extension.getBackgroundPage().console.log(screenShotURL);	
+					});    
+				});
+				sendResponse({farewell: screenShotURL});
+			}
+	});
+	
+	/*Send request to current tab when page action is clicked*/
 	chrome.pageAction.onClicked.addListener(function(tab) {
 		chrome.tabs.getSelected(null, function(tab) {
 			chrome.tabs.sendRequest(
