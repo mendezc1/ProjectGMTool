@@ -11,12 +11,10 @@ var personaShown = 0; //toggle when user clicks view/hide persona button
 function init(){
 	//start up the sidebar
 	toggleSidebar();
-	var sidebardom =$("#mySidebar").get();
-	//$("#welcomeText").hide();
-	console.log(sidebardom);
-	
 }
-init();
+$(document).ready(function(){
+	init();
+});
 function collapseSidebar(e){
 	$("#mySidebar").children().each(function(){
 		$(this).hide();
@@ -377,8 +375,6 @@ function addQuestions(element, questions, actionNum) {
 		class: "responseBoxLabel"
 	}).appendTo(container);
 		
-
-		
 		$("<br>").appendTo(container);
 		//Add response field for yes
 		var yesResponse = $("<textArea/>", {
@@ -466,184 +462,19 @@ function toggleSidebar() {
 	}
 	else {
 		console.log("in else");
-		$("#mySidebar").remove();
-		
-		//attempt to make the sidebar resizeable
-		var resizeBar = $("<div/>", {
-			id: "resizeBar" //Not reeses bar ;) 
-		}).appendTo($("body"));
-		
 		var sidebar = $("<div/>", {
 			id: "mySidebar",
-		}).appendTo($("#resizeBar"));
+		}).appendTo($('body'));
 		sidebarOpen = true;
-		
-		
-		
-		var welcomeText = $("<span/>", {
-			id: "welcomeText",
-			html: "Welcome to the GenderMag Tool"
-		}).appendTo($("#mySidebar"));
-		
-		$("#mySidebar").append("<hr>");
-		
-		var beginSetup = $("<p/>", {
-			id: "beginSetup",
-			html: "Before you get started with the GenderMag walkthrough, please record some information that will help identify this session."
-		}).appendTo($("#mySidebar"));
-		
-		var getTeam = $("<div/>", {
-			id: "getTeam"
-		}).appendTo($("#mySidebar"));
-		
-		$("#getTeam").append("<br>");
-		
-		var teamPrompt = $("<label/>", {
-			id: "teamPrompt",
-			html: "What is the name of your team?"
-		}).appendTo(getTeam);
-		
-		var teamInput = $("<input/>", {
-			id: "teamInput",
-			type: "text",
-			placeholder: "eg Mobile Group"
-		}).appendTo(getTeam);
-		
-		var teamSubmit = $("<input/>", { 
-			class: "submitTeam", 
-			type: "submit", 
-			value: "Submit" 
-		}).appendTo(getTeam);
-		
-		
-		$("#getTeam").append("<br>");
-		
-		var teamName = $("<span/>", {
-			id: "teamName"
-		}).appendTo("#mySidebar");
-		
-		$(teamSubmit).click(function() {
+		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/popup.html'), async: false}).responseText;
+		$($.parseHTML(msg)).appendTo("#mySidebar");
+
+		$("#submitTeam").click(function() {
 			var teamName = $(teamInput).val();
 			$("#teamName").html("Team Name: "+ teamName);
 			$("#getTeam").children().hide();
 			$("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
 		});
-				
-		var getPersona = $("<div/>", {
-			id: "getPersona"
-		}).appendTo($("#mySidebar"));
-		
-		var personaPrompt = $("<label/>", {
-			id: "personaPrompt",
-			html: "Select a Persona"
-		}).appendTo(getPersona);
-		
-		var personaSelection = $("<select/>", {
-			id: "personaSelection",
-			name: "persona"
-		}).appendTo(getPersona);
-		
-		var personaSelectionAbby = $("<option/>", {
-			value: "Abby",
-			html: "Abby"
-		}).appendTo(personaSelection);
-		var personaSelectionTim = $("<option/>", {
-			value: "Tim",
-			html: "Tim"
-		}).appendTo(personaSelection);
-		var personaSelectionPatrick = $("<option/>", {
-			value: "Patrick",
-			html: "Patrick"
-		}).appendTo(personaSelection);
-		var personaSelectionPatricia = $("<option/>", {
-			value: "Patricia",
-			html: "Patricia"
-		}).appendTo(personaSelection);		
-		
-		var submitPersona = $("<input/>", { 
-			id: "submitPersona",
-			class: "submitPersona", 
-			type: "submit", 
-			value: "Submit" 
-		}).appendTo(getPersona);
-		
-
-	
-		var viewPersona = $("<button/>", {
-			id: "viewPersona",
-			personaShown: "false"
-		}).appendTo("#mySidebar");
-
-		var personaName2 = $("<span/>", {
-			id: "personaName",
-			class: "setup"
-		}).appendTo($("#mySidebar"));
-
-		var taskName = $("<span/>", {
-			id: "taskName",
-			class: "setup"
-		}).appendTo($("#mySidebar"));
-
-		
-		var getTask = $("<div/>", {
-			id: "getTask"
-		}).appendTo($("#mySidebar"));
-
-		var taskPrompt = $("<label/>", {
-			id: "taskPrompt",
-		}).appendTo(getTask);	
-
-		$("#getTeam").append("<br>");
-
-		var taskInput = $("<input/>", {
-			id: "taskInput",
-			type: "text",
-			placeholder: "eg Needs to fire Sue"
-		}).appendTo(getTask);	
-
-		var submitTask = $("<input/>", {
-			type: "submit",
-			id: "submitTask",
-			value: "Create Scenario"
-		}).appendTo(getTask);
-				
-		$(getTask).append("<br>");
-
-		var subtasks = $("<div/>", {
-			id: "subtasks",
-			class: "accordion"
-		}).appendTo($("#mySidebar"));
-
-		var getSubtask = $("<div/>", {
-			id: "getSubtask"
-		}).appendTo($("#mySidebar"));
-
-		var subtaskPrompt = $("<div/>", {
-			id: "subtaskPrompt"
-		}).appendTo($(getSubtask));
-
-		var subtaskInput = $("<input/>", {
-			id: "subtaskInput",
-			type: "text",
-			placeholder: "eg Search for 'Sue'"
-		}).appendTo(getSubtask);
-
-		var submitSubtask = $("<input/>", { 
-			id: "submitSubtask",
-			class: "submitSubtask", 
-			type: "submit", 
-			value: "Add Subgoal" 
-		}).appendTo(getSubtask);
-		
-
-		var saveAndExit = $("<button/>", {
-			id: "saveAndExit",
-			html: "Save and Exit"
-			
-		}).appendTo($("#mySidebar"));
-
-		$("#getPersona").append("<br>");
-		
 
 		//Get persona name
 		$("#submitPersona").click(function() {
@@ -881,6 +712,11 @@ function toggleSidebar() {
 
 
 $(document).ready(function() {
+	var style = document.createElement('link');
+	style.rel = 'stylesheet';
+	style.type = 'text/css';
+	style.href = chrome.extension.getURL('styles.css');
+	(document.head||document.documentElement).appendChild(style);
 	console.log("ayy");
 	
 	//Reload previous html
