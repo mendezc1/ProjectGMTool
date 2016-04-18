@@ -349,6 +349,52 @@ ul.graph li.facetTinkerAbby {
 #graphContainer{
 }
 
+#mySidebar div.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+#mySidebar div.accordion.active, #mySidebar div.accordion:hover {
+    background-color: #ddd;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+#mySidebar div.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+    opacity: 0;
+}
+
+
+/* The "show" class is added to the accordion panel when the user clicks on one of the buttons. This will show the panel content */
+#mySidebar div.panel.show {
+    opacity: 1;
+    max-height: 500px; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */
+}
+
+#mySidebar div.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+#mySidebar div.accordion.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
 .facetLink{
 }
 

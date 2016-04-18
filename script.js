@@ -15,6 +15,7 @@ function init(){
 $(document).ready(function(){
 	init();
 });
+
 function collapseSidebar(e){
 	$("#mySidebar").children().each(function(){
 		$(this).hide();
@@ -52,148 +53,6 @@ function now() {
 	var date = new Date();
 	return date.getHours() + ":" + date.getMinutes();
 }
-
-function overlayScreen(){
-	$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
-	numScreenShots++;
-	if(!document.getElementById('genderMagCanvasContainer')){
-		console.log("In overlayScreen");
-		var canvasContainer = document.createElement('div');
-			// Add the div into the document
-	}
-	else{
-		var canvasContainer = document.getElementById('genderMagCanvas');	
-	}
-	
-		canvasContainer.id = "genderMagCanvasContainer";
-		canvasContainer.style.position="fixed";
-		// Set to 100% so that it will have the dimensions of the document
-		canvasContainer.style.left="0px";
-		canvasContainer.style.top="0px";
-		canvasContainer.style.width="100%";
-		canvasContainer.style.height="100%";
-		canvasContainer.style.zIndex="1000";
-		document.body.appendChild(canvasContainer);
-		
-		var canvas = document.createElement('canvas');
-		canvas.style.width = canvasContainer.scrollWidth+"px";
-		canvas.style.height = canvasContainer.scrollHeight+"px";
-		canvas.id = "genderMagCanvas";
-		canvas.position = "fixed";
-		canvas.style.cssText = "z-index:100; background:blue; width:100%; height:100%;";
-		canvas.style.opacity = .50;
-		canvas.width=canvasContainer.scrollWidth;
-		canvas.height=canvasContainer.scrollHeight;
-		canvas.style.overflow = 'visible';
-		canvas.style.position = 'fixed';
-		canvasContainer.appendChild(canvas);
-
-
-		var genderMagCanvas = document.getElementById('genderMagCanvas'),
-			ctx = genderMagCanvas.getContext('2d'),
-			rect = {},
-			drag = false;
-		
-	
-		function init() {
-			genderMagCanvas.addEventListener('mousedown', mouseDown, false);
-			genderMagCanvas.addEventListener('mouseup', mouseUp, false);
-			genderMagCanvas.addEventListener('mousemove', mouseMove, false);			
-		}
-		function mouseDown(e) {
-			rect.startX = e.pageX - this.offsetLeft;
-			rect.startY = e.pageY - this.offsetTop;
-			drag = true;
-		}			
-		function mouseUp(e) {
-			drag = false;
-			console.log(rect);
-			elm = document.elementFromPoint(rect.startX, rect.startY);
-			var elements = new Array();
-			while(elm.id == "genderMagCanvas" || elm.id == "genderMagCanvasContainer" )
-			{
-				elements.push(elm);
-				elm.style.display = "none";
-				elm = document.elementFromPoint(rect.startX, rect.startY);
-			}
-			console.log("element" , elm.innerText, elm.textContent);
-			var highlightClick = document.createElement("div");
-			highlightClick.id = "highlightClick";
-			document.body.appendChild(highlightClick);
-			highlightClick.style.left = rect.startX-40 + "px";
-			highlightClick.style.top = rect.startY-20 + "px";
-			console.log("Clicked ", highlightClick)
-			
-		
-			console.log(elements);
-			for(var element in elements){
-				if(element.id == "genderMagCanvas" || element.id == "genderMagCanvasContainer" ){
-					element.style.display = "default";
-				}
-			}
-		chrome.runtime.sendMessage({greeting: "takeScreenShot", userAction: elm.innerText}, function(response) {
-				
-		});
-			console.log("sending message");
-			setTimeout(function(){
-				document.getElementById("highlightClick").remove();
-			}, 2000);
-		}
-		function mouseMove(e) {
-			if (drag) {
-				rect.w = (e.pageX - this.offsetLeft) - rect.startX;
-				rect.h = (e.pageY - this.offsetTop) - rect.startY ;
-				ctx.clearRect(0,0,canvas.width,canvas.height);
-				draw();
-			}
-		}
-		function draw() {
-			ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);
-		}
-		init();
-
-}
-
-
-function takeScreenShot() {
-	chrome.windows.getCurrent(function (win) {    
-    	chrome.tabs.captureVisibleTab(win.id,{"format": "png"}, function(imgUrl) {
-            chrome.extension.getBackgroundPage().console.log("The image url", imgUrl);  
-			var screenShotLink = $("<a>", {
-				id: "screenShotLink" + numSubtasks + "-" + numScreenShots,
-				html: "Click here, then show me the action",
-				href: imgUrl
-			});
-			$("#screenShot" + numSubtasks + "-" + numScreenShots).append(screenShotLink);
-		});    
-	});
-	numScreenShots++;
-};
-
-//Adds a checkbox for each of the five facets to element
-//Takes question number as input
-function addFacetCheckboxes(element, questionNumber, actionNum, yesNoMaybe) {
-	var questionNumber = questionNumber + 1;
-	
-	var facets = ["Motivation", "Information Processing Style", "Computer Self-Efficacies",
-		"Attitude Towards Risk", "Willingness to Tinker"];
-	
-	for (var facet = 0; facet < facets.length; facet++) {
-		//Checkbox
-		$("<input/>", {
-			id: "S" + numSubtasks + "A" + actionNum + "Q" + questionNumber + yesNoMaybe + "F" + facet,
-			type: "checkbox",
-			value: facets[facet],
-		}).appendTo(element);
-	
-		//Label for Checkbox
-		$("<span/>", { html: facets[facet] }).appendTo(element);
-		
-		$("<br>").appendTo(element);
-	}
-	
-	$("<br>").appendTo(element);
-};
 
 function parseUserInput(allInput) {
 	var taskName = $("#taskName").html();
@@ -345,77 +204,6 @@ function downloadCSV(csvContent) {
 }
 
 
-//Adds a series of questions (array of strings) to element
-//Under each question, adds checkboxes for yes/no response and fields for explanation
-function addQuestions(element, questions, actionNum) {
-
-	for (var i = 0; i < questions.length; i++) {
-		var container = $("<div/>", { id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) });
-		var yesFacets = $("<div/>", { id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "yesFacets" });
-		var noFacets = $("<div/>", { id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "noFacets" });
-		var maybeFacets =$("<div/>", { id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "maybeFacets" });
-		
-		//Add question text
-		var question = $("<span/>", { html: questions[i] }).appendTo(container);
-		question.addClass("cwQuestion");
-	
-		//Add "Yes" checkbox
-	var yesCheckbox = $("<div>", {
-		html: "Yes",
-		class: "responseBoxLabel"
-	}).appendTo(container);
-	
-	var noCheckbox = $("<div>", {
-		html: "No",
-		class: "responseBoxLabel"
-	}).appendTo(container);
-	
-	var maybeCheckbox = $("<div>", {
-		html: "Maybe",
-		class: "responseBoxLabel"
-	}).appendTo(container);
-		
-		$("<br>").appendTo(container);
-		//Add response field for yes
-		var yesResponse = $("<textArea/>", {
-			id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "YesResponse",
-			class: "responseBox",
-			placeholder: "Why?",
-		}).appendTo(container);
-		
-
-		
-		
-		
-
-		
-		//Add response field for no
-		var noResponse = $("<textArea/>", {
-			id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "NoResponse",
-			placeholder: "Why not?",
-			class: "responseBox"
-		}).appendTo(container);
-
-		
-		//Add response field for maybe
-		var noResponse = $("<textArea/>", {
-			id: "S" + numSubtasks + "A" + actionNum + "Q" + (i + 1) + "maybeResponse",
-			placeholder: "Why maybe?",
-			class: "responseBox"
-		}).appendTo(container);
-		
-
-		var question = $("<span/>", { html: "Which of the persona's facets did you use to answer the above question?" }).appendTo(container);
-		question.addClass("cwQuestion");
-		//Add checkboxes for Maybe facets
-		addFacetCheckboxes(maybeFacets, i, actionNum, "M");
-		maybeFacets.appendTo(container);
-					
-		container.appendTo(element);
-	}
-
-}
-
 /*Handle requests from background.html*/
 function handleRequest(
 	//The object data with the request params
@@ -466,7 +254,7 @@ function toggleSidebar() {
 			id: "mySidebar",
 		}).appendTo($('body'));
 		sidebarOpen = true;
-		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/popup.html'), async: false}).responseText;
+		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/templates/popup.html'), async: false}).responseText;
 		$($.parseHTML(msg)).appendTo("#mySidebar");
 
 		$("#submitTeam").click(function() {
@@ -709,8 +497,6 @@ function toggleSidebar() {
 		console.log("end of if");
 	}	
 }
-
-
 $(document).ready(function() {
 	var style = document.createElement('link');
 	style.rel = 'stylesheet';
@@ -756,12 +542,6 @@ $(document).ready(function() {
 		$("#getTask").children().fadeTo(0, 0.6).attr("disabled",  true);
 		$("#getSubtask").children().fadeTo(0, 0.6).attr("disabled",  true);
 	}
-	
-
-
-
-	
-
 });	
 
 // When user clicks off of tool or closes tool

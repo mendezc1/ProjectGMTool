@@ -9,24 +9,7 @@ var screenShotURL;
 		chrome.pageAction.show(tab.id);
 	});
 	
-/*	chrome.tabs.onUpdated.addListener(function() {
-	  //chrome.tabs.executeScript(null, { file: "./jquery-ui-1.11.4.custom/jquery-ui.js" }, function() {
-		chrome.tabs.getSelected(null, function(tab) {
-			chrome.tabs.sendRequest(
-				//Selected tab id
-				tab.id,
-				//Params inside a object data
-				{callFunction: "toggleSidebar"}, 
-				//Optional callback function
-				function(response) {
-					console.log(response);
-				}
-			);
-		});
-	  //});   
-	});
-	
-*/	
+
 	chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
 			if (request.greeting == "takeScreenShot"){	
