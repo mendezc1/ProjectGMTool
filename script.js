@@ -472,7 +472,7 @@ function toggleSidebar() {
 		$("#submitTeam").click(function() {
 			var teamName = $(teamInput).val();
 			$("#teamName").html("Team Name: "+ teamName);
-			$("#getTeam").children().hide();
+			$("#getTeam").remove();
 			$("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
 		});
 

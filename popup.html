@@ -12,19 +12,16 @@
 
 	<body>
 		<div id="welcomeText">Welcome to the GenderMag Tool</div>
-		<br>
-		<hr>
-		
-		<p id="beginSetup">Before you get started with the GenderMag walkthrough,
-		please record some information that will help identify this session.</p>
+		<div id="beginSetup">Before you get started with the GenderMag walkthrough,
+		please record some information that will help identify this session.</div>
 		
 		<div id="getTeam">
 			<label id="teamPrompt">What is the name of your team?</label><br>
 			<input id="teamInput" type="text" placeholder="eg Mobile Group">
-			<input type="submit" id="submitTeam"><br>
+			<button id="submitTeam">Submit</button><br>
 		</div>
 		
-		<span class="setup" id="teamName"></span><br>
+		<div id="teamName"></div>
 		
 		<div id="getPersona">
 			<label id="personaPrompt">Select a Persona</label>
@@ -34,17 +31,13 @@
 				<option value="Patrick">Patrick</option>
 				<option value="Patricia">Patricia</option>
 			</select>
-		
-			<button id="submitPersona">Submit</button><br>
+			<button id="submitPersona">Submit</button>
 		</div>
-		
-		<button id="viewPersona" personaShown="false"></button><br>		
-		
-		<span class="setup" id="personaName"></span>
-		<span class="setup" id="taskName"></span>
+		<div class="setup" id="personaName"><button id="viewPersona" personaShown="false"></button><br></div>
+		<div class="setup" id="taskName"></div>
 		
 		<div id="getTask">
-			<label id="taskPrompt"></label><br>
+			<label id="taskPrompt"></label>
 			<input id="taskInput" type="text" placeholder="eg Needs to fire Sue">
 			<input type="submit" id="submitTask" value="Create Scenario"><br>
 		</div>

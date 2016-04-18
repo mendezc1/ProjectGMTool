@@ -1,3 +1,17 @@
+#mySidebar {
+	top: 0px;
+	right: 0px;
+	position:fixed;
+	width:500px;
+	height:100%;
+	overflow:auto;
+	border: 5px ridge #4099FF;
+	background-color: white;
+	z-index: 9999999;
+	float: right;
+	padding: none;
+	resize:both;
+}
 #mySidebar *{
 animation: none;
 animation-delay: 0;
@@ -20,7 +34,7 @@ background-position-x: 0;
 background-position-y: 0;
 background-repeat: repeat;
 background-size: auto auto;
-border: 0;
+border: none;
 border-style: none;
 border-width: medium;
 border-color: none;
@@ -148,13 +162,20 @@ width: auto;
 word-spacing: normal;
 z-index: auto
 }
-
+#mySidebar div {
+	background-color: white;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
 #popupBody {
 	width: 500px;
 	background-color: #ffffff;
 }
-#mysidebar input.text{
-	outline: 1px black;
+#teamInput{
+	background: white;
+	color:black;
+	outline: 1px groove #ccc;
 }
 #mySidebar button {
     align-items: flex-start;
@@ -193,23 +214,16 @@ div#mySidebar button {
 }
 #welcomeText {
 	font-size: 18px;
-	border-bottom: 1px grey;
+
 }
 
-#beginSetup, #subtaskPrompt {
+#subtaskPrompt {
 	font-size: 13px;
 	border: 3px solid orange;
 	padding: 10px;
 	
 }
 
-.setup{
-	font-size: 16px;
-	background-color: #d8eaff;
-	text-align: center;
-	padding: 5px;
-	margin-bottom: 10px;
-}
 
 .idealActionLabel {
 	font-size: 14px;
@@ -252,20 +266,7 @@ div#mySidebar button {
 .personaPhotoContainer {
 }
 
-#mySidebar {
-	top: 0px;
-	right: 0px;
-	position:fixed;
-	width:500px;
-	height:100%;
-	overflow:auto;
-	border: 5px ridge #4099FF;
-	padding: 10px;
-	background-color: white;
-	z-index: 9999999;
-	float: right;
-	resize:both;
-}
+
 
 #resizeBar {
 	background-color: purple;
