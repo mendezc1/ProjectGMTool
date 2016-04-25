@@ -250,16 +250,27 @@ function toggleSidebar() {
 	}
 	else {
 		console.log("in else");
-		var sidebar = $("<iframe>", {
+		var sidebarHTML = $("<iframe>", {
 			id: "mySidebar",
 		}).appendTo($('body'));
 		sidebarOpen = true;
 		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/templates/popup.html'), async: false}).responseText;
 		var dataToAppend =$($.parseHTML(msg));
-		$("#mySidebar").contents().find("body").append(dataToAppend);
-		$("#mySidebar").contents().find("#welcomeText").html("hello");
-		$("#submitTeam").click(function() {
-			var teamName = $(teamInput).val();
+		var style = $("<link>", {
+			rel:"stylesheet",
+			href: chrome.extension.getURL('/styles.css')
+		});
+		var jqStyle = $("<link>", {
+			rel:"stylesheet",
+			href: chrome.extension.getURL('/jquery-ui-1.11.4.custom/jquery-ui.css')
+		});
+		var sidebar = $("#mySidebar").contents().find("body");
+		//$("#mySidebar").contents().find("head").attr('href', chrome.extension.getURL('/jquery-ui-1.11.4.custom/jquery-ui.css'));
+		$("#mySidebar").contents().find("head").append(style);
+		sidebar.append(dataToAppend);
+		//sidebar.find("#welcomeText").html("hello");
+		$("#mySidebar").contents().find("#submitTeam").click(function() {
+			var teamName = $("#mySidebar").contents().find("#submitTeam").val();
 			$("#teamName").html("Team Name: "+ teamName);
 			$("#getTeam").remove();
 			$("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);

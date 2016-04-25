@@ -11,248 +11,138 @@
 	float: right;
 	padding: none;
 	resize:both;
-}
-#mySidebar *{
-animation: none;
-animation-delay: 0;
-animation-direction: normal;
-animation-duration: 0;
-animation-fill-mode: none;
-animation-iteration-count: 1;
-animation-name: none;
-animation-play-state: running;
-animation-timing-function: ease;
-backface-visibility: visible;
-background: 0;
-background-attachment: scroll;
-background-clip: border-box;
-background-color: transparent;
-background-image: none;
-background-origin: padding-box;
-background-position: 0 0;
-background-position-x: 0;
-background-position-y: 0;
-background-repeat: repeat;
-background-size: auto auto;
-border: none;
-border-style: none;
-border-width: medium;
-border-color: none;
-border-bottom: 0;
-border-bottom-color: none;
-border-bottom-left-radius: 0;
-border-bottom-right-radius: 0;
-border-bottom-style: none;
-border-bottom-width: medium;
-border-collapse: separate;
-border-image: none;
-border-left: 0;
-border-left-color: none;
-border-left-style: none;
-border-left-width: medium;
-border-radius: 0;
-border-right: 0;
-border-right-color: none;
-border-right-style: none;
-border-right-width: medium;
-border-spacing: 0;
-border-top: 0;
-border-top-color: none;
-border-top-left-radius: 0;
-border-top-right-radius: 0;
-border-top-style: none;
-border-top-width: medium;
-bottom: auto;
-box-shadow: none;
-box-sizing: content-box;
-caption-side: top;
-clear: none;
-clip: auto;
-color: black;
-columns: auto;
-column-count: auto;
-column-fill: balance;
-column-gap: normal;
-column-rule: medium none currentColor;
-column-rule-color: currentColor;
-column-rule-style: none;
-column-rule-width: none;
-column-span: 1;
-column-width: auto;
-content: normal;
-counter-increment: none;
-counter-reset: none;
-cursor: auto;
-direction: ltr;
-display: inline;
-empty-cells: show;
-float: none;
-font: normal;
-font-family: gudea;
-font-size: 16px;
-font-stretch: normal;
-font-style: normal;
-font-variant: normal;
-font-weight: normal;
-height: auto;
-hyphens: none;
-left: auto;
-letter-spacing: normal;
-line-height: 1.0;
-list-style: none;
-list-style-image: none;
-list-style-position: outside;
-list-style-type: disc;
-margin: 0;
-margin-bottom: 0;
-margin-left: 0;
-margin-right: 0;
-margin-top: 0;
-max-height: none;
-max-width: none;
-min-height: 0;
-min-width: 0;
-opacity: 1;
-orphans: 0;
-outline: 0;
-outline-color: invert;
-outline-style: none;
-outline-width: medium;
-overflow: visible;
-overflow-x: visible;
-overflow-y: visible;
-padding: 0;
-padding-bottom: 0;
-padding-left: 0;
-padding-right: 0;
-padding-top: 0;
-page-break-after: auto;
-page-break-before: auto;
-page-break-inside: auto;
-perspective: none;
-perspective-origin: 50% 50%;
-position: static;
-quotes: '\201C' '\201D' '\2018' '\2019';
-right: auto;
-tab-size: 8;
-table-layout: auto;
-text-align: left;
-text-align-last: auto;
-text-decoration: none;
-text-decoration-color: inherit;
-text-decoration-line: none;
-text-decoration-style: solid;
-text-indent: 0;
-text-shadow: none;
-text-transform: none;
-top: auto;
-transform: none;
-transform-style: flat;
-transition: none;
-transition-delay: 0s;
-transition-duration: 0s;
-transition-property: none;
-transition-timing-function: ease;
-unicode-bidi: normal;
-vertical-align: baseline;
-visibility: visible;
-white-space: normal;
-widows: 0;
-width: auto;
-word-spacing: normal;
-z-index: auto
-}
-#mySidebar div {
-	background-color: white;
-	border-bottom-color: black;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-}
-#popupBody {
-	width: 500px;
-	background-color: #ffffff;
-}
-#teamInput{
-	background: white;
-	color:black;
-	outline: 1px groove #ccc;
-}
-#mySidebar button {
-    align-items: flex-start;
-    text-align: center;
-    cursor: default;
-    color: buttontext;
-    background-color: buttonface;
-    box-sizing: border-box;
-    padding: 2px 6px 3px;
-    border: 2px outset buttonface;
+}#popupBody {
+	width: 550px;
 }
 
 #content {
 	margin-top: 20px;
 }
 
-hr {
-	border-top: 2px solid #4099FF;
-}
-
-input[type="text"] {
-	width: 55%;
-}
-
-#highlightClick {
-    position: absolute;
-    left: 30px;
-    border: 3px solid orange;
-	z-index:1000;
-	opacity: 0.5;
-	height: 50px;
-	width: 100px;
-}
-div#mySidebar button {
-	background-color: red;
-}
 #welcomeText {
-	font-size: 18px;
-
+	font-size: 20px;
+	font-family: 'Poppins', sans-serif;
 }
 
-#subtaskPrompt {
+#viewPersona {
+	float: right;
+}
+
+hr {
+	border-top: 2px solid #0288D1;
+}
+
+#icons {
+	text-align: center;
 	font-size: 13px;
-	border: 3px solid orange;
-	padding: 10px;
-	
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	margin-top: 15px;
 }
 
+.icon {
+	color: #03a9f4 ;
+}
 
-.idealActionLabel {
-	font-size: 14px;
-	color: #0071F3;
+#team {
+	float: left;
+}
+
+#scenario {
+	float: right;
+}
+
+.instruction {
+	font-size: 13px;
+	text-align: center;
+	border: 2px solid #FFC107;
+	margin: 10px;
+	cursor: default;
+	padding: 5px;
+}
+
+button, input[type=submit] {
+    background-color: #0288D1;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px;
+}
+
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+
+input[type=text] {
+	height: 15px;
+	width: 200px;
+	border: 1px solid grey;
+}
+ 
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px #FFC107;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #FFC107;
+}
+
+.removeSubgoal, .removeAction {
+	float: right;
+	margin: 1px !important;
+	font-size: 12px;
+	background-color: #ffffff !important;
+	color: #ff4500 !important;
+	padding: 0px !important;
+}
+
+select {
+	width: 200px;
+	height: 15px;
 }
 
 .cwQuestion {
 	font-weight: bold;
 }
 
-.removeSubtask {
-	float: right;
-}
-
 .responseBox {
 	display: inline-block;
+	height: 40px;
+	border: 1px solid grey;
 }
 
 .responseBoxLabel {
 	display: inline-block;
 	padding-right: 60px;
 	padding-left: 60px;
-}
-.previewImage{
-	width:200px;
-	height:200px;
-	
+	margin-top: 5px;
 }
 
+label {
+	color: black;
+}
+
+.accordion {
+	margin-bottom: 10px;
+}
+
+.complete {
+	display: none;
+}
+
+.moreOrLess {
+	text-decoration: underline;
+}
 
 /* EVERYTHING FOR THE PERSONA VIEW BELOW THIS LINE. EVERYTHING ABOVE FOR POPUP */
 
@@ -267,12 +157,6 @@ div#mySidebar button {
 }
 
 
-
-#resizeBar {
-	background-color: purple;
-	float: left;
-	resize: both;
-}
 
 .personaPhoto{
 	height: 100px;
@@ -349,55 +233,5 @@ ul.graph li.facetTinkerAbby {
 #graphContainer{
 }
 
-#mySidebar div.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-#mySidebar div.accordion.active, #mySidebar div.accordion:hover {
-    background-color: #ddd;
-}
-
-/* Style the accordion panel. Note: hidden by default */
-#mySidebar div.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.6s ease-in-out;
-    opacity: 0;
-}
-
-
-/* The "show" class is added to the accordion panel when the user clicks on one of the buttons. This will show the panel content */
-#mySidebar div.panel.show {
-    opacity: 1;
-    max-height: 500px; /* Whatever you like, as long as its more than the height of the content (on all screen sizes) */
-}
-
-#mySidebar div.accordion:after {
-    content: '\02795'; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
-
-#mySidebar div.accordion.active:after {
-    content: "\2796"; /* Unicode character for "minus" sign (-) */
-}
-
 .facetLink{
-}
-
-#mySidebar div, p, h1, h2, h3, h4, h5, h6, ul, ol, dl, pre, hr, blockquote, address {
-	display: block !important;
 }

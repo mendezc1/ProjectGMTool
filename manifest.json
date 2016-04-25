@@ -22,5 +22,5 @@
 		}
 	],
 	"permissions": ["storage", "tabs", "<all_urls>"],
-	"web_accessible_resources": ["/templates/*"]
+	"web_accessible_resources": ["/templates/*", "styles.css"]
 }
