@@ -22,5 +22,5 @@
 		}
 	],
 	"permissions": ["storage", "tabs", "<all_urls>"],
-	"web_accessible_resources": ["/templates/*", "styles.css"]
+	"web_accessible_resources": ["/templates/*", "styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*"]
 }

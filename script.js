@@ -243,32 +243,47 @@ function toggleSidebar() {
 		$("#beginSetup").hide();
 		$("#getTeam").hide();
 		$("#teamName").hide();
-		//charles writes a function here
 		$("#toggleSidebar").html("Open Sidebar");
 		sidebarOpen = false;
 		
 	}
 	else {
-		console.log("in else");
+		//add sidebar iframe to body
 		var sidebarHTML = $("<iframe>", {
 			id: "mySidebar",
 		}).appendTo($('body'));
 		sidebarOpen = true;
-		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/templates/popup.html'), async: false}).responseText;
-		var dataToAppend =$($.parseHTML(msg));
+		
+		/*use these two variables to refer to the contents of the sidebar.
+		 * Ex: Accessing the "submitTeam" element of the sidebar:
+		 *		sidebarBody.find("#submitTeam");
+		 * Ex: Adding an onclick to the "submitTeam" element of the sidebar.
+		 * 		sidebarBody.find("#submitTeam").click(function() {});
+		*/
+		var sidebarBody = $("#mySidebar").contents().find("body");
+		var sidebarHead = $("#mySidebar").contents().find("head");
+		
+		//Adding CSS to sidebar
 		var style = $("<link>", {
 			rel:"stylesheet",
 			href: chrome.extension.getURL('/styles.css')
-		});
+		}).appendTo(sidebarHead);
 		var jqStyle = $("<link>", {
 			rel:"stylesheet",
 			href: chrome.extension.getURL('/jquery-ui-1.11.4.custom/jquery-ui.css')
-		});
-		var sidebar = $("#mySidebar").contents().find("body");
-		//$("#mySidebar").contents().find("head").attr('href', chrome.extension.getURL('/jquery-ui-1.11.4.custom/jquery-ui.css'));
-		$("#mySidebar").contents().find("head").append(style);
-		sidebar.append(dataToAppend);
-		//sidebar.find("#welcomeText").html("hello");
+		}).appendTo(sidebarHead);
+		var faStyle = $("<link>", {
+			rel:"stylesheet",
+			href: chrome.extension.getURL('font-awesome-4.6.1/css/font-awesome.min.css')
+		}).appendTo(sidebarHead);
+		/* Adding popup.html to the sidebar.
+		 * This is a good example of how to add templates to the iframe. Doing it this way allows us to refer to the elements within the sidebar.
+		*/
+		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/templates/popup.html'), async: false}).responseText;
+		var dataToAppend =$($.parseHTML(msg));
+		sidebarBody.append(dataToAppend);
+		
+		//TODO: add a "buttonAction" function so we can just call it to add all the onclicks.
 		$("#mySidebar").contents().find("#submitTeam").click(function() {
 			var teamName = $("#mySidebar").contents().find("#submitTeam").val();
 			$("#teamName").html("Team Name: "+ teamName);
