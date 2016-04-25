@@ -250,13 +250,14 @@ function toggleSidebar() {
 	}
 	else {
 		console.log("in else");
-		var sidebar = $("<div/>", {
+		var sidebar = $("<iframe>", {
 			id: "mySidebar",
 		}).appendTo($('body'));
 		sidebarOpen = true;
 		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/templates/popup.html'), async: false}).responseText;
-		$($.parseHTML(msg)).appendTo("#mySidebar");
-
+		var dataToAppend =$($.parseHTML(msg));
+		$("#mySidebar").contents().find("body").append(dataToAppend);
+		$("#mySidebar").contents().find("#welcomeText").html("hello");
 		$("#submitTeam").click(function() {
 			var teamName = $(teamInput).val();
 			$("#teamName").html("Team Name: "+ teamName);
