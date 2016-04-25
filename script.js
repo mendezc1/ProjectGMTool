@@ -228,7 +228,11 @@ function handleRequest(
 }
 chrome.extension.onRequest.addListener(handleRequest);
 
-/*Small function wich create a sidebar(just to illustrate my point)*/
+//onClicks for button
+function onclickActions(){
+}
+
+
 
 function toggleSidebar() {
 	if(sidebarOpen) {
@@ -276,6 +280,7 @@ function toggleSidebar() {
 			rel:"stylesheet",
 			href: chrome.extension.getURL('font-awesome-4.6.1/css/font-awesome.min.css')
 		}).appendTo(sidebarHead);
+		
 		/* Adding popup.html to the sidebar.
 		 * This is a good example of how to add templates to the iframe. Doing it this way allows us to refer to the elements within the sidebar.
 		*/
@@ -284,17 +289,19 @@ function toggleSidebar() {
 		sidebarBody.append(dataToAppend);
 		
 		//TODO: add a "buttonAction" function so we can just call it to add all the onclicks.
-		$("#mySidebar").contents().find("#submitTeam").click(function() {
-			var teamName = $("#mySidebar").contents().find("#submitTeam").val();
-			$("#teamName").html("Team Name: "+ teamName);
-			$("#getTeam").remove();
-			$("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
+		
+		//Team name input
+		sidebarBody.find("#submitTeam").click(function() {
+			var teamName = sidebarBody.find("#teamInput").val();
+			sidebarBody.find("#teamName").html("Team Name: "+ teamName);
+			sidebarBody.find("#getTeam").remove();
+			sidebarBody.find("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
 		});
 
-		//Get persona name
-		$("#submitPersona").click(function() {
-			personaName = $("#personaSelection").val();
-			$("#personaName").html("Persona Name: " + personaName + "<br>");
+		//Persona selection
+		sidebarBody.find("#submitPersona").click(function() {
+			personaName = sidebarBody.find("#personaSelection").val();
+			sidebarBody.find("#personaName").html("Persona Name: " + personaName + "<br>");
 			if ((personaName == "Tim") || (personaName == "Patrick")) {
 				pronoun = "he";
 				possessive = "his";
@@ -302,36 +309,34 @@ function toggleSidebar() {
 				pronoun = "she";
 				possessive = "her";
 			}
-		
-			$("#getPersona").children().remove();
-			$("#getPersona").remove();
-		
-			//Show task
-			$("#getTask").children().fadeTo(500, 1).attr("disabled", false);
-			$("#taskPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
+			sidebarBody.find("#getPersona").children().remove();
+			sidebarBody.find("#getPersona").remove();
+			//Show Scenario
+			sidebarBody.find("#getScenario").children().show();
+			sidebarBody.find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
 			//Show button to view persona
-			$("#viewPersona").show().html("Show " + personaName);
+			sidebarBody.find("#viewPersona").show().html("Show " + personaName);
 			personaShown = true;
 		});
 	
 		//Get task name
-		$('#submitTask').click(function() {
-			var taskName = $("#taskInput").val();
-			$("#taskName").html("Scenario Description: " + taskName);
+		sidebarBody.find('#submitScenario').click(function() {
+			var taskName = sidebarBody.find("#scenarioInput").val();
+			sidebarBody.find("#scenarioName").html("Scenario Description: " + taskName);
 			
-			$("#getTask").children().remove();
-			$("#getTask").remove();
+			sidebarBody.find("#getScenario").children().remove();
+			sidebarBody.find("#getScenario").remove();
 		
 			//Show subtask
-			$("#getSubtask").children().fadeTo(500, 1).attr("disabled",  false);
-			$("#beginSetup").remove();
-			$("#subtaskPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+			sidebarBody.find("#getSubgoal").children().show;
+			sidebarBody.find("#beginSetup").remove();
+			sidebarBody.find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
 		});
 		
 		var closeSidebar = $("<button/>", {
 				id: "toggleSidebar",
 				html: "Close Sidebar"
-		}).appendTo("#mySidebar");
+		}).appendTo(sidebarBody);
 		
 		$(closeSidebar).click(function(e){
 			collapseSidebar(e);
