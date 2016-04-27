@@ -11,11 +11,21 @@ var personaShown = 0; //toggle when user clicks view/hide persona button
 function init(){
 	//start up the sidebar
 	toggleSidebar();
+	$(function() {
+		$( "#accordion" ).accordion({
+			collapsible: true
+		});
+	});
 }
 $(document).ready(function(){
 	init();
 });
-
+//Append template to sidebar from another file
+function appendTemplateToElement(element,file){	
+	var msg = $.ajax({type: "GET", url: chrome.extension.getURL(file), async: false}).responseText;
+	var dataToAppend =$($.parseHTML(msg));
+	element.append(dataToAppend);
+}
 function collapseSidebar(e){
 	$("#mySidebar").children().each(function(){
 		$(this).hide();
@@ -284,9 +294,8 @@ function toggleSidebar() {
 		/* Adding popup.html to the sidebar.
 		 * This is a good example of how to add templates to the iframe. Doing it this way allows us to refer to the elements within the sidebar.
 		*/
-		var msg = $.ajax({type: "GET", url: chrome.extension.getURL('/templates/popup.html'), async: false}).responseText;
-		var dataToAppend =$($.parseHTML(msg));
-		sidebarBody.append(dataToAppend);
+		
+		appendTemplateToElement(sidebarBody, 'templates/popup.html');
 		
 		//TODO: add a "buttonAction" function so we can just call it to add all the onclicks.
 		
@@ -318,7 +327,18 @@ function toggleSidebar() {
 			sidebarBody.find("#viewPersona").show().html("Show " + personaName);
 			personaShown = true;
 		});
-	
+		/*	
+		//Show persona details
+		$("#viewPersona").click(function() {
+			if (personaShown == true) {
+				personaShown = false;
+				$(this).html("Hide " + personaName);
+			} else {
+				personaShown = true;
+				$(this).html("Show " + personaName);
+			}
+		});
+		*/
 		//Get task name
 		sidebarBody.find('#submitScenario').click(function() {
 			var taskName = sidebarBody.find("#scenarioInput").val();
@@ -338,194 +358,147 @@ function toggleSidebar() {
 				html: "Close Sidebar"
 		}).appendTo(sidebarBody);
 		
+		//works for now... (4/27/2016)
 		$(closeSidebar).click(function(e){
 			collapseSidebar(e);
 		});
 		
-	//Get Subtask
-	$("#submitSubtask").click(function() {
-		numSubtasks++;
-			
-		//Clear the hint in the field for subtask name/description
-		$("#subtaskInput").attr("placeholder", "");
-		
-		//Label for this subtask
-		var label = $("<h3/>", { id: "S" + numSubtasks + "Name",
-			html: "Subgoal: " + $("#subtaskInput").val() });
-		label.appendTo("#subtasks");
-		var removeSubtask = $("<button>", {
-			class: "removeSubtask",
-			id: "Remove" + numSubtasks,
-			html: "Remove This Subgoal",
-		}).appendTo(label);
-		//Container for this subtask
-		var subtask = $("<div/>", { id: "S" + numSubtasks, numactions: 0 });
 
-		//Container for subtask questions
-		var questionContainer = $("<div/>", { id: "S" + numSubtasks + "Questions" });
-		questionContainer.appendTo(subtask);
-	
-		var question = ["Will " + personaName + " have formed this subgoal as a step to " +
-		                possessive + " overall goal?<br>"];
+		//Get Subtask
 		
-		addQuestions(questionContainer, question, 0);
-					
-		//Container to hold ideal actions (questions and responses) for this subtask
-		var idealActions = $("<div/>", { id: "S" + numSubtasks + "Actions" });
-		
-		var addAction = $("<div/>", { class: "getAction", type: "text" });
-		var actionInput = $("<input/>", { class: "actionInput", type: "text", placeholder: "Type 'Sue in Search Field" });
-		var submitAction = $("<input/>", { class: "submitAction", type: "submit", value: "Add Ideal Action" });
-		
-		actionInput.appendTo(addAction);
-		submitAction.appendTo(addAction);
-		addAction.appendTo(idealActions);
-		idealActions.appendTo(subtask);
-		
-		//Add subtask to container for all subtasks
-		subtask.appendTo("#subtasks");
-		
-		//Open accordion menu to this subtask
-    	$(".accordion").accordion("refresh");
-    	$(".accordion").accordion({ active: numSubtasks - 1}); //Zero-based index of panel
-		
-		//Reset subtask form
-		$("#subtaskInput").val("");
-		$("#subtaskPrompt").html("Are there any more subgoals?");
-		$("#submitSubtask").val("Add New Subgoal");								
-	});
-	
-	//Show persona details
-	$("#viewPersona").click(function() {
-		if (personaShown == true) {
-			personaShown = false;
-			$(this).html("Hide " + personaName);
-		} else {
-			personaShown = true;
-			$(this).html("Show " + personaName);
-		}
-	});
-			//According menu
-		$(function() {
-			$(".accordion").accordion({ heightStyle: "content", collapsible: true });
-		});
-		
-	//Add ideal action
-	$("body").on("click", "input.submitAction", function() {
-		//Current subgoal
-		var actions = $(this).parent().parent();
-		var subgoal = actions.parent();
-		
-		var numActions = parseInt(subgoal.attr("numactions"));
-		subgoal.attr("numactions", numActions + 1);
-		
-		var actionName = $(this).prev().val();
-		var actionId = subgoal.attr("id") + "A" + subgoal.attr("numactions");
-		
-		//Add this action
-		var action = $("<div/>", {
-			id: actionId
-		}).appendTo(actions);
-		
-		//Add action name to action
-		$("<span/>", { 
-			html: "Ideal Action: "+ actionName + "<br>",
-			id: actionId + "Name",
-			class: "idealActionLabel"
-		}).appendTo(action);
-
-		var buttonPrompt = $("<div/>", {
-			html: "Now that you specified the action click this button to show it and capture your screen",
-		}).appendTo(action);
-		
-		var screenShotButton = $("<button>", {
-			id: "screenShot" + numSubtasks + "-" + numScreenShots,
-			class: "screenShot",
-			html: "Click here to show me the action"
-		}).appendTo(action);
-		
-		//screenShotButton.after("<br/>");
-		$("body").on("click", "button.screenShot", function(){
-			chrome.runtime.sendMessage({greeting: "takeScreenShot"}, function(response) {	
+		//current funcitonality is broken. need to add JS for incrementing IDs to properly place actions.
+		sidebarBody.find("#submitSubgoal").click(function() {
+			appendTemplateToElement(sidebarBody.find('#subgoals'),'/templates/subgoal.html');
+			//initialize the subgoal accordion menu and tooltips
+			$(function() {
+				sidebarBody.find(".accordion").accordion({ heightStyle: "content", collapsible: true });
+				sidebarBody.find("#setup").tooltip({ track: true });
 			});
-			overlayScreen();
-		});	
-	//Add questions for action
-		var actionQuestions = $("<div/>", {
-			id: actionId + "Questions"
-		}).appendTo(action);
 			
-		var question1 = "<br> Will " + personaName + " know what to do at this step?<br>";
-
-		var question3 = "If  " + 
-		                personaName + " does the right thing, will " + 
-		                pronoun + " know that " +
-						pronoun + " did the right thing and is making progress toward " +
-						possessive + " goal?<br>";
-
-		var questions = [question1, question3];
+			sidebarBody.find("#addAction").click(function(e) {
+				appendTemplateToElement(sidebarBody.find(e.target).parent(),'/templates/action.html');
 			
-		//Add questions and response fields to ideal action
-		addQuestions(actionQuestions, questions, numActions + 1);
-		
-		var removeAction = $("<button>", {
-			class: "removeAction",
-			id: "Remove" + actionId,
-			html: "Remove This Action"
-		}).appendTo(action);	
-		
-		//Reset form and move to the bottom of the panel
-		$(this).attr("placeholder", "");
-		$(this).prev().val("");
-		$(this).parent().appendTo(actions);
-	});
-	
-	$("body").on("click", "button.removeSubtask", function() {
-		var id = event.target.id;
-		var subtaskNumber = id[id.length - 1];
-				
-		$("#S" + subtaskNumber).remove();
-		$("#S" + subtaskNumber + "Name").remove();
-		
-		numSubtasks--;
-		$(".accordion").accordion("refresh");
-	});
-	
-	$("body").on("click", "button.removeAction", function() {
-		var id = event.target.id;
-		var subtaskNumber = id[7];
-		var actionNumber = id[9];
-				
-		$("#S" + subtaskNumber + "A" + actionNumber).remove();
-		
-		//Reduce the action count for the subgoal
-		//prevNumActions = $("#S" + subtaskNumber).attr("numactions");
-		//curNumActions = parseInt(prevNumActions) - 1;
-		//$("#S" + subtaskNumber).attr("numactions", curNumActions);
-		
-		$(".accordion").accordion("refresh");
-	});
-	$("body").on("click", "button.screenShot", function(){
-		overlayScreen();
-	});
-	
-	$("#saveAndExit").click(function() {
-		$(document).each(function() {
-			allInput = ($(this).find(':input'));
+				//initialize the subgoal accordion menu and tooltips
+				$(function() {
+					sidebarBody.find(".accordion").accordion({ heightStyle: "content", collapsible: true });	
+					sidebarBody.find("#setup").tooltip({ track: true });
+				});
+			});
 		});
 		
-		csv = createCSV(parseUserInput(allInput));
-		downloadCSV(csv);
-		
-		//After save, don't store html on unload
-		$(window).unbind("unload");
-		
-		//Remove input and global variables
-		localStorage.clear();		
-	});
-	
+		//Add ideal action
+		$("body").on("click", "input.submitAction", function() {
+			//Current subgoal
+			var actions = $(this).parent().parent();
+			var subgoal = actions.parent();
+			
+			var numActions = parseInt(subgoal.attr("numactions"));
+			subgoal.attr("numactions", numActions + 1);
+			
+			var actionName = $(this).prev().val();
+			var actionId = subgoal.attr("id") + "A" + subgoal.attr("numactions");
+			
+			//Add this action
+			var action = $("<div/>", {
+				id: actionId
+			}).appendTo(actions);
+			
+			//Add action name to action
+			$("<span/>", { 
+				html: "Ideal Action: "+ actionName + "<br>",
+				id: actionId + "Name",
+				class: "idealActionLabel"
+			}).appendTo(action);
 
+			var buttonPrompt = $("<div/>", {
+				html: "Now that you specified the action click this button to show it and capture your screen",
+			}).appendTo(action);
+			
+			var screenShotButton = $("<button>", {
+				id: "screenShot" + numSubtasks + "-" + numScreenShots,
+				class: "screenShot",
+				html: "Click here to show me the action"
+			}).appendTo(action);
+			
+			//screenShotButton.after("<br/>");
+			$("body").on("click", "button.screenShot", function(){
+				chrome.runtime.sendMessage({greeting: "takeScreenShot"}, function(response) {	
+				});
+				overlayScreen();
+			});	
+		//Add questions for action
+			var actionQuestions = $("<div/>", {
+				id: actionId + "Questions"
+			}).appendTo(action);
+				
+			var question1 = "<br> Will " + personaName + " know what to do at this step?<br>";
+
+			var question3 = "If  " + 
+							personaName + " does the right thing, will " + 
+							pronoun + " know that " +
+							pronoun + " did the right thing and is making progress toward " +
+							possessive + " goal?<br>";
+
+			var questions = [question1, question3];
+				
+			//Add questions and response fields to ideal action
+			addQuestions(actionQuestions, questions, numActions + 1);
+			
+			var removeAction = $("<button>", {
+				class: "removeAction",
+				id: "Remove" + actionId,
+				html: "Remove This Action"
+			}).appendTo(action);	
+			
+			//Reset form and move to the bottom of the panel
+			$(this).attr("placeholder", "");
+			$(this).prev().val("");
+			$(this).parent().appendTo(actions);
+		});
 		
+		$("body").on("click", "button.removeSubtask", function() {
+			var id = event.target.id;
+			var subtaskNumber = id[id.length - 1];
+					
+			$("#S" + subtaskNumber).remove();
+			$("#S" + subtaskNumber + "Name").remove();
+			
+			numSubtasks--;
+			$(".accordion").accordion("refresh");
+		});
+		
+		$("body").on("click", "button.removeAction", function() {
+			var id = event.target.id;
+			var subtaskNumber = id[7];
+			var actionNumber = id[9];
+					
+			$("#S" + subtaskNumber + "A" + actionNumber).remove();
+			
+			//Reduce the action count for the subgoal
+			//prevNumActions = $("#S" + subtaskNumber).attr("numactions");
+			//curNumActions = parseInt(prevNumActions) - 1;
+			//$("#S" + subtaskNumber).attr("numactions", curNumActions);
+			
+			$(".accordion").accordion("refresh");
+		});
+		$("body").on("click", "button.screenShot", function(){
+			overlayScreen();
+		});
+		
+		$("#saveAndExit").click(function() {
+			$(document).each(function() {
+				allInput = ($(this).find(':input'));
+			});
+			
+			csv = createCSV(parseUserInput(allInput));
+			downloadCSV(csv);
+			
+			//After save, don't store html on unload
+			$(window).unbind("unload");
+			
+			//Remove input and global variables
+			localStorage.clear();		
+		});		
 		console.log("end of if");
 	}	
 }

@@ -4,35 +4,37 @@ Also, if you change the name of an input element, update parseUserInput in outpu
 
 <!DOCTYPE html>
 <html> 
-	<h3>Subgoal</h3>
 	
-	<div id="Content" class="content" data-numactions=0>
-		<input id="remove" type="submit" class="removeSubgoal" value="X"><br>
+	<div id = "subgoal0" class="accordion">
+		<h3>Subgoal</h3>
+		<div id="Content" class="content" data-numactions=0>
+			<input id="remove" type="submit" class="removeSubgoal" value="X"><br>
+			
+			<span class="cwQuestion">Will Abby have formed this subgoal as a step to her overall goal?<br></span>
+			
+			<div id="A0Q0yes" class="responseBoxLabel">Yes</div>
+			<div id="A0Q0no"class="responseBoxLabel">No</div>
+			<div id="A0Q0maybe" class="responseBoxLabel">Maybe</div><br>
 		
-		<span class="cwQuestion">Will Abby have formed this subgoal as a step to her overall goal?<br></span>
+			<textarea id="A0Q0whyYes" class="responseBox" placeholder="Why?"></textarea>
+			<textarea id="A0Q0whyNo" class="responseBox" placeholder="Why not?"></textarea>
+			<textarea id="A0Q0whyMaybe" class="responseBox" placeholder="Why maybe?"></textarea><br>
 		
-		<div id="A0Q0yes" class="responseBoxLabel">Yes</div>
-		<div id="A0Q0no"class="responseBoxLabel">No</div>
-		<div id="A0Q0maybe" class="responseBoxLabel">Maybe</div><br>
-	
-		<textarea id="A0Q0whyYes" class="responseBox" placeholder="Why?"></textarea>
-		<textarea id="A0Q0whyNo" class="responseBox" placeholder="Why not?"></textarea>
-		<textarea id="A0Q0whyMaybe" class="responseBox" placeholder="Why maybe?"></textarea><br>
-	
-		<span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span><br>
-		
-		<input id="A0Q0motiv" type="checkbox" value="Motivation"><span>Motivation</span><br>
-		<input id="A0Q0info" type="checkbox" value="Information Processing Style"><span>Information Processing Style</span><br>
-		<input id="A0Q0self" type="checkbox" value="Computer Self-Efficacies"><span>Computer Self-Efficacies</span><br>
-		<input id="A0Q0risk" type="checkbox" value="Attitude Towards Risk"><span>Attitude Towards Risk</span><br>
-		<input id="A0Q0tinker" type="checkbox" value="Willingness to Tinker"><span>Willingness to Tinker</span><br><br>
-		
-		<div class="accordion idealActions" id="idealActions">
+			<span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span><br>
+			
+			<input id="A0Q0motiv" type="checkbox" value="Motivation"><span>Motivation</span><br>
+			<input id="A0Q0info" type="checkbox" value="Information Processing Style"><span>Information Processing Style</span><br>
+			<input id="A0Q0self" type="checkbox" value="Computer Self-Efficacies"><span>Computer Self-Efficacies</span><br>
+			<input id="A0Q0risk" type="checkbox" value="Attitude Towards Risk"><span>Attitude Towards Risk</span><br>
+			<input id="A0Q0tinker" type="checkbox" value="Willingness to Tinker"><span>Willingness to Tinker</span><br><br>
+			
+			<div class="accordion idealActions" id="idealActions">
+			</div>
+			
+			<label>Are there any more ideal actions in this subgoal?</label><br>
+			<input class="actionName" type="text"></input>
+			<input id="addAction" class= "addAction" type="submit" value="Add Action">
+			
 		</div>
-		
-		<label>Are there any more ideal actions in this subgoal?</label><br>
-		<input class="actionName" type="text"></input>
-		<input id="addAction" class= "addAction" type="submit" value="Add Action">
-		
 	</div>
 </html>
