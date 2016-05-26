@@ -24,11 +24,11 @@ body {
 #slideout.clicked {
 	bottom: 250px;
 }
-#slideout_inner.clicked {
+#GenderMagFrame.clicked {
 	bottom: 0px;
 }
 		
-#slideout_inner {
+#GenderMagFrame {
 	position: fixed;
 	bottom: -250px;
 	background: #6DAD53;

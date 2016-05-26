@@ -51,7 +51,7 @@ function addOnClicks(){
 
 	$("#slideout").contents().find("body").on('click', function(event) {
 		$("#slideout").toggleClass("clicked");
-		$("#slideout_inner").toggleClass("clicked");
+		$("#GenderMagFrame").toggleClass("clicked");
 	});
 
 }
