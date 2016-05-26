@@ -7,7 +7,7 @@ var sidebarOpen = false;
 var personaShown = 0; //toggle when user clicks view/hide persona button
 
 /* This stuff needs to run when the extension starts */
-
+/*
 function init(){
 	//start up the sidebar
 	toggleSidebar();
@@ -17,6 +17,7 @@ function init(){
 		});
 	});
 }
+*/
 $(document).ready(function(){
 	init();
 });
@@ -286,15 +287,15 @@ function toggleSidebar() {
 			rel:"stylesheet",
 			href: chrome.extension.getURL('/jquery-ui-1.11.4.custom/jquery-ui.css')
 		}).appendTo(sidebarHead);
+		
 		var faStyle = $("<link>", {
 			rel:"stylesheet",
 			href: chrome.extension.getURL('font-awesome-4.6.1/css/font-awesome.min.css')
 		}).appendTo(sidebarHead);
 		
-		/* Adding popup.html to the sidebar.
-		 * This is a good example of how to add templates to the iframe. Doing it this way allows us to refer to the elements within the sidebar.
-		*/
 		
+		/* Adding popup.html to the sidebar.
+		*/
 		appendTemplateToElement(sidebarBody, 'templates/popup.html');
 		
 		//TODO: add a "buttonAction" function so we can just call it to add all the onclicks.

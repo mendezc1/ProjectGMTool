@@ -12,15 +12,15 @@
 	},
 	 
 	 "web_accessible_resources": [
-      "images/*.jpg"
+      "images/*.jpg", "/styles/*.css"
 	],
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js", "screenshot.js", "html.js"],
-			"css": ["styles.css","jquery-ui-1.11.4.custom/jquery-ui.css" ]
+			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js", "screenshot.js", "html.js", "/scripts/utilities.js"],
+			"css": ["styles.css","jquery-ui-1.11.4.custom/jquery-ui.css"]
 		}
 	],
 	"permissions": ["storage", "tabs", "<all_urls>"],
-	"web_accessible_resources": ["/templates/*", "styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*"]
+	"web_accessible_resources": ["/templates/*", "/styles/*.css", "styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*"]
 }
