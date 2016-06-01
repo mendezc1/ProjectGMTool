@@ -5,6 +5,7 @@ function init(){
 	importStylesheet($("#slideout").contents().find("head"),"/styles/sliderbody.css");
 	$("#slideout").contents().find("body").append("GenderMag");
 	addOnClicks();
+	setup("#GenderMagFrame", "./templates/firstState.html");
 	
 }
 
