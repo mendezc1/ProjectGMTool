@@ -52,6 +52,9 @@ function addOnClicks(){
 	$("#slideout").contents().find("body").on('click', function(event) {
 		$("#slideout").toggleClass("clicked");
 		$("#GenderMagFrame").toggleClass("clicked");
+		addToolTip("setupToolTip");
+		
 	});
-
+	
+	
 }
