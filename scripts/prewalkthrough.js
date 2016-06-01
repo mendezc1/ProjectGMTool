@@ -31,14 +31,14 @@ function preWalkthrough (id, file) {
  * Post: 
  */
 
-/*function handlePreWalkthroughInfo (id) {
+function handlePreWalkthroughInfo (id) {
 	
 	console.log("Here in handle");
 	
 	//Set team name
-	$(id).contents().find('body').children('#submitTeam').on('Click', function() {
+	sidebarbody().find('#submitTeam').on('click', function() {
 		alert('hi');
 	});
 	
 	console.log("exiting handle");
-}*/
+}
