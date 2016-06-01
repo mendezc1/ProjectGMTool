@@ -4,7 +4,7 @@
 	"description": "Inject a sidebar on the current tab when the page action is clicked",
 	"version": "0.2",
 	"background": {
-		"scripts": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "background.js"]
+		"scripts": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "background.js", "scripts/screenshot.js"]
 	},
 	"page_action": {
 		"default_icon": "icon.png",
@@ -17,7 +17,11 @@
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
+<<<<<<< HEAD
 			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js", "screenshot.js", "html.js", "/scripts/utilities.js", "/scripts/setup.js", "/scripts/prewalkthrough.js"],
+=======
+			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js", "scripts/tooltip.js", "html.js", "/scripts/utilities.js", "scripts/overlayScreen.js"],
+>>>>>>> b1273d96d8a6df493b81d16e326ced4a3ebd92f3
 			"css": ["styles.css","jquery-ui-1.11.4.custom/jquery-ui.css"]
 		}
 	],
