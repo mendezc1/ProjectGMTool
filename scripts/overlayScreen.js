@@ -1,6 +1,8 @@
 function overlayScreen(){
-	$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
-	numScreenShots++;
+	//$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
+	//numScreenShots++;
+	$("#slideout").toggleClass("clicked");
+	$("#GenderMagFrame").toggleClass("clicked");
 	if(!document.getElementById('genderMagCanvasContainer')){
 		console.log("In overlayScreen");
 		var canvasContainer = document.createElement('div');
@@ -65,10 +67,16 @@ function overlayScreen(){
 			var highlightClick = document.createElement("div");
 			highlightClick.id = "highlightClick";
 			document.body.appendChild(highlightClick);
-			highlightClick.style.left = rect.startX-40 + "px";
-			highlightClick.style.top = rect.startY-20 + "px";
+			highlightClick.style.position = "absolute";
+			highlightClick.style.left = elm.offsetLeft + "px";
+			highlightClick.style.top = elm.offsetTop + "px";
+			highlightClick.style.height = elm.offsetHeight + "px";
+			highlightClick.style.width = elm.offsetWidth + "px";
+			highlightClick.style.border = "3px solid orange";
+			highlightClick.style.opacity = "0.5";
+			highlightClick.style.zindex = "10000";
+	
 			console.log("Clicked ", highlightClick)
-			
 		
 			console.log(elements);
 			for(var element in elements){
@@ -79,17 +87,61 @@ function overlayScreen(){
 		chrome.runtime.sendMessage({greeting: "takeScreenShot", userAction: elm.innerText}, function(response) {
 				
 		});
-			console.log("sending message");
-			setTimeout(function(){
-				document.getElementById("highlightClick").remove();
-			}, 2000);
+		console.log("sending message");
+		setTimeout(function(){
+			document.getElementById("highlightClick").remove();
+			$("#highlightHover").remove();
+		}, 2000);
+		var toolTip = document.createElement("div");
+		toolTip.id = "myToolTip";
+		toolTip.style.position = "absolute";
+		toolTip.style.left = elm.offsetLeft + "px";
+		toolTip.style.top = elm.offsetTop + "px";
+		toolTip.style.height = "200px";
+		toolTip.style.width = "400px";
+		toolTip.style.zindex = "10002";	
+		toolTip.style.border ="5px ridge #4099FF";
+		toolTip.style.backgroundColor = "white";
+		document.body.appendChild(toolTip);
+		//addToolTip("setupToolTip");
+		appendTemplateToElement(toolTip ,"./templates/setupToolTip.html");
+		toolTip.click(function() {
+			sidebarBody.contents().find(".preview").remove();
+			sidebarBody.contents().find(".complete").remove();
+			sidebarBody.contents().find(".closeToolTip").remove();
+		});
 		}
 		function mouseMove(e) {
 			if (drag) {
 				rect.w = (e.pageX - this.offsetLeft) - rect.startX;
 				rect.h = (e.pageY - this.offsetTop) - rect.startY ;
-				ctx.clearRect(0,0,canvas.width,canvas.height);
+				ctx.clearRect(0,0,canvas.width,canvas.height);				
 				draw();
+			}
+			if($("#highlightHover")){
+				rect.startX = e.pageX - this.offsetLeft;
+				rect.startY = e.pageY - this.offsetTop;
+				var hoverElm = document.elementFromPoint(rect.startX, rect.startY);
+				rect.w = (e.pageX - this.offsetLeft) - rect.startX;
+				rect.h = (e.pageY - this.offsetTop) - rect.startY ;
+
+				$("#highlightHover").remove();
+				var highlightHover = document.createElement("div");
+				highlightHover.id = "highlightHover";
+				document.body.appendChild(highlightHover);
+				highlightHover.style.position = "absolute";
+				highlightHover.style.left = rect.startX-30 + "px";
+				highlightHover.style.top = rect.startY-20 + "px";
+				highlightHover.style.height = "50" + "px";
+				highlightHover.style.width = "100" + "px";
+				highlightHover.style.border = "3px solid orange";
+				highlightHover.style.opacity = "0.5";
+				highlightHover.style.zindex = "10000";
+				//console.log("Hovered if", hoverElm)
+			}
+			else{
+				var highlightHover = document.createElement("div");
+				highlightHover.id = "highlightHover";
 			}
 		}
 		function draw() {

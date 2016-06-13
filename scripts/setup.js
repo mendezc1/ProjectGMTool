@@ -19,12 +19,14 @@ function setup (id, file) {
 	
 	//Add the onclick to the "Start Walkthrough" button	
 	$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
+		importStylesheet($("#GenderMagFrame").contents().find("body"), "./styles/styles.css");
 		preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 	});
 	
 	//Add the onclick to the "Learn More" button
 	$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
 		console.log("Learn more button clicked");
+		addToolTip("setupToolTip");
 	});
 	
 }

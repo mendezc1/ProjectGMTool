@@ -454,8 +454,8 @@ $(document).ready(function() {
 	var style = document.createElement('link');
 	style.rel = 'stylesheet';
 	style.type = 'text/css';
-	style.href = chrome.extension.getURL('styles.css');
-	(document.head||document.documentElement).appendChild(style);
+//	style.href = chrome.extension.getURL('styles.css');
+//	(document.head||document.documentElement).appendChild(style);
 	console.log("ayy");
 	
 	//Reload previous html

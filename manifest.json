@@ -12,15 +12,15 @@
 	},
 	 
 	 "web_accessible_resources": [
-      "images/*.jpg", "/styles/*.css"
-	],
+      "images/*.jpg", "/styles/*.css",  "styles/styles.css"
+    ],
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
 			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "script.js", "scripts/tooltip.js", "html.js", "/scripts/utilities.js", "scripts/overlayScreen.js", "/scripts/setup.js" , "/scripts/prewalkthrough.js"],
-			"css": ["styles.css","jquery-ui-1.11.4.custom/jquery-ui.css"]
+			"css": ["jquery-ui-1.11.4.custom/jquery-ui.css"]
 		}
 	],
 	"permissions": ["storage", "tabs", "<all_urls>"],
-	"web_accessible_resources": ["/templates/*", "/styles/*.css", "styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*"]
+	"web_accessible_resources": ["/templates/*", "/styles/*.css", "styles/styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*"]
 }
