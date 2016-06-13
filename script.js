@@ -300,60 +300,6 @@ function toggleSidebar() {
 		
 		//TODO: add a "buttonAction" function so we can just call it to add all the onclicks.
 		
-		//Team name input
-		sidebarBody.find("#submitTeam").click(function() {
-			var teamName = sidebarBody.find("#teamInput").val();
-			sidebarBody.find("#teamName").html("Team Name: "+ teamName);
-			sidebarBody.find("#getTeam").remove();
-			sidebarBody.find("#getPersona").children().fadeTo(500, 1).attr("disabled",  false);
-		});
-
-		//Persona selection
-		sidebarBody.find("#submitPersona").click(function() {
-			personaName = sidebarBody.find("#personaSelection").val();
-			sidebarBody.find("#personaName").html("Persona Name: " + personaName + "<br>");
-			if ((personaName == "Tim") || (personaName == "Patrick")) {
-				pronoun = "he";
-				possessive = "his";
-			} else {
-				pronoun = "she";
-				possessive = "her";
-			}
-			sidebarBody.find("#getPersona").children().remove();
-			sidebarBody.find("#getPersona").remove();
-			//Show Scenario
-			sidebarBody.find("#getScenario").children().show();
-			sidebarBody.find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
-			//Show button to view persona
-			sidebarBody.find("#viewPersona").show().html("Show " + personaName);
-			personaShown = true;
-		});
-		/*	
-		//Show persona details
-		$("#viewPersona").click(function() {
-			if (personaShown == true) {
-				personaShown = false;
-				$(this).html("Hide " + personaName);
-			} else {
-				personaShown = true;
-				$(this).html("Show " + personaName);
-			}
-		});
-		*/
-		//Get task name
-		sidebarBody.find('#submitScenario').click(function() {
-			var taskName = sidebarBody.find("#scenarioInput").val();
-			sidebarBody.find("#scenarioName").html("Scenario Description: " + taskName);
-			
-			sidebarBody.find("#getScenario").children().remove();
-			sidebarBody.find("#getScenario").remove();
-		
-			//Show subtask
-			sidebarBody.find("#getSubgoal").children().show;
-			sidebarBody.find("#beginSetup").remove();
-			sidebarBody.find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
-		});
-		
 		var closeSidebar = $("<button/>", {
 				id: "toggleSidebar",
 				html: "Close Sidebar"
@@ -364,25 +310,26 @@ function toggleSidebar() {
 			collapseSidebar(e);
 		});
 		
-
 		//Get Subtask
-		
 		//current funcitonality is broken. need to add JS for incrementing IDs to properly place actions.
-		sidebarBody.find("#submitSubgoal").click(function() {
-			appendTemplateToElement(sidebarBody.find('#subgoals'),'/templates/subgoal.html');
+		//Current name appending only works for the first subgoal. Breaks after that. Needs JS to make unique IDs etc.
+		sidebarBody().find('body').on('click', '#submitSubgoal', function() {
+			var subgoalName = sidebarBody().find("#subgoalInput").val();
+			appendTemplateToElement(sidebarBody().find('#subgoals'),'/templates/subgoal.html');
+			sidebarBody().find("#subgoalHeading").html("Subgoal: " + subgoalName);
 			//initialize the subgoal accordion menu and tooltips
 			$(function() {
-				sidebarBody.find(".accordion").accordion({ heightStyle: "content", collapsible: true });
-				sidebarBody.find("#setup").tooltip({ track: true });
+				sidebarBody().find(".accordion").accordion({ heightStyle: "content", collapsible: true });
+				sidebarBody().find("#setup").tooltip({ track: true });
 			});
 			
-			sidebarBody.find("#addAction").click(function(e) {
-				appendTemplateToElement(sidebarBody.find(e.target).parent(),'/templates/action.html');
+			sidebarBody().find("#addAction").click(function(e) {
+				appendTemplateToElement(sidebarBody().find(e.target).parent(),'/templates/action.html');
 			
 				//initialize the subgoal accordion menu and tooltips
 				$(function() {
-					sidebarBody.find(".accordion").accordion({ heightStyle: "content", collapsible: true });	
-					sidebarBody.find("#setup").tooltip({ track: true });
+					sidebarBody().find(".accordion").accordion({ heightStyle: "content", collapsible: true });	
+					sidebarBody().find("#setup").tooltip({ track: true });
 				});
 			});
 		});

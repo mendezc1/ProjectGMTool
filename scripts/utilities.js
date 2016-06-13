@@ -55,9 +55,10 @@ function addOnClicks(){
 		$("#GenderMagFrame").toggleClass("clicked");
 		addToolTip("setupToolTip");
 		
-	});	
+	});
+	
 }
 
-function sidebarbody(){
+function sidebarBody(){
 	return $("#GenderMagFrame").contents();
 }
