@@ -1,5 +1,6 @@
 <head>
 	<!-- <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' type='text/css'> -->
+	<link rel="stylesheet" href="css/styles.css">
 	
 	<script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
 	<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
@@ -15,26 +16,35 @@
 
 <body>
 <span id="welcomeText">the GenderMag Tool</span>
-<button id="viewPersona">View Persona</button>
+<button id="viewPersona">View Personas</button>
 
 <hr>
+
+
+<div id="userInfo" style="height:100%; width:15%; float:left; margin:5px;">
+
+	<div id="icons">
 	
-<div id="icons">
-	<span class="icon" id="team">
-		<i class="fa fa-2x fa-users" aria-hidden="true"></i>
-		<label id="teamName">Team</label>
-	</span>
-			
-			<span class="icon" id="persona">
-				<i class="fa fa-2x fa-user" aria-hidden="true"></i>
-				<label id="personaName">Persona</label>
-			</span>
-			
-			<span class="icon" id="scenario">
-				<i class="fa fa-2x fa-road" aria-hidden="true"></i>
-				<label id="scenarioName">Scenario</label>
-			</span>
+		<div class="icon" id="team">
+			<i class="fa fa-2x fa-users" aria-hidden="true"></i>
+			<label id="teamName">Team</label>
 		</div>
+			
+		<div class="icon" id="persona">
+			<i class="fa fa-2x fa-user" aria-hidden="true"></i>
+			<label id="personaName">Persona</label>
+		</div>
+			
+		<div class="icon" id="scenario">
+			<i class="fa fa-2x fa-road" aria-hidden="true"></i>
+			<label id="scenarioName">Scenario</label>
+		</div>
+		
+	</div>
+	
+</div>
+
+
 		
 		<div id="setup" class="instruction">
 			<span class="preview"> Before you get started with the GenderMag walkthrough... </span>
@@ -52,7 +62,7 @@
 			<input type="submit" id="submitTeam"><br>
 		</div>
 		
-		<div id="getPersona">
+		<div id="getPersona" hidden>
 			<label id="personaPrompt">Now select a Persona</label><br>
 			<select id="personaSelection" name="persona">
 				<option value="Abby">Abby</option>
@@ -64,7 +74,7 @@
 			<button id="submitPersona">Submit</button><br>
 		</div>
 		
-		<div id="getScenario">
+		<div id="getScenario" hidden>
 			<label id="scenarioPrompt"></label><br>
 			<input id="scenarioInput" type="text" placeholder="ex Edit Sue's contact information">
 			<input type="submit" id="submitScenario"><br>
@@ -73,7 +83,7 @@
 		<div id="subgoals">
 		</div>
 			
-		<div id="getSubgoal">
+		<div id="getSubgoal" hidden>
 			<label id="subgoalPrompt"></label><br>
 			<input id="subgoalInput" type="text" placeholder="ex Search for 'Sue' in the DB">
 			<input type="submit" id="submitSubgoal" value="Add Subgoal">
