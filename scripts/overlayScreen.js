@@ -25,7 +25,7 @@ function overlayScreen(){
 		canvas.style.height = canvasContainer.scrollHeight+"px";
 		canvas.id = "genderMagCanvas";
 		canvas.position = "fixed";
-		canvas.style.cssText = "z-index:100; background:blue; width:100%; height:100%;";
+		//canvas.style.cssText = "z-index:100; background:blue; width:100%; height:100%;";
 		canvas.style.opacity = .50;
 		canvas.width=canvasContainer.scrollWidth;
 		canvas.height=canvasContainer.scrollHeight;
