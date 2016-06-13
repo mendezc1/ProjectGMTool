@@ -105,10 +105,8 @@ function overlayScreen(){
 		document.body.appendChild(toolTip);
 		//addToolTip("setupToolTip");
 		appendTemplateToElement(toolTip ,"./templates/setupToolTip.html");
-		toolTip.click(function() {
-			sidebarBody.contents().find(".preview").remove();
-			sidebarBody.contents().find(".complete").remove();
-			sidebarBody.contents().find(".closeToolTip").remove();
+		$(".closeToolTip").click(function() {
+			toolTip.remove();
 		});
 		}
 		function mouseMove(e) {
