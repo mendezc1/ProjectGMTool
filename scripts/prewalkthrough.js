@@ -17,8 +17,45 @@ function preWalkthrough (id, file) {
 	var el = $(id).contents().find('body');
 	el.empty();
 	appendTemplateToElement(el,file);
+	seeMoreOnclick();
 	handlePreWalkthroughInfo();
 
+}
+
+/* Function seeMoreOnclick
+ * 
+ * Adds the functionality to the "See more..." link of the popup.html template.
+ * 
+ * Takes no arguments.
+ *
+ * Pre: The prewalkthrough template has been appended to the sidebar (so the elements that are referenced exist).
+ * Post: The "see more..." link is functional.
+ */
+function seeMoreOnclick () {
+	
+	sidebarBody().find('body').on('click', '.moreOrLess', function() {
+		var isOpen = $(this).attr("stateVar");
+		
+		//The "see more" is expanded and needs to be closed
+		if (isOpen == 1) {
+			$(this).attr("stateVar", 0);
+			isOpen = $(this).attr("stateVar");
+			sidebarBody().find(".complete").hide();
+			sidebarBody().find(".preview").show();
+			sidebarBody().find(".moreOrLess").html("See more");
+		}
+		
+		//The "see more" is closed and needs to be expanded
+		else {
+			$(this).attr("stateVar", 1);
+			isOpen = $(this).attr("stateVar");
+			sidebarBody().find(".preview").hide();
+			sidebarBody().find(".moreOrLess").html("See less");
+			sidebarBody().find(".complete").show();
+		}
+		
+	});
+	
 }
 
 /* Function handlePreWalkthroughInfo
@@ -47,7 +84,7 @@ function handlePreWalkthroughInfo () {
         });
 		
 		//Display team name
-		sidebarBody().find("#teamName").html("Team Name: "+ teamName);
+		sidebarBody().find("#teamName").html("Team: "+ teamName);
 		sidebarBody().find("#getTeam").remove();
 		sidebarBody().find("#getPersona").show();
 		
@@ -63,7 +100,7 @@ function handlePreWalkthroughInfo () {
         });
 		
 		//Display persona selection and related info
-		sidebarBody().find("#personaName").html("Persona Name: " + personaName + "<br>");
+		sidebarBody().find("#personaName").html("Persona: " + personaName + "<br>");
 		if ((personaName == "Tim") || (personaName == "Patrick")) {
 			pronoun = "he";
 			possessive = "his";
@@ -92,7 +129,7 @@ function handlePreWalkthroughInfo () {
         });
 		
 		//Display scenario and related info
-		sidebarBody().find("#scenarioName").html("Scenario Description: " + scenarioName);
+		sidebarBody().find("#scenarioName").html("Scenario: " + scenarioName);
 		
 		sidebarBody().find("#getScenario").children().remove();
 		sidebarBody().find("#getScenario").remove();
