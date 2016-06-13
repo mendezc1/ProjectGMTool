@@ -18,6 +18,7 @@ function preWalkthrough (id, file) {
 	el.empty();
 	appendTemplateToElement(el,file);
 	seeMoreOnclick();
+	makeEditable();
 	handlePreWalkthroughInfo();
 
 }
@@ -58,10 +59,44 @@ function seeMoreOnclick () {
 	
 }
 
+/* Function makeEditable
+ * 
+ * Adds the functionality "Edit" buttons (e.g, for team name, persona, etc)
+ * 
+ * Takes no arguments.
+ *
+ * Pre: The prewalkthrough template has been appended to the sidebar (so the elements that are referenced exist).
+ * Post: The edit buttons allow the user to edit their input.
+ */
+ 
+function makeEditable () {
+	
+	//Team name button
+	sidebarBody().find('body').on('click', '#editTeam', function() {
+		sidebarBody().find("#editTeam").hide();
+		sidebarBody().find("#getTeam").show();
+	});
+	
+	//Persona name button
+	sidebarBody().find('body').on('click', '#editPersona', function() {
+		sidebarBody().find("#editPersona").hide();
+		sidebarBody().find("#getPersona").show();
+		sidebarBody().find("#getPersona").children().show();
+	});
+	
+	//Scenario name button
+	sidebarBody().find('body').on('click', '#editScenario', function() {
+		sidebarBody().find("#editScenario").hide();
+		sidebarBody().find("#getScenario").show();
+		sidebarBody().find("#getScenario").children().show();
+	});
+	
+}
+
 /* Function handlePreWalkthroughInfo
  * 
  * Handles the prewalkthrough information -- team name, persona choice, and scenario name. Asks the user for each of these in turn, 
- * 	and leaves the template ready to set up for the next subtask.
+ * 	and leaves the template ready to set up for the subgoal. 
  * 
  * Takes no arguments.
  *
@@ -76,6 +111,7 @@ function handlePreWalkthroughInfo () {
 	
 	//Set team name
 	sidebarBody().find('body').on('click', '#submitTeam', function() {
+		
 		//Get and save team name
 		teamName = sidebarBody().find("#teamInput").val();
 		chrome.storage.local.set({'teamName': teamName}, function() {
@@ -83,15 +119,17 @@ function handlePreWalkthroughInfo () {
 			  console.log('teamName saved');
         });
 		
-		//Display team name
+		//Display team name and edit button
 		sidebarBody().find("#teamName").html("Team: "+ teamName);
-		sidebarBody().find("#getTeam").remove();
+		sidebarBody().find("#editTeam").show();
+		sidebarBody().find("#getTeam").hide();
 		sidebarBody().find("#getPersona").show();
 		
 	});
 	
 	//Persona selection
 	sidebarBody().find('body').on('click', '#submitPersona', function() {
+		
 		//Get and save persona selection
 		personaName = sidebarBody().find("#personaSelection").val();
 		chrome.storage.local.set({'personaName': personaName}, function() {
@@ -100,7 +138,7 @@ function handlePreWalkthroughInfo () {
         });
 		
 		//Display persona selection and related info
-		sidebarBody().find("#personaName").html("Persona: " + personaName + "<br>");
+		sidebarBody().find("#personaName").html("Persona: " + personaName);
 		if ((personaName == "Tim") || (personaName == "Patrick")) {
 			pronoun = "he";
 			possessive = "his";
@@ -108,19 +146,22 @@ function handlePreWalkthroughInfo () {
 			pronoun = "she";
 			possessive = "her";
 		}
-		sidebarBody().find("#getPersona").children().remove();
-		sidebarBody().find("#getPersona").remove();
+		sidebarBody().find("#getPersona").children().hide();
+		sidebarBody().find("#getPersona").hide();
 		//Show Scenario
 		sidebarBody().find("#getScenario").children().show();
 		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
+		sidebarBody().find("#editPersona").show();
 		//Show button to view persona
 		sidebarBody().find("#viewPersona").show().html("Show " + personaName);
 		personaShown = true;
 		sidebarBody().find("#getScenario").show();
+		
 	});
 	
 	//Get scenario name
 	sidebarBody().find('body').on('click', '#submitScenario', function() {
+		
 		//Get and save scenario name
 		scenarioName = sidebarBody().find("#scenarioInput").val();
 		chrome.storage.local.set({'scenarioName': scenarioName}, function() {
@@ -130,14 +171,17 @@ function handlePreWalkthroughInfo () {
 		
 		//Display scenario and related info
 		sidebarBody().find("#scenarioName").html("Scenario: " + scenarioName);
+		sidebarBody().find("#editScenario").show();
 		
-		sidebarBody().find("#getScenario").children().remove();
-		sidebarBody().find("#getScenario").remove();
+		sidebarBody().find("#getScenario").children().hide();
+		sidebarBody().find("#getScenario").hide();
 	
 		//Show subtask
-		sidebarBody().find("#getSubgoal").children().show;
-		sidebarBody().find("#setup").remove();
+		sidebarBody().find("#getSubgoal").show();
+		sidebarBody().find("#setup").hide();
 		sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+		
+		//Idea: here should go the "Does this look good, are you ready to start the CW" type of button
 		
 		//Test that local vars were stored correctly
 		//USE THIS type of syntax to get vars out of local storage (returns the JSON object)
