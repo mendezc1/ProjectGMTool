@@ -150,13 +150,13 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#getPersona").children().hide();
 		sidebarBody().find("#getPersona").hide();
 		//Show Scenario
-		sidebarBody().find("#getScenario").children().show();
+		sidebarBody().find("#getScenario").show();
 		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
 		sidebarBody().find("#editPersona").show();
 		//Show button to view persona
 		sidebarBody().find("#viewPersona").show().html("Show " + personaName);
 		personaShown = true;
-		sidebarBody().find("#getScenario").show();
+		
 		
 	});
 	
