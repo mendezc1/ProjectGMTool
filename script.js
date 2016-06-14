@@ -528,6 +528,5 @@ $(window).unload(function () {
     localStorage.setItem("possessive", possessive);
     localStorage.setItem("numSubtasks", numSubtasks);
     //localStorage.setItem("personaShown", personaShown);
-	
 });
 

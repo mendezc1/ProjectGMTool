@@ -179,6 +179,4 @@ function renderImage(imgURL){
     	var destX = canvas.width / 2 - destWidth / 2;
     	var destY = canvas.height / 2 - destHeight / 2;
  		context.drawImage(myImg, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, 980, 300);
- 		//myImg.width = 980;
- 		//myImg.height = 300;
 }
