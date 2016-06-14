@@ -140,6 +140,7 @@ function handlePreWalkthroughInfo () {
 		
 		//Display persona selection and related info
 		sidebarBody().find("#personaName").html("Persona: " + personaName);
+		loadPersona(personaName);
 		if ((personaName == "Tim") || (personaName == "Patrick")) {
 			pronoun = "he";
 			possessive = "his";

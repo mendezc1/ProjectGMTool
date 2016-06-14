@@ -159,7 +159,7 @@ function renderImage(imgURL){
 	toolTip.style.border ="5px ridge #4099FF";
 	toolTip.style.backgroundColor = "white";
 	document.body.appendChild(toolTip);
-	//addToolTip("setupToolTip");
+	//addToolTip("imageCanvas");
 	appendTemplateToElement(toolTip ,"./templates/imageCanvas.html");
 	$(".closeToolTip").click(function() {
 		toolTip.remove();
@@ -180,3 +180,4 @@ function renderImage(imgURL){
     	var destY = canvas.height / 2 - destHeight / 2;
  		context.drawImage(myImg, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, 980, 300);
 }
+
