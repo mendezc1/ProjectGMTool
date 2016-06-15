@@ -165,7 +165,7 @@ function renderImage(imgURL){
 	$(".closeToolTip").click(function() {
 		toolTip.remove();
 	});
-		$(".previewTrigger").click(function(){
+	$(".previewTrigger").click(function(){ //#triggered
 		window.open(imgURL);
 	});
 		var canvas = document.getElementById("imageCanvas");
