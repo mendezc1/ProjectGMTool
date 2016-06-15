@@ -6,6 +6,6 @@ function addToolTip(toolTipName){
 	sidebarBody.contents().find("#" + toolTipName + "Button").on('click', function() {
 		console.log("setup tooltip");
 		sidebarBody.contents().find("#" + toolTipName).remove();
-		overlayScreen();
+		//overlayScreen();
 	});
 }

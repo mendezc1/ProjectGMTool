@@ -26,7 +26,8 @@ function setup (id, file) {
 	//Add the onclick to the "Learn More" button
 	$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
 		console.log("Learn more button clicked");
-		addToolTip("setupToolTip");
+		overlayScreen();
+		//addToolTip("setupToolTip");
 	});
 	
 }
