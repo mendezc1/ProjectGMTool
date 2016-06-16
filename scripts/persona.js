@@ -1,7 +1,7 @@
 function loadPersona(personaName){
 	console.log("in load persona" , personaName);
 	if(personaName == "Abby"){
-		appendTemplateToElement(sidebarBody().find("#scenarioName"), "./templates/abbyPersona.html");
+		appendTemplateToElement(sidebarBody().find("#personaInfo"), "./templates/abbyPersona.html");
 		var abbySRC=chrome.extension.getURL("images/Abby_square.jpg");
 		var abbyIMG= "<img id='AbbyPhoto' src='" + abbySRC + "' alt='Abby Jones' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(abbyIMG);

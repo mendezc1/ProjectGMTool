@@ -80,6 +80,8 @@ function makeEditable () {
 	//Persona name button
 	sidebarBody().find('body').on('click', '#editPersona', function() {
 		sidebarBody().find("#editPersona").hide();
+		sidebarBody().find("#personaInfo").hide();
+		sidebarBody().find("#personaInfo").empty();
 		sidebarBody().find("#getPersona").show();
 		sidebarBody().find("#getPersona").children().show();
 	});
@@ -141,6 +143,7 @@ function handlePreWalkthroughInfo () {
 		//Display persona selection and related info
 		sidebarBody().find("#personaName").html("Persona: " + personaName);
 		loadPersona(personaName);
+		sidebarBody().find("#personaInfo").show();
 		if ((personaName == "Tim") || (personaName == "Patrick")) {
 			pronoun = "he";
 			possessive = "his";
