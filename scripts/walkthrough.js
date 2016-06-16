@@ -15,7 +15,7 @@ function drawAction(id, file, actionNum){
 	id = "#GenderMagFrame";
 	file = "/templates/actionPrompt.html";
 	var el = $(id).contents().find('#containeryo');
-	el.empty();
+	//el.empty();
 	appendTemplateToElement(el,file);
 	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
 		overlayScreen();
