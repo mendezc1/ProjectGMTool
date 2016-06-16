@@ -153,17 +153,32 @@ function renderImage(imgURL){
 	toolTip.style.position = "absolute";
 	toolTip.style.left = elm.offsetLeft + "px";
 	toolTip.style.top = elm.offsetTop + "px";
-	toolTip.style.height = "200px";
-	toolTip.style.width = "400px";
+	toolTip.style.height = "300px";
+	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	
 	toolTip.style.border ="5px ridge #4099FF";
 	toolTip.style.backgroundColor = "white";
+	
 	document.body.appendChild(toolTip);
+	$('#myToolTip').draggable();
 	//addToolTip("imageCanvas");
 
 	appendTemplateToElement(toolTip ,"./templates/imageCanvas.html");
 	$(".closeToolTip").click(function() {
+		//toolTip.remove();
+		toolTip.innerHTML = " ";
+		appendTemplateToElement(toolTip, "./templates/preAction.html");
+		$("#preActionClose").click(function(){
+			//SAVE HERE ALANNAH!
+			toolTip.remove();
+			$("#slideout").toggleClass("clicked");
+			$("#GenderMagFrame").toggleClass("clicked");
+		});
+		
+	});
+	$("#retakeImage").click(function(){
 		toolTip.remove();
+		overlayScreen();
 	});
 	$(".previewTrigger").click(function(){ //#triggered
 		window.open(imgURL);
