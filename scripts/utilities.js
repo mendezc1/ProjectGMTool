@@ -6,6 +6,7 @@ function init(){
 	importStylesheet($("#slideout").contents().find("head"),"/styles/styles.css");
 	importStylesheet($("#slideout").contents().find("head"),"/jquery-ui-1.11.4.custom/jquery-ui.css");
 	importStylesheet($("#slideout").contents().find("head"),"font-awesome-4.6.1/css/font-awesome.min.css");
+	importStylesheet($("body", "/styles/screenShotStyle.css");
 	$("#slideout").contents().find("body").append("GenderMag");
 	addOnClicks();
 	setup("#GenderMagFrame", "./templates/firstState.html");
@@ -28,30 +29,7 @@ function appendTemplateToElement(el,file){
 	$(el).append(dataToAppend);
 }
 
-/* F<html>
-	<head>
-		
-		<script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
-		<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-		
-		<script src="js/setup.js"></script>
-		<script src="js/prewalkthrough.js"></script>
-		<script src="js/helper.js"></script>
-		
-		<script src="popup.js"></script>
-		
-		<title>Welcome To GenderMag!</title>
-	</head>
-
-	<body>
-		
-		<div id="welcomeText">Welcome! Some text about what this is.</div>
-		<button id="startGenderMagButton">Start GenderMag</button>
-		<button id="learnMoreButton">Learn More</button>
-
-	</body>
-	
-</html>unction importStylesheet
+/* Function importStylesheet
  * 
  * Takes 2 arguements:
  * 		element: the element to which the stylesheet will be appended
