@@ -116,11 +116,7 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitTeam', function() {
 		
 		//Get and save team name
-		teamName = sidebarBody().find("#teamInput").val();
-		chrome.storage.local.set({'teamName': teamName}, function() {
-			  // Notify that we saved.
-			  console.log('teamName saved');
-        });
+		saveTeamNameLocal();
 		
 		//Display team name and edit button
 		sidebarBody().find("#teamName").html("Team: "+ teamName);
@@ -134,11 +130,7 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitPersona', function() {
 		
 		//Get and save persona selection
-		personaName = sidebarBody().find("#personaSelection").val();
-		chrome.storage.local.set({'personaName': personaName}, function() {
-			  // Notify that we saved.
-			  console.log('personaName saved');
-        });
+		savePersonaNameLocal();
 		
 		//Display persona selection and related info
 		sidebarBody().find("#personaName").html("Persona: " + personaName);
@@ -168,11 +160,7 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitScenario', function() {
 		
 		//Get and save scenario name
-		scenarioName = sidebarBody().find("#scenarioInput").val();
-		chrome.storage.local.set({'scenarioName': scenarioName}, function() {
-			  // Notify that we saved.
-			  console.log('scenarioName saved');
-        });
+		saveScenarioNameLocal();
 		
 		//Display scenario and related info
 		sidebarBody().find("#scenarioName").html("Scenario: " + scenarioName);
@@ -194,6 +182,9 @@ function handlePreWalkthroughInfo () {
 	});
 	
 	sidebarBody().find('body').on('click', '#submitSubgoal', function() {
+		var subId = subgoalArray.length + 1;
+		var subName = sidebarBody().find("#subgoalInput").val()
+		var sub = addSubgoal(subId, subName , 0);
 		drawSubgoal(0,0,0);
 	});
 	
