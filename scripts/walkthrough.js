@@ -5,18 +5,21 @@ function drawSubgoal(id, file, subNum){
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
-	sidebarBody().find('body').on('click', '#addAction', function() {
-		overlayScreen();
+	sidebarBody().find('body').on('click', '#addAction', function(){
 		drawAction(0,0,0);
 	});
+
 }
 
 function drawAction(id, file, actionNum){
 	id = "#GenderMagFrame";
-	file = "/templates/preActionBody.html";
+	file = "/templates/actionPrompt.html";
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
+	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
+		overlayScreen();
+	});
 }
 /*
 		//Get Subtask
