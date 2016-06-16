@@ -6,6 +6,7 @@ function drawSubgoal(id, file, subNum){
 	el.empty();
 	appendTemplateToElement(el,file);
 	sidebarBody().find('body').on('click', '#addAction', function() {
+		overlayScreen();
 		drawAction(0,0,0);
 	});
 }
