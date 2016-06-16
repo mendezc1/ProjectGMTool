@@ -6,7 +6,7 @@ function init(){
 	importStylesheet($("#slideout").contents().find("head"),"/styles/styles.css");
 	importStylesheet($("#slideout").contents().find("head"),"/jquery-ui-1.11.4.custom/jquery-ui.css");
 	importStylesheet($("#slideout").contents().find("head"),"font-awesome-4.6.1/css/font-awesome.min.css");
-	importStylesheet($("body", "/styles/screenShotStyle.css");
+	importStylesheet($("body"), "/styles/screenShotStyle.css");
 	$("#slideout").contents().find("body").append("GenderMag");
 	addOnClicks();
 	setup("#GenderMagFrame", "./templates/firstState.html");
