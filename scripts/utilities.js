@@ -25,7 +25,30 @@ function appendTemplateToElement(el,file){
 	$(el).append(dataToAppend);
 }
 
-/* Function importStylesheet
+/* F<html>
+	<head>
+		
+		<script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+		<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+		
+		<script src="js/setup.js"></script>
+		<script src="js/prewalkthrough.js"></script>
+		<script src="js/helper.js"></script>
+		
+		<script src="popup.js"></script>
+		
+		<title>Welcome To GenderMag!</title>
+	</head>
+
+	<body>
+		
+		<div id="welcomeText">Welcome! Some text about what this is.</div>
+		<button id="startGenderMagButton">Start GenderMag</button>
+		<button id="learnMoreButton">Learn More</button>
+
+	</body>
+	
+</html>unction importStylesheet
  * 
  * Takes 2 arguements:
  * 		element: the element to which the stylesheet will be appended
