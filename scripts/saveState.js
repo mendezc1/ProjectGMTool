@@ -2,18 +2,34 @@ var subgoalArray = [];
 
 //Creates a new subgoal object
 //Call using var x = addSubgoal(id, name, numActions);
-function saveSubgoal (id, name, numActions) {
+function saveSubgoal (name, yesnomaybe, whyText, facets) {
 	var subgoal = {
-		id: id,
+		id: subgoalArray.length + 1,
 		name: name,
-		numActions: numActions,
+		ynm: yesnomaybe,
+		why: whyText,
+		facetValues: facets,
 		actions: []
 	};
 	console.log("incoming subgoal", subgoal);
 	subgoalArray.push(subgoal);
 	console.log("Array 1: ", subgoalArray);
 	chrome.storage.local.set({'subgoalArray': subgoalArray});
+	//addToSandwich("subgoal",subgoal);
 }
+/*
+function addToSandwich(type, item){
+	if(!type.localeCompare("subgoal")){
+		var nameLink= $("<a>", [
+		href = "#",
+		html("hello");
+		)
+		sidebarBody().find("#subgoalList").append(item.name);
+	}
+	
+	
+}
+*/
 
 //Creates a new idealAction object
 function saveIdealAction (id, name, idOfSubgoal, el) {
