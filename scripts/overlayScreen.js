@@ -12,8 +12,7 @@ chrome.runtime.onMessage.addListener(
 function overlayScreen(){
 	//$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
 	//numScreenShots++;
-	$("#slideout").toggleClass("clicked");
-	$("#GenderMagFrame").toggleClass("clicked");
+	closeSlider();
 	if(!document.getElementById('genderMagCanvasContainer')){
 		console.log("In overlayScreen");
 		var canvasContainer = document.createElement('div');
@@ -167,16 +166,7 @@ function renderImage(imgURL){
 	$(".closeToolTip").click(function() {
 		//toolTip.remove();
 		toolTip.innerHTML = " ";
-		appendTemplateToElement(toolTip, "./templates/preAction.html");
-		$("#preActionClose").click(function(){
-			//SAVE HERE ALANNAH!
-			//var el = sidebarBody().find('#preActionQuestions');
-			//saveIdealAction(id, name, idOfSubgoal, el);
-			toolTip.remove();
-			$("#slideout").toggleClass("clicked");
-			$("#GenderMagFrame").toggleClass("clicked");
-		});
-		
+		preActionQuestions(toolTip);
 	});
 	$("#retakeImage").click(function(){
 		toolTip.remove();

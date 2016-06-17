@@ -65,3 +65,17 @@ function addOnClicks(){
 function sidebarBody(){
 	return $("#GenderMagFrame").contents();
 }
+
+function openSlider(){
+	if(!$("#slideout").hasClass("clicked")){
+		$("#slideout").addClass("clicked");
+		$("#GenderMagFrame").addClass("clicked");
+	}
+}
+
+function closeSlider(){
+	if($("#slideout").hasClass("clicked")){
+		$("#slideout").toggleClass("clicked");
+		$("#GenderMagFrame").toggleClass("clicked");
+	}
+}
