@@ -141,7 +141,7 @@ function handlePreWalkthroughInfo () {
 		var userTeam = saveTeamNameLocal();
 		
 		//Display team name and edit button
-		sidebarBody().find("#teamName").html("Team: "+ userTeam);
+		sidebarBody().find("#teamName").html("<b>Team:</b> "+ userTeam);
 		sidebarBody().find("#editTeam").show();
 		sidebarBody().find("#getTeam").hide();
 		sidebarBody().find("#getPersona").show();
@@ -155,7 +155,7 @@ function handlePreWalkthroughInfo () {
 		var userPersona = savePersonaNameLocal();
 		
 		//Display persona selection and related info
-		sidebarBody().find("#personaName").html("Persona: " + userPersona);
+		sidebarBody().find("#personaName").html("<b>Persona:</b> " + userPersona);
 		loadPersona(userPersona);
 		sidebarBody().find("#personaInfo").show();
 		if ((userPersona == "Tim") || (userPersona == "Patrick")) {
@@ -185,7 +185,7 @@ function handlePreWalkthroughInfo () {
 		var userScenario = saveScenarioNameLocal();
 		
 		//Display scenario and related info
-		sidebarBody().find("#scenarioName").html("Scenario: " + userScenario);
+		sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + userScenario);
 		sidebarBody().find("#editScenario").show();
 		
 		sidebarBody().find("#getScenario").children().hide();
@@ -208,6 +208,9 @@ function handlePreWalkthroughInfo () {
 	});
 	
 	sidebarBody().find('body').on('click', '#submitSubgoal', function() {
+		sidebarBody().find("#editTeam").hide();
+		sidebarBody().find("#editPersona").hide();
+		sidebarBody().find("#editScenario").hide();
 		drawSubgoal(0,0);
 	});
 	
