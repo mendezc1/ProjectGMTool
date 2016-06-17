@@ -14,44 +14,37 @@
 </head>
 
 <body>
-<span id="welcomeText">The GenderMag Tool</span> &nbsp; &nbsp; &nbsp;
-<button id="saveButton" style="margin-top:5px;">Save</button>
-<!-- <button id="viewPersona">View Personas</button> -->
 
-<hr>
+<div id="userInfo" style="height:10%; width:100%; margin:5px; overflow:hidden;">
 
 
-<div id="userInfo" style="height:80%; width:15%; float:left; margin:5px; overflow:hidden;">
-
-	<div id="icons">
-	
-		<div class="icon" id="team">
+	<span id="welcomeText">The GenderMag Tool</span> &nbsp; &nbsp; &nbsp;
+		<span class="icon" id="team">
 			<i class="fa fa-2x fa-users" aria-hidden="true"></i>
 			<label id="teamName">Team:</label>
 			<button id='editTeam' hidden>Edit</button>
-		</div>
+		</span>
 			
-		<div class="icon" id="persona">
+		<span class="icon" id="persona">
 			<i class="fa fa-2x fa-user" aria-hidden="true"></i>
 			<label id="personaName">Persona:</label>
 			<button id='editPersona' hidden>Edit</button>
-		</div>
+		</span>
 			
-		<div class="icon" id="scenario">
+		<span class="icon" id="scenario">
 			<i class="fa fa-2x fa-road" aria-hidden="true"></i>
 			<label id="scenarioName">Scenario:</label>
 			<button id='editScenario' hidden>Edit</button>
-		</div>
-		
+		</span>
+
+<!--button id="saveAndExit" style="margin-top:5px;">Save</button-->
+<!-- <button id="viewPersona">View Personas</button> -->
+
 	</div>
-	
-	<hr>
-	
-	<div id="personaInfo">
-	</div>
-	
-</div>
-<div id="containeryo" style="height:80%; width:80%; float:left; margin:5px;  overflow: auto;" >
+<hr>
+<div id="sideBySide" style="overflow:hidden;">
+	<div id="subgoalList" style="height:80%; width:10%; float:left">Subgoals here</div>
+	<div id="containeryo" style="height:80%; width:50%; margin:5px;  float:left; overflow: hidden;" >
 		<div id="setup" class="instruction" style="margin-bottom:5px;">
 			<span class="preview"> Before you get started with the GenderMag walkthrough... </span>
 			
@@ -94,6 +87,11 @@
 			<input id="subgoalInput" type="text" placeholder="ex Search for 'Sue' in the DB">
 			<input type="submit" id="submitSubgoal" value="Add Subgoal">
 		</div>
+</div>
+	<div id="personaInfo"style ="height:80%; width:35%; float:left; margin:5px;overflow:hidden;"></div>
+
+
+ <br style="clear:left;" />
 </div>
 	</body>
 </html>
