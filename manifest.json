@@ -12,7 +12,7 @@
 	},
 	 
 	 "web_accessible_resources": [
-      "images/*.jpg", "/styles/*.css",  "styles/styles.css"
+      "images/*.jpg", "/styles/*.css",  "/html5-canvas-drawing-app/*"
     ],
 	"content_scripts": [
 		{
@@ -22,5 +22,5 @@
 		}
 	],
 	"permissions": ["storage", "tabs", "<all_urls>"],
-	"web_accessible_resources": ["/templates/*", "/images/*.jpg", "/styles/*.css", "styles/styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*"]
+	"web_accessible_resources": ["/templates/*", "/images/*.jpg", "/styles/*.css", "styles/styles.css", "/jquery-ui-1.11.4.custom/jquery-ui.css", "/font-awesome-4.6.1/*", "/html5-canvas-drawing-app/*"]
 }

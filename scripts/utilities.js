@@ -1,5 +1,5 @@
 function init(){
-	
+
 	importStylesheet("body","./styles/slider.css");
 	appendTemplateToElement("body","./templates/slider.html");
 	importStylesheet($("#slideout").contents().find("head"),"/styles/sliderbody.css");
@@ -10,6 +10,7 @@ function init(){
 	$("#slideout").contents().find("body").append("GenderMag");
 	addOnClicks();
 	setup("#GenderMagFrame", "./templates/firstState.html");
+	
 	
 }
 
