@@ -6,8 +6,44 @@ function loadPersona(personaName){
 		var abbyIMG= "<img id='AbbyPhoto' src='" + abbySRC + "' alt='Abby Jones' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(abbyIMG);
 		sidebarBody().find(".abbyMTrigger").click(function (){
+			
+			console.log("Who you gonna call?");
 			addToolTip("abbyMToolTip");
+			
+			
 		});
+		sidebarBody().find(".abbyIPSTrigger").click(function(){
+			console.log("Marco");
+			addToolTip("abbyIPSToolTip");
+		});
+		sidebarBody().find(".abbySETrigger").click(function(){
+			console.log("John-Jacob-Jingleheimer-Schmidt his name is my name too, whenever we go out, the people always shout");
+			addToolTip("abbySEToolTip");
+		});
+		sidebarBody().find(".abbyRTrigger").click(function(){
+			console.log("They call me `Bell`");
+			console.log("They call me `Stacy`");
+			console.log("They call me `her`");
+			console.log("They call me `Jane`"); 
+			console.log("Thats not my name");
+			console.log("Thats not my name");
+			console.log("Thats not my name");
+			console.log("Thats not my name.");
+			console.log("They call me `quiet girl`");
+			console.log("But I'm a riot Mary, Jo, Lisa");
+			console.log("Always the same");
+			console.log("Thats not my name");
+			console.log("Thats not my name");
+			console.log("Thats not my name"); 
+			console.log("Thats not my name");
+			console.log("What is my name? Its: ");
+			addToolTip("abbyRToolTip");
+		});
+		sidebarBody().find(".abbyTTrigger").click(function(){
+			console.log("Knock Knock, Whos there? Orange? Orange Who? Aren't you glad I didn't call");
+			addToolTip("abbyTToolTip");
+		});
+		
 			
 	}
 	else if(personaName == "Tim"){
