@@ -170,6 +170,8 @@ function renderImage(imgURL){
 		appendTemplateToElement(toolTip, "./templates/preAction.html");
 		$("#preActionClose").click(function(){
 			//SAVE HERE ALANNAH!
+			//var el = sidebarBody().find('#preActionQuestions');
+			//saveIdealAction(id, name, idOfSubgoal, el);
 			toolTip.remove();
 			$("#slideout").toggleClass("clicked");
 			$("#GenderMagFrame").toggleClass("clicked");

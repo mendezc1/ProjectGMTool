@@ -1,11 +1,16 @@
-function drawSubgoal(id, file, subNum){
+function drawSubgoal(id, file){
 	
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
+	var subName = sidebarBody().find("#subgoalInput").val();
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
+	sidebarBody().find('h3').html("Subgoal: " + subName);
+	
 	sidebarBody().find('body').on('click', '#addAction', function(){
+		var subNum = subgoalArray.length + 1;
+		saveSubgoal(subNum, subName, 0);
 		drawAction(0,0,0);
 	});
 

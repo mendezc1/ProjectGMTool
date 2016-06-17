@@ -176,16 +176,13 @@ function handlePreWalkthroughInfo () {
 		
 		//Idea: here should go the "Does this look good, are you ready to start the CW" type of button
 		
-		//Test that local vars were stored correctly
+		//DEBUG: Test that local vars were stored correctly
 		//USE THIS type of syntax to get vars out of local storage (returns the JSON object)
 		chrome.storage.local.get(function(result){console.log(result)});
 	});
 	
 	sidebarBody().find('body').on('click', '#submitSubgoal', function() {
-		var subId = subgoalArray.length + 1;
-		var subName = sidebarBody().find("#subgoalInput").val()
-		var sub = addSubgoal(subId, subName , 0);
-		drawSubgoal(0,0,0);
+		drawSubgoal(0,0);
 	});
 	
 }	
