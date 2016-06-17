@@ -40,7 +40,7 @@ function saveIdealAction (id, name, idOfSubgoal, el) {
 }
 
 
-//Save the entire HTML of the page to local storage
+//Save the entire HTML of the slider to local storage
 function saveHTML () {   //hot male lol
 	
 	var currentHTML = sidebarBody().find("body").html();
@@ -50,16 +50,35 @@ function saveHTML () {   //hot male lol
 	chrome.storage.local.set({'lastSavedHTML': currentHTML}, function() {
 		console.log("HTML saved");
 	});
-	chrome.storage.local.get(function(result){console.log(result)});
+	//chrome.storage.local.get(function(result){console.log(result)});
 	
-	//Begin test of code - empties the body then puts it back
+	//Begin test of code - empties the body then puts it back from local storage
 	/* sidebarBody().find("body").empty();
 	alert("putting code back");
-	sidebarBody().find("body").html(currentHTML); */
+	chrome.storage.local.get("lastSavedHTML", function(result) {
+			var HTMLtoAppend = result.lastSavedHTML;
+			sidebarBody().find("body").html(HTMLtoAppend);
+			console.log("body should be back");
+	}); */
 	
 }
 
+//Restore the last saved HTML of the slider from local storage
+//If element isn't initialized and this is called, it'll wipe the slider - so check for ==NULL
+function restoreHTML () {
+	chrome.storage.local.get("lastSavedHTML", function(result) {
+			var HTMLtoAppend = result.lastSavedHTML;
+			sidebarBody().find("body").html(HTMLtoAppend);
+			console.log("body should be back");
+	});
+}
 
+//Clear the lastSavedHTML in local storage. Mostly for testing purposes.
+function clearHTML () {
+	chrome.storage.local.set({'lastSavedHTML': null}, function() {
+		console.log("set lastSavedHTML to null");
+	});
+}
 
 
 

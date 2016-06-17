@@ -13,20 +13,33 @@
 
 function setup (id, file) {
 	
-	//Put the text and buttons on the screen
-	var el = $(id).contents().find('body');
-	appendTemplateToElement(el,file);
+	console.log("In setup");
+	//clearHTML();
 	
-	//Add the onclick to the "Start Walkthrough" button	
-	$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
-		preWalkthrough("#GenderMagFrame", "./templates/popup.html");
-	});
-	
-	//Add the onclick to the "Learn More" button
-	$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
-		console.log("Learn more button clicked");
-		overlayScreen();
-		//addToolTip("setupToolTip");
+	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
+	chrome.storage.local.get("lastSavedHTML", function(result) {
+		var HTMLtoAppend = result.lastSavedHTML;
+		if (HTMLtoAppend) {
+			restoreHTML();
+		}
+		else {
+			console.log("Nothing to restore - starting as normal");
+			//Put the text and buttons on the screen
+			var el = $(id).contents().find('body');
+			appendTemplateToElement(el,file);
+			
+			//Add the onclick to the "Start Walkthrough" button	
+			$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
+				preWalkthrough("#GenderMagFrame", "./templates/popup.html");
+			});
+			
+			//Add the onclick to the "Learn More" button
+			$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
+				console.log("Learn more button clicked");
+				overlayScreen();
+				//addToolTip("setupToolTip");
+			});
+		}
 	});
 	
 }

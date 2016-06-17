@@ -18,7 +18,8 @@ function preWalkthrough (id, file) {
 	el.empty();
 	appendTemplateToElement(el,file);
 	seeMoreOnclick();
-	addSaveOnclick();
+	//addSaveOnclick();
+	//addClearOnclick();
 	makeEditable();
 	handlePreWalkthroughInfo();
 
@@ -60,7 +61,7 @@ function seeMoreOnclick () {
 	
 }
 
-
+/*
 //Save current HTML to local storage.
 function addSaveOnclick () {
 	
@@ -69,6 +70,16 @@ function addSaveOnclick () {
 	});
 	
 }
+
+//Clear current HTML out of local storage.
+function addClearOnclick () {
+	
+	sidebarBody().find('body').on('click', '#clearButton', function() {
+		clearHTML();
+	});
+	
+}
+*/
 
 /* Function makeEditable
  * 
