@@ -18,6 +18,7 @@ function preWalkthrough (id, file) {
 	el.empty();
 	appendTemplateToElement(el,file);
 	seeMoreOnclick();
+	addSaveOnclick();
 	makeEditable();
 	handlePreWalkthroughInfo();
 
@@ -55,6 +56,16 @@ function seeMoreOnclick () {
 			sidebarBody().find(".complete").show();
 		}
 		
+	});
+	
+}
+
+
+//Save current HTML to local storage.
+function addSaveOnclick () {
+	
+	sidebarBody().find('body').on('click', '#saveButton', function() {
+		saveHTML();
 	});
 	
 }
@@ -103,7 +114,7 @@ function makeEditable () {
  * Takes no arguments.
  *
  * Pre: The prewalkthrough template has been appended to the sidebar (so the elements that are referenced exist).
- * Post: The user's team name, persona selection, and scenario have been stored in the GLOBAL variables:
+ * Post: The user's team name, persona selection, and scenario have been stored in the local storage variables:
  *			team name -> teamName
  *			persona choice -> personaName
  *			scenario -> scenarioName
@@ -116,10 +127,10 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitTeam', function() {
 		
 		//Get and save team name
-		saveTeamNameLocal();
+		var userTeam = saveTeamNameLocal();
 		
 		//Display team name and edit button
-		sidebarBody().find("#teamName").html("Team: "+ teamName);
+		sidebarBody().find("#teamName").html("Team: "+ userTeam);
 		sidebarBody().find("#editTeam").show();
 		sidebarBody().find("#getTeam").hide();
 		sidebarBody().find("#getPersona").show();
@@ -130,13 +141,13 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitPersona', function() {
 		
 		//Get and save persona selection
-		savePersonaNameLocal();
+		var userPersona = savePersonaNameLocal();
 		
 		//Display persona selection and related info
-		sidebarBody().find("#personaName").html("Persona: " + personaName);
-		loadPersona(personaName);
+		sidebarBody().find("#personaName").html("Persona: " + userPersona);
+		loadPersona(userPersona);
 		sidebarBody().find("#personaInfo").show();
-		if ((personaName == "Tim") || (personaName == "Patrick")) {
+		if ((userPersona == "Tim") || (userPersona == "Patrick")) {
 			pronoun = "he";
 			possessive = "his";
 		} else {
@@ -147,10 +158,10 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#getPersona").hide();
 		//Show Scenario
 		sidebarBody().find("#getScenario").show();
-		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
+		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + userPersona + " will be performing");
 		sidebarBody().find("#editPersona").show();
 		//Show button to view persona
-		sidebarBody().find("#viewPersona").show().html("Show " + personaName);
+		sidebarBody().find("#viewPersona").show().html("Show " + userPersona);
 		personaShown = true;
 		
 		
@@ -160,10 +171,10 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitScenario', function() {
 		
 		//Get and save scenario name
-		saveScenarioNameLocal();
+		var userScenario = saveScenarioNameLocal();
 		
 		//Display scenario and related info
-		sidebarBody().find("#scenarioName").html("Scenario: " + scenarioName);
+		sidebarBody().find("#scenarioName").html("Scenario: " + userScenario);
 		sidebarBody().find("#editScenario").show();
 		
 		sidebarBody().find("#getScenario").children().hide();
@@ -172,7 +183,11 @@ function handlePreWalkthroughInfo () {
 		//Show subtask
 		sidebarBody().find("#getSubgoal").show();
 		sidebarBody().find("#setup").hide();
-		sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+		chrome.storage.local.get("personaName", function(result) {
+			var userPersona = result.personaName;
+			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
+		});
+		//sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
 		
 		//Idea: here should go the "Does this look good, are you ready to start the CW" type of button
 		
