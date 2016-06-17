@@ -6,12 +6,28 @@ function drawSubgoal(id, file){
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
+	sidebarBody().find("#editSubgoal").hide();
 	sidebarBody().find('h3').html("Subgoal: " + subName);
-	
+		
 	sidebarBody().find('body').on('click', '#addAction', function(){
+		var Q1Answer = sidebarBody().find('#A0Q0whyYes').val();
+		console.log("Q1 answer", Q1Answer);
+		sidebarBody().find("#A0Q0whyYes").hide();
+		sidebarBody().find("#A0Q0Response").show();
+		sidebarBody().find("#A0Q0Response").html(Q1Answer);
+		
 		var subNum = subgoalArray.length + 1;
 		saveSubgoal(subNum, subName, 0);
+		sidebarBody().find('#addAction').hide();
+		sidebarBody().find('#editSubgoal').show();
+		sidebarBody().find('#editSubgoal').click(function(){
+			sidebarBody().find("#editSubgoal").hide();
+			sidebarBody().find('#addAction').show();
+			sidebarBody().find("#A0Q0whyYes").show();
+			sidebarBody().find("#A0Q0Response").hide();
+		});
 		drawAction(0,0,0);
+		
 	});
 
 }
