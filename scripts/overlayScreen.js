@@ -77,7 +77,7 @@ function overlayScreen(){
 			console.log("element" , elm.innerText, elm.textContent);
 			var highlightClick = document.createElement("div");
 			highlightClick.id = "highlightClick";
-			document.body.appendChild(highlightClick);
+		//	document.body.appendChild(highlightClick);
 			highlightClick.style.position = "absolute";
 			highlightClick.style.left = elm.offsetLeft + "px";
 			highlightClick.style.top = elm.offsetTop + "px";
@@ -102,7 +102,7 @@ function overlayScreen(){
 
 		console.log("sending message");
 		setTimeout(function(){
-			document.getElementById("highlightClick").remove();
+		//	document.getElementById("highlightClick").remove();
 			$("#highlightHover").remove();
 		}, 2000);
 		}
@@ -151,8 +151,8 @@ function renderImage(imgURL){
 	var toolTip = document.createElement("div");
 	toolTip.id = "myToolTip";
 	toolTip.style.position = "absolute";
-	toolTip.style.left = elm.offsetLeft + "px";
-	toolTip.style.top = elm.offsetTop + "px";
+	toolTip.style.left = elm.offsetLeft+100 + "px";
+	toolTip.style.top = elm.offsetTop+100 + "px";
 	toolTip.style.height = "300px";
 	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	
