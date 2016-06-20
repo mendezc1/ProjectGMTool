@@ -186,19 +186,17 @@ function handlePreWalkthroughInfo () {
 		//Show subtask
 		sidebarBody().find("#getSubgoal").show();
 		sidebarBody().find("#setup").hide();
-
-		chrome.storage.local.get("personaName", function(result) {
-			var userPersona = result.personaName;
-			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
-			sidebarBody().find("#subgoalInput").keyup(function(event){
-				if(event.keyCode == 13){
-					sidebarBody().find("#submitSubgoal").click();
-				} 
-			});
-		});
-		//sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
 		
-		//Idea: here should go the "Does this look good, are you ready to start the CW" type of button
+		var personaName = getVarFromLocal("personaName");
+		if (!personaName) {
+			console.log("persona name was null. Check your save");
+		}
+		sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+		sidebarBody().find("#subgoalInput").keyup(function(event){
+			if(event.keyCode == 13){
+				sidebarBody().find("#submitSubgoal").click();
+			} 
+		});
 		
 	});
 	
