@@ -18,7 +18,8 @@ function preWalkthrough (id, file) {
 	el.empty();
 	appendTemplateToElement(el,file);
 	seeMoreOnclick();
-	//addSaveOnclick();
+	
+
 	//addClearOnclick();
 	makeEditable();
 	handlePreWalkthroughInfo();
@@ -61,25 +62,40 @@ function seeMoreOnclick () {
 	
 }
 
-/*
+function restoreSave(prevHTML){
+
+		
+		sidebarBody().find("#persona").html(prevHTML);
+		console.log("prevHTML", prevHTML);
+		localStorage.removeItem("personaName");
+}
+
 //Save current HTML to local storage.
 function addSaveOnclick () {
+
+
+	var backupHTML = "ABBY!";
+	localStorage.setItem("personaName", backupHTML);
+	console.log("backup", backupHTML);
+	//sidebarBody().find('body').on('click', '#saveButton', function() {
 	
-	sidebarBody().find('body').on('click', '#saveButton', function() {
-		saveHTML();
-	});
+	
+	//save the current state (html) unless user is done (clicked done button)      
+
+		//saveHTML();
+	//});
 	
 }
 
 //Clear current HTML out of local storage.
 function addClearOnclick () {
-	
+	console.log("clearing html")
 	sidebarBody().find('body').on('click', '#clearButton', function() {
 		clearHTML();
 	});
 	
 }
-*/
+
 
 /* Function makeEditable
  * 
@@ -174,7 +190,13 @@ function handlePreWalkthroughInfo () {
 		//Show button to view persona
 		sidebarBody().find("#viewPersona").show().html("Show " + userPersona);
 		personaShown = true;
-		
+		var prevHTML = localStorage.getItem("personaName");
+		if(prevHTML){
+			restoreSave(prevHTML);
+		}
+		else{
+			addSaveOnclick();
+		}
 		
 	});
 	

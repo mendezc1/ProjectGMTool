@@ -19,6 +19,7 @@ function setup (id, file) {
 	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
 	chrome.storage.local.get("lastSavedHTML", function(result) {
 		var HTMLtoAppend = result.lastSavedHTML;
+		console.log("result ", result);
 		if (HTMLtoAppend) {
 			restoreHTML();
 		}

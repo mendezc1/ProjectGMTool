@@ -85,7 +85,7 @@ function restoreHTML () {
 	chrome.storage.local.get("lastSavedHTML", function(result) {
 			var HTMLtoAppend = result.lastSavedHTML;
 			sidebarBody().find("body").html(HTMLtoAppend);
-			console.log("body should be back");
+			console.log("body should be back", HTMLtoAppend);
 	});
 }
 
