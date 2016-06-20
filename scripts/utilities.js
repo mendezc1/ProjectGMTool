@@ -55,11 +55,18 @@ function importStylesheet(el, file){
  */
 function addOnClicks(){
 	
-	$("#slideout").contents().find("body").on('click', function(event) {
-		$("#slideout").toggleClass("clicked");
-		$("#GenderMagFrame").toggleClass("clicked");
-	});
+	//The slider handle
+	var el = $("#slideout").contents().find("body");
+	if (el) {
+		$("#slideout").contents().find("body").on('click', function(event) {
+			$("#slideout").toggleClass("clicked");
+			$("#GenderMagFrame").toggleClass("clicked");
+		});
+	}
 	
+	
+
+	console.log("Done adding clicks");
 }
 
 function sidebarBody(){
