@@ -1,7 +1,5 @@
 function drawSubgoal(id, file, subgoal = null){
-	
 
-	
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
 	var subName = sidebarBody().find("#subgoalInput").val();
@@ -9,14 +7,14 @@ function drawSubgoal(id, file, subgoal = null){
 	el.empty();
 	appendTemplateToElement(el,file);
 	if(subgoal){
-		sidebarBody().find('h3').html("Subgoal: " + subgoal.name);
+		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subgoal.name);
 		sidebarBody().find('#yes').attr("clicked") = subgoal.ynm[0];
 		sidebarBody().find('#no').attr("clicked") = subgoal.ynm[1];
 		sidebarBody().find('#maybe').attr("clicked") = subgoal.ynm[2];
 		sidebarBody().find('#A0Q0whyYes').html(subgoal.whyText);
 	}
 	sidebarBody().find("#editSubgoal").hide();
-	sidebarBody().find('h3').html("Subgoal: " + subName);
+	sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
 	sidebarBody().find('body').on('click', '#addAction', function(){
 		var yesNoMaybe = [$("#yes").attr("checked"), $("#no").attr("checked"), $("#maybe").attr("checked")];
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();

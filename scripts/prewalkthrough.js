@@ -19,8 +19,6 @@ function preWalkthrough (id, file) {
 	appendTemplateToElement(el,file);
 	seeMoreOnclick();
 	
-
-	//addClearOnclick();
 	makeEditable();
 	handlePreWalkthroughInfo();
 
@@ -58,40 +56,6 @@ function seeMoreOnclick () {
 			sidebarBody().find(".complete").show();
 		}
 		
-	});
-	
-}
-
-function restoreSave(prevHTML){
-
-		
-		sidebarBody().find("#persona").html(prevHTML);
-		console.log("prevHTML", prevHTML);
-		localStorage.removeItem("personaName");
-}
-
-//Save current HTML to local storage.
-function addSaveOnclick () {
-
-
-	var backupHTML = "ABBY!";
-	localStorage.setItem("personaName", backupHTML);
-	console.log("backup", backupHTML);
-	//sidebarBody().find('body').on('click', '#saveButton', function() {
-	
-	
-	//save the current state (html) unless user is done (clicked done button)      
-
-		//saveHTML();
-	//});
-	
-}
-
-//Clear current HTML out of local storage.
-function addClearOnclick () {
-	console.log("clearing html")
-	sidebarBody().find('body').on('click', '#clearButton', function() {
-		clearHTML();
 	});
 	
 }
@@ -154,10 +118,11 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitTeam', function() {
 		
 		//Get and save team name
-		var userTeam = saveTeamNameLocal();
+		var teamName = sidebarBody().find("#teamInput").val();
+		saveVarToLocal("teamName", teamName);
 		
 		//Display team name and edit button
-		sidebarBody().find("#teamName").html("<b>Team:</b> "+ userTeam);
+		sidebarBody().find("#teamName").html("<b>Team:</b> "+ teamName);
 		sidebarBody().find("#editTeam").show();
 		sidebarBody().find("#getTeam").hide();
 		sidebarBody().find("#getPersona").show();
@@ -168,13 +133,14 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitPersona', function() {
 		
 		//Get and save persona selection
-		var userPersona = savePersonaNameLocal();
+		var personaName = sidebarBody().find("#personaSelection").val();
+		saveVarToLocal("personaName", personaName);
 		
 		//Display persona selection and related info
-		sidebarBody().find("#personaName").html("<b>Persona:</b> " + userPersona);
-		loadPersona(userPersona);
+		sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
+		loadPersona(personaName);
 		sidebarBody().find("#personaInfo").show();
-		if ((userPersona == "Tim") || (userPersona == "Patrick")) {
+		if ((personaName == "Tim") || (personaName == "Patrick")) {
 			pronoun = "he";
 			possessive = "his";
 		} else {
@@ -185,18 +151,9 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#getPersona").hide();
 		//Show Scenario
 		sidebarBody().find("#getScenario").show();
-		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + userPersona + " will be performing");
+		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
 		sidebarBody().find("#editPersona").show();
-		//Show button to view persona
-		sidebarBody().find("#viewPersona").show().html("Show " + userPersona);
 		personaShown = true;
-		var prevHTML = localStorage.getItem("personaName");
-		if(prevHTML){
-			restoreSave(prevHTML);
-		}
-		else{
-			addSaveOnclick();
-		}
 		
 	});
 	
@@ -204,10 +161,11 @@ function handlePreWalkthroughInfo () {
 	sidebarBody().find('body').on('click', '#submitScenario', function() {
 		
 		//Get and save scenario name
-		var userScenario = saveScenarioNameLocal();
+		var scenarioName = sidebarBody().find("#scenarioInput").val();
+		saveVarToLocal("scenarioName", scenarioName);
 		
 		//Display scenario and related info
-		sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + userScenario);
+		sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + scenarioName);
 		sidebarBody().find("#editScenario").show();
 		
 		sidebarBody().find("#getScenario").children().hide();
@@ -216,17 +174,12 @@ function handlePreWalkthroughInfo () {
 		//Show subtask
 		sidebarBody().find("#getSubgoal").show();
 		sidebarBody().find("#setup").hide();
-		chrome.storage.local.get("personaName", function(result) {
-			var userPersona = result.personaName;
-			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
-		});
-		//sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
+		var personaName = getVarFromLocal("personaName");
+		if (!personaName) {
+			console.log("persona name was null. Check your save");
+		}
+		sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
 		
-		//Idea: here should go the "Does this look good, are you ready to start the CW" type of button
-		
-		//DEBUG: Test that local vars were stored correctly
-		//USE THIS type of syntax to get vars out of local storage (returns the JSON object)
-		chrome.storage.local.get(function(result){console.log(result)});
 	});
 	
 	sidebarBody().find('body').on('click', '#submitSubgoal', function() {
