@@ -16,9 +16,9 @@ function drawSubgoal(id, file, subgoal = null){
 	sidebarBody().find("#editSubgoal").hide();
 	sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
 	sidebarBody().find('body').on('click', '#addAction', function(){
-		var yesNoMaybe = [$("#yes").attr("checked"), $("#no").attr("checked"), $("#maybe").attr("checked")];
+		var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();
-		var facets = [$("#A0Q0motiv").attr("checked"),$("#A0Q0info").attr("checked"),$("#A0Q0self").attr("checked"),$("#A0Q0risk").attr("checked"),$("#A0Q0tinker").attr("checked")];
+		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "self": sidebarBody().find("#A0Q0self").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 		saveSubgoal(subName, yesNoMaybe, whyText, facets);
 		drawAction(0,0,0);
 		

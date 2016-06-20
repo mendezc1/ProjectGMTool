@@ -13,23 +13,25 @@ function saveSubgoal (name, yesnomaybe, whyText, facets) {
 	};
 	console.log("incoming subgoal", subgoal);
 	subgoalArray.push(subgoal);
-	console.log("Array 1: ", subgoalArray);
-	chrome.storage.local.set({'subgoalArray': subgoalArray});
-	//addToSandwich("subgoal",subgoal);
+	console.log("subgoalArray nonlocal: ", subgoalArray);
+	localStorage.setItem("subgoalArray", JSON.stringify(subgoalArray));
+	
+	//Test that it worked
+	var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
+	console.log("subgoalArray local: ", subgoalArray);
+	
+	addToSandwich("subgoal",subgoal);
 }
-/*
+
 function addToSandwich(type, item){
-	if(!type.localeCompare("subgoal")){
-		var nameLink= $("<a>", [
-		href = "#",
-		html("hello");
-		)
-		sidebarBody().find("#subgoalList").append(item.name);
+	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
+		var sideSubgoal = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		sidebarBody().find("#subgoalList").append(sideSubgoal);
 	}
 	
 	
 }
-*/
+
 
 //Creates a new idealAction object
 function saveIdealAction (id, name, idOfSubgoal, el) {
