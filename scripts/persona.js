@@ -6,11 +6,8 @@ function loadPersona(personaName){
 		var abbyIMG= "<img id='AbbyPhoto' src='" + abbySRC + "' alt='Abby Jones' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(abbyIMG);
 		sidebarBody().find(".abbyMTrigger").click(function (){
-			
 			console.log("Who you gonna call?");
-			addToolTip("abbyMToolTip");
-			
-			
+			addToolTip("abbyMToolTip");	
 		});
 		sidebarBody().find(".abbyIPSTrigger").click(function(){
 			console.log("Marco");

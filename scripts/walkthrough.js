@@ -23,6 +23,12 @@ function drawSubgoal(id, file, subgoal = null){
 		drawAction(0,0,0);
 		
 	});
+	
+	sidebarBody().find("#A0Q0whyYes").keyup(function(event){
+		if(event.keyCode == 13){
+			sidebarBody().find("#addAction").click();
+		} 
+	});
 
 }
 

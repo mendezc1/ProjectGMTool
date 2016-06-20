@@ -115,6 +115,12 @@ function handlePreWalkthroughInfo () {
 	
 	var sidebarHead = $("#mySidebar").contents().find("head");
 	//Set team name
+	
+	sidebarBody().find("#teamInput").keyup(function(event){
+		if(event.keyCode == 13){
+			sidebarBody().find("#submitTeam").click();
+		} 
+	});
 	sidebarBody().find('body').on('click', '#submitTeam', function() {
 		
 		//Get and save team name
@@ -158,6 +164,12 @@ function handlePreWalkthroughInfo () {
 	});
 	
 	//Get scenario name
+	
+	sidebarBody().find("#scenarioInput").keyup(function(event){
+		if(event.keyCode == 13){
+			sidebarBody().find("#submitScenario").click();
+		} 
+	});
 	sidebarBody().find('body').on('click', '#submitScenario', function() {
 		
 		//Get and save scenario name
@@ -174,11 +186,19 @@ function handlePreWalkthroughInfo () {
 		//Show subtask
 		sidebarBody().find("#getSubgoal").show();
 		sidebarBody().find("#setup").hide();
-		var personaName = getVarFromLocal("personaName");
-		if (!personaName) {
-			console.log("persona name was null. Check your save");
-		}
-		sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+
+		chrome.storage.local.get("personaName", function(result) {
+			var userPersona = result.personaName;
+			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
+			sidebarBody().find("#subgoalInput").keyup(function(event){
+				if(event.keyCode == 13){
+					sidebarBody().find("#submitSubgoal").click();
+				} 
+			});
+		});
+		//sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
+		
+		//Idea: here should go the "Does this look good, are you ready to start the CW" type of button
 		
 	});
 	
