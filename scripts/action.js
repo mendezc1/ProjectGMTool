@@ -11,9 +11,27 @@ function preActionQuestions(el){
 	
 	$("#whyYes").keyup(function(event){
 		if(event.keyCode == 13){
-			$("#preActionClose").click();
+			//$("#preActionClose").click();
 		} 
 	});
+	$("#preActionBack").click(function(){
+		renderImage();
+	})
+		$(".abbyMTrigger").click(function (){
+			addToolTip("abbyMToolTip");	
+		});
+		$(".abbyIPSTrigger").click(function(){
+			addToolTip("abbyIPSToolTip");
+		});
+		$(".abbySETrigger").click(function(){
+			addToolTip("abbySEToolTip");
+		});
+		$(".abbyRTrigger").click(function(){
+			addToolTip("abbyRToolTip");
+		});
+		$(".abbyTTrigger").click(function(){
+			addToolTip("abbyTToolTip");
+		});
 }
 
 function doActionPrompt(el){
@@ -23,6 +41,10 @@ function doActionPrompt(el){
 		$(el).empty();
 		postActionQuestions(el);
 	});
+	$("#doActionBack").click(function(){
+		$(el).empty();
+		preActionQuestions(el);
+	});
 }
 
 function postActionQuestions(el){
@@ -31,6 +53,25 @@ function postActionQuestions(el){
 		//SAVE HERE ALANNAH!
 		$(el).empty();
 		actionLoop(el);
+	});
+		$(".abbyMTrigger").click(function (){
+			addToolTip("abbyMToolTip");	
+		});
+		$(".abbyIPSTrigger").click(function(){
+			addToolTip("abbyIPSToolTip");
+		});
+		$(".abbySETrigger").click(function(){
+			addToolTip("abbySEToolTip");
+		});
+		$(".abbyRTrigger").click(function(){
+			addToolTip("abbyRToolTip");
+		});
+		$(".abbyTTrigger").click(function(){
+			addToolTip("abbyTToolTip");
+		});
+		$("#postActionBack").click(function(){
+		$(el).empty();
+		doActionPrompt(el);
 	});
 }
 
@@ -54,5 +95,11 @@ function actionLoop(el){
 		//SAVE HERE ALANNAH!
 		//nuke
 	});	
+	$("#loopActionBack").click(function(){
+		$(el).empty();
+		postActionQuestions(el);
+	});
 	
 }
+
+
