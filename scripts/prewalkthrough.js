@@ -151,6 +151,12 @@ function handlePreWalkthroughInfo () {
 	
 	var sidebarHead = $("#mySidebar").contents().find("head");
 	//Set team name
+	
+	sidebarBody().find("#teamInput").keyup(function(event){
+		if(event.keyCode == 13){
+			sidebarBody().find("#submitTeam").click();
+		} 
+	});
 	sidebarBody().find('body').on('click', '#submitTeam', function() {
 		
 		//Get and save team name
@@ -201,6 +207,12 @@ function handlePreWalkthroughInfo () {
 	});
 	
 	//Get scenario name
+	
+	sidebarBody().find("#scenarioInput").keyup(function(event){
+		if(event.keyCode == 13){
+			sidebarBody().find("#submitScenario").click();
+		} 
+	});
 	sidebarBody().find('body').on('click', '#submitScenario', function() {
 		
 		//Get and save scenario name
@@ -219,6 +231,11 @@ function handlePreWalkthroughInfo () {
 		chrome.storage.local.get("personaName", function(result) {
 			var userPersona = result.personaName;
 			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
+			sidebarBody().find("#subgoalInput").keyup(function(event){
+				if(event.keyCode == 13){
+					sidebarBody().find("#submitSubgoal").click();
+				} 
+			});
 		});
 		//sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + userPersona + " to perform");
 		

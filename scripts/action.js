@@ -8,6 +8,12 @@ function preActionQuestions(el){
 		$(el).empty();
 		doActionPrompt(el);
 	});
+	
+	$("#whyYes").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#preActionClose").click();
+		} 
+	});
 }
 
 function doActionPrompt(el){
