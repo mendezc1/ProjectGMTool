@@ -243,7 +243,7 @@ function handlePreWalkthroughInfo () {
 		
 		//DEBUG: Test that local vars were stored correctly
 		//USE THIS type of syntax to get vars out of local storage (returns the JSON object)
-		chrome.storage.local.get(function(result){console.log(result)});
+	
 	});
 	
 	sidebarBody().find('body').on('click', '#submitSubgoal', function() {

@@ -172,6 +172,9 @@ function renderImage(imgURL){
 		toolTip.remove();
 		overlayScreen();
 	});
+	$("#imageBack").click(function(){
+		openSlider();
+	});
 	$(".previewTrigger").click(function(){ //#triggered
 		window.open(imgURL);
 	});

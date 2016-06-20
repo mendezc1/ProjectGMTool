@@ -28,10 +28,10 @@ function drawSubgoal(id, file, subgoal = null){
 	
 	sidebarBody().find("#A0Q0whyYes").keyup(function(event){
 		if(event.keyCode == 13){
-			sidebarBody().find("#addAction").click();
+		//	sidebarBody().find("#addAction").click();
 		} 
 	});
-
+	
 }
 
 function drawAction(id, file, actionNum){
@@ -43,6 +43,10 @@ function drawAction(id, file, actionNum){
 	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
 		overlayScreen();
 	});
+	sidebarBody().find("#promptActionBack").click(function(){
+		el.empty();
+		drawSubgoal(0,0);
+	})
 }
 /*
 		//Get Subtask
