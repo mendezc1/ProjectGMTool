@@ -20,21 +20,21 @@ function preActionQuestions(el){
 	$("#preActionBack").click(function(){
 		renderImage();
 	})
-		$(".abbyMTrigger").click(function (){
-			addToolTip("abbyMToolTip");	
-		});
-		$(".abbyIPSTrigger").click(function(){
-			addToolTip("abbyIPSToolTip");
-		});
-		$(".abbySETrigger").click(function(){
-			addToolTip("abbySEToolTip");
-		});
-		$(".abbyRTrigger").click(function(){
-			addToolTip("abbyRToolTip");
-		});
-		$(".abbyTTrigger").click(function(){
-			addToolTip("abbyTToolTip");
-		});
+    $(".abbyMTrigger").click(function (){
+        addToolTip("abbyMToolTip");	
+    });
+    $(".abbyIPSTrigger").click(function(){
+        addToolTip("abbyIPSToolTip");
+    });
+    $(".abbySETrigger").click(function(){
+        addToolTip("abbySEToolTip");
+    });
+    $(".abbyRTrigger").click(function(){
+        addToolTip("abbyRToolTip");
+    });
+    $(".abbyTTrigger").click(function(){
+        addToolTip("abbyTToolTip");
+    });
 }
 
 function doActionPrompt(el){
@@ -54,6 +54,12 @@ function postActionQuestions(el){
 	appendTemplateToElement(el, "./templates/postAction.html");
 	$("#submitPostAction").click(function(){
 		//SAVE HERE ALANNAH!
+        var actionName = getVarFromLocal("currActionName");
+		var yesNoMaybe = {"yes": $('#YNMyes').is(":checked"), "no": $('#YNMno').is(":checked"), "maybe": $('#YNMmaybe').is(":checked")};
+		var whyText = $('#whyYes').val();
+		var facets = {"motiv": $('#Q2motiv').is(":checked"), "info": $('#Q2info').is(":checked"), "self": $('#Q2self').is(":checked"), "risk": $('#Q2risk').is(":checked"), "tinker": $('#Q2tinker').is(":checked")};
+		savePostIdealAction(actionName, yesNoMaybe, whyText, facets);
+        
 		$(el).empty();
 		actionLoop(el);
 	});

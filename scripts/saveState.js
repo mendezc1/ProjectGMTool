@@ -16,8 +16,8 @@ function saveSubgoal (name, yesnomaybe, whyText, facets) {
 	localStorage.setItem("subgoalArray", JSON.stringify(subgoalArray));
 	
 	//Test that it worked
-	var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
-	console.log("subgoalArray local: ", subgoalArray);
+	//var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
+	//console.log("subgoalArray local: ", retrieved);
 	
 	addToSandwich("subgoal",subgoal);
 }
@@ -33,12 +33,13 @@ function addToSandwich(type, item){
 //Creates a new preIdealAction object and saves it to local storage on the current subgoal's actions
 //Pre: subgoalArray isn't empty
 function savePreIdealAction (name, yesnomaybe, whyText, facets) {
-	var currArray = JSON.parse(localStorage.getItem('subgoalArray'));
-	console.log("subgoal array in action", currArray);
-	var targetSubgoal = currArray[currArray.length];
-	console.log("targetSubgoal", targetSubgoal);
+    
+	var currArray = getSubgoalArrayFromLocal();
+    //console.log(currArray);
+	var targetSubgoal = currArray[(currArray.length - 1)];
+	//console.log("targetSubgoal", targetSubgoal);
 	var preIdealAction = {
-		actionId: targetSubgoal.actions.length + 1,
+		actionId: targetSubgoal.actions.length + 1, //Check this when done
 		name: name,
 		subgoalId: targetSubgoal.id, 
 		ynm: yesnomaybe,
@@ -47,25 +48,65 @@ function savePreIdealAction (name, yesnomaybe, whyText, facets) {
 	};
 	
 	console.log("incoming preAction", preIdealAction);
+    //Save to local so that we can get it later and stick it in the array with its corresponding postAction
+    saveVarToLocal("currPreAction", preIdealAction);
+    
 }
 
 //Creates a new postIdealAction object and saves it to local storage on the current subgoal's actions
-//Pre: subgoalArray isn't empty
+//Pre: subgoalArray isn't empty, and the current preAction isn't null
 function savePostIdealAction (name, yesnomaybe, whyText, facets) {
-	var currArray = JSON.parse(localStorage.getItem('subgoalArray'));
-	var targetSubgoal = currArray[currArray.length];
+    var currPreAction = getVarFromLocal("currPreAction");
+    //console.log("incoming preAction", currPreAction);
 	var postIdealAction = {
-		actionId: targetSubgoal.actions.length + 1,
+		actionId: currPreAction.actionId,  //Check this when done
 		name: name,
-		subgoalId: targetSubgoal.id, 
+		subgoalId: currPreAction.subgoalId, 
 		ynm: yesnomaybe,
 		why: whyText,
 		facetValues: facets
 	};
 	
 	console.log("incoming postAction", postIdealAction);
+    //Put them together and save
+    glueActionsAndSave(currPreAction, postIdealAction);
 }
 
+
+/*	Puts the pre and post actions into an object and sticks it in the target subgoal's actions array.
+*	Takes 2 arguments: preIdealAction, postIdealAction
+*	Pre: both must exist
+*	Post: target subgoal's actions array has an action object made of pre and post action objects.
+*/
+function glueActionsAndSave (preAction, postAction) {
+    
+    //Get the associated image's URL from local
+    var currImgURL = localStorage.getItem("currImgURL");
+    //console.log(currImgURL);
+    
+    //Make the object
+    var idealAction = {
+        id: preAction.actionId,
+        name: preAction.name,
+        imgURL: currImgURL,
+        preAction: preAction,
+        postAction: postAction
+    }
+    console.log("incoming ideal action: ", idealAction);
+    
+    //Save it to local
+    var currArray = getSubgoalArrayFromLocal();
+    if (!currArray) {
+        console.log("Something went wrong, can't find the subgoal array");
+    }
+    else {
+        var targetSubgoal = currArray[(currArray.length - 1)];      //The last subgoal added
+        targetSubgoal.actions.push(idealAction);
+        //console.log("sub with action: ", targetSubgoal);
+        currArray[(currArray.length - 1)] = targetSubgoal;
+        localStorage.setItem("subgoalArray", JSON.stringify(currArray));   //Update the subgoal array
+    }
+}
 
 
 /*	Saves the passed variable to HTML5 local storage.
@@ -97,7 +138,21 @@ function getVarFromLocal (nameOfThing) {
 }
 
 
-
+/*	Gets the subgoal array object our of local storage and converts it to an array, then returns it.
+*   If it doesn't exist, returns null.
+*	Takes no args.
+*/
+function getSubgoalArrayFromLocal() {
+    var currObj = JSON.parse(localStorage.getItem('subgoalArray'));
+    if (!currObj) {
+        console.log("Couldn't find subgoalArray in local storage");
+        return null;
+    }
+    else{
+        var currArray = $.map(currObj, function(el) { return el });     //Turn it into an array
+        return currArray;
+    }
+}
 
 
 

@@ -5,6 +5,7 @@ chrome.runtime.onMessage.addListener(
     if (request.callFunction == "renderImage"){
 //    console.log("rendering image" , request.imgURL);
 		renderImage(request.imageUrl);
+        localStorage.setItem("currImgURL", request.imageUrl);
 	}
 });
 
