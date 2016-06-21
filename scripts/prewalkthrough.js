@@ -116,33 +116,50 @@ function handlePreWalkthroughInfo () {
 	var sidebarHead = $("#mySidebar").contents().find("head");
 	//Set team name
 	
-	sidebarBody().find("#teamInput").keyup(function(event){
-		if(event.keyCode == 13){
-			sidebarBody().find("#submitTeam").click();
-		} 
-	});
-	sidebarBody().find('body').on('click', '#submitTeam', function() {
-		
-		//Get and save team name
-		var teamName = sidebarBody().find("#teamInput").val();
-		saveVarToLocal("teamName", teamName);
-		
-		//Display team name and edit button
-		sidebarBody().find("#teamName").html("<b>Team:</b> "+ teamName);
+	//If the state variable is set, reload previous input
+	var isSetTeam = localStorage.getItem("inGetTeam");
+	if (isSetTeam == "true") {		//Restore from previous state
+		localStorage.setItem("inGetTeam", null);   //DEBUG: So it doesn't keep doing this when it shouldn't
+		console.log("Restoring team name...");
+		sidebarBody().find("#teamName").html("<b>Team:</b> "+ getVarFromLocal("teamName") );
 		sidebarBody().find("#editTeam").show();
 		sidebarBody().find("#getTeam").hide();
-		sidebarBody().find("#getPersona").show();
-		
-	});
+		if( localStorage.getItem("inGetPersona") != "true") {
+			console.log("showing persona select...");
+			sidebarBody().find("#getPersona").show();
+		}
+	}
 	
-	//Persona selection
-	sidebarBody().find('body').on('click', '#submitPersona', function() {
+	else {
+		console.log("no previous teamName");
+		sidebarBody().find("#teamInput").keyup(function(event){
+			if(event.keyCode == 13){
+				sidebarBody().find("#submitTeam").click();
+			} 
+		});
+		sidebarBody().find('body').on('click', '#submitTeam', function() {
+			
+			//Get and save team name
+			var teamName = sidebarBody().find("#teamInput").val();
+			saveVarToLocal("teamName", teamName);
+			
+			//Display team name and edit button
+			sidebarBody().find("#teamName").html("<b>Team:</b> "+ teamName);
+			sidebarBody().find("#editTeam").show();
+			sidebarBody().find("#getTeam").hide();
+			sidebarBody().find("#getPersona").show();
+			localStorage.setItem("inGetTeam", "true");
+		});
 		
-		//Get and save persona selection
-		var personaName = sidebarBody().find("#personaSelection").val();
-		saveVarToLocal("personaName", personaName);
-		
-		//Display persona selection and related info
+	}
+	
+	
+	//If the state variable is set, reload previous input
+	var isSetPersona = localStorage.getItem("inGetPersona");
+	if (isSetTeam == "true") {		//Restore from previous state
+		localStorage.setItem("inGetPersona", null);   //DEBUG: So it doesn't keep doing this when it shouldn't 
+		console.log("Restoring persona name...");
+		var personaName = getVarFromLocal("personaName");
 		sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
 		loadPersona(personaName);
 		sidebarBody().find("#personaInfo").show();
@@ -155,26 +172,59 @@ function handlePreWalkthroughInfo () {
 		}
 		sidebarBody().find("#getPersona").children().hide();
 		sidebarBody().find("#getPersona").hide();
-		//Show Scenario
-		sidebarBody().find("#getScenario").show();
-		sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
 		sidebarBody().find("#editPersona").show();
 		personaShown = true;
+		if( localStorage.getItem("inGetScenario") != "true") {
+			console.log("showing scenario input...");
+			//Show Scenario
+			sidebarBody().find("#getScenario").show();
+			//sidebarBody().find("#getScenario").children().show();
+			sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
+		}
 		
-	});
+	}
+	
+	else {
+		//Persona selection
+		sidebarBody().find('body').on('click', '#submitPersona', function() {
+			
+			//Get and save persona selection
+			var personaName = sidebarBody().find("#personaSelection").val();
+			saveVarToLocal("personaName", personaName);
+			
+			//Display persona selection and related info
+			sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
+			loadPersona(personaName);
+			sidebarBody().find("#personaInfo").show();
+			if ((personaName == "Tim") || (personaName == "Patrick")) {
+				pronoun = "he";
+				possessive = "his";
+			} else {
+				pronoun = "she";
+				possessive = "her";
+			}
+			sidebarBody().find("#getPersona").children().hide();
+			sidebarBody().find("#getPersona").hide();
+			//Show Scenario
+			sidebarBody().find("#getScenario").show();
+			sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
+			sidebarBody().find("#editPersona").show();
+			personaShown = true;
+			localStorage.setItem("inGetPersona", "true");
+			
+		});
+		
+	}
 	
 	//Get scenario name
 	
-	sidebarBody().find("#scenarioInput").keyup(function(event){
-		if(event.keyCode == 13){
-			sidebarBody().find("#submitScenario").click();
-		} 
-	});
-	sidebarBody().find('body').on('click', '#submitScenario', function() {
-		
+	//If the state variable is set, reload previous input
+	var isSetScenario = localStorage.getItem("inGetScenario");
+	if (isSetTeam == "true") {		//Restore from previous state
+		localStorage.setItem("inGetScenario", null);   //DEBUG: So it doesn't keep doing this when it shouldn't
+		console.log("Restoring scenario...");
 		//Get and save scenario name
-		var scenarioName = sidebarBody().find("#scenarioInput").val();
-		saveVarToLocal("scenarioName", scenarioName);
+		var scenarioName = getVarFromLocal("scenarioName");
 		
 		//Display scenario and related info
 		sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + scenarioName);
@@ -182,23 +232,62 @@ function handlePreWalkthroughInfo () {
 		
 		sidebarBody().find("#getScenario").children().hide();
 		sidebarBody().find("#getScenario").hide();
-	
-		//Show subtask
-		sidebarBody().find("#getSubgoal").show();
-		sidebarBody().find("#setup").hide();
 		
-		var personaName = getVarFromLocal("personaName");
-		if (!personaName) {
-			console.log("persona name was null. Check your save");
+		if( localStorage.getItem("inGetScenario") != "true") {
+			console.log("showing subgoal select...");
+			//Show subgoal
+			sidebarBody().find("#getSubgoal").show();
+			sidebarBody().find("#setup").hide();
+			var personaName = getVarFromLocal("personaName");
+			if (!personaName) {
+				console.log("persona name was null. Check your save");
+			}
+			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+			sidebarBody().find("#subgoalInput").keyup(function(event){
+				if(event.keyCode == 13){
+					sidebarBody().find("#submitSubgoal").click();
+				} 
+			});
 		}
-		sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
-		sidebarBody().find("#subgoalInput").keyup(function(event){
+	}
+	
+	else {
+		sidebarBody().find("#scenarioInput").keyup(function(event){
 			if(event.keyCode == 13){
-				sidebarBody().find("#submitSubgoal").click();
+				sidebarBody().find("#submitScenario").click();
 			} 
 		});
+		sidebarBody().find('body').on('click', '#submitScenario', function() {
+			
+			//Get and save scenario name
+			var scenarioName = sidebarBody().find("#scenarioInput").val();
+			saveVarToLocal("scenarioName", scenarioName);
+			
+			//Display scenario and related info
+			sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + scenarioName);
+			sidebarBody().find("#editScenario").show();
+			
+			sidebarBody().find("#getScenario").children().hide();
+			sidebarBody().find("#getScenario").hide();
 		
-	});
+			//Show subtask
+			sidebarBody().find("#getSubgoal").show();
+			sidebarBody().find("#setup").hide();
+			
+			var personaName = getVarFromLocal("personaName");
+			if (!personaName) {
+				console.log("persona name was null. Check your save");
+			}
+			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
+			sidebarBody().find("#subgoalInput").keyup(function(event){
+				if(event.keyCode == 13){
+					sidebarBody().find("#submitSubgoal").click();
+				} 
+			});
+			localStorage.setItem("inGetScenario", "true");
+			
+		});
+	}
 	
 	sidebarBody().find('body').on('click', '#submitSubgoal', function() {
 		sidebarBody().find("#editTeam").hide();

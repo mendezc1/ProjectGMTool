@@ -14,33 +14,31 @@
 function setup (id, file) {
 	
 	console.log("In setup");
-	//clearHTML();
 	
 	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
-	chrome.storage.local.get("lastSavedHTML", function(result) {
-		var HTMLtoAppend = result.lastSavedHTML;
-		console.log("result ", result);
-		if (HTMLtoAppend) {
-			//restoreHTML();
-		}
-		else {
-			console.log("Nothing to restore - starting as normal");
-			//Put the text and buttons on the screen
-			var el = $(id).contents().find('body');
-			appendTemplateToElement(el,file);
-			
-			//Add the onclick to the "Start Walkthrough" button	
-			$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
-				preWalkthrough("#GenderMagFrame", "./templates/popup.html");
-			});
-			
-			//Add the onclick to the "Learn More" button
-			$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
-				console.log("Learn more button clicked");
-				overlayScreen();
-				//addToolTip("setupToolTip");
-			});
-		}
-	});
+	var inMiddleOfAction = localStorage.getItem("inMiddleOfAction");
+	console.log(inMiddleOfAction);
+	if (inMiddleOfAction == "true") {		//Restore from a "just did the ideal action" state
+		localStorage.setItem("inMiddleOfAction", null);   //So it doesn't keep doing thins when it shouldn't
+		console.log("Yaas");
+	}
+	else {
+		//console.log("Nothing to restore - starting as normal");
+		//Put the text and buttons on the screen
+		var el = $(id).contents().find('body');
+		appendTemplateToElement(el,file);
+		
+		//Add the onclick to the "Start Walkthrough" button	
+		$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
+			preWalkthrough("#GenderMagFrame", "./templates/popup.html");
+		});
+		
+		//Add the onclick to the "Learn More" button
+		$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
+			console.log("Learn more button clicked");
+			overlayScreen();
+			//addToolTip("setupToolTip");
+		});
+	}
 	
 }

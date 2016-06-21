@@ -41,8 +41,14 @@ function drawAction(id, file, actionNum){
 	var actionName = "";
 	sidebarBody().find('body').on('click', '#submitActionName', function() {
 		actionName = sidebarBody().find("#actionNameInput").val();
+		var currArray = getSubgoalArrayFromLocal();
+		var actionItem = {
+			name: actionName,
+			actionId: currArray[(currArray.length - 1)].actions.length + 1
+		}
 		saveVarToLocal("currActionName", actionName);
 		sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+		addToSandwich("idealAction", actionItem);
 		sidebarBody().find("#promptAction").show();
 	});
 	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
