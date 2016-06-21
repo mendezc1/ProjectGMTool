@@ -35,7 +35,7 @@ function addToSandwich(type, item){
 		sidebarBody().find("#subgoalList").append(sideSubgoal);
 	}
 	if(!type.localeCompare("idealAction")){ 		//It's an action
-		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '"> &nbsp; &nbsp; &nbsp;Action ' + item.actionId + ': ' + item.name + '</div>';
+		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
 	}
 	
