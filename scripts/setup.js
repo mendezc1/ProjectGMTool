@@ -16,13 +16,13 @@ function setup (id, file) {
 	console.log("In setup");
 	
 	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
-	var inMiddleOfAction = localStorage.getItem("inMiddleOfAction");
+	/*var inMiddleOfAction = localStorage.getItem("inMiddleOfAction");
 	console.log(inMiddleOfAction);
 	if (inMiddleOfAction == "true") {		//Restore from a "just did the ideal action" state
 		localStorage.setItem("inMiddleOfAction", null);   //So it doesn't keep doing thins when it shouldn't
 		console.log("Yaas");
 	}
-	else {
+	else { */
 		//console.log("Nothing to restore - starting as normal");
 		//Put the text and buttons on the screen
 		var el = $(id).contents().find('body');
@@ -39,6 +39,6 @@ function setup (id, file) {
 			overlayScreen();
 			//addToolTip("setupToolTip");
 		});
-	}
+	//}
 	
 }
