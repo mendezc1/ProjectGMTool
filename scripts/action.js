@@ -6,7 +6,7 @@ function preActionQuestions(el){
 		var yesNoMaybe = {"yes": $('#actionYes').is(":checked"), "no": $('#actionNo').is(":checked"), "maybe": $('#actionMaybe').is(":checked")};
 		var whyText = $('#whyYes').val();
 		var facets = {"motiv": $('#motiv').is(":checked"), "info": $('#info').is(":checked"), "self": $('#self').is(":checked"), "risk": $('#risk').is(":checked"), "tinker": $('#tinker').is(":checked")};
-		savePreIdealAction(actionName, yesNoMaybe, whyText, facets);
+		//savePreIdealAction(actionName, yesNoMaybe, whyText, facets);
 		
 		$(el).empty();
 		doActionPrompt(el);
