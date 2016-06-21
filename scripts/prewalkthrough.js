@@ -204,7 +204,17 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#editTeam").hide();
 		sidebarBody().find("#editPersona").hide();
 		sidebarBody().find("#editScenario").hide();
-		drawSubgoal(0,0);
+		var subgoalId = localStorage.getItem("numSubgoals");
+		if(subgoalId == undefined){
+			subgoalId = 1;
+			localStorage.setItem("numSubgoals", subgoalId);
+		}
+		else{
+			subgoalId++;
+			localStorage.setItem("numSubgoals", subgoalId);
+			
+		}
+		drawSubgoal(0,0,subgoalId);
 	});
 	
 }	

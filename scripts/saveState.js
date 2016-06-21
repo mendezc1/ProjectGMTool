@@ -1,18 +1,19 @@
 var subgoalArray = [];
 
 //Creates a new subgoal and saves it to local storage at the end of subgoalArray
-function saveSubgoal (name, yesnomaybe, whyText, facets) {
+function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	var subgoal = {
-		id: subgoalArray.length + 1,
+		id: id,
 		name: name,
 		ynm: yesnomaybe,
 		why: whyText,
 		facetValues: facets,
 		actions: []
 	};
-	console.log("incoming subgoal", subgoal);
-	subgoalArray.push(subgoal);
-	//console.log("subgoalArray nonlocal: ", subgoalArray);
+	console.log("incoming subgoal", subgoal, id, subgoalArray.length);
+	if(id > subgoalArray.length){
+	subgoalArray[id-1] = subgoal;
+	console.log("subgoalArray nonlocal: ", subgoalArray);
 	localStorage.setItem("subgoalArray", JSON.stringify(subgoalArray));
 	
 	//Test that it worked
@@ -20,6 +21,10 @@ function saveSubgoal (name, yesnomaybe, whyText, facets) {
 	//console.log("subgoalArray local: ", retrieved);
 	
 	addToSandwich("subgoal",subgoal);
+	}
+	else{
+		console.log("nothing to see here")
+	}
 }
 
 function addToSandwich(type, item){

@@ -1,25 +1,29 @@
-function drawSubgoal(id, file, subgoal = null){
-
+function drawSubgoal(id, file, subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
 	var subName = sidebarBody().find("#subgoalInput").val();
+	console.log("subname", subName);
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
-	if(subgoal){
+	sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
+	var subgoals = getSubgoalArrayFromLocal();
+	if(subgoals){
+		var subgoal = subgoals[subgoalId-1];
+		console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
+		console.log("in subgoal setting area", subName)
 		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subgoal.name);
-		sidebarBody().find('#yes').attr("clicked") = subgoal.ynm[0];
-		sidebarBody().find('#no').attr("clicked") = subgoal.ynm[1];
-		sidebarBody().find('#maybe').attr("clicked") = subgoal.ynm[2];
-		sidebarBody().find('#A0Q0whyYes').html(subgoal.whyText);
+		//sidebarBody().find('#yes').attr("checked") = subgoal.ynm.yes;
+		//sidebarBody().find('#no').attr("checked") = subgoal.ynm.no;
+		//sidebarBody().find('#maybe').attr("checked") = subgoal.ynm.maybe;
+		sidebarBody().find('#A0Q0whyYes').html(subgoal.why);
 	}
 	sidebarBody().find("#editSubgoal").hide();
-	sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
 	sidebarBody().find('body').on('click', '#addAction', function(){
 		var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();
 		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "self": sidebarBody().find("#A0Q0self").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
-		saveSubgoal(subName, yesNoMaybe, whyText, facets);
+		saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
 		drawAction(0,0,0);
 		
 	});
@@ -45,12 +49,23 @@ function drawAction(id, file, actionNum){
 		sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
 		sidebarBody().find("#promptAction").show();
 	});
+	sidebarBody().find("#actionNameInput").keyup(function(event){
+		if(event.keyCode == 13){
+			sidebarBody().find("#submitActionName").click();
+		} 
+	});
 	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
 		overlayScreen();
 	});
 	sidebarBody().find("#promptActionBack").click(function(){
 		el.empty();
-		drawSubgoal(0,0);
+		var subgoalId = localStorage.getItem("numSubgoals");
+		console.log("get back", subgoalId);
+		/*Jojo was a man who thought he was a loner
+		But he knew it couldn't last
+		Jojo left his home in Tucson, Arizona
+		For some California grass*/
+		drawSubgoal(0,0, subgoalId);
 	})
 }
 /*

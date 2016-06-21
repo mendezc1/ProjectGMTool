@@ -2,7 +2,8 @@ function preActionQuestions(el){
 	appendTemplateToElement(el, "./templates/preAction.html");
 	$("#preActionClose").click(function(){
 		//SAVE HERE ALANNAH!
-		var actionName = getVarFromLocal("currActionName");
+		//var actionName = getVarFromLocal("currActionName"); //Currently save and then deletes this name before it can be called again
+		var actionName = "Lights, Camera"
 		var yesNoMaybe = {"yes": $('#actionYes').is(":checked"), "no": $('#actionNo').is(":checked"), "maybe": $('#actionMaybe').is(":checked")};
 		var whyText = $('#whyYes').val();
 		var facets = {"motiv": $('#motiv').is(":checked"), "info": $('#info').is(":checked"), "self": $('#self').is(":checked"), "risk": $('#risk').is(":checked"), "tinker": $('#tinker').is(":checked")};
@@ -12,11 +13,7 @@ function preActionQuestions(el){
 		doActionPrompt(el);
 	});
 	
-	$("#whyYes").keyup(function(event){
-		if(event.keyCode == 13){
-			//$("#preActionClose").click();
-		} 
-	});
+
 	$("#preActionBack").click(function(){
 		renderImage();
 	})
