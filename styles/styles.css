@@ -1,3 +1,7 @@
+.closeToolTip{
+	cursor: pointer;
+}
+
 #mySidebar {
 	top: 0px;
 	right: 0px;
