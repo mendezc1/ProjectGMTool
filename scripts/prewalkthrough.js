@@ -1,5 +1,4 @@
 /* Function preWalkthrough
- * 
  * Appends the HTML template found in <file> to the element with the ID of <id>. Then, calls the handlePreWalkthroughInfo() 
  * function, which gets the user's team name, persona choice, and scenario name and puts the first subgoal template on the screen.
  * 

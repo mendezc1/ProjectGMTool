@@ -12,6 +12,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	};
 	console.log("incoming subgoal", subgoal, id, subgoalArray.length);
 	if(id > subgoalArray.length){
+	
 	subgoalArray[id-1] = subgoal;
 	console.log("subgoalArray nonlocal: ", subgoalArray);
 	localStorage.setItem("subgoalArray", JSON.stringify(subgoalArray));
@@ -145,7 +146,7 @@ function getVarFromLocal (nameOfThing) {
 	}
 	else {
 		console.log("Couldn't find variable " + nameOfThing + "in local storage");
-		return null;
+		return "";
 	}
 }
 

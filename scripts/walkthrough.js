@@ -24,8 +24,15 @@ function drawSubgoal(id, file, subgoalId){
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();
 		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "self": sidebarBody().find("#A0Q0self").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 		saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
-		drawAction(0,0,0);
-		
+		var numActions = localStorage.getItem("actionNum");
+		if(numActions){
+			
+			drawAction(0,0,numActions, subgoalId);
+		}
+		else{
+			localStorage.setItem("numActions", 0);
+			drawAction(0, 0, 0, subgoalId);
+		}
 	});
 	
 	sidebarBody().find("#A0Q0whyYes").keyup(function(event){
@@ -36,24 +43,34 @@ function drawSubgoal(id, file, subgoalId){
 	
 }
 
-function drawAction(id, file, actionNum){
+function drawAction(id, file, actionNum, subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/actionPrompt.html";
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
 	var actionName = "";
+	console.log("action/subgoal", actionNum, subgoalId);
 	sidebarBody().find('body').on('click', '#submitActionName', function() {
 		actionName = sidebarBody().find("#actionNameInput").val();
 		var currArray = getSubgoalArrayFromLocal();
 		var actionItem = {
 			name: actionName,
-			actionId: currArray[(currArray.length - 1)].actions.length + 1
-		}
+			actionId: actionNum
+		};
+		//currArray[(currArray.length - 1)].actions.length + 1;
 		saveVarToLocal("currActionName", actionName);
 		sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
-		addToSandwich("idealAction", actionItem);
 		sidebarBody().find("#promptAction").show();
+		if(actionNum >=  currArray[subgoalId-1].actions.length){
+			console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length)
+			addToSandwich("idealAction", actionItem);
+			actionNum++;
+			localStorage.setItem("numActions", actionNum);
+		}
+		else{
+			console.log("NO SANDWICH TODAY!!!!!!!!!");
+		}
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
 		if(event.keyCode == 13){
