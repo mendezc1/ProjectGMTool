@@ -155,8 +155,10 @@ function renderImage(imgURL){
 	toolTip.style.height = "300px";
 	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	
-	toolTip.style.border ="5px ridge #4099FF";
+	toolTip.style.border ="3px solid #999999";
 	toolTip.style.backgroundColor = "white";
+	toolTip.style.cursor="pointer";
+	toolTip.style.borderRadius="5px";
 	
 	document.body.appendChild(toolTip);
 	$('#myToolTip').draggable();

@@ -12,8 +12,9 @@ function addToolTip(toolTipName){
 		pageDiv.style.height = "200px";
 		pageDiv.style.width = "500px";
 		pageDiv.style.zindex = "10002";	
-		pageDiv.style.border ="3px solid #d3d3d3";
-		pageDiv.style.boxShadow="10px 10px 5px black;";
+		pageDiv.style.border ="3px solid #999999";
+		pageDiv.style.cursor="pointer";
+		//pageDiv.style.boxShadow="10px 10px 5px black;";
 		pageDiv.style.borderRadius="5px";
 		pageDiv.style.backgroundColor = "white";
 		appendTemplateToElement($("#"+toolTipName+"Div"), 'templates/' + toolTipName + '.html');

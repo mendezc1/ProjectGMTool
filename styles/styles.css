@@ -1,6 +1,18 @@
-#BARkeryCroc{
+#abbyTToolTipDiv{
+	-webkit-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.75);
+}
 
-	cursor: hand;
+#abbyTToolTipDiv:hover{
+	background:#ffffff;
+    background:-moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); 
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color- stop(47%,#f6f6f6), color-stop(100%,#ededed)); 
+    background:-webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); 
+    background:-o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); 
+    background:-ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+    background:linear-gradient(to bottom,  #ffffff 0%,#f6f6f6 47%,#ededed 100%); 
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );color:#266CAE} 
 }
 
 #mySidebar {
