@@ -13,23 +13,25 @@ function saveSubgoal (name, yesnomaybe, whyText, facets) {
 	};
 	console.log("incoming subgoal", subgoal);
 	subgoalArray.push(subgoal);
-	console.log("Array 1: ", subgoalArray);
-	chrome.storage.local.set({'subgoalArray': subgoalArray});
-	//addToSandwich("subgoal",subgoal);
+	console.log("subgoalArray nonlocal: ", subgoalArray);
+	localStorage.setItem("subgoalArray", JSON.stringify(subgoalArray));
+	
+	//Test that it worked
+	var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
+	console.log("subgoalArray local: ", subgoalArray);
+	
+	addToSandwich("subgoal",subgoal);
 }
-/*
+
 function addToSandwich(type, item){
-	if(!type.localeCompare("subgoal")){
-		var nameLink= $("<a>", [
-		href = "#",
-		html("hello");
-		)
-		sidebarBody().find("#subgoalList").append(item.name);
+	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
+		var sideSubgoal = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		sidebarBody().find("#subgoalList").append(sideSubgoal);
 	}
 	
 	
 }
-*/
+
 
 //Creates a new idealAction object
 function saveIdealAction (id, name, idOfSubgoal, el) {
@@ -55,6 +57,54 @@ function saveIdealAction (id, name, idOfSubgoal, el) {
 	console.log("array 2: ", subgoalArray);
 }
 
+/*	Saves the passed variable to HTML5 local storage.
+*	Takes 2 arguments: what you want the item to be called, and the item to save.
+*	Pre: item must exist
+*	Post: item is in local storage.
+*/
+function saveVarToLocal (nameOfThingToSave, thingToSave) {
+	localStorage.setItem(nameOfThingToSave, JSON.stringify(thingToSave));
+	console.log("Saved: " + nameOfThingToSave + " " + thingToSave);
+}
+
+
+/*	Gets the passed variable to HTML5 local storage, if it exists.
+*	Takes 1 argument: the name of the item.
+*	Pre: None
+*	Post: If the item by that name is in local storage, it returns the item. If it's not, it returns null.
+*/
+function getVarFromLocal (nameOfThing) {
+	var item = JSON.parse(localStorage.getItem(nameOfThing));
+	if (item) {
+		console.log("Found: " + nameOfThing + " " + item);
+		return item;
+	}
+	else {
+		console.log("Couldn't find variable " + nameOfThing + "in local storage");
+		return null;
+	}
+}
+
+
+
+
+
+
+
+//Test code for storing/retrieving/accessing arrays in local storage
+	/*	var testArray = ["checked", 1, false];
+		console.log(testArray);
+		localStorage.setItem("testArray", JSON.stringify(testArray));
+		var retrievedObject = JSON.parse(localStorage.getItem('testArray'));
+		console.log(retrievedObject[1]);
+	*/
+
+
+
+
+
+/* Deprecated. Uses chrome local storage rather than HTML 5 local storage.
+
 
 //Save the entire HTML of the slider to local storage
 function saveHTML () {   //hot male lol
@@ -75,7 +125,7 @@ function saveHTML () {   //hot male lol
 			var HTMLtoAppend = result.lastSavedHTML;
 			sidebarBody().find("body").html(HTMLtoAppend);
 			console.log("body should be back");
-	}); */
+	});
 	
 }
 
@@ -127,3 +177,5 @@ function saveScenarioNameLocal () {
 	});
 	return scenarioName;
 }
+
+End deprecated code. */

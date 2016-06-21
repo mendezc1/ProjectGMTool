@@ -21,7 +21,7 @@ function setup (id, file) {
 		var HTMLtoAppend = result.lastSavedHTML;
 		console.log("result ", result);
 		if (HTMLtoAppend) {
-			restoreHTML();
+			//restoreHTML();
 		}
 		else {
 			console.log("Nothing to restore - starting as normal");
