@@ -38,6 +38,13 @@ function drawAction(id, file, actionNum){
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
+	var actionName = "";
+	sidebarBody().find('body').on('click', '#submitActionName', function() {
+		actionName = sidebarBody().find("#actionNameInput").val();
+		saveVarToLocal("currActionName", actionName);
+		sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+		sidebarBody().find("#promptAction").show();
+	});
 	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
 		overlayScreen();
 	});
