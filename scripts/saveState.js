@@ -28,10 +28,16 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 }
 
 function addToSandwich(type, item){
+	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
-		var sideSubgoal = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideSubgoal);
-	}	
+	}
+	if(!type.localeCompare("idealAction")){ 		//It's an action
+		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '"> &nbsp; &nbsp; &nbsp;Action ' + item.actionId + ': ' + item.name + '</div>';
+		sidebarBody().find("#subgoalList").append(sideAction);
+	}
+	
 }
 
 
@@ -55,6 +61,7 @@ function savePreIdealAction (name, yesnomaybe, whyText, facets) {
 	console.log("incoming preAction", preIdealAction);
     //Save to local so that we can get it later and stick it in the array with its corresponding postAction
     saveVarToLocal("currPreAction", preIdealAction);
+	localStorage.setItem("inMiddleOfAction", "true");		//So we know to retrieve the in-between state
     
 }
 
