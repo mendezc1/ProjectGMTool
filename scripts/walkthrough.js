@@ -41,6 +41,7 @@ function drawSubgoal(subgoalId){
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();
 		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 		saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
+        setPhasersToTrue("gotSubgoalQuestions");
 		var numActions = localStorage.getItem("actionNum");
 		if(numActions > 0){
 			
@@ -82,8 +83,10 @@ function drawAction(actionNum, subgoalId){
 		}
 			console.log("actionname", actionName);
 			saveVarToLocal("currActionName", actionName);
+            setPhasersToTrue("gotActionName");
 			sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
 			sidebarBody().find("#promptAction").show();
+            setPhasersToTrue("actionPromptOnScreen");
 		
 		if(actionNum >  currArray[subgoalId-1].actions.length){
 			console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);

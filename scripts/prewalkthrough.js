@@ -17,7 +17,7 @@ function preWalkthrough (id, file) {
 	el.empty();
 	appendTemplateToElement(el,file);
 	seeMoreOnclick();
-	
+	nukeButtonOnclick();
 	makeEditable();
 	handlePreWalkthroughInfo();
 
@@ -55,6 +55,16 @@ function seeMoreOnclick () {
 			sidebarBody().find(".complete").show();
 		}
 		
+	});
+	
+}
+
+
+function nukeButtonOnclick () {
+	
+	sidebarBody().find('body').on('click', '#nukeStatus', function() {
+		localStorage.setItem("statusObject", JSON.stringify(statusObject));
+        console.log("Resetting status object...");
 	});
 	
 }
@@ -116,9 +126,8 @@ function handlePreWalkthroughInfo () {
 	//Set team name
 	
 	//If the state variable is set, reload previous input
-	var isSetTeam = localStorage.getItem("inGetTeam");
-	if (isSetTeam == "true") {		//Restore from previous state
-		localStorage.setItem("inGetTeam", null);   //DEBUG: So it doesn't keep doing this when it shouldn't
+	var isSetTeam = statusIsTrue("gotTeamName");
+	if (isSetTeam) {		//Restore from previous state
 		console.log("Restoring team name...");
 		sidebarBody().find("#teamName").html("<b>Team:</b> "+ getVarFromLocal("teamName") );
 		sidebarBody().find("#editTeam").show();
@@ -141,22 +150,21 @@ function handlePreWalkthroughInfo () {
 			//Get and save team name
 			var teamName = sidebarBody().find("#teamInput").val();
 			saveVarToLocal("teamName", teamName);
+            setPhasersToTrue("gotTeamName");
 			
 			//Display team name and edit button
 			sidebarBody().find("#teamName").html("<b>Team:</b> "+ teamName);
 			sidebarBody().find("#editTeam").show();
 			sidebarBody().find("#getTeam").hide();
 			sidebarBody().find("#getPersona").show();
-			localStorage.setItem("inGetTeam", "true");
 		});
 		
 	}
 	
 	
 	//If the state variable is set, reload previous input
-	var isSetPersona = localStorage.getItem("inGetPersona");
-	if (isSetTeam == "true") {		//Restore from previous state
-		localStorage.setItem("inGetPersona", null);   //DEBUG: So it doesn't keep doing this when it shouldn't 
+	var isSetPersona = statusIsTrue("gotPersonaName");
+	if (isSetPersona) {		//Restore from previous state
 		console.log("Restoring persona name...");
 		var personaName = getVarFromLocal("personaName");
 		sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
@@ -190,6 +198,7 @@ function handlePreWalkthroughInfo () {
 			//Get and save persona selection
 			var personaName = sidebarBody().find("#personaSelection").val();
 			saveVarToLocal("personaName", personaName);
+            setPhasersToTrue("gotPersonaName");
 			
 			//Display persona selection and related info
 			sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
@@ -209,7 +218,6 @@ function handlePreWalkthroughInfo () {
 			sidebarBody().find("#scenarioPrompt").html("Take a moment to describe the scenario " + personaName + " will be performing");
 			sidebarBody().find("#editPersona").show();
 			personaShown = true;
-			localStorage.setItem("inGetPersona", "true");
 			
 		});
 		
@@ -218,9 +226,8 @@ function handlePreWalkthroughInfo () {
 	//Get scenario name
 	
 	//If the state variable is set, reload previous input
-	var isSetScenario = localStorage.getItem("inGetScenario");
-	if (isSetTeam == "true") {		//Restore from previous state
-		localStorage.setItem("inGetScenario", null);   //DEBUG: So it doesn't keep doing this when it shouldn't
+	var isSetScenario = statusIsTrue("gotScenarioName");
+	if (isSetScenario) {		//Restore from previous state
 		console.log("Restoring scenario...");
 		//Get and save scenario name
 		var scenarioName = getVarFromLocal("scenarioName");
@@ -261,6 +268,8 @@ function handlePreWalkthroughInfo () {
 			//Get and save scenario name
 			var scenarioName = sidebarBody().find("#scenarioInput").val();
 			saveVarToLocal("scenarioName", scenarioName);
+            setPhasersToTrue("gotScenarioName");
+            setPhasersToTrue("finishedPrewalkthrough");
 			
 			//Display scenario and related info
 			sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + scenarioName);
@@ -283,7 +292,6 @@ function handlePreWalkthroughInfo () {
 					sidebarBody().find("#submitSubgoal").click();
 				} 
 			});
-			localStorage.setItem("inGetScenario", "true");
 			
 		});
 	}
@@ -293,6 +301,7 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#editPersona").hide();
 		sidebarBody().find("#editScenario").hide();
 		var subgoalId = localStorage.getItem("numSubgoals");
+        setPhasersToTrue("gotSubgoalName");
 		if(subgoalId == undefined){
 			subgoalId = 1;
 			localStorage.setItem("numSubgoals", subgoalId);

@@ -88,6 +88,7 @@ function overlayScreen(){
 			highlightClick.style.zindex = "10000";
 	
 			console.log("Clicked ", highlightClick)
+            setPhasersToTrue("highlightedAction");
 		
 			console.log(elements);
 			for(var element in elements){
@@ -170,10 +171,12 @@ function renderImage(imgURL){
 	$(".closeToolTip").click(function() {
 		//toolTip.remove();
 		//toolTip.innerHTML = " ";
-		preActionQuestions(toolTip);
+        setPhasersToTrue("gotScreenshot");
+        preActionQuestions(toolTip);
 	});
 	$("#retakeImage").click(function(){
 		toolTip.remove();
+        setPhasersToFalse("drewToolTip");
 		overlayScreen();
 	});
 	$("#imageBack").click(function(){

@@ -16,20 +16,20 @@ function setup (id, file) {
 	console.log("In setup");
 	
 	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
-	/*var inMiddleOfAction = localStorage.getItem("inMiddleOfAction");
-	console.log(inMiddleOfAction);
-	if (inMiddleOfAction == "true") {		//Restore from a "just did the ideal action" state
-		localStorage.setItem("inMiddleOfAction", null);   //So it doesn't keep doing thins when it shouldn't
-		console.log("Yaas");
+	var hasStartedWalkthrough = statusIsTrue("startedGM")
+	if (hasStartedWalkthrough) {
+        console.log("Found previous info. Skipping start screen");
+        preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 	}
-	else { */
-		//console.log("Nothing to restore - starting as normal");
+	else {
+		console.log("Nothing to restore - starting as normal");
 		//Put the text and buttons on the screen
 		var el = $(id).contents().find('body');
 		appendTemplateToElement(el,file);
 		
 		//Add the onclick to the "Start Walkthrough" button	
 		$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
+            setPhasersToTrue("startedGM");
 			preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 		});
 		
@@ -39,6 +39,6 @@ function setup (id, file) {
 			overlayScreen();
 			//addToolTip("setupToolTip");
 		});
-	//}
+	}
 	
 }
