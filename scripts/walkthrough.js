@@ -16,8 +16,9 @@ function drawSubgoal(id, file, subgoalId){
 		//sidebarBody().find('#yes').attr("checked") = subgoal.ynm.yes;
 		//sidebarBody().find('#no').attr("checked") = subgoal.ynm.no;
 		//sidebarBody().find('#maybe').attr("checked") = subgoal.ynm.maybe;
-		sidebarBody().find('#A0Q0whyYes').html(subgoal.why);
+		sidebarBody().find('#A0Q0whyYes').html(subgoal.why);		
 	}
+
 	sidebarBody().find("#editSubgoal").hide();
 	sidebarBody().find('body').on('click', '#addAction', function(){
 		var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
@@ -25,16 +26,15 @@ function drawSubgoal(id, file, subgoalId){
 		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "self": sidebarBody().find("#A0Q0self").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 		saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
 		var numActions = localStorage.getItem("actionNum");
-		if(numActions){
+		if(numActions > 0){
 			
-			drawAction(0,0,numActions, subgoalId);
+			drawAction(numActions, subgoalId);
 		}
 		else{
-			localStorage.setItem("numActions", 0);
-			drawAction(0, 0, 0, subgoalId);
+			localStorage.setItem("numActions", 1);
+			drawAction(1, subgoalId);
 		}
 	});
-	
 	sidebarBody().find("#A0Q0whyYes").keyup(function(event){
 		if(event.keyCode == 13){
 		//	sidebarBody().find("#addAction").click();
@@ -43,13 +43,15 @@ function drawSubgoal(id, file, subgoalId){
 	
 }
 
-function drawAction(id, file, actionNum, subgoalId){
+function drawAction(actionNum, subgoalId){
+	console.log("draw action called");
 	id = "#GenderMagFrame";
 	file = "/templates/actionPrompt.html";
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
 	var actionName = "";
+
 	console.log("action/subgoal", actionNum, subgoalId);
 	sidebarBody().find('body').on('click', '#submitActionName', function() {
 		actionName = sidebarBody().find("#actionNameInput").val();
@@ -59,17 +61,21 @@ function drawAction(id, file, actionNum, subgoalId){
 			actionId: actionNum
 		};
 		//currArray[(currArray.length - 1)].actions.length + 1;
-		saveVarToLocal("currActionName", actionName);
-		sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
-		sidebarBody().find("#promptAction").show();
-		if(actionNum >=  currArray[subgoalId-1].actions.length){
+		
+		if(actionName){
+			console.log("actionname", actionName);
+			saveVarToLocal("currActionName", actionName);
+			sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+			sidebarBody().find("#promptAction").show();
+		}
+		if(actionNum >  currArray[subgoalId-1].actions.length){
 			console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length)
 			addToSandwich("idealAction", actionItem);
 			actionNum++;
 			localStorage.setItem("numActions", actionNum);
 		}
 		else{
-			console.log("NO SANDWICH TODAY!!!!!!!!!");
+			console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
 		}
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
@@ -84,10 +90,6 @@ function drawAction(id, file, actionNum, subgoalId){
 		el.empty();
 		var subgoalId = localStorage.getItem("numSubgoals");
 		console.log("get back", subgoalId);
-		/*Jojo was a man who thought he was a loner
-		But he knew it couldn't last
-		Jojo left his home in Tucson, Arizona
-		For some California grass*/
 		drawSubgoal(0,0, subgoalId);
 	})
 }
