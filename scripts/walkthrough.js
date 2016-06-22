@@ -72,7 +72,8 @@ function drawAction(actionNum, subgoalId){
 		var currArray = getSubgoalArrayFromLocal();
 		var actionItem = {
 			name: actionName,
-			actionId: actionNum
+			actionId: actionNum, 
+			subgoalId: subgoalId
 		};
 		//currArray[(currArray.length - 1)].actions.length + 1;
 		

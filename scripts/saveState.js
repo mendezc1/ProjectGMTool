@@ -33,10 +33,18 @@ function addToSandwich(type, item){
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideSubgoal);
+		sidebarBody().find("#sideSubgoal" + item.id).click(function(){
+			drawSubgoal(item.id);
+		});
 	}
 	if(!type.localeCompare("idealAction") && item.name){ 		//It's an action
 		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
+		sidebarBody().find("#sideAction" +item.actionId).click(function(){
+			drawAction(item.actionId, item.subgoalId);
+			sidebarBody().find('#actionNameInput').html(item.name);
+			sidebarBody().find('#submitActionName').click();
+		});
 	}
 	
 }
