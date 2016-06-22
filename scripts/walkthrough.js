@@ -1,4 +1,4 @@
-function drawSubgoal(id, file, subgoalId){
+function drawSubgoal(subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
 	var subName = sidebarBody().find("#subgoalInput").val();
@@ -110,7 +110,7 @@ function drawAction(actionNum, subgoalId){
 		el.empty();
 		var subgoalId = localStorage.getItem("numSubgoals");
 		console.log("get back", subgoalId);
-		drawSubgoal(0,0, subgoalId);
+		drawSubgoal(subgoalId);
 	})
 }
 /*

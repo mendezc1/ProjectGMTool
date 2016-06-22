@@ -95,7 +95,7 @@ function actionLoop(el){
 	$("#nextSubgoal").click(function(){
 		$(el).remove();
 		openSlider();
-		drawSubgoal();
+		drawSubgoal(); //creates undefined unnamed subgoal
 	});
 	
 	$("#saveAndExit").click(function(){
