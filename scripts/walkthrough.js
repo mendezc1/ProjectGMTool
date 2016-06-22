@@ -3,6 +3,10 @@ function drawSubgoal(subgoalId){
 	file = "/templates/subgoal.html";
 	var subName = sidebarBody().find("#subgoalInput").val();
 	console.log("subname", subName);
+	if(subName==undefined){
+		subName = $("#subgoalInput").val(); //insert subgoal name here! currently this returns undefined
+		console.log("in if", subName);
+	}
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);

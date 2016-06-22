@@ -103,6 +103,7 @@ function actionLoop(el){
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
 		overlayScreen();
+		overlayScreen(); //Second time's the charm
 		preActionQuestions(el);     //Note: at some point we have to let them name the action. Can't jsut drop them into a new action.
         
         //Reset action states
@@ -116,7 +117,7 @@ function actionLoop(el){
         setPhasersToFalse("gotPostActionQuestions");
 	});
 	
-	$("#nextSubgoal").click(function(){
+	$("#newSubgoal").click(function(){
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
         
@@ -134,7 +135,8 @@ function actionLoop(el){
         setPhasersToFalse("gotSubgoalQuestions");
         
 		openSlider();
-		drawSubgoal(); //creates undefined unnamed subgoal
+		var numSubgoals = localStorage.getItem("numSubgoals");
+		drawSubgoal(numSubgoals+1); //creates undefined unnamed subgoal
 	});
 	
 	$("#saveAndExit").click(function(){
