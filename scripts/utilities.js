@@ -16,6 +16,8 @@ function init(){
 	localStorage.removeItem("subgoalArray");
 	localStorage.removeItem("numActions");
 	
+    //init the status object
+    initStatusObject();
 }
 
 /* Function appendTemplateToElement

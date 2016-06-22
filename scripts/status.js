@@ -8,8 +8,9 @@ var statusObject = {
 	gotSubgoalName: "",
 	gotSubgoalQuestions: "",
 	gotActionName: "",
+    drewToolTip: "",
+    gotScreenshot: "",
 	gotPreActionQuestions: "",
-	gotScreenshot: "",
 	gotPostActionQuestions: "",
 	finishedSubgoal: "",
 	finishedGM: ""
@@ -17,10 +18,11 @@ var statusObject = {
 
 function initStatusObject () {
 	localStorage.setItem("statusObject", JSON.stringify(statusObject));
+    console.log("Initializing status object...");
 }
 
 function getStatusObject () {
-	var obj = JSON.parse(localStorage.getItem(statusObject));
+	var obj = JSON.parse(localStorage.getItem("statusObject"));
 	return obj;
 }
 
@@ -28,33 +30,33 @@ function saveStatusObject (obj) {
 	localStorage.setItem("statusObject", JSON.stringify(obj));
 }
 
-function setPhasersToTrue (key) {
+function setPhasersToTrue (keyToChange) {
 	var obj = getStatusObject();
 	if (obj) {
-		obj.key = "true";
-		saveStatusObject();
+		obj[keyToChange] = "true";
+		saveStatusObject(obj);
 	}
 	else {
 		console.log("statusObject doesn't exist in local");
 	} 
 }
 
-function setPhasersToFalse (key) {
+function setPhasersToFalse (keyToChange) {
 	var obj = getStatusObject();
 	if (obj) {
-		obj.key = "false";
-		saveStatusObject();
+		obj[keyToChange] = "false";
+		saveStatusObject(obj);
 	}
 	else {
 		console.log("statusObject doesn't exist in local");
 	} 
 }
 
-function setPhasersToStun (key) {			//Sets the key's value to an empty string.
+function setPhasersToStun (keyToChange) {			//Sets the key's value to an empty string.
 	var obj = getStatusObject();
 	if (obj) {
-		obj.key = "";
-		saveStatusObject();
+		obj[keyToChange] = "";
+		saveStatusObject(obj);
 	}
 	else {
 		console.log("statusObject doesn't exist in local");

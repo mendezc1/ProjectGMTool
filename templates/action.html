@@ -1,0 +1,119 @@
+<html>
+	<body>
+    
+        <div id="imageCanvasTemplate">
+    
+            <div style="height:25px; background-color:#999999;">	
+                <button id="imageBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
+                <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;"> Save and Continue</button>	
+                <button id="retakeImage" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;"> Retake screen capture </button> 
+            </div>
+            
+            <canvas id="imageCanvas"> 
+                <img id="previewImage"></img>
+            </canvas>
+            
+            <div id="imageCaption"> 
+                This is a preview of your image. To see the full image <span class="previewTrigger" style="color:blue;"> click here </span>
+            </div>
+            
+            <div>
+                You may also retake your image if you aren't happy with it. Once you have an image you like, select the save image and close button
+            </div>
+        
+        </div>
+        
+        
+        
+        <div id="preActionTemplate" style="display:none;">
+        
+            <div id="preActionQuestions">
+            
+                <div style="height:25px; background-color:#999999;">
+                    <button id="preActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>	
+                    <button id="preActionClose" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;">Save and close this action </button>
+                </div>
+                <br>
+                
+                <span class="cwQuestion">Will Abby know what to do at this step?<br></span>
+                <div id="yesnomaybe" style="width:100%">
+                    <span><input id="actionYes" type="checkbox" name="yes" value="yes">Yes</input></span>
+                    <span><input id="actionNo" type="checkbox" name="no" value="no">No</input></span>
+                    <span><input id="actionMaybe" type="checkbox" name="maybe" value="maybe">Maybe</input></span>
+                </div>
+                
+                <textarea id="whyYes" rows="4" cols="40" class="responseBox" placeholder="Why, why not or why maybe?"></textarea>
+                <!--textarea id="whyNo" class="responseBox" placeholder="Why not?"></textarea>
+                <textarea id="whyMaybe" class="responseBox" placeholder="Why maybe?"></textarea><br>
+                <span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span--><br>
+	
+                <input id="motiv" type="checkbox" value="Motivation"><span class="abbyMTrigger" style="color:blue">Motivation</span><br>
+                <input id="info" type="checkbox" value="Information Processing Style"><span class="abbyIPSTrigger" style="color:blue">Information Processing Style</span><br>
+                <input id="self" type="checkbox" value="Computer Self-Efficacies"><span class="abbySETrigger" style="color:blue">Computer Self-Efficacies</span><br>
+                <input id="risk" type="checkbox" value="Attitude Towards Risk"><span class="abbyRTrigger" style="color:blue">Attitude Towards Risk</span><br>
+                <input id="tinker" type="checkbox" value="Willingness to Tinker"><span class="abbyTTrigger" style="color:blue">Willingness to Tinker</span><br><br>
+                
+            </div>
+        
+        </div>
+        
+        
+        
+        <div id="doActionPromptTemplate" style="display:none;">
+        
+            <div style="height:25px; background-color:#999999;">
+                <button id="doActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
+                <input id="postAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;">
+            </div>
+            <p>Please perform the ideal action now, then press the continue button.</p>
+            
+        </div>
+        
+        
+        
+        <div id="postActionTemplate" style="display:none;">
+            
+            <div style="height:25px; background-color:#999999;">
+                <button id="postActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
+                <input id="submitPostAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;">
+            </div>
+            <br>
+            
+            <span class="cwQuestion">If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?<br></span>
+            <div id="yesnomaybe" style="width:100%">
+                <span><input id="YNMyes" type="checkbox" name="yes" value="yes">Yes</input></span>
+                <span><input id="YNMno" type="checkbox" name="no" value="no">No</input></span>
+                <span><input id="YNMmaybe" type="checkbox" name="maybe" value="maybe">Maybe</input></span>
+            </div>
+            
+            <textarea id="whyYes" rows="4" cols="40" class="responseBox" placeholder="Why, why not or why maybe?"></textarea>
+            <br>
+            
+            <span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span>
+            <br>
+            <input id="Q2motiv" type="checkbox" value="Motivation"><span class="abbyMTrigger" style="color:blue">Motivation</span><br>
+            <input id="Q2info" type="checkbox" value="Information Processing Style"><span class="abbyIPSTrigger" style="color:blue">Information Processing Style</span><br>
+            <input id="Q2self" type="checkbox" value="Computer Self-Efficacies"><span class="abbySETrigger" style="color:blue">Computer Self-Efficacies</span><br>
+            <input id="Q2risk" type="checkbox" value="Attitude Towards Risk"><span class="abbyRTrigger" style="color:blue">Attitude Towards Risk</span><br>
+            <input id="Q2tinker" type="checkbox" value="Willingness to Tinker"><span class="abbyTTrigger" style="color:blue">Willingness to Tinker</span><br><br>
+            
+        </div>
+        
+        
+        
+        <div id="actionLoopTemplate" style="display:none;">
+            
+            <div style="height:25px; background-color:#999999;">
+                <button id="loopActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
+            </div>
+
+            <p> Are there more actions for this subgoal? </p>
+            <input id="moreActions" type="submit" value="Yes - Add another action"></input><br>
+            <input id="nextSubgoal" type="submit"value="No - Create new subgoal"></input><br>
+            <input id="saveAndExit" type="submit" value="No - I'm done, save and exit GenderMag"></input><br>
+            
+        </div>
+        
+
+	</body>
+ </html>
