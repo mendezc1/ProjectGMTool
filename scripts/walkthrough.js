@@ -8,6 +8,7 @@ function drawSubgoal(id, file, subgoalId){
 	appendTemplateToElement(el,file);
 	sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
 	var subgoals = getSubgoalArrayFromLocal();
+	sidebarBody().find("#editSubgoal").hide();
 	if(subgoals){
 		var subgoal = subgoals[subgoalId-1];
 		console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
@@ -16,10 +17,18 @@ function drawSubgoal(id, file, subgoalId){
 		//sidebarBody().find('#yes').attr("checked") = subgoal.ynm.yes;
 		//sidebarBody().find('#no').attr("checked") = subgoal.ynm.no;
 		//sidebarBody().find('#maybe').attr("checked") = subgoal.ynm.maybe;
-		sidebarBody().find('#A0Q0whyYes').html(subgoal.why);		
+		sidebarBody().find('#A0Q0Response').html(subgoal.why);
+		sidebarBody().find('#A0Q0whyYes').hide();
+ 		sidebarBody().find('#editSubgoal').show();
+ 		sidebarBody().find('#editSubgoal').click(function(){
+ 			sidebarBody().find("#editSubgoal").hide();
+ 			sidebarBody().find('#addAction').show();
+ 			sidebarBody().find("#A0Q0whyYes").show();
+			sidebarBody().find("#A0Q0whyYes").html(subgoal.why);
+ 			sidebarBody().find("#A0Q0Response").hide();
+ 		});		
 	}
 
-	sidebarBody().find("#editSubgoal").hide();
 	sidebarBody().find('body').on('click', '#addAction', function(){
 		var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();
@@ -35,11 +44,9 @@ function drawSubgoal(id, file, subgoalId){
 			drawAction(1, subgoalId);
 		}
 	});
-	sidebarBody().find("#A0Q0whyYes").keyup(function(event){
-		if(event.keyCode == 13){
-		//	sidebarBody().find("#addAction").click();
-		} 
-	});
+
+	
+	
 	
 }
 
@@ -77,6 +84,7 @@ function drawAction(actionNum, subgoalId){
 		else{
 			console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
 		}
+		sidebarBody().find("#editAction").show();
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
 		if(event.keyCode == 13){
