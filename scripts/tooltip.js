@@ -1,4 +1,4 @@
-function addToolTip(toolTipName){
+function addToolTip(toolTipName, folderName){
 	if($("#"+toolTipName + "Div")){
 		$("#"+toolTipName+"Div").remove();
 	}
@@ -17,7 +17,7 @@ function addToolTip(toolTipName){
 		//pageDiv.style.boxShadow="10px 10px 5px black;";
 		pageDiv.style.borderRadius="5px";
 		pageDiv.style.backgroundColor = "white";
-		appendTemplateToElement($("#"+toolTipName+"Div"), 'templates/' + toolTipName + '.html');
+		appendTemplateToElement($("#"+toolTipName+"Div"), 'templates/'+folderName+ '/' +toolTipName +'.html');
 		$("#"+toolTipName+"Div").draggable();
 		console.log("HostBusters!");
 		$("#" + toolTipName + "Button").on('click', function() {
