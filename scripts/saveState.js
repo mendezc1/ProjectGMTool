@@ -37,12 +37,16 @@ function addToSandwich(type, item){
 			drawSubgoal(item.id);
 		});
 	}
-	if(!type.localeCompare("idealAction") && item.name){ 		//It's an action
+	if(!type.localeCompare("idealAction") && item.name){ 	//It's an action
 		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
+		//console.log("added to sammich", item.actionId, item.name);
+		var actionNum = localStorage.getItem("numActions");
+		actionNum++;
+		localStorage.setItem("numActions", actionNum);
 		sidebarBody().find("#sideAction" +item.actionId).click(function(){
 			drawAction(item.actionId, item.subgoalId);
-			sidebarBody().find('#actionNameInput').html(item.name);
+			sidebarBody().find('#actionNameInput').html("Camera action");
 			sidebarBody().find('#submitActionName').click();
 		});
 	}

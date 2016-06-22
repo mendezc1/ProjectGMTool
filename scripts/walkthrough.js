@@ -67,7 +67,7 @@ function drawAction(actionNum, subgoalId){
 	var actionName = "";
 
 	console.log("action/subgoal", actionNum, subgoalId);
-	sidebarBody().find('body').on('click', '#submitActionName', function() {
+	sidebarBody().find('#submitActionName').click(function() {
 		actionName = sidebarBody().find("#actionNameInput").val();
 		var currArray = getSubgoalArrayFromLocal();
 		var actionItem = {
@@ -77,17 +77,18 @@ function drawAction(actionNum, subgoalId){
 		};
 		//currArray[(currArray.length - 1)].actions.length + 1;
 		
-		if(actionName){
+		if(actionName==" "){
+			actionName = sidebarBody().find("#sideAction" +actionNum).innerHTML;
+		}
 			console.log("actionname", actionName);
 			saveVarToLocal("currActionName", actionName);
 			sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
 			sidebarBody().find("#promptAction").show();
-		}
+		
 		if(actionNum >  currArray[subgoalId-1].actions.length){
-			console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length)
+			console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
 			addToSandwich("idealAction", actionItem);
-			actionNum++;
-			localStorage.setItem("numActions", actionNum);
+			
 		}
 		else{
 			console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
