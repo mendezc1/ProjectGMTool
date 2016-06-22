@@ -30,6 +30,21 @@ function saveStatusObject (obj) {
 	localStorage.setItem("statusObject", JSON.stringify(obj));
 }
 
+function statusIsTrue(keyToCheck) {
+    var obj = getStatusObject();
+	if (obj) {
+		if (obj[keyToCheck] == "true") {
+            return true;
+        }
+        else {
+            return false;
+        }
+	}
+	else {
+		console.log("statusObject doesn't exist in local");
+	} 
+}
+
 function setPhasersToTrue (keyToChange) {
 	var obj = getStatusObject();
 	if (obj) {

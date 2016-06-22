@@ -14,7 +14,13 @@ function preActionQuestions(el){
 	
 
 	$("#preActionBack").click(function(){
-		renderImage();
+        if (statusIsTrue("drewToolTip")) {
+            $(el).find("#preActionTemplate").hide();
+            $(el).find("#imageCanvasTemplate").show();
+        }
+        else {
+            renderImage();
+        }
 	})
     $(".abbyMTrigger").click(function (){
         addToolTip("abbyMToolTip");	
