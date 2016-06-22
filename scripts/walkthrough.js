@@ -1,4 +1,4 @@
-function drawSubgoal(id, file, subgoalId){
+function drawSubgoal(subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
 	var subName = sidebarBody().find("#subgoalInput").val();
@@ -14,9 +14,16 @@ function drawSubgoal(id, file, subgoalId){
 		console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
 		console.log("in subgoal setting area", subName)
 		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subgoal.name);
-		//sidebarBody().find('#yes').attr("checked") = subgoal.ynm.yes;
-		//sidebarBody().find('#no').attr("checked") = subgoal.ynm.no;
-		//sidebarBody().find('#maybe').attr("checked") = subgoal.ynm.maybe;
+		sidebarBody().find('#yes').prop("checked", subgoal.ynm.yes);
+		sidebarBody().find('#no').prop("checked", subgoal.ynm.no);
+		sidebarBody().find('#maybe').prop("checked", subgoal.ynm.maybe);
+
+		sidebarBody().find('#A0Q0motiv').prop("checked", subgoal.facetValues.motiv);  //not to be confused with motion
+		sidebarBody().find('#A0Q0info').prop("checked", subgoal.facetValues.info); //not to be confused with inFork
+		sidebarBody().find('#A0Q0selfE').prop("checked", subgoal.facetValues.selfE); //not to be confused with selfie
+		sidebarBody().find('#A0Q0risk').prop("checked", subgoal.facetValues.risk);   // not to be confused with risque
+		sidebarBody().find('#A0Q0tinker').prop("checked", subgoal.facetValues.tinker); //not to be confused with tinkle
+		
 		sidebarBody().find('#A0Q0Response').html(subgoal.why);
 		sidebarBody().find('#A0Q0whyYes').hide();
  		sidebarBody().find('#editSubgoal').show();
@@ -32,7 +39,7 @@ function drawSubgoal(id, file, subgoalId){
 	sidebarBody().find('body').on('click', '#addAction', function(){
 		var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
 		var whyText = sidebarBody().find('#A0Q0whyYes').val();
-		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "self": sidebarBody().find("#A0Q0self").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
+		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 		saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
 		var numActions = localStorage.getItem("actionNum");
 		if(numActions > 0){
@@ -85,6 +92,11 @@ function drawAction(actionNum, subgoalId){
 			console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
 		}
 		sidebarBody().find("#editAction").show();
+		sidebarBody().find("#editAction").click(function(){
+			sidebarBody().find("#editAction").hide();
+			sidebarBody().find("#submitActionName").show();
+			sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+		})
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
 		if(event.keyCode == 13){
@@ -98,7 +110,7 @@ function drawAction(actionNum, subgoalId){
 		el.empty();
 		var subgoalId = localStorage.getItem("numSubgoals");
 		console.log("get back", subgoalId);
-		drawSubgoal(0,0, subgoalId);
+		drawSubgoal(subgoalId);
 	})
 }
 /*

@@ -302,7 +302,7 @@ function handlePreWalkthroughInfo () {
 			localStorage.setItem("numSubgoals", subgoalId);
 			
 		}
-		drawSubgoal(0,0,subgoalId);
+		drawSubgoal(subgoalId);
 	});
 	
 }	
