@@ -179,6 +179,7 @@ function renderImage(imgURL){
 	$("#imageBack").click(function(){
 		openSlider();
 	});
+	$(".actionNameSpan").html(localStorage.getItem("currActionName"));
 	$(".previewTrigger").click(function(){ //#triggered
 		window.open(imgURL);
 	});
