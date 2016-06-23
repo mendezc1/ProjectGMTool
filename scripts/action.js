@@ -9,6 +9,7 @@ function preActionQuestions(el){
 		var whyText = $('#whyYes').val();
 		var facets = {"motiv": $('#motiv').is(":checked"), "info": $('#info').is(":checked"), "self": $('#self').is(":checked"), "risk": $('#risk').is(":checked"), "tinker": $('#tinker').is(":checked")};
 		savePreIdealAction(actionName, yesNoMaybe, whyText, facets);
+        setPhasersToTrue("gotPreActionQuestions");
 		doActionPrompt(el);
 	});
 	
@@ -17,6 +18,7 @@ function preActionQuestions(el){
         if (statusIsTrue("drewToolTip")) {
             $(el).find("#preActionTemplate").hide();
             $(el).find("#imageCanvasTemplate").show();
+            setPhasersToFalse("gotScreenshot");
         }
         else {
             renderImage();
@@ -44,11 +46,13 @@ function doActionPrompt(el){
     $(el).find("#doActionPromptTemplate").show();
 	$("#postAction").click(function(){
 		//SAVE HERE ALANNAH!
+        setPhasersToTrue("idealActionPerformed");
 		postActionQuestions(el);
 	});
 	$("#doActionBack").click(function(){
 		$(el).find("#doActionPromptTemplate").hide();
         $(el).find("#preActionTemplate").show();
+        setPhasersToFalse("gotPreActionQuestions");
 		preActionQuestions(el);
 	});
 }
@@ -58,7 +62,7 @@ function postActionQuestions(el){
     $(el).find("#postActionTemplate").show();
 	$("#submitPostAction").click(function(){
 		//SAVE HERE ALANNAH!
-
+        setPhasersToTrue("gotPostActionQuestions");
 		var actionName = localStorage.getItem("currActionName");
 		var yesNoMaybe = {"yes": $('#YNMyes').is(":checked"), "no": $('#YNMno').is(":checked"), "maybe": $('#YNMmaybe').is(":checked")};
 		var whyText = $('#whyYes').val();
@@ -85,6 +89,7 @@ function postActionQuestions(el){
     $("#postActionBack").click(function(){
         $(el).find("#postActionTemplate").hide();
         $(el).find("#doActionPromptTemplate").show();
+        setPhasersToFalse("idealActionPerformed");
         doActionPrompt(el);
     });
 }
@@ -96,12 +101,38 @@ function actionLoop(el){
 	$("#moreActions").click(function(){
 		//SAVE HERE ALANNAH!
 		$(el).remove();
+        setPhasersToFalse("drewToolTip");
 		overlayScreen();
-		preActionQuestions(el);
+		preActionQuestions(el);     //Note: at some point we have to let them name the action. Can't jsut drop them into a new action.
+        
+        //Reset action states
+        /* setPhasersToFalse("gotActionName");
+        setPhasersToFalse("actionPromptOnScreen");          // <-- Uncomment when we let them put a new action name.
+        setPhasersToFalse("drewToolTip");  */           
+        setPhasersToFalse("highlightedAction");
+        setPhasersToFalse("gotScreenshot");
+        setPhasersToFalse("gotPreActionQuestions");
+        setPhasersToFalse("idealActionPerformed");
+        setPhasersToFalse("gotPostActionQuestions");
 	});
 	
 	$("#nextSubgoal").click(function(){
 		$(el).remove();
+        setPhasersToFalse("drewToolTip");
+        
+        //Reset action states
+        /* setPhasersToFalse("gotActionName");
+        setPhasersToFalse("actionPromptOnScreen");          // <-- Uncomment when we let them put a new action name.
+        setPhasersToFalse("drewToolTip");  */           
+        setPhasersToFalse("highlightedAction");
+        setPhasersToFalse("gotScreenshot");
+        setPhasersToFalse("gotPreActionQuestions");
+        setPhasersToFalse("idealActionPerformed");
+        setPhasersToFalse("gotPostActionQuestions");
+        //Reset subgoal states
+        setPhasersToFalse("gotSubgoalName");
+        setPhasersToFalse("gotSubgoalQuestions");
+        
 		openSlider();
 		drawSubgoal(); //creates undefined unnamed subgoal
 	});
@@ -109,10 +140,12 @@ function actionLoop(el){
 	$("#saveAndExit").click(function(){
 		//SAVE HERE ALANNAH!
 		//nuke
+        setPhasersToTrue("finishedGM");
 	});	
 	$("#loopActionBack").click(function(){
 		$(el).find("#actionLoopTemplate").hide();
         $(el).find("#postActionTemplate").show();
+        setPhasersToFalse("gotPostActionQuestions");
 		postActionQuestions(el);
 	});
 	

@@ -1,4 +1,7 @@
 function init(){
+    
+    //init the status object
+    initStatusObject();
 
 	importStylesheet("body","./styles/slider.css");
 	appendTemplateToElement("body","./templates/slider.html");
@@ -16,8 +19,6 @@ function init(){
 	localStorage.removeItem("subgoalArray");
 	localStorage.removeItem("numActions");
 	
-    //init the status object
-    initStatusObject();
 }
 
 /* Function appendTemplateToElement
@@ -47,7 +48,7 @@ function appendTemplateToElement(el,file){
  */
 
 function importStylesheet(el, file){
-	console.log("#"+ el);
+	//console.log("#"+ el);
 	return $("<link>", {
 			rel:"stylesheet",
 			href: chrome.extension.getURL(file),
@@ -67,12 +68,16 @@ function addOnClicks(){
 		$("#slideout").contents().find("body").on('click', function(event) {
 			$("#slideout").toggleClass("clicked");
 			$("#GenderMagFrame").toggleClass("clicked");
+            if ($( "#slideout" ).hasClass( "clicked" ) ) {
+                setPhasersToTrue("sliderIsOpen");
+            }
+            else {
+                setPhasersToFalse("sliderIsOpen");
+            }            
 		});
 	}
-	
-	
-
-	console.log("Done adding clicks");
+    
+	//console.log("Done adding clicks");
 }
 
 function sidebarBody(){
@@ -83,6 +88,7 @@ function openSlider(){
 	if(!$("#slideout").hasClass("clicked")){
 		$("#slideout").addClass("clicked");
 		$("#GenderMagFrame").addClass("clicked");
+        setPhasersToTrue("sliderIsOpen");
 	}
 }
 
@@ -90,5 +96,6 @@ function closeSlider(){
 	if($("#slideout").hasClass("clicked")){
 		$("#slideout").toggleClass("clicked");
 		$("#GenderMagFrame").toggleClass("clicked");
+        setPhasersToFalse("sliderIsOpen");
 	}
 }
