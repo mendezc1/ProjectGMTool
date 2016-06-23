@@ -25,19 +25,19 @@ function preActionQuestions(el){
         }
 	})
     $(".abbyMTrigger").click(function (){
-        addToolTip("abbyMToolTip");	
+        addToolTip("abbyMToolTip", "Abby");	
     });
     $(".abbyIPSTrigger").click(function(){
-        addToolTip("abbyIPSToolTip");
+        addToolTip("abbyIPSToolTip", "Abby");
     });
     $(".abbySETrigger").click(function(){
-        addToolTip("abbySEToolTip");
+        addToolTip("abbySEToolTip", "Abby");
     });
     $(".abbyRTrigger").click(function(){
-        addToolTip("abbyRToolTip");
+        addToolTip("abbyRToolTip", "Abby");
     });
     $(".abbyTTrigger").click(function(){
-        addToolTip("abbyTToolTip");
+        addToolTip("abbyTToolTip", "Abby");
     });
 }
 
@@ -72,19 +72,19 @@ function postActionQuestions(el){
 		actionLoop(el);
 	});
     $(".abbyMTrigger").click(function (){
-        addToolTip("abbyMToolTip");	
+        addToolTip("abbyMToolTip", "Abby");	
     });
     $(".abbyIPSTrigger").click(function(){
-        addToolTip("abbyIPSToolTip");
+        addToolTip("abbyIPSToolTip", "Abby");
     });
     $(".abbySETrigger").click(function(){
-        addToolTip("abbySEToolTip");
+        addToolTip("abbySEToolTip", "Abby");
     });
     $(".abbyRTrigger").click(function(){
-        addToolTip("abbyRToolTip");
+        addToolTip("abbyRToolTip", "Abby");
     });
     $(".abbyTTrigger").click(function(){
-        addToolTip("abbyTToolTip");
+        addToolTip("abbyTToolTip", "Abby");
     });
     $("#postActionBack").click(function(){
         $(el).find("#postActionTemplate").hide();
