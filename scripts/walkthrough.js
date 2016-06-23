@@ -1,12 +1,54 @@
 function drawSubgoal(subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
-	
-	console.log("draw subgoal called, ", subgoalId);
-	
-	var isSetSubgoalQuestions = (statusIsTrue("gotSubgoalQuestions"));
-	if (isSetSubgoalQuestions) {
-		var numActions = localStorage.getItem("numActions");
+
+	var subName = sidebarBody().find("#subgoalInput").val();
+	console.log("subname", subName);
+	if(subName==undefined){
+		//subName = $("#subgoalInput").val(); //insert subgoal name here! currently this returns undefined
+		subName = " "
+		console.log("in if", subName);
+	}
+	var el = $(id).contents().find('#containeryo');
+	el.empty();
+	appendTemplateToElement(el,file);
+	sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
+	var subgoals = getSubgoalArrayFromLocal();
+	sidebarBody().find("#editSubgoal").hide();
+	if(subgoals){
+		var subgoal = subgoals[subgoalId-1];
+		console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
+		console.log("in subgoal setting area", subName)
+		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subgoal.name);
+		sidebarBody().find('#yes').prop("checked", subgoal.ynm.yes);
+		sidebarBody().find('#no').prop("checked", subgoal.ynm.no);
+		sidebarBody().find('#maybe').prop("checked", subgoal.ynm.maybe);
+
+		sidebarBody().find('#A0Q0motiv').prop("checked", subgoal.facetValues.motiv);  //not to be confused with motion
+		sidebarBody().find('#A0Q0info').prop("checked", subgoal.facetValues.info); //not to be confused with inFork
+		sidebarBody().find('#A0Q0selfE').prop("checked", subgoal.facetValues.selfE); //not to be confused with selfie
+		sidebarBody().find('#A0Q0risk').prop("checked", subgoal.facetValues.risk);   // not to be confused with risque
+		sidebarBody().find('#A0Q0tinker').prop("checked", subgoal.facetValues.tinker); //not to be confused with tinkle
+		
+		sidebarBody().find('#A0Q0Response').html(subgoal.why);
+		sidebarBody().find('#A0Q0whyYes').hide();
+ 		sidebarBody().find('#editSubgoal').show();
+ 		sidebarBody().find('#editSubgoal').click(function(){
+ 			sidebarBody().find("#editSubgoal").hide();
+ 			sidebarBody().find('#addAction').show();
+ 			sidebarBody().find("#A0Q0whyYes").show();
+			sidebarBody().find("#A0Q0whyYes").html(subgoal.why);
+ 			sidebarBody().find("#A0Q0Response").hide();
+ 		});		
+	}
+
+	sidebarBody().find('body').on('click', '#addAction', function(){
+		var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
+		var whyText = sidebarBody().find('#A0Q0whyYes').val();
+		var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
+		saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
+        setPhasersToTrue("gotSubgoalQuestions");
+		var numActions = localStorage.getItem("actionNum");
 		if(numActions > 0){
 			var subgoals = getSubgoalArrayFromLocal();
 			var subgoal = subgoals[subgoalId-1];

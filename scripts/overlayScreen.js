@@ -305,7 +305,8 @@ function renderImage(imgURL){
 	$("#imageBack").click(function(){
 		openSlider();
 	});
-	$(".actionNameSpan").html(localStorage.getItem("currActionName"));
+	var actionSpan = localStorage.getItem("currActionName");
+	$(".actionNameSpan").html(actionSpan.slice(1,actionSpan.length-1));
 	$(".previewTrigger").click(function(){ //#triggered
 		window.open(imgURL);
 	});

@@ -25,19 +25,19 @@ function preActionQuestions(el){
         }
 	})
     $(".abbyMTrigger").click(function (){
-        addToolTip("abbyMToolTip");	
+        addToolTip("abbyMToolTip", "Abby");	
     });
     $(".abbyIPSTrigger").click(function(){
-        addToolTip("abbyIPSToolTip");
+        addToolTip("abbyIPSToolTip", "Abby");
     });
     $(".abbySETrigger").click(function(){
-        addToolTip("abbySEToolTip");
+        addToolTip("abbySEToolTip", "Abby");
     });
     $(".abbyRTrigger").click(function(){
-        addToolTip("abbyRToolTip");
+        addToolTip("abbyRToolTip", "Abby");
     });
     $(".abbyTTrigger").click(function(){
-        addToolTip("abbyTToolTip");
+        addToolTip("abbyTToolTip", "Abby");
     });
 }
 
@@ -72,19 +72,19 @@ function postActionQuestions(el){
 		actionLoop(el);
 	});
     $(".abbyMTrigger").click(function (){
-        addToolTip("abbyMToolTip");	
+        addToolTip("abbyMToolTip", "Abby");	
     });
     $(".abbyIPSTrigger").click(function(){
-        addToolTip("abbyIPSToolTip");
+        addToolTip("abbyIPSToolTip", "Abby");
     });
     $(".abbySETrigger").click(function(){
-        addToolTip("abbySEToolTip");
+        addToolTip("abbySEToolTip", "Abby");
     });
     $(".abbyRTrigger").click(function(){
-        addToolTip("abbyRToolTip");
+        addToolTip("abbyRToolTip", "Abby");
     });
     $(".abbyTTrigger").click(function(){
-        addToolTip("abbyTToolTip");
+        addToolTip("abbyTToolTip", "Abby");
     });
     $("#postActionBack").click(function(){
         $(el).find("#postActionTemplate").hide();
@@ -103,6 +103,7 @@ function actionLoop(el){
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
 		overlayScreen();
+		overlayScreen(); //Second time's the charm
 		preActionQuestions(el);     //Note: at some point we have to let them name the action. Can't jsut drop them into a new action.
         
         //Reset action states
@@ -116,7 +117,7 @@ function actionLoop(el){
         setPhasersToFalse("gotPostActionQuestions");
 	});
 	
-	$("#nextSubgoal").click(function(){
+	$("#newSubgoal").click(function(){
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
         
@@ -134,13 +135,23 @@ function actionLoop(el){
         setPhasersToFalse("gotSubgoalQuestions");
         
 		openSlider();
-		drawSubgoal(); //creates undefined unnamed subgoal
+		var numSubgoals = localStorage.getItem("numSubgoals");
+		drawSubgoal(numSubgoals+1); //creates undefined unnamed subgoal
 	});
 	
 	$("#saveAndExit").click(function(){
 		//SAVE HERE ALANNAH!
 		//nuke
+		
         setPhasersToTrue("finishedGM");
+		var entrees = parseSubgoalArray();
+		var scurvy = createCSV(entrees);
+		downloadCSV(scurvy);
+		
+		localStorage.clear(); //NUKED
+		//nuclear fallout
+		//war war never changes...
+		
 	});	
 	$("#loopActionBack").click(function(){
 		$(el).find("#actionLoopTemplate").hide();
