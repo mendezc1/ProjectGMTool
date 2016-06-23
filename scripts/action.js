@@ -102,8 +102,8 @@ function actionLoop(el){
 		//SAVE HERE ALANNAH!
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
-		overlayScreen();
-		overlayScreen(); //Second time's the charm
+		overlayScreen(0);
+		overlayScreen(0); //Second time's the charm
 		preActionQuestions(el);     //Note: at some point we have to let them name the action. Can't jsut drop them into a new action.
         
         //Reset action states

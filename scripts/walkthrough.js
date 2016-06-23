@@ -55,7 +55,7 @@ function drawSubgoal(subgoalId){
 			var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 			saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
 			setPhasersToTrue("gotSubgoalQuestions");
-			var numActions = localStorage.getItem("actionNum");
+			var numActions = localStorage.getItem("numActions");
 			if(numActions > 0){
 				var subgoals = getSubgoalArrayFromLocal();
 				var subgoal = subgoals[subgoalId-1];
@@ -120,7 +120,7 @@ function drawSubgoal(subgoalId){
 			var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 			saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
 			setPhasersToTrue("gotSubgoalQuestions");
-			var numActions = localStorage.getItem("actionNum");
+			var numActions = localStorage.getItem("numActions");
 			if(numActions > 0){
 				
 				drawAction(numActions, subgoalId);
@@ -197,6 +197,7 @@ function drawAction(actionNum, subgoalId){
 		} 
 	});
 	sidebarBody().find('body').on('click', '#overlayTrigger', function() {
+		overlayScreen();
 		overlayScreen();
 	});
 	sidebarBody().find("#promptActionBack").click(function(){

@@ -10,11 +10,12 @@ chrome.runtime.onMessage.addListener(
 });
 
 
-function overlayScreen(onlyDraw = null){
+function overlayScreen(onlyDraw){
 	
-	if (onlyDraw) {
+	if (onlyDraw == "onlyToolTip") {
 		closeSlider();
 		if(!document.getElementById('genderMagCanvasContainer')){
+			console.log("in if");
 			var canvasContainer = document.createElement('div');
 				// Add the div into the document
 		}
@@ -300,6 +301,7 @@ function renderImage(imgURL){
 	$("#retakeImage").click(function(){
 		toolTip.remove();
         setPhasersToFalse("drewToolTip");
+		overlayScreen();
 		overlayScreen();
 	});
 	$("#imageBack").click(function(){
