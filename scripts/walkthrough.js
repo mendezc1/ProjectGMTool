@@ -4,7 +4,8 @@ function drawSubgoal(subgoalId){
 	var subName = sidebarBody().find("#subgoalInput").val();
 	console.log("subname", subName);
 	if(subName==undefined){
-		subName = $("#subgoalInput").val(); //insert subgoal name here! currently this returns undefined
+		//subName = $("#subgoalInput").val(); //insert subgoal name here! currently this returns undefined
+		subName = " "
 		console.log("in if", subName);
 	}
 	var el = $(id).contents().find('#containeryo');

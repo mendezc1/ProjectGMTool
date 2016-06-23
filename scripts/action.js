@@ -142,10 +142,16 @@ function actionLoop(el){
 	$("#saveAndExit").click(function(){
 		//SAVE HERE ALANNAH!
 		//nuke
+		
         setPhasersToTrue("finishedGM");
 		var entrees = parseSubgoalArray();
 		var scurvy = createCSV(entrees);
 		downloadCSV(scurvy);
+		
+		localStorage.clear(); //NUKED
+		//nuclear fallout
+		//war war never changes...
+		
 	});	
 	$("#loopActionBack").click(function(){
 		$(el).find("#actionLoopTemplate").hide();

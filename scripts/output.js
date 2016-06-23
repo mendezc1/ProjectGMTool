@@ -44,6 +44,5 @@ function downloadCSV(csvContent) {
 	document.body.appendChild(link); // Required for FF
 
 	link.click(); // This will download the data file named "my_data.csv".
-	//var encodedUri = encodeURI(csvContent);
-	//window.open(encodedUri);
+	
 }

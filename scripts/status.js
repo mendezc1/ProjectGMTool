@@ -1,4 +1,4 @@
-var statusObject = {
+var statusObject = {							//Now we just need a priviledge object. 
 	sliderIsOpen: "",                           //set for first time in utilities.js
 	startedGM: "",                              //set in setup.js
 	gotTeamName: "",                            //set in prewalkthrough.js
