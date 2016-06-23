@@ -143,6 +143,9 @@ function actionLoop(el){
 		//SAVE HERE ALANNAH!
 		//nuke
         setPhasersToTrue("finishedGM");
+		var entrees = parseSubgoalArray();
+		var scurvy = createCSV(entrees);
+		downloadCSV(scurvy);
 	});	
 	$("#loopActionBack").click(function(){
 		$(el).find("#actionLoopTemplate").hide();
