@@ -29,6 +29,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 }
 
 function addToSandwich(type, item){
+	console.log("servin' up a sandwich");
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';

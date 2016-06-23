@@ -106,9 +106,9 @@ function actionLoop(el){
 		preActionQuestions(el);     //Note: at some point we have to let them name the action. Can't jsut drop them into a new action.
         
         //Reset action states
-        /* setPhasersToFalse("gotActionName");
-        setPhasersToFalse("actionPromptOnScreen");          // <-- Uncomment when we let them put a new action name.
-        setPhasersToFalse("drewToolTip");  */           
+        setPhasersToFalse("gotActionName");
+        setPhasersToFalse("actionPromptOnScreen");          
+        setPhasersToFalse("drewToolTip");          
         setPhasersToFalse("highlightedAction");
         setPhasersToFalse("gotScreenshot");
         setPhasersToFalse("gotPreActionQuestions");
@@ -151,4 +151,38 @@ function actionLoop(el){
 	
 }
 
+function reloadToolTipState () {
+	console.log("reloading toolTip state");
+	
+	overlayScreen("onlyToolTip");
+	
+	var toolTip = document.getElementById("myToolTip");
+
+	
+	if (statusIsTrue("gotPostActionQuestions")) {
+		$(toolTip).find("#imageCanvasTemplate").hide();
+		actionLoop(toolTip);
+	}
+	
+	else if (statusIsTrue("idealActionPerformed")) {
+		$(toolTip).find("#imageCanvasTemplate").hide();
+		postActionQuestions(toolTip);
+	}
+	
+	else if (statusIsTrue("gotPreActionQuestions")) {	//This is the important one
+		$(toolTip).find("#imageCanvasTemplate").hide();
+		doActionPrompt(toolTip);
+	}
+	
+	else if (statusIsTrue("gotScreenshot")) {
+		$(toolTip).find("#imageCanvasTemplate").hide();
+		preActionQuestions(toolTip);
+	}
+	
+	else if (statusIsTrue("highlightedAction")) {
+		//Put the image back on the screen
+	}
+	
+	console.log("Done reloading tooltip");
+}
 
