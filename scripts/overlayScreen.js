@@ -97,9 +97,9 @@ function overlayScreen(onlyDraw){
 		openSlider();
 	});
 	$(".actionNameSpan").html(localStorage.getItem("currActionName"));
-	$(".previewTrigger").click(function(){ //#triggered
-		window.open(imgURL);
-	});
+	//$(".previewTrigger").click(function(){ //#triggered
+	//	window.open(imgURL);
+	//});
 		var canvas = document.getElementById("imageCanvas");
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
@@ -305,9 +305,7 @@ function renderImage(imgURL){
 		openSlider();
 	});
 	$(".actionNameSpan").html(localStorage.getItem("currActionName"));
-	$(".previewTrigger").click(function(){ //#triggered
-		window.open(imgURL);
-	});
+
 		var canvas = document.getElementById("imageCanvas");
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
@@ -399,22 +397,37 @@ function renderImage(imgURL){
     	var destX = canvas.width / 2 - destWidth / 2;
     	var destY = canvas.height / 2 - destHeight / 2;
 		console.log(globXY);
+			
+		$(".previewTrigger").click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
+		
 		console.log($("#imageAnnotation").css("width"));
 		console.log($("#imageAnnotation").height());
 		$("#imageAnnotation").width(ratioWidth+10);
-		$("#imageAnnotation").height(ratioHeight+10);
+		$("#imageAnnotation").height(ratioHeight+40);
 		$("#imageAnnotation").draggable();
 		$("#annotationCanvas").attr("width", ratioWidth);
 		$("#annotationCanvas").attr("height", ratioHeight);
 		$("#annotationCanvas").width(ratioWidth);
 		$("#annotationCanvas").height(ratioHeight);
-		
-		drawOnCanvas("#annotationCanvas");
-		var annotationCanvas = document.getElementById("annotationCanvas");
-		ctx = annotationCanvas.getContext("2d");
-		ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
+		$("#imageAnnotation").css("position", "absolute");
+		$("#imageAnnotation").css("top", "150px");
+		$("#imageAnnotation").css("left", "100px");
+	
+			drawOnCanvas("#annotationCanvas");
+			var annotationCanvas = document.getElementById("annotationCanvas");
+			ctx = annotationCanvas.getContext("2d");
+			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
+			
+			$("#backLargePreview").click(function(){
+				$("#imageAnnotation").remove();
+			});
+			$("#closeLargePreview").click(function(){
+				$("#imageAnnotation").remove();
+			});
+			
+		});
 		context.drawImage(myImg,0, 0,myImg.width, myImg.height,0,0,ratioWidth/3, ratioHeight/3);
 /*		//$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
 		//numScreenShots++;
