@@ -46,8 +46,8 @@
                 
                 <textarea id="whyYes" rows="4" cols="40" class="responseBox" placeholder="Why, why not or why maybe?"></textarea>
                 <!--textarea id="whyNo" class="responseBox" placeholder="Why not?"></textarea>
-                <textarea id="whyMaybe" class="responseBox" placeholder="Why maybe?"></textarea><br>
-                <span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span--><br>
+                <textarea id="whyMaybe" class="responseBox" placeholder="Why maybe?"></textarea--><br>
+                <span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span><br>
 	
                 <input id="motiv" type="checkbox" value="Motivation"><span class="abbyMTrigger" style="color:blue">Motivation</span><br>
                 <input id="info" type="checkbox" value="Information Processing Style"><span class="abbyIPSTrigger" style="color:blue">Information Processing Style</span><br>
@@ -113,9 +113,16 @@
             </div>
 
             <p> Are there more actions for this subgoal? </p>
-            <input id="moreActions" type="submit" value="Yes - Add another action"></input><br>
-            <input id="nextSubgoal" type="submit"value="No - Create new subgoal"></input><br>
-            <input id="saveAndExit" type="submit" value="No - I'm done, save and exit GenderMag"></input><br>
+			<p>Yes, create a new Action</p>
+			<input id="actionNameInput" type="text" placeholder="ex Type 'Sue' in the search bar">
+			<input id="moreActions" type="submit" value="Add another action"></input><br>
+
+			<p>No, create a new Subgoal</p>
+            <input id="subgoalInput" type="text" placeholder="ex Search for 'Sue' in the DB">
+			<input type="submit" id="newSubgoal" value="Create new subgoal">
+			
+			<p>No, please exit the tool</p>
+            <input id="saveAndExit" type="submit" value="Save and stop GenderMag session"></input><br>
             
         </div>
         

@@ -37,6 +37,7 @@ function setup (id, file) {
 		$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
 			console.log("Learn more button clicked");
 			overlayScreen();
+			overlayScreen();
 			//addToolTip("setupToolTip");
 		});
 	}

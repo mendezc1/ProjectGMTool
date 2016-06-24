@@ -16,8 +16,8 @@ function init(){
 	
 	//Local storage removal
 	localStorage.removeItem("numSubgoals");
-	localStorage.removeItem("subgoalArray");
-	localStorage.removeItem("numActions");
+	//localStorage.removeItem("subgoalArray");
+	//localStorage.removeItem("numActions");
 	
 }
 
