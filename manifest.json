@@ -17,11 +17,8 @@
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-<<<<<<< HEAD
-			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "/scripts/jcanvas.min.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "scripts/tooltip.js", "/scripts/utilities.js", "scripts/overlayScreen.js", "/scripts/setup.js" , "/scripts/prewalkthrough.js", "scripts/script.js", "/scripts/persona.js", "/scripts/walkthrough.js", "/scripts/saveState.js", "/scripts/action.js", "/scripts/status.js"],
-=======
-			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "scripts/tooltip.js", "/scripts/utilities.js", "scripts/overlayScreen.js", "/scripts/setup.js" , "/scripts/prewalkthrough.js", "scripts/script.js", "/scripts/persona.js", "/scripts/walkthrough.js", "/scripts/saveState.js", "/scripts/action.js", "/scripts/status.js", "/scripts/output.js"],
->>>>>>> d8154f738ab4b40e5c547083dacafa201f897a89
+			"js": ["jquery-ui-1.11.4.custom/external/jquery/jquery.js", "/scripts/jcanvas.min.js", "jquery-ui-1.11.4.custom/jquery-ui.min.js", "scripts/tooltip.js", "/scripts/utilities.js", "scripts/overlayScreen.js", "/scripts/setup.js" , "/scripts/prewalkthrough.js", "scripts/script.js", "/scripts/persona.js", "/scripts/walkthrough.js", "/scripts/saveState.js", "/scripts/action.js", "/scripts/status.js", "/scripts/output.js"],
+
 			"css": ["jquery-ui-1.11.4.custom/jquery-ui.css"]
 		}
 	],
