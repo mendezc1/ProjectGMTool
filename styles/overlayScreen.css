@@ -1,0 +1,23 @@
+
+
+#ayy{
+	width: 300px;
+	height:500px;
+	position:absolute;
+	top:100px;
+	left:100px;
+	border:3px solid #999999;
+	background-color : white;
+
+}
+
+#imageAnnotation{
+	width: 500px;
+	height:500px;
+	position:absolute;
+	top:150px;
+	left:100px;
+	border:3px solid #999999;
+	background-color : white;
+
+}
