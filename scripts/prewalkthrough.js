@@ -65,6 +65,8 @@ function nukeButtonOnclick () {
 	sidebarBody().find('body').on('click', '#nukeStatus', function() {
 		localStorage.setItem("statusObject", JSON.stringify(statusObject));
         console.log("Resetting status object...");
+		localStorage.clear();
+		console.log("Clearing local...");
 	});
 	
 }

@@ -9,7 +9,7 @@ function drawSubgoal(subgoalId){
 	if (isSetSubgoalQuestions) {
 		var numActions = localStorage.getItem("numActions");
 
-		var subName = sidebarBody().find("#subgoalInput").val();
+		var subName = localStorage.getItem("currSubgoalName");
 		console.log("subname", subName);
 		if(subName==undefined){
 			//subName = $("#subgoalInput").val(); //insert subgoal name here! currently this returns undefined

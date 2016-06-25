@@ -29,14 +29,32 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 }
 
 function addToSandwich(type, item){
-	console.log("servin' up a sandwich");
+	console.log("servin' up a " +type+ " sandwich");
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
-		var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
-		sidebarBody().find("#subgoalList").append(sideSubgoal);
-		sidebarBody().find("#sideSubgoal" + item.id).click(function(){
-			drawSubgoal(item.id);
-		});
+		var subArr = getSubgoalArrayFromLocal();
+		var alreadyDrawn = false;
+		if (subArr) {
+			for (var prop in subArr) {
+				if (subArr[prop].id == item.id) {
+					alreadyDrawn = true;
+					console.log("Not gonna draw that again");
+				}
+			}
+		}
+		if (!alreadyDrawn || item.id == 1) {
+			var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+			sidebarBody().find("#subgoalList").append(sideSubgoal);
+			sidebarBody().find("#sideSubgoal" + item.id).click(function(){
+				drawSubgoal(item.id);
+			});
+		}
+		else {
+			sidebarBody().find("#sideSubgoal" + item.id).click(function(){
+				drawSubgoal(item.id);
+			});
+		}
+			
 	}
 	if(!type.localeCompare("idealAction") && item.name){ 	//It's an action
 		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';

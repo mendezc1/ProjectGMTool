@@ -18,6 +18,12 @@ function setup (id, file) {
 	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
 	var hasStartedWalkthrough = statusIsTrue("startedGM")
 	if (hasStartedWalkthrough) {
+		if (statusIsTrue("sliderIsOpen")) {
+			openSlider();
+		}
+		else {
+			closeSlider();
+		}
         console.log("Found previous info. Skipping start screen");
         preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 	}
