@@ -18,14 +18,22 @@ function parseSubgoalArray(){
 	return entries;
 }
 
-
+var globName = "";
 function createCSV(entries) {
 	var csvContent = "data:text/csv;charset=utf-8,";
 	
-	var header = ["Date", "Time", "Team", "Persona", "Scenario", "Subgoal", "Action", "Question",
-		"Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker"]
-		
-	csvContent += header.join(",") + "\n";
+	var header1 = ["Date", "Time", "Team", "Persona", "Scenario"];
+	csvContent += header1.join(",") + "\n";
+	
+	var DTTPS = ["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
+	globName += DTTPS[0];
+	globName += "-";
+	globName += DTTPS[2];
+	csvContent += DTTPS.join(",") + "\n";
+
+	
+	var header2 = ["Subgoal", "Action", "Question", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker"];
+	csvContent += header2.join(",") + "\n";
 		
 	entries.forEach(function(entry, index){
 		console.log("entry", entry);
@@ -40,9 +48,10 @@ function downloadCSV(csvContent) {
 	var encodedUri = encodeURI(csvContent);
 	var link = document.createElement("a");
 	link.setAttribute("href", encodedUri);
-	link.setAttribute("download", "my_data.csv");
+	link.setAttribute("download", globName+".csv");
 	document.body.appendChild(link); // Required for FF
 
 	link.click(); // This will download the data file named "my_data.csv".
-	
+	localStorage.clear();
+	location.reload();
 }
