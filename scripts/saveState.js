@@ -33,7 +33,14 @@ function addToSandwich(type, item){
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var subArr = getSubgoalArrayFromLocal();
-		var alreadyDrawn = false;
+		drawSubgoal(item.id);
+		var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		sidebarBody().find("#subgoalList").append(sideSubgoal);
+		sidebarBody().find("#sideSubgoal" + item.id).click(function(){
+			drawSubgoal(item.id);
+		});
+	
+		/* var alreadyDrawn = false;
 		if (subArr) {
 			for (var prop in subArr) {
 				if (subArr[prop].id == item.id) {
@@ -43,6 +50,7 @@ function addToSandwich(type, item){
 			}
 		}
 		if (!alreadyDrawn || item.id == 1) {
+			console.log("in if");
 			var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
 			sidebarBody().find("#subgoalList").append(sideSubgoal);
 			sidebarBody().find("#sideSubgoal" + item.id).click(function(){
@@ -50,10 +58,11 @@ function addToSandwich(type, item){
 			});
 		}
 		else {
+			console.log("in else");
 			sidebarBody().find("#sideSubgoal" + item.id).click(function(){
 				drawSubgoal(item.id);
 			});
-		}
+		} */
 			
 	}
 	if(!type.localeCompare("idealAction") && item.name){ 	//It's an action
@@ -208,3 +217,9 @@ function getSubgoalArrayFromLocal() {
 		var retrievedObject = JSON.parse(localStorage.getItem('testArray'));
 		console.log(retrievedObject[1]);
 	*/
+	
+$( window ).unload(function() {
+	console.log("UNLOCKED AND UNLOADED");
+	var sidebarHTML = sidebarBody().find('#subgoalList').html();
+	console.log(sidebarHTML);
+});
