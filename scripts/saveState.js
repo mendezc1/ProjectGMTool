@@ -34,7 +34,7 @@ function addToSandwich(type, item){
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var subArr = getSubgoalArrayFromLocal();
 		drawSubgoal(item.id);
-		var sideSubgoal = '<div style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		var sideSubgoal = '<div superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideSubgoal);
 		sidebarBody().find("#sideSubgoal" + item.id).click(function(){
 			drawSubgoal(item.id);
@@ -66,7 +66,7 @@ function addToSandwich(type, item){
 			
 	}
 	if(!type.localeCompare("idealAction") && item.name){ 	//It's an action
-		var sideAction = '<div style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
+		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
 		//console.log("added to sammich", item.actionId, item.name);
 		var actionNum = localStorage.getItem("numActions");
@@ -218,8 +218,48 @@ function getSubgoalArrayFromLocal() {
 		console.log(retrievedObject[1]);
 	*/
 	
+	
+//Happens before refresh
 $( window ).unload(function() {
 	console.log("UNLOCKED AND UNLOADED");
 	var sidebarHTML = sidebarBody().find('#subgoalList').html();
 	console.log(sidebarHTML);
+	localStorage.setItem('sidebarHTML', sidebarHTML);
 });
+
+
+//Happens after refresh
+function reloadSandwich () {
+	console.log("LOCKED AND LOADED");
+	var sidebarHTML = localStorage.getItem('sidebarHTML');
+	console.log(sidebarHTML);
+	var subgoalDiv = sidebarBody().find('#subgoalList');
+	if (subgoalDiv) {
+		subgoalDiv.html(sidebarHTML);
+		sidebarBody().find('#subgoalList').children().each(function () {
+			var currId = this.getAttribute('supercoolattr');
+			console.log(currId);
+			if (currId.length == 1) {
+				//It's a subgoal
+				console.log("subgoal");
+				sidebarBody().find("#sideSubgoal" + currId).click(function(){
+					drawSubgoal(currId);
+				});
+			}
+			else {
+				//It's an action
+				console.log("action", currId[(currId.length) - 1]);
+				sidebarBody().find("#sideAction" +currId[(currId.length) - 1]).click(function(){
+					drawAction(currId[currId.length], currId[0]);
+					sidebarBody().find('#actionNameInput').html("Camera action");
+					sidebarBody().find('#submitActionName').click();
+				});
+				
+			}
+		});
+		
+	}
+	else {
+		console.log("NOPE");
+	}
+}

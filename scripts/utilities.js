@@ -1,5 +1,5 @@
 function init(){
-    
+	
     //init the status object
     initStatusObject();
 
@@ -13,6 +13,7 @@ function init(){
 	$("#slideout").contents().find("body").append("GenderMag");
 	addOnClicks();
 	setup("#GenderMagFrame", "./templates/firstState.html");
+	reloadSandwich();
 	
 	//Local storage removal
 	//localStorage.removeItem("numSubgoals");
