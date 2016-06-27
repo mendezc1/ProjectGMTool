@@ -12,7 +12,12 @@
  */
 
 function preWalkthrough (id, file) {
-	
+	/*
+	QUALITY CODE INCOMING
+	localStorage.setItem("actionNum", Infinity);
+	var GRA= localStorage.getItem("actionNum");
+	console.log("get rekt alannah", GRA);
+	*/
 	var el = $(id).contents().find('body');
 	el.empty();
 	appendTemplateToElement(el,file);

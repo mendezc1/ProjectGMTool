@@ -9,8 +9,9 @@ function parseSubgoalArray(){
 	var entry = []; //corresponds to a single row in the csv
 	var entries = [];
 	
-	for (var i = 0; i < userInput.length; i++) { 
-		entry = [userInput[i].name, userInput[i].why];
+	for (var i = 0; i < userInput.length; i++) {
+		var currI = userInput[i];//Current input, not to be confused with curry
+		entry = [currI.name, currI.why, currI.ynm["yes"], currI.facetValues["selfE"]];
 		if (entry.length != 0) {
 			entries.push(entry);
 		}
@@ -25,7 +26,7 @@ function createCSV(entries) {
 	var header1 = ["Date", "Time", "Team", "Persona", "Scenario"];
 	csvContent += header1.join(",") + "\n";
 	
-	var DTTPS = ["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
+	var DTTPS = ["Today", "Now", "TeamName", "AbbyPersona", "YourScenarioHere"]//["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
 	globName += DTTPS[0];
 	globName += "-";
 	globName += DTTPS[2];
