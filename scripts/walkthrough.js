@@ -53,18 +53,12 @@ function drawSubgoal(subgoalId){
 	
 	else {
 		console.log("in walkthrough else");
-		var subName = "";
-		if (statusIsTrue("gotSubgoalName")) {
-			subName = localStorage.getItem("currSubgoalName");
-		}
-		else {
-			subName = sidebarBody().find("#subgoalInput").val();
-		}
+		var subName = localStorage.getItem("currSubgoalName");
 		var el = $(id).contents().find('#containeryo');
 		el.empty();
 		appendTemplateToElement(el,file);
 		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
-		var subgoals = getSubgoalArrayFromLocal();
+		/* var subgoals = getSubgoalArrayFromLocal();
 		sidebarBody().find("#editSubgoal").hide();
 		if(subgoals){
 			var subgoal = subgoals[subgoalId-1];
@@ -91,7 +85,7 @@ function drawSubgoal(subgoalId){
 				sidebarBody().find("#A0Q0whyYes").html(subgoal.why);
 				sidebarBody().find("#A0Q0Response").hide();
 			});		
-		}
+		} */
 
 		sidebarBody().find('body').on('click', '#addAction', function(){
 			var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};

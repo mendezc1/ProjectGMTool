@@ -118,6 +118,8 @@ function actionLoop(el){
 	});
 	
 	$("#newSubgoal").click(function(){
+		localStorage.setItem("numActions", 0 );
+		localStorage.setItem("currSubgoalName", $(el).find("#subgoalInput").val() );
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
         
@@ -135,8 +137,10 @@ function actionLoop(el){
         setPhasersToFalse("gotSubgoalQuestions");
         
 		openSlider();
-		var numSubgoals = localStorage.getItem("numSubgoals");
-		drawSubgoal(numSubgoals+1); //creates undefined unnamed subgoal
+		var numSubgoals = Number(localStorage.getItem("numSubgoals"));
+		numSubgoals++;
+		localStorage.setItem("numSubgoals", numSubgoals)
+		drawSubgoal(numSubgoals); //creates undefined unnamed subgoal
 	});
 	
 	$("#saveAndExit").click(function(){
