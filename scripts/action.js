@@ -122,9 +122,9 @@ function actionLoop(el){
         setPhasersToFalse("drewToolTip");
         
         //Reset action states
-        /* setPhasersToFalse("gotActionName");
-        setPhasersToFalse("actionPromptOnScreen");          // <-- Uncomment when we let them put a new action name.
-        setPhasersToFalse("drewToolTip");  */           
+        setPhasersToFalse("gotActionName");
+        setPhasersToFalse("actionPromptOnScreen");
+        setPhasersToFalse("drewToolTip");            
         setPhasersToFalse("highlightedAction");
         setPhasersToFalse("gotScreenshot");
         setPhasersToFalse("gotPreActionQuestions");
@@ -191,7 +191,7 @@ function reloadToolTipState () {
 	}
 	
 	else if (statusIsTrue("highlightedAction")) {
-		//Put the image back on the screen
+		//overlayScreen("onlyToolTip");
 	}
 	
 	console.log("Done reloading tooltip");

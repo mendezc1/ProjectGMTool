@@ -15,7 +15,7 @@ function init(){
 	setup("#GenderMagFrame", "./templates/firstState.html");
 	
 	//Local storage removal
-	localStorage.removeItem("numSubgoals");
+	//localStorage.removeItem("numSubgoals");
 	//localStorage.removeItem("subgoalArray");
 	//localStorage.removeItem("numActions");
 	

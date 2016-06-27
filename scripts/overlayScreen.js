@@ -63,44 +63,44 @@ function overlayScreen(onlyDraw){
 			elm = document.elementFromPoint(rect.startX, rect.startY);
 		}
 		var toolTip = document.createElement("div");
-	toolTip.id = "myToolTip";
-	toolTip.style.position = "absolute";
-	toolTip.style.left = elm.offsetLeft+100 + "px";
-	toolTip.style.top = elm.offsetTop+100 + "px";
-	toolTip.style.height = "300px";
-	toolTip.style.width = "500px";
-	toolTip.style.zindex = "10002";	
-	toolTip.style.border ="3px solid #999999";
-	toolTip.style.backgroundColor = "white";
-	toolTip.style.cursor="pointer";
-	toolTip.style.borderRadius="5px";
-    setPhasersToTrue("drewToolTip");
-	
-	document.body.appendChild(toolTip);
-	$('#myToolTip').draggable();
-	//addToolTip("imageCanvas");
+		toolTip.id = "myToolTip";
+		toolTip.style.position = "absolute";
+		toolTip.style.left = elm.offsetLeft+100 + "px";
+		toolTip.style.top = elm.offsetTop+100 + "px";
+		toolTip.style.height = "300px";
+		toolTip.style.width = "500px";
+		toolTip.style.zindex = "10002";	
+		toolTip.style.border ="3px solid #999999";
+		toolTip.style.backgroundColor = "white";
+		toolTip.style.cursor="pointer";
+		toolTip.style.borderRadius="5px";
+		setPhasersToTrue("drewToolTip");
+		
+		document.body.appendChild(toolTip);
+		$('#myToolTip').draggable();
+		//addToolTip("imageCanvas");
 
-	appendTemplateToElement(toolTip ,"./templates/action.html");
-	$(".closeToolTip").click(function() {
-		//toolTip.remove();
-		//toolTip.innerHTML = " ";
-        setPhasersToTrue("gotScreenshot");
-        preActionQuestions(toolTip);
-	});
-	$("#retakeImage").click(function(){
-		toolTip.remove();
-        setPhasersToFalse("drewToolTip");
-		overlayScreen();
-		overlayScreen();
-	});
-	$("#imageBack").click(function(){
-		openSlider();
-	});
-	var actionSpan = localStorage.getItem("currActionName");
-	$(".actionNameSpan").html(actionSpan.slice(1,actionSpan.length-1));
-	//$(".previewTrigger").click(function(){ //#triggered
-	//	window.open(imgURL);
-	//});
+		appendTemplateToElement(toolTip ,"./templates/action.html");
+		$(".closeToolTip").click(function() {
+			//toolTip.remove();
+			//toolTip.innerHTML = " ";
+			setPhasersToTrue("gotScreenshot");
+			preActionQuestions(toolTip);
+		});
+		$("#retakeImage").click(function(){
+			toolTip.remove();
+			setPhasersToFalse("drewToolTip");
+			overlayScreen();
+			overlayScreen();
+		});
+		$("#imageBack").click(function(){
+			openSlider();
+		});
+		var actionSpan = localStorage.getItem("currActionName");
+		$(".actionNameSpan").html(actionSpan.slice(1,actionSpan.length-1));
+		//$(".previewTrigger").click(function(){ //#triggered
+		//	window.open(imgURL);
+		//});
 		var canvas = document.getElementById("imageCanvas");
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
@@ -130,9 +130,9 @@ function overlayScreen(onlyDraw){
    		var sourceHeight = myImg.height - destHeight;
     	var destX = canvas.width / 2 - destWidth / 2;
     	var destY = canvas.height / 2 - destHeight / 2;
- 		context.drawImage(myImg, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, ratioWidth, ratioHeight);
+ 		context.drawImage(myImg,0, 0,myImg.width, myImg.height,0,0,ratioWidth/3, ratioHeight/3);
 		
-}
+	}
 	
 	else {
 		closeSlider();
@@ -397,7 +397,7 @@ function renderImage(imgURL){
    		var sourceHeight = myImg.height - destHeight;
     	var destX = canvas.width / 2 - destWidth / 2;
     	var destY = canvas.height / 2 - destHeight / 2;
-		console.log(globXY);
+		//console.log(globXY);
 			
 		$(".previewTrigger").click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");

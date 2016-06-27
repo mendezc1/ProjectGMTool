@@ -26,6 +26,9 @@ function setup (id, file) {
 		}
         console.log("Found previous info. Skipping start screen");
         preWalkthrough("#GenderMagFrame", "./templates/popup.html");
+		if (statusIsTrue('drewToolTip')) {
+			reloadToolTipState();
+		}
 	}
 	else {
 		console.log("Nothing to restore - starting as normal");
