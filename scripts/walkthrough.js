@@ -1,3 +1,4 @@
+
 function drawSubgoal(subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
