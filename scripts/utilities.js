@@ -66,7 +66,7 @@ function addOnClicks(){
 	//The slider handle
 	var el = $("#slideout").contents().find("body");
 	if (el) {
-		$("#slideout").contents().find("body").on('click', function(event) {
+		$("#slideout").contents().find("body").off('click').on('click', function(event) {
 			$("#slideout").toggleClass("clicked");
 			$("#GenderMagFrame").toggleClass("clicked");
             if ($( "#slideout" ).hasClass( "clicked" ) ) {

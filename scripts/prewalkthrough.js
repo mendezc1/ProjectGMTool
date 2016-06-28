@@ -39,7 +39,7 @@ function preWalkthrough (id, file) {
  */
 function seeMoreOnclick () {
 	
-	sidebarBody().find('body').on('click', '.moreOrLess', function() {
+	sidebarBody().find('body').off('click', '.moreOrLess').on('click', '.moreOrLess', function() {
 		var isOpen = $(this).attr("stateVar");
 		
 		//The "see more" is expanded and needs to be closed
@@ -67,7 +67,7 @@ function seeMoreOnclick () {
 
 function nukeButtonOnclick () {
 	
-	sidebarBody().find('body').on('click', '#nukeStatus', function() {
+	sidebarBody().find('body').off('click', '#nukeStatus').on('click', '#nukeStatus', function() {
 		localStorage.setItem("statusObject", JSON.stringify(statusObject));
         console.log("Resetting status object...");
 		localStorage.clear();
@@ -90,13 +90,13 @@ function nukeButtonOnclick () {
 function makeEditable () {
 	
 	//Team name button
-	sidebarBody().find('body').on('click', '#editTeam', function() {
+	sidebarBody().find('body').off('click', '#editTeam').on('click', '#editTeam', function() {
 		sidebarBody().find("#editTeam").hide();
 		sidebarBody().find("#getTeam").show();
 	});
 	
 	//Persona name button
-	sidebarBody().find('body').on('click', '#editPersona', function() {
+	sidebarBody().find('body').off('click', '#editPersona').on('click', '#editPersona', function() {
 		sidebarBody().find("#editPersona").hide();
 		sidebarBody().find("#personaInfo").hide();
 		sidebarBody().find("#personaInfo").empty();
@@ -105,7 +105,7 @@ function makeEditable () {
 	});
 	
 	//Scenario name button
-	sidebarBody().find('body').on('click', '#editScenario', function() {
+	sidebarBody().find('body').off('click', '#editScenario').on('click', '#editScenario', function() {
 		sidebarBody().find("#editScenario").hide();
 		sidebarBody().find("#getScenario").show();
 		sidebarBody().find("#getScenario").children().show();
@@ -152,7 +152,7 @@ function handlePreWalkthroughInfo () {
 				sidebarBody().find("#submitTeam").click();
 			} 
 		});
-		sidebarBody().find('body').on('click', '#submitTeam', function() {
+		sidebarBody().find('body').off('click', '#submitTeam').on('click', '#submitTeam', function() {
 			
 			//Get and save team name
 			var teamName = sidebarBody().find("#teamInput").val();
@@ -200,7 +200,7 @@ function handlePreWalkthroughInfo () {
 	
 	else {
 		//Persona selection
-		sidebarBody().find('body').on('click', '#submitPersona', function() {
+		sidebarBody().find('body').off('click', '#submitPersona').on('click', '#submitPersona', function() {
 			
 			//Get and save persona selection
 			var personaName = sidebarBody().find("#personaSelection").val();
@@ -270,7 +270,7 @@ function handlePreWalkthroughInfo () {
 				sidebarBody().find("#submitScenario").click();
 			} 
 		});
-		sidebarBody().find('body').on('click', '#submitScenario', function() {
+		sidebarBody().find('body').off('click', '#submitScenario').on('click', '#submitScenario', function() {
 			
 			//Get and save scenario name
 			var scenarioName = sidebarBody().find("#scenarioInput").val();
@@ -345,7 +345,7 @@ function handlePreWalkthroughInfo () {
 	
 	else {			//Happens if gotSubgoalName is false
 		
-		sidebarBody().find('body').on('click', '#submitSubgoal', function() {
+		sidebarBody().find('body').off('click', '#submitSubgoal').on('click', '#submitSubgoal', function() {
 			sidebarBody().find("#editTeam").hide();
 			sidebarBody().find("#editPersona").hide();
 			sidebarBody().find("#editScenario").hide();

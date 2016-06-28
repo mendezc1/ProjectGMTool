@@ -20,7 +20,7 @@ function addToolTip(toolTipName, folderName){
 		appendTemplateToElement($("#"+toolTipName+"Div"), 'templates/'+folderName+ '/' +toolTipName +'.html');
 		$("#"+toolTipName+"Div").draggable();
 		console.log("HostBusters!");
-		$("#" + toolTipName + "Button").on('click', function() {
+		$("#" + toolTipName + "Button").off('click').on('click', function() {
 			$("#" + toolTipName + "Div").remove();
 		});
 	

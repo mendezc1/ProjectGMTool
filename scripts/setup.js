@@ -37,13 +37,13 @@ function setup (id, file) {
 		appendTemplateToElement(el,file);
 		
 		//Add the onclick to the "Start Walkthrough" button	
-		$(id).contents().find('body').children('#startGenderMagButton').on('click', function() {
+		$(id).contents().find('body').children('#startGenderMagButton').off('click').on('click', function() {
             setPhasersToTrue("startedGM");
 			preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 		});
 		
 		//Add the onclick to the "Learn More" button
-		$(id).contents().find('body').children('#learnMoreButton').on('click', function() {
+		$(id).contents().find('body').children('#learnMoreButton').off('click').on('click', function() {
 			console.log("Learn more button clicked");
 			overlayScreen();
 			overlayScreen();

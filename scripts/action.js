@@ -101,16 +101,14 @@ function actionLoop(el){
 	$("#moreActions").click(function(){
 		//SAVE HERE ALANNAH!
 		localStorage.setItem("currActionName", $(el).find("#actionNameInput").val());
+		addToSandwich('idealAction', 0);
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
 		overlayScreen(0);
 		overlayScreen(0); //Second time's the charm
 		preActionQuestions(el);     
         
-        //Reset action states
-        setPhasersToFalse("gotActionName");
-        setPhasersToFalse("actionPromptOnScreen");          
-        setPhasersToFalse("drewToolTip");          
+        //Reset action states                   
         setPhasersToFalse("highlightedAction");
         setPhasersToFalse("gotScreenshot");
         setPhasersToFalse("gotPreActionQuestions");
