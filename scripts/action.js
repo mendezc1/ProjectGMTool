@@ -100,11 +100,12 @@ function actionLoop(el){
 	
 	$("#moreActions").click(function(){
 		//SAVE HERE ALANNAH!
+		localStorage.setItem("currActionName", $(el).find("#actionNameInput").val());
 		$(el).remove();
         setPhasersToFalse("drewToolTip");
 		overlayScreen(0);
 		overlayScreen(0); //Second time's the charm
-		preActionQuestions(el);     //Note: at some point we have to let them name the action. Can't jsut drop them into a new action.
+		preActionQuestions(el);     
         
         //Reset action states
         setPhasersToFalse("gotActionName");
