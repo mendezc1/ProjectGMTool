@@ -87,7 +87,7 @@ function drawSubgoal(subgoalId){
 			});		
 		} */
 
-		sidebarBody().find('body').on('click', '#addAction', function(){
+		sidebarBody().find('body').off('click', '#addAction').on('click', '#addAction', function(){
 			var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
 			var whyText = sidebarBody().find('#A0Q0whyYes').val();
 			var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};

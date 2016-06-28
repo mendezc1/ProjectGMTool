@@ -12,10 +12,16 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	};
 	console.log("incoming subgoal", subgoal, id, subgoalArray.length);
 	if(id > subgoalArray.length){
-	
-	subgoalArray[id-1] = subgoal;
-	console.log("subgoalArray nonlocal: ", subgoalArray);
-	localStorage.setItem("subgoalArray", JSON.stringify(subgoalArray));
+		var subArr = "";
+		if (id == 1) {
+			subArr = subgoalArray;
+		}
+		else {
+			subArr = getSubgoalArrayFromLocal();
+		}
+		subArr[id-1] = subgoal;
+		console.log("subgoalArray in if: ", subArr);
+		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
 	
 	//Test that it worked
 	//var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
@@ -24,7 +30,12 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	addToSandwich("subgoal",subgoal);
 	}
 	else{
-		console.log("nothing to see here")
+		var subArr = getSubgoalArrayFromLocal();
+		subArr[id-1] = subgoal;
+		console.log("subgoalArray in else: ", subArr);
+		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
+		console.log("nothing to see here");
+		
 	}
 }
 
