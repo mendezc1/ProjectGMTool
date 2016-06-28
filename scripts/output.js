@@ -11,7 +11,17 @@ function parseSubgoalArray(){
 	
 	for (var i = 0; i < userInput.length; i++) {
 		var currI = userInput[i];//Current input, not to be confused with curry
-		entry = [currI.name, currI.why, currI.ynm["yes"], currI.facetValues["selfE"]];
+		console.log("Hacktion", currI);
+		entry = [currI.name, 
+					currI.why, 
+					currI.ynm["yes"], 
+					currI.ynm["no"], 
+					currI.ynm["maybe"], 
+					currI.facetValues["motiv"], 
+					currI.facetValues["info"], 
+					currI.facetValues["selfE"], 
+					currI.facetValues["risk"], 
+					currI.facetValues["tinker"]];
 		if (entry.length != 0) {
 			entries.push(entry);
 		}
@@ -26,14 +36,15 @@ function createCSV(entries) {
 	var header1 = ["Date", "Time", "Team", "Persona", "Scenario"];
 	csvContent += header1.join(",") + "\n";
 	
-	var DTTPS = ["Today", "Now", "TeamName", "AbbyPersona", "YourScenarioHere"]//["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
+	var DTTPS = ["Today", "Now", "TeamName", "AbbyPersona", "YourScenarioHere"]																														//["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
 	globName += DTTPS[0];
 	globName += "-";
 	globName += DTTPS[2];
+	globName += "-GenderMagSession";
 	csvContent += DTTPS.join(",") + "\n";
 
 	
-	var header2 = ["Subgoal", "Action", "Question", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker"];
+	var header2 = ["Subgoal",  "Will Abby have formed this subgoal as a step to her overall goal?", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", "Action", "Will Abby know what to do at this step?", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", "If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker"];
 	csvContent += header2.join(",") + "\n";
 		
 	entries.forEach(function(entry, index){
@@ -50,9 +61,9 @@ function downloadCSV(csvContent) {
 	var link = document.createElement("a");
 	link.setAttribute("href", encodedUri);
 	link.setAttribute("download", globName+".csv");
-	document.body.appendChild(link); // Required for FF
+	document.body.appendChild(link); 
 
-	link.click(); // This will download the data file named "my_data.csv".
+	link.click(); // This will download the data file named "globName.csv".
 	localStorage.clear();
 	location.reload();
 }

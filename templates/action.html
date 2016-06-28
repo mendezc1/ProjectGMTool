@@ -4,10 +4,11 @@
         <div id="imageCanvasTemplate">
     
             <div style="height:25px; background-color:#999999;text-align:center;">
-				<span class="actionNameSpan" style="color:white;"> </span>
+				<!--span class="actionNameSpan" style="color:white;"> </span-->
                 <button id="imageBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
                 <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> Save and Continue</button>	
-                <button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> Retake screen capture </button> 
+				<button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> View full image </button>
+				<button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> Retake screen capture </button> 
             </div>
             
             <canvas id="imageCanvas"> 
@@ -15,11 +16,11 @@
             </canvas>
             
             <div id="imageCaption"> 
-                This is a preview of your image. To see the full image <span class="previewTrigger" style="color:blue;"> click here </span>
+                This is a preview of your image. To see the full image select the view full image button. 
             </div>
             
             <div>
-                You may also retake your image if you aren't happy with it. Once you have an image you like, select the save image and close button
+                You may also retake your image if you aren't happy with it. Once you have an image you like, select the save and continue
             </div>
         
         </div>

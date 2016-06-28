@@ -102,6 +102,8 @@ function overlayScreen(onlyDraw){
 		//	window.open(imgURL);
 		//});
 		var canvas = document.getElementById("imageCanvas");
+		canvas.width = "500";
+		canvas.height="150";
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
 		var imgURL = localStorage.getItem("currImgURL");
@@ -115,22 +117,19 @@ function overlayScreen(onlyDraw){
 		var ratioHeight = myImg.height * 0.75;
 		var ratioWidth = imageRatio*ratioHeight;
 		console.log("my image", myImg.height, myImg.width, imageRatio, ratioHeight, ratioWidth);
-		var sourceY = elm.offsetTop;
-		var sourceX = elm.offsetLeft;
+		var sourceY = localStorage.getItem("sourceY");
+		var sourceX = localStorage.getItem("sourceX");
 		
-		if(elm.offsetLeft > 90)
-			var sourceX = elm.offsetLeft -90;//-(elm.offsetLeft/16);
-		if(elm.offsetTop > 60)
-			var sourceY = elm.offsetTop -60;//+ (elm.offsetTop/8);
+		
 
-    	console.log("Source x and y: ", elm.offsetLeft, elm.offsetTop, sourceX, sourceY);
+    	//console.log("Source x and y: ", elm.offsetLeft, elm.offsetTop, sourceX, sourceY);
     	var destWidth = myImg.width-ratioWidth;
     	var destHeight = myImg.height-ratioHeight;
 		var sourceWidth = myImg.width - destWidth;
    		var sourceHeight = myImg.height - destHeight;
     	var destX = canvas.width / 2 - destWidth / 2;
     	var destY = canvas.height / 2 - destHeight / 2;
- 		context.drawImage(myImg,0, 0,myImg.width, myImg.height,0,0,ratioWidth/3, ratioHeight/3);
+ 		context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*8/10, ratioHeight*8/10);
 		
 	}
 	
@@ -189,10 +188,9 @@ function overlayScreen(onlyDraw){
 			drag = false;
 			console.log(rect);
 			globXY = [e.pageX,e.pageY];
-			elm = document.elementFromPoint(rect.startX, rect.startY);
+			elm = document.elementFromPoint(rect.startX, rect.startY);//elm can return undefined;
 			var elements = new Array();
-			while(elm.id == "genderMagCanvas" || elm.id == "genderMagCanvasContainer" )
-			{
+			while(elm.id == "genderMagCanvas" || elm.id == "genderMagCanvasContainer" ){
 				elements.push(elm);
 				elm.style.display = "none";
 				elm = document.elementFromPoint(rect.startX, rect.startY);
@@ -308,6 +306,8 @@ function renderImage(imgURL){
 	$(".actionNameSpan").html(localStorage.getItem("currActionName"));
 
 		var canvas = document.getElementById("imageCanvas");
+		canvas.width = "500";
+		canvas.height="150";
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
 
@@ -389,7 +389,9 @@ function renderImage(imgURL){
 			var sourceX = elm.offsetLeft -90;//-(elm.offsetLeft/16);
 		if(elm.offsetTop > 60)
 			var sourceY = elm.offsetTop -60;//+ (elm.offsetTop/8);
-
+		localStorage.setItem("sourceX", sourceX);
+		localStorage.setItem("sourceY", sourceY);
+		
     	console.log("Source x and y: ", elm.offsetLeft, elm.offsetTop, sourceX, sourceY);
     	var destWidth = myImg.width-ratioWidth;
     	var destHeight = myImg.height-ratioHeight;
@@ -429,7 +431,7 @@ function renderImage(imgURL){
 			});
 			
 		});
-		context.drawImage(myImg,0, 0,myImg.width, myImg.height,0,0,ratioWidth/3, ratioHeight/3);
+		context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*8/10, ratioHeight*8/10);
 /*		//$("#screenShot" + numSubtasks + "-" + numScreenShots).html("Retake Screenshot");
 		//numScreenShots++;
 		closeSlider();
