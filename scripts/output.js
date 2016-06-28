@@ -55,7 +55,6 @@ function createCSV(entries) {
 	var inAWorld = localStorage.getItem("scenarioName")
 	var DTTPS = [today(), now(), teamName, persona5Delayed, inAWorld];																														//["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
 	globName += DTTPS[0];
-	//globName += "-";
 	globName += DTTPS[2];
 	globName += "GenderMagSession";
 	csvContent += DTTPS.join(",") + "\n";
