@@ -2,7 +2,6 @@
 function drawSubgoal(subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
-
 	
 	console.log("draw subgoal called, ", subgoalId);
 	

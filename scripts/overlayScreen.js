@@ -97,13 +97,15 @@ function overlayScreen(onlyDraw){
 			openSlider();
 		});
 		var actionSpan = localStorage.getItem("currActionName");
-		$(".actionNameSpan").html(actionSpan.slice(1,actionSpan.length-1));
+		$(".actionNameSpan").html("Action: " + actionSpan);
 		//$(".previewTrigger").click(function(){ //#triggered
 		//	window.open(imgURL);
 		//});
 		var canvas = document.getElementById("imageCanvas");
-		canvas.width = "500";
-		canvas.height="150";
+		canvas.width = "465";
+		canvas.height=	"150";
+		canvas.style.border="2px solid black"
+		canvas.style.margin="10px";
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
 		var imgURL = localStorage.getItem("currImgURL");
@@ -303,11 +305,13 @@ function renderImage(imgURL){
 	$("#imageBack").click(function(){
 		openSlider();
 	});
-	$(".actionNameSpan").html(localStorage.getItem("currActionName"));
-
+	var actionSpan = localStorage.getItem("currActionName");
+		$(".actionNameSpan").html("Action: " + actionSpan);
 		var canvas = document.getElementById("imageCanvas");
-		canvas.width = "500";
-		canvas.height="150";
+		canvas.width = "465";
+		canvas.height=	"150";
+		canvas.style.border="2px solid black"
+		canvas.style.margin="10px";
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
 
