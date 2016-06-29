@@ -71,7 +71,8 @@ function addToSandwich(type, item){
 		var actionNum = localStorage.getItem("numActions");
 		actionNum++;
 		localStorage.setItem("numActions", actionNum);
-		sidebarBody().find("#sideAction" +item.actionId).unbind( "click" ).click(function(){
+        var sideActionIdToFind = "#sideAction" + item.subgoalId + "-" + item.actionId;
+		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
 			drawAction(item.actionId, item.subgoalId);
 			sidebarBody().find('#actionNameInput').html("Camera action");
 			sidebarBody().find('#submitActionName').unbind( "click" ).click();
@@ -87,7 +88,8 @@ function addToSandwich(type, item){
 		var actionNum = localStorage.getItem("numActions");
 		actionNum++;
 		localStorage.setItem("numActions", actionNum);
-		sidebarBody().find("#sideAction" +item.actionId).unbind( "click" ).click(function(){
+        var sideActionIdToFind = "#sideAction" + subgoalId + "-" + actionId;
+		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
 			drawAction(actionId, subgoalId);
 			sidebarBody().find('#actionNameInput').html("Camera action");
 			sidebarBody().find('#submitActionName').click();
@@ -267,10 +269,20 @@ function reloadSandwich () {
 			}
 			else {
 				//It's an action
-				console.log("action", currId[(currId.length) - 1]);
-				sidebarBody().find("#sideAction" +currId[(currId.length) - 1]).unbind( "click" ).click(function(){
-					drawAction(currId[currId.length], currId[0]);
-					sidebarBody().find('#actionNameInput').html("Camera action");
+				console.log("action", currId);
+				sidebarBody().find("#sideAction" + currId).unbind( "click" ).click(function(){
+                    var thisActionNum = Number(currId[currId.length-1]);
+                    var thisSubNum = Number(currId[0]);
+					drawAction(thisActionNum, thisSubNum);
+                    var subgoals = getSubgoalArrayFromLocal();
+                    var actionName = "";
+                    if (subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ]) {
+                        actionName = subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ].name;
+                    }
+                    else {
+                        actionName = "Lights, Camera";
+                    }
+					sidebarBody().find('#actionNameInput').html(actionName);
 					sidebarBody().find('#submitActionName').click();
 				});
 				
