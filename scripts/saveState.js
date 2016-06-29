@@ -12,12 +12,9 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	};
 	console.log("incoming subgoal", subgoal, id, subgoalArray.length);
 	if(id > subgoalArray.length){
-		var subArr = "";
-		if (id == 1) {
+		var subArr = getSubgoalArrayFromLocal();
+		if (!subArr) {
 			subArr = subgoalArray;
-		}
-		else {
-			subArr = getSubgoalArrayFromLocal();
 		}
 		subArr[id-1] = subgoal;
 		console.log("subgoalArray in if: ", subArr);
@@ -27,7 +24,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	//var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
 	//console.log("subgoalArray local: ", retrieved);
 	
-	addToSandwich("subgoal",subgoal);
+        addToSandwich("subgoal",subgoal);
 	}
 	else{
 		var subArr = getSubgoalArrayFromLocal();
@@ -44,16 +41,30 @@ function addToSandwich(type, item){
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var subArr = getSubgoalArrayFromLocal();
+        console.log("subArr rn: ", subArr);
 		drawSubgoal(item.id);
 		var sideSubgoal = '<div superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
-		sidebarBody().find("#subgoalList").append(sideSubgoal);
+		if (item.id >= subArr.length) {
+            var foundIt = false;
+            sidebarBody().find('#subgoalList').children().each(function () {
+                var currId = Number(this.getAttribute('supercoolattr'));
+                if (item.id == currId) {
+                    console.log("in finding if", currId, typeof(currId));
+                    foundIt = true;
+                }
+            });
+            console.log("found: ", foundIt);
+            if (!foundIt) {
+                sidebarBody().find("#subgoalList").append(sideSubgoal);
+            }
+        }
 		sidebarBody().find("#sideSubgoal" + item.id).unbind( "click" ).click(function(){
 			drawSubgoal(item.id);
 		});
 
 			
 	}
-	if(!type.localeCompare("idealAction") && item.name){ 	//It's an action that got its name from the slider
+	else if(!type.localeCompare("idealAction") && item.name){ 	//It's an action that got its name from the slider
 		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.subgoalId + '-' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
 		console.log("added to sammich", item.actionId, item.name);
@@ -66,7 +77,7 @@ function addToSandwich(type, item){
 			sidebarBody().find('#submitActionName').unbind( "click" ).click();
 		});
 	}
-	if(!type.localeCompare("idealAction") && !item){ 	//It's an action that got its name from the tooltip prompt
+	else if(!type.localeCompare("idealAction") && !item){ 	//It's an action that got its name from the tooltip prompt
 		var subgoalId = localStorage.getItem("numSubgoals");
 		var actionId = localStorage.getItem("numActions");
 		var actionName = localStorage.getItem("currActionName");
@@ -79,9 +90,13 @@ function addToSandwich(type, item){
 		sidebarBody().find("#sideAction" +item.actionId).unbind( "click" ).click(function(){
 			drawAction(actionId, subgoalId);
 			sidebarBody().find('#actionNameInput').html("Camera action");
-			sidebarBody().find('#submitActionName').unbind( "click" ).click();
+			sidebarBody().find('#submitActionName').click();
 		});
 	}
+    
+    else {
+        console.log("Something went wrong in addToSandwich OH GOD PANIC");
+    }
 	
 }
 
@@ -256,7 +271,7 @@ function reloadSandwich () {
 				sidebarBody().find("#sideAction" +currId[(currId.length) - 1]).unbind( "click" ).click(function(){
 					drawAction(currId[currId.length], currId[0]);
 					sidebarBody().find('#actionNameInput').html("Camera action");
-					sidebarBody().find('#submitActionName').unbind( "click" ).click();
+					sidebarBody().find('#submitActionName').click();
 				});
 				
 			}
