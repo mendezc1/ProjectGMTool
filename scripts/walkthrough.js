@@ -125,38 +125,43 @@ function drawAction(actionNum, subgoalId){
 	console.log("action/subgoal", actionNum, subgoalId); 
 	sidebarBody().find('#submitActionName').unbind( "click" ).click(function() {
 		actionName = sidebarBody().find("#actionNameInput").val();
-		var currArray = getSubgoalArrayFromLocal();
-		var actionItem = {
-			name: actionName,
-			actionId: actionNum, 
-			subgoalId: subgoalId
-		};
-		//currArray[(currArray.length - 1)].actions.length + 1;
-		
-		if(actionName==" "){
-			actionName = sidebarBody().find("#sideAction" +actionNum).innerHTML;
-		}
-			console.log("actionname", actionName);
-			saveVarToLocal("currActionName", actionName);
-            setPhasersToTrue("gotActionName");
-			sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
-			sidebarBody().find("#promptAction").show();
-            setPhasersToTrue("actionPromptOnScreen");
-		
-		if(actionNum >  currArray[subgoalId-1].actions.length){
-			console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
-			addToSandwich("idealAction", actionItem);
-			
-		}
-		else{
-			console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
-		}
-		sidebarBody().find("#editAction").show();
-		sidebarBody().find("#editAction").unbind( "click" ).click(function(){
-			sidebarBody().find("#editAction").hide();
-			sidebarBody().find("#submitActionName").show();
-			sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
-		})
+        if (actionName == "") {
+            alert("Please name your action before continuing");
+        }
+        else {
+            var currArray = getSubgoalArrayFromLocal();
+            var actionItem = {
+                name: actionName,
+                actionId: actionNum, 
+                subgoalId: subgoalId
+            };
+            //currArray[(currArray.length - 1)].actions.length + 1;
+            
+            if(actionName==" "){
+                actionName = sidebarBody().find("#sideAction" +actionNum).innerHTML;
+            }
+                console.log("actionname", actionName);
+                saveVarToLocal("currActionName", actionName);
+                setPhasersToTrue("gotActionName");
+                sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+                sidebarBody().find("#promptAction").show();
+                setPhasersToTrue("actionPromptOnScreen");
+            
+            if(actionNum >  currArray[subgoalId-1].actions.length){
+                console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
+                addToSandwich("idealAction", actionItem);
+                
+            }
+            else{
+                console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
+            }
+            sidebarBody().find("#editAction").show();
+            sidebarBody().find("#editAction").unbind( "click" ).click(function(){
+                sidebarBody().find("#editAction").hide();
+                sidebarBody().find("#submitActionName").show();
+                sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+            })
+        }
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
 		if(event.keyCode == 13){

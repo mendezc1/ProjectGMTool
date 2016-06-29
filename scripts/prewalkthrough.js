@@ -346,23 +346,28 @@ function handlePreWalkthroughInfo () {
 	else {			//Happens if gotSubgoalName is false
 		
 		sidebarBody().find('body').off('click', '#submitSubgoal').on('click', '#submitSubgoal', function() {
-			sidebarBody().find("#editTeam").hide();
-			sidebarBody().find("#editPersona").hide();
-			sidebarBody().find("#editScenario").hide();
-			var subgoalId = localStorage.getItem("numSubgoals");
-			setPhasersToTrue("gotSubgoalName");
-			var subName = sidebarBody().find("#subgoalInput").val();
-			localStorage.setItem("currSubgoalName", subName);;
-			if(subgoalId == undefined){
-				subgoalId = 1;
-				localStorage.setItem("numSubgoals", subgoalId);
-			}
-			else{
-				subgoalId++;
-				localStorage.setItem("numSubgoals", subgoalId);
-				
-			}
-			drawSubgoal(subgoalId);
+            if (sidebarBody().find("#subgoalInput").val() == "") {
+                alert("Please name your subgoal before continuing");
+            }
+            else {
+                sidebarBody().find("#editTeam").hide();
+                sidebarBody().find("#editPersona").hide();
+                sidebarBody().find("#editScenario").hide();
+                var subgoalId = localStorage.getItem("numSubgoals");
+                setPhasersToTrue("gotSubgoalName");
+                var subName = sidebarBody().find("#subgoalInput").val();
+                localStorage.setItem("currSubgoalName", subName);;
+                if(subgoalId == undefined){
+                    subgoalId = 1;
+                    localStorage.setItem("numSubgoals", subgoalId);
+                }
+                else{
+                    subgoalId++;
+                    localStorage.setItem("numSubgoals", subgoalId);
+                    
+                }
+                drawSubgoal(subgoalId);
+            }
 		});
 	}
 	
