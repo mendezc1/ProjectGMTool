@@ -8,16 +8,16 @@ function drawSubgoal(subgoalId){
 	var isSetSubgoalQuestions = (statusIsTrue("gotSubgoalQuestions"));
 	if (isSetSubgoalQuestions) {
 		console.log("in walkthrough if");
+		var subgoals = getSubgoalArrayFromLocal();
 		var numActions = localStorage.getItem("numActions");
 
-		var subName = localStorage.getItem("currSubgoalName");
+		var subName = subgoals[subgoalId - 1].name;
 		console.log("subname", subName);
 
 		var el = $(id).contents().find('#containeryo');
 		el.empty();
 		appendTemplateToElement(el,file);
 		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
-		var subgoals = getSubgoalArrayFromLocal();
 		sidebarBody().find("#editSubgoal").hide();
 		if(subgoals){
 			var subgoal = subgoals[subgoalId-1];

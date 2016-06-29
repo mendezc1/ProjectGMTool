@@ -62,8 +62,8 @@ function addToSandwich(type, item){
 		localStorage.setItem("numActions", actionNum);
 		sidebarBody().find("#sideAction" +item.actionId).unbind( "click" ).click(function(){
 			drawAction(item.actionId, item.subgoalId);
-			sidebarBody().find('#actionNameInput').html("Camera action");
-			sidebarBody().find('#submitActionName').unbind( "click" ).click();
+			//sidebarBody().find('#actionNameInput').html("Camera action");
+			//sidebarBody().find('#submitActionName').unbind( "click" ).click();
 		});
 	}
 	if(!type.localeCompare("idealAction") && !item){ 	//It's an action that got its name from the tooltip prompt
@@ -78,8 +78,8 @@ function addToSandwich(type, item){
 		localStorage.setItem("numActions", actionNum);
 		sidebarBody().find("#sideAction" +item.actionId).unbind( "click" ).click(function(){
 			drawAction(actionId, subgoalId);
-			sidebarBody().find('#actionNameInput').html("Camera action");
-			sidebarBody().find('#submitActionName').unbind( "click" ).click();
+			//sidebarBody().find('#actionNameInput').html("Camera action");
+			//sidebarBody().find('#submitActionName').click();
 		});
 	}
 	
@@ -256,7 +256,7 @@ function reloadSandwich () {
 				sidebarBody().find("#sideAction" +currId[(currId.length) - 1]).unbind( "click" ).click(function(){
 					drawAction(currId[currId.length], currId[0]);
 					sidebarBody().find('#actionNameInput').html("Camera action");
-					sidebarBody().find('#submitActionName').unbind( "click" ).click();
+					sidebarBody().find('#submitActionName').click();
 				});
 				
 			}
