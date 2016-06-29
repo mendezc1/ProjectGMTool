@@ -17,7 +17,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 			subArr = subgoalArray;
 		}
 		subArr[id-1] = subgoal;
-		console.log("subgoalArray in if: ", subArr);
+		//console.log("subgoalArray in if: ", subArr);
 		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
 	
 	//Test that it worked
@@ -29,7 +29,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 	else{
 		var subArr = getSubgoalArrayFromLocal();
 		subArr[id-1] = subgoal;
-		console.log("subgoalArray in else: ", subArr);
+		//console.log("subgoalArray in else: ", subArr);
 		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
 		console.log("nothing to see here");
 		
@@ -41,7 +41,7 @@ function addToSandwich(type, item){
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var subArr = getSubgoalArrayFromLocal();
-        console.log("subArr rn: ", subArr);
+        //console.log("subArr rn: ", subArr);
 		drawSubgoal(item.id);
 		var sideSubgoal = '<div superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
 		if (item.id >= subArr.length) {
@@ -49,11 +49,11 @@ function addToSandwich(type, item){
             sidebarBody().find('#subgoalList').children().each(function () {
                 var currId = Number(this.getAttribute('supercoolattr'));
                 if (item.id == currId) {
-                    console.log("in finding if", currId, typeof(currId));
+                    //console.log("in finding if", currId, typeof(currId));
                     foundIt = true;
                 }
             });
-            console.log("found: ", foundIt);
+            //console.log("found: ", foundIt);
             if (!foundIt) {
                 sidebarBody().find("#subgoalList").append(sideSubgoal);
             }
