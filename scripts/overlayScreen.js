@@ -67,7 +67,7 @@ function overlayScreen(onlyDraw){
 		toolTip.style.position = "absolute";
 		toolTip.style.left = elm.offsetLeft+100 + "px";
 		toolTip.style.top = elm.offsetTop+100 + "px";
-		toolTip.style.height = "300px";
+		toolTip.style.height = "550px";
 		toolTip.style.width = "500px";
 		toolTip.style.zindex = "10002";	
 		toolTip.style.border ="3px solid #999999";
@@ -277,7 +277,7 @@ function renderImage(imgURL){
 	toolTip.style.position = "absolute";
 	toolTip.style.left = elm.offsetLeft+100 + "px";
 	toolTip.style.top = elm.offsetTop+100 + "px";
-	toolTip.style.height = "300px";
+	toolTip.style.height = "550px";
 	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	
 	toolTip.style.border ="3px solid #999999";
