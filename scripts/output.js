@@ -19,16 +19,48 @@ function now() {
 	return date.getHours() + ":" + date.getMinutes();
 }
 
+//Function to stop commas and \n from actually creating new cells and lines in csv
+function sanitizeString(unsafeWord){
+	var safeWord = '\"'+ unsafeWord + '\"';//safety first!
+	return safeWord;
+}
+/*		each element of the action array... every single element
+
+		id: preAction.actionId,
+        name: preAction.name,
+        imgURL: currImgURL,
+        preAction: preAction,
+        postAction: postAction
+		
+		
+		pre
+		actionId: targetSubgoal.actions.length + 1, //Check this when done
+		name: name,
+		subgoalId: targetSubgoal.id, 
+		ynm: yesnomaybe,
+		why: whyText,
+		facetValues: facets
+		
+		post
+		actionId: currPreAction.actionId,  //Check this when done
+		name: name,
+		subgoalId: currPreAction.subgoalId, 
+		ynm: yesnomaybe,
+		why: whyText,
+		facetValues: facets
+		
+*/		
 function parseSubgoalArray(){
 	var userInput= getSubgoalArrayFromLocal();
 	var entry = []; //corresponds to a single row in the csv
 	var entries = [];
 	
-	for (var i = 0; i < userInput.length; i++) {
-		var currI = userInput[i];//Current input, not to be confused with curry
+	for (var j in userInput) {
+		var currI = userInput[j];//Current input, not to be confused with curry
 		console.log("Hacktion", currI.actions);
-		entry = [currI.name, 
-					currI.why, 
+
+		entry = [sanitizeString(currI.name), 
+					sanitizeString(currI.why), 
 					currI.ynm["yes"], 
 					currI.ynm["no"], 
 					currI.ynm["maybe"], 
@@ -38,9 +70,36 @@ function parseSubgoalArray(){
 					currI.facetValues["risk"], 
 					currI.facetValues["tinker"],
 					];
-			for(i in currI.actions){
-				entry.push("\n");
-				entry.push(currI.actions[i].name);
+			for(var i in currI.actions){
+				//get new line and to the right part of csv
+				entry.push("\n, , , , , , , , ,"); 
+				
+				//pre action question
+				//console.log("action name", currI.actions[i].name, sanitizeString(currI.actions[i].name))
+				entry.push(currI.actions[i].name); //Somehow this is already been sanitized and doing it twice undos it... thanks obama
+				entry.push(sanitizeString(currI.actions[i].preAction.why));
+				entry.push(currI.actions[i].preAction.ynm["yes"]);
+				entry.push(currI.actions[i].preAction.ynm["no"]);
+				entry.push(currI.actions[i].preAction.ynm["maybe"]);
+				entry.push(currI.actions[i].preAction.facetValues["motiv"]); 
+				entry.push(currI.actions[i].preAction.facetValues["info"]); 
+				entry.push(currI.actions[i].preAction.facetValues["self"]);
+				entry.push(currI.actions[i].preAction.facetValues["risk"]);
+				entry.push(currI.actions[i].preAction.facetValues["tinker"]);
+				
+				//post action question
+				entry.push(sanitizeString(currI.actions[i].postAction.why));
+				entry.push(currI.actions[i].postAction.ynm["yes"]);
+				entry.push(currI.actions[i].postAction.ynm["no"]);
+				entry.push(currI.actions[i].postAction.ynm["maybe"]);
+				entry.push(currI.actions[i].postAction.facetValues["motiv"]); 
+				entry.push(currI.actions[i].postAction.facetValues["info"]); 
+				entry.push(currI.actions[i].postAction.facetValues["self"]);
+				entry.push(currI.actions[i].postAction.facetValues["risk"]);
+				entry.push(currI.actions[i].postAction.facetValues["tinker"]);
+				
+				//url currently is about 4X as long as longest cell allowed in excel
+				//entry.push('\"' +currI.actions[i].imgURL+'\"');
 			}
 		if (entry.length != 0) {
 			entries.push(entry);
@@ -73,7 +132,7 @@ function createCSV(entries) {
 					"Will Abby know what to do at this step?", 
 					"Yes", "No", "Maybe", 
 					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
-					"If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?", 
+					sanitizeString("If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?"), 
 					"Yes", "No", "Maybe", 
 					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
 					"Screen Capture Link"];
