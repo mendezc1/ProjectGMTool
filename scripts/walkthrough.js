@@ -43,7 +43,22 @@ function drawSubgoal(subgoalId){
 				sidebarBody().find("#A0Q0whyYes").show();
 				sidebarBody().find("#A0Q0whyYes").html(subgoal.why);
 				sidebarBody().find("#A0Q0Response").hide();
-			});		
+			});
+            sidebarBody().find('body').off('click', '#addAction').on('click', '#addAction', function(){
+                var yesNoMaybe = {"yes": sidebarBody().find("#yes").is(":checked"), "no": sidebarBody().find("#no").is(":checked"), "maybe": sidebarBody().find("#maybe").is(":checked")};
+                var whyText = sidebarBody().find('#A0Q0whyYes').val();
+                var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
+                saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
+                setPhasersToTrue("gotSubgoalQuestions");
+                var numActions = localStorage.getItem("numActions");
+                if(numActions > 0){
+                    drawAction(numActions, subgoalId);
+                }
+                else{
+                    localStorage.setItem("numActions", 1);
+                    drawAction(1, subgoalId);
+                }
+            });
 		}
 		
 		
