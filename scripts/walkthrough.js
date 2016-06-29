@@ -117,7 +117,9 @@ function drawAction(actionNum, subgoalId){
 	var isSetActionName = statusIsTrue("gotActionName");
 	if (isSetActionName) {
 		actionName = localStorage.getItem("currActionName");
-		sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+		sidebarBody().find('#getActionName').hide();
+        sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
+        sidebarBody().find('#actionNameGot').show();
 		sidebarBody().find("#promptAction").show();
 		setPhasersToTrue("actionPromptOnScreen");
 	}
@@ -143,7 +145,9 @@ function drawAction(actionNum, subgoalId){
                 console.log("actionname", actionName);
                 saveVarToLocal("currActionName", actionName);
                 setPhasersToTrue("gotActionName");
-                sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+                sidebarBody().find('#getActionName').hide();
+                sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
+                sidebarBody().find('#actionNameGot').show();
                 sidebarBody().find("#promptAction").show();
                 setPhasersToTrue("actionPromptOnScreen");
             
@@ -157,9 +161,11 @@ function drawAction(actionNum, subgoalId){
             }
             sidebarBody().find("#editAction").show();
             sidebarBody().find("#editAction").unbind( "click" ).click(function(){
-                sidebarBody().find("#editAction").hide();
-                sidebarBody().find("#submitActionName").show();
-                sidebarBody().find('#getActionName').html("<b>Ideal Action: " + actionName + "</b>");
+                sidebarBody().find('#editAction').hide();
+                sidebarBody().find('#getActionName').show();
+                sidebarBody().find('#actionNameGot').hide();
+                sidebarBody().find("#promptAction").hide();
+                setPhasersToFalse("actionPromptOnScreen");
             })
         }
 	});

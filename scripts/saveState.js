@@ -75,7 +75,7 @@ function addToSandwich(type, item){
 		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
 			drawAction(item.actionId, item.subgoalId);
 			sidebarBody().find('#actionNameInput').html("Camera action");
-			sidebarBody().find('#submitActionName').unbind( "click" ).click();
+			sidebarBody().find('#submitActionName').click();
 		});
 	}
 	else if(!type.localeCompare("idealAction") && !item){ 	//It's an action that got its name from the tooltip prompt
