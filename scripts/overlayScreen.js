@@ -558,7 +558,7 @@ function renderImage(imgURL){
 					var oldHeight = myImg.height;
 					smallerImg.src = drawnOnURL
 					console.log("New height", oldWidth, oldHeight, smallerImg.width, smallerImg.height);
-				context.clearRect(0,0,465, 150);
+					context.clearRect(0,0,465, 150);
 				if(oldHeight > smallerImg.height){
 					var sx = sourceX *smallerImg.width/oldWidth;
 					var sy = sourceY *smallerImg.height/oldHeight;
@@ -584,5 +584,7 @@ function renderImage(imgURL){
 		}
 		else{
 			context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
-}		}
+		}		
+}
+
 
