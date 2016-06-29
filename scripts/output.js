@@ -26,7 +26,7 @@ function parseSubgoalArray(){
 	
 	for (var i = 0; i < userInput.length; i++) {
 		var currI = userInput[i];//Current input, not to be confused with curry
-		console.log("Hacktion", currI);
+		console.log("Hacktion", currI.actions);
 		entry = [currI.name, 
 					currI.why, 
 					currI.ynm["yes"], 
@@ -36,7 +36,12 @@ function parseSubgoalArray(){
 					currI.facetValues["info"], 
 					currI.facetValues["selfE"], 
 					currI.facetValues["risk"], 
-					currI.facetValues["tinker"]];
+					currI.facetValues["tinker"],
+					];
+			for(i in currI.actions){
+				entry.push("\n");
+				entry.push(currI.actions[i].name);
+			}
 		if (entry.length != 0) {
 			entries.push(entry);
 		}
@@ -60,7 +65,18 @@ function createCSV(entries) {
 	csvContent += DTTPS.join(",") + "\n";
 
 	
-	var header2 = ["Subgoal",  "Will Abby have formed this subgoal as a step to her overall goal?", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", "Action", "Will Abby know what to do at this step?", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", "If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?", "Yes", "No", "Maybe", "Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker"];
+	var header2 = ["Subgoal",  
+					"Will Abby have formed this subgoal as a step to her overall goal?", 
+					"Yes", "No", "Maybe", 
+					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
+					"Action", 
+					"Will Abby know what to do at this step?", 
+					"Yes", "No", "Maybe", 
+					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
+					"If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?", 
+					"Yes", "No", "Maybe", 
+					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
+					"Screen Capture Link"];
 	csvContent += header2.join(",") + "\n";
 		
 	entries.forEach(function(entry, index){

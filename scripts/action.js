@@ -99,6 +99,11 @@ function actionLoop(el){
     $(el).find("#actionLoopTemplate").show();
 	
 	$("#moreActions").click(function(){
+		if ($(el).find("#actionNameInput").val() == ""){
+			alert("Please name your action before continuing");
+			
+		}
+		else{
 		//SAVE HERE ALANNAH!
 		localStorage.setItem("currActionName", $(el).find("#actionNameInput").val());
 		addToSandwich('idealAction', 0);
@@ -114,9 +119,14 @@ function actionLoop(el){
         setPhasersToFalse("gotPreActionQuestions");
         setPhasersToFalse("idealActionPerformed");
         setPhasersToFalse("gotPostActionQuestions");
+		}
 	});
 	
 	$("#newSubgoal").click(function(){
+		if($(el).find("#subgoalInput").val() == ""){
+			alert("Please name your subgoal before continuing")
+		}
+		else{
 		localStorage.setItem("numActions", 0 );
 		localStorage.setItem("currSubgoalName", $(el).find("#subgoalInput").val() );
 		$(el).remove();
@@ -140,6 +150,7 @@ function actionLoop(el){
 		numSubgoals++;
 		localStorage.setItem("numSubgoals", numSubgoals)
 		drawSubgoal(numSubgoals); //creates undefined unnamed subgoal
+		}
 	});
 	
 	$("#saveAndExit").click(function(){
