@@ -37,7 +37,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 }
 
 function addToSandwich(type, item){
-	console.log("servin' up a " +type+ " sandwich");
+	console.log("servin' up a(n) " +type+ " sandwich");
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var subArr = getSubgoalArrayFromLocal();
