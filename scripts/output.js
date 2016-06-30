@@ -19,7 +19,7 @@ function now() {
 	return date.getHours() + ":" + date.getMinutes();
 }
 
-//Function to stop commas and \n from actually creating new cells and lines in csv
+//Function to stop commas and \n from actually creating new cells and lines in csv.. in case there is a comma or 
 function sanitizeString(unsafeWord){
 	var safeWord = '\"'+ unsafeWord + '\"';//safety first!
 	return safeWord;
