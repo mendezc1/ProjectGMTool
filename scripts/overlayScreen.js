@@ -123,6 +123,7 @@ function overlayScreen(onlyDraw){
 		var sourceX = localStorage.getItem("sourceX");
 		
 		
+		
 
     	//console.log("Source x and y: ", elm.offsetLeft, elm.offsetTop, sourceX, sourceY);
     	var destWidth = myImg.width-ratioWidth;
@@ -131,8 +132,17 @@ function overlayScreen(onlyDraw){
    		var sourceHeight = myImg.height - destHeight;
     	var destX = canvas.width / 2 - destWidth / 2;
     	var destY = canvas.height / 2 - destHeight / 2;
- 		context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
-			$(".previewTrigger").click(function(){ //#triggered
+		
+		var sx = localStorage.getItem("sx");
+		var sy = localStorage.getItem("sy");
+		if(sx && sy){
+			console.log("in iff")
+			context.drawImage(myImg, sx, sy, myImg.width, myImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+		}
+		else{
+			context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
+		}
+ 			$(".previewTrigger").click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
 		
@@ -566,6 +576,13 @@ function renderImage(imgURL){
 			
 		});
 		console.log("old height", myImg.width, myImg.height);
-		context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
-}
+		var sx = localStorage.getItem("sx");
+		var sy = localStorage.getItem("sy");
+		if(sx && sy){
+			console.log("in iff")
+			context.drawImage(myImg, sx, sy, myImg.width, myImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+		}
+		else{
+			context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
+}		}
 
