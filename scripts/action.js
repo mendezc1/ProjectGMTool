@@ -212,6 +212,9 @@ function reloadToolTipState () {
 	}
 	
 	else if (statusIsTrue("highlightedAction")) {
+
+		console.log("on image");
+		//renderImage()
 		//overlayScreen("onlyToolTip");
 	}
 	
