@@ -456,7 +456,7 @@ function renderImage(imgURL){
 						img.onload = function() {
 							
 						context.clearRect(0, 0,  canvas.width, canvas.height);
-						context.drawImage(img, 10, 10);  
+						context.drawImage(img, 0, 0);  
 							console.log("should be drawn");
 						}
 						return img.src;
@@ -534,17 +534,38 @@ function renderImage(imgURL){
 				$("#imageAnnotation").remove();
 				var drawnOnURL = history.saveState(annotationCanvas);
 				localStorage.setItem("currImgURL", drawnOnURL);
+				myImg.src = drawnOnURL
+				context.clearRect(0,0,465, 150);
+				context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height)
 			});
 			$("#closeLargePreview").click(function(){
 				$("#imageAnnotation").remove();
 				var drawnOnURL = history.saveState(annotationCanvas);
 				localStorage.setItem("currImgURL", drawnOnURL);
-				//myImg.src = drawnOnURL
-				//context.clearRect(0,0,465, 150);
-				//context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
+				
+				var smallerImg = document.getElementById("previewImage");
+					var oldWidth = myImg.width;
+					var oldHeight = myImg.height;
+					smallerImg.src = drawnOnURL
+					console.log("New height", oldWidth, oldHeight, smallerImg.width, smallerImg.height);
+				context.clearRect(0,0,465, 150);
+				if(oldHeight > smallerImg.height){
+					var sx = sourceX *smallerImg.width/oldWidth;
+					var sy = sourceY *smallerImg.height/oldHeight;
+					localStorage.setItem("sx", sx);
+					localStorage.setItem("sy", sy);
+					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+				}
+				else{
+					var sx = localStorage.getItem("sx");
+					var sy = localStorage.getItem("sy");
+					console.log("Newer height", myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+				}
 			});
 			
 		});
+		console.log("old height", myImg.width, myImg.height);
 		context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
 }
 
