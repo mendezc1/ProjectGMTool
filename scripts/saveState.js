@@ -43,7 +43,9 @@ function addToSandwich(type, item){
 		var subArr = getSubgoalArrayFromLocal();
         //console.log("subArr rn: ", subArr);
 		drawSubgoal(item.id);
-		var sideSubgoal = '<div superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		var sideSubgoal = '<div stateVar=1 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+        //[Ignore this commented stuff Chris] uncomment for adding arrow pic. Also: will have to expand when first action is drawn, cause the below version starts out with a collapsed subgoal
+        //var sideSubgoal = '<span> <img id="sideSubgoalImg' + item.id + '" src=""></img> <div stateVar=0 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div> </span>';
 		if (item.id >= subArr.length) {
             var foundIt = false;
             sidebarBody().find('#subgoalList').children().each(function () {
@@ -61,6 +63,7 @@ function addToSandwich(type, item){
         }
 		sidebarBody().find("#sideSubgoal" + item.id).unbind( "click" ).click(function(){
 			drawSubgoal(item.id);
+            sideSubgoalExpandy(item.id, 0);
 		});
 
 			
@@ -321,3 +324,77 @@ function reloadSandwich () {
 		console.log("NOPE");
 	}
 }
+
+
+//Called when a sideSubgoal is clicked. Expands or collapses the actions under that subgoal, but not the subgoal itself.
+//Call with sideSubgoalExpandy(id, 0) to toggle. 
+//Call with sideSubgoalExpandy(id, "expand") or sideSubgoalExpandy(id, "collapse") to do that specifically
+function sideSubgoalExpandy (subgoalId, whatToDo) {
+    
+    //Get the subgoal list
+    var sideList = sidebarBody().find('#subgoalList');
+    
+    if (whatToDo == "expand") {     //Just expand
+        sideList.children().each(function () {
+            var currId = (this.getAttribute('supercoolattr'));
+            //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to expand
+            if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
+                console.log("showing ", currId);
+                $(this).show();
+            }
+        });
+    }
+    
+    
+    else if (whatToDo == "collapse") {      //Just collapse
+        sideList.children().each(function () {
+            var currId = (this.getAttribute('supercoolattr'));
+            //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to collapse
+            if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
+                console.log("hiding ", currId);
+                $(this).hide();
+            }
+        });
+    }
+    
+    
+    else {          //Toggle based on stateVar
+    
+        //Find the stateVar
+        var stateVar = Number(sidebarBody().find('#sideSubgoal' + subgoalId).attr("stateVar"));
+        console.log('stateVar', stateVar);
+        
+        //If it's collapsed (stateVar == 0), expand and set the stateVar to 1
+        if (stateVar == 0) {
+            sideList.children().each(function () {
+                var currId = (this.getAttribute('supercoolattr'));
+                //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to expand
+                if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
+                    console.log("showing ", currId);
+                    $(this).show();
+                }
+            });
+            sidebarBody().find('#sideSubgoal' + subgoalId).attr("stateVar", 1);
+        }
+        
+        //If it's expanded (stateVar == 1), collapse and set the stateVar to 0
+        else if (stateVar == 1) {
+            sideList.children().each(function () {
+                var currId = (this.getAttribute('supercoolattr'));
+                //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to collapse
+                if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
+                    console.log("hiding ", currId);
+                    $(this).hide();
+                }
+            });
+            sidebarBody().find('#sideSubgoal' + subgoalId).attr("stateVar", 0);
+        }
+        
+        else {
+            console.log("Something in expandy went wrong... check your stateVar or the function call");
+        }
+        
+    }
+    
+}
+
