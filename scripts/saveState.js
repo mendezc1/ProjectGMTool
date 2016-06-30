@@ -87,8 +87,13 @@ function addToSandwich(type, item){
             localStorage.setItem("numActions", actionNum);
 		}
         else {
-            //Just change the name of the action in the sandwich menu
+            //Just change the name of the action in the sandwich menu and the subgoal array (if it exists)
             sidebarBody().find(sideActionIdForClick).html('Action ' + item.actionId + ': ' + item.name);
+            var currArray = getSubgoalArrayFromLocal();
+            if (currArray[item.subgoalId - 1].actions.length > 0) {
+                currArray[item.subgoalId - 1].actions[item.actionId - 1].name = item.name;
+                saveVarToLocal("subgoalArray", currArray);
+            }
             console.log("just changed the name");
         }
 		
@@ -119,7 +124,7 @@ function addToSandwich(type, item){
 	}
     
     else {
-        console.log("Something went wrong in addToSandwich OH GOD PANIC");
+        console.log("Something went wrong in addToSandwich OH GOD PANIC", type, item);
     }
 	
 }

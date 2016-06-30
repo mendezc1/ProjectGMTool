@@ -139,13 +139,12 @@ function drawAction(actionNum, subgoalId){
             alert("Please name your action before continuing");
         }
         else {
-            currArray = getSubgoalArrayFromLocal();
+            //currArray = getSubgoalArrayFromLocal();
             var actionItem = {
                 name: actionName,
                 actionId: actionNum, 
                 subgoalId: subgoalId
             };
-            //currArray[(currArray.length - 1)].actions.length + 1;
             
             if(actionName==""){
                 console.log("STILL have a blank action name");
@@ -174,7 +173,7 @@ function drawAction(actionNum, subgoalId){
                 sidebarBody().find('#actionNamePrompt').hide();
                 sidebarBody().find("#promptAction").hide();
                 setPhasersToFalse("actionPromptOnScreen");
-            })
+            });
         }
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
