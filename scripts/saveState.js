@@ -90,10 +90,10 @@ function addToSandwich(type, item){
             //Just change the name of the action in the sandwich menu and the subgoal array (if it exists)
             sidebarBody().find(sideActionIdForClick).html('Action ' + item.actionId + ': ' + item.name);
             var currArray = getSubgoalArrayFromLocal();
-            if (currArray[item.subgoalId - 1].actions.length > 0) {
+            /*if (currArray[item.subgoalId - 1].actions.length > 0) {
                 currArray[item.subgoalId - 1].actions[item.actionId - 1].name = item.name;
                 saveVarToLocal("subgoalArray", currArray);
-            }
+            }*/
             console.log("just changed the name");
         }
 		
