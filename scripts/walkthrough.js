@@ -171,7 +171,7 @@ function drawAction(actionNum, subgoalId){
             sidebarBody().find("#editAction").unbind( "click" ).click(function(){
                 sidebarBody().find('#editAction').hide();
                 sidebarBody().find('#getActionName').show();
-                sidebarBody().find('#actionNameGot').hide();
+                sidebarBody().find('#actionNamePrompt').hide();
                 sidebarBody().find("#promptAction").hide();
                 setPhasersToFalse("actionPromptOnScreen");
             })
