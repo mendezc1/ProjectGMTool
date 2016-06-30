@@ -106,32 +106,40 @@ function drawSubgoal(subgoalId){
 
 function drawAction(actionNum, subgoalId){
 	
-	console.log("draw action called");
+	console.log("draw action called", actionNum, subgoalId);
 	id = "#GenderMagFrame";
 	file = "/templates/actionPrompt.html";
 	var el = $(id).contents().find('#containeryo');
 	el.empty();
 	appendTemplateToElement(el,file);
-	var actionName = "";
-	
-	var isSetActionName = statusIsTrue("gotActionName");
-	if (isSetActionName) {
-		actionName = localStorage.getItem("currActionName");
+	var actionName = "THE ACTION NAME";
+	var currArray = getSubgoalArrayFromLocal();
+		
+	if (statusIsTrue("gotActionName")) {
+		console.log("was true");
+		if (actionNum >  currArray[subgoalId-1].actions.length) {
+			actionName = localStorage.getItem("currActionName");
+		}
+		else {
+			actionName = currArray[subgoalId-1].actions[actionNum-1].name;
+		}
 		sidebarBody().find('#getActionName').hide();
         sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
         sidebarBody().find('#actionNameGot').show();
 		sidebarBody().find("#promptAction").show();
 		setPhasersToTrue("actionPromptOnScreen");
 	}
-
-	console.log("action/subgoal", actionNum, subgoalId); 
+	console.log("action/subgoal", actionNum, subgoalId, actionName); 
+	
+	
+	//Below is add onclicks - so if gotActionName wan't true, it doesn't do anything really
 	sidebarBody().find('#submitActionName').unbind( "click" ).click(function() {
 		actionName = sidebarBody().find("#actionNameInput").val();
-        if (actionName == "") {
+        if (actionName == "" && !(statusIsTrue('gotActionName'))) {
             alert("Please name your action before continuing");
         }
         else {
-            var currArray = getSubgoalArrayFromLocal();
+            currArray = getSubgoalArrayFromLocal();
             var actionItem = {
                 name: actionName,
                 actionId: actionNum, 
@@ -139,17 +147,17 @@ function drawAction(actionNum, subgoalId){
             };
             //currArray[(currArray.length - 1)].actions.length + 1;
             
-            if(actionName==" "){
-                actionName = sidebarBody().find("#sideAction" +actionNum).innerHTML;
+            if(actionName==""){
+                console.log("STILL have a blank action name");
             }
-                console.log("actionname", actionName);
-                saveVarToLocal("currActionName", actionName);
-                setPhasersToTrue("gotActionName");
-                sidebarBody().find('#getActionName').hide();
-                sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
-                sidebarBody().find('#actionNameGot').show();
-                sidebarBody().find("#promptAction").show();
-                setPhasersToTrue("actionPromptOnScreen");
+			console.log("actionname", actionName);
+			saveVarToLocal("currActionName", actionName);
+			setPhasersToTrue("gotActionName");
+			sidebarBody().find('#getActionName').hide();
+			sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
+			sidebarBody().find('#actionNameGot').show();
+			sidebarBody().find("#promptAction").show();
+			setPhasersToTrue("actionPromptOnScreen");
             
             if(actionNum >  currArray[subgoalId-1].actions.length){
                 console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
@@ -175,6 +183,10 @@ function drawAction(actionNum, subgoalId){
 		} 
 	});
 	sidebarBody().find('body').off('click', '#overlayTrigger').on('click', '#overlayTrigger', function() {
+		if (statusIsTrue('drewToolTip')) {
+			var justTheToolTip = document.getElementById("myToolTip");
+			$(justTheToolTip).remove();
+		}
 		overlayScreen();
 		overlayScreen();
 	});

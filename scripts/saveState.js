@@ -66,16 +66,31 @@ function addToSandwich(type, item){
 	}
 	else if(!type.localeCompare("idealAction") && item.name){ 	//It's an action that got its name from the slider
 		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.subgoalId + '-' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
-		sidebarBody().find("#subgoalList").append(sideAction);
-		console.log("added to sammich", item.actionId, item.name);
+		var sideActionIdToFind = item.subgoalId + "-" + item.actionId;
+		console.log(sideActionIdToFind, typeof(sideActionIdToFind));
+		var foundIt = false;
+		sidebarBody().find('#subgoalList').children().each(function () {
+			var currId = this.getAttribute('supercoolattr');
+			console.log(currId, typeof(currId));
+			if (! sideActionIdToFind.localeCompare(currId)) {
+				console.log("in finding if");
+				foundIt = true;
+			}
+		});
+		if (!foundIt) {
+			sidebarBody().find("#subgoalList").append(sideAction);
+			console.log("added to sammich", item.actionId, item.name);
+		}
 		var actionNum = localStorage.getItem("numActions");
 		actionNum++;
 		localStorage.setItem("numActions", actionNum);
-        var sideActionIdToFind = "#sideAction" + item.subgoalId + "-" + item.actionId;
-		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
+		
+        var sideActionIdForClick = "#sideAction" + item.subgoalId + "-" + item.actionId;
+		sidebarBody().find(sideActionIdForClick).unbind( "click" ).click(function(){
+			console.log("clicked the action", this.getAttribute('supercoolattr'));
 			drawAction(item.actionId, item.subgoalId);
-			sidebarBody().find('#actionNameInput').html("Camera action");
-			sidebarBody().find('#submitActionName').click();
+			//sidebarBody().find('#actionNameInput').html("Camera action");
+			//sidebarBody().find('#submitActionName').click();
 		});
 	}
 	else if(!type.localeCompare("idealAction") && !item){ 	//It's an action that got its name from the tooltip prompt
@@ -91,8 +106,8 @@ function addToSandwich(type, item){
         var sideActionIdToFind = "#sideAction" + subgoalId + "-" + actionId;
 		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
 			drawAction(actionId, subgoalId);
-			sidebarBody().find('#actionNameInput').html("Camera action");
-			sidebarBody().find('#submitActionName').click();
+			//sidebarBody().find('#actionNameInput').html("Camera action");
+			//sidebarBody().find('#submitActionName').click();
 		});
 	}
     
