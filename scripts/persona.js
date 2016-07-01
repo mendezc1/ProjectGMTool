@@ -5,19 +5,19 @@ function loadPersona(personaName){
 		var abbySRC=chrome.extension.getURL("images/Abby_square.jpg");
 		var abbyIMG= "<img id='AbbyPhoto' src='" + abbySRC + "' alt='Abby Jones' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(abbyIMG);
-		sidebarBody().find(".abbyMTrigger").click(function (){
+		sidebarBody().find(".abbyMTrigger").unbind( "click" ).click(function (){
 		//	console.log("Who you gonna call?");
 			addToolTip("abbyMToolTip", "Abby");	
 		});
-		sidebarBody().find(".abbyIPSTrigger").click(function(){
+		sidebarBody().find(".abbyIPSTrigger").unbind( "click" ).click(function(){
 	//		console.log("Marco");
 			addToolTip("abbyIPSToolTip", "Abby");
 		});
-		sidebarBody().find(".abbySETrigger").click(function(){
+		sidebarBody().find(".abbySETrigger").unbind( "click" ).click(function(){
 //			console.log("John-Jacob-Jingleheimer-Schmidt his name is my name too, whenever we go out, the people always shout");
 			addToolTip("abbySEToolTip", "Abby");
 		});
-		sidebarBody().find(".abbyRTrigger").click(function(){
+		sidebarBody().find(".abbyRTrigger").unbind( "click" ).click(function(){
 		/*	console.log("They call me `Bell`");
 			console.log("They call me `Stacy`");
 			console.log("They call me `her`");
@@ -36,7 +36,7 @@ function loadPersona(personaName){
 			console.log("What is my name? Its: ");*/
 			addToolTip("abbyRToolTip", "Abby");
 		});
-		sidebarBody().find(".abbyTTrigger").click(function(){
+		sidebarBody().find(".abbyTTrigger").unbind( "click" ).click(function(){
 			//console.log("Knock Knock, Whos there? Orange? Orange Who? Aren't you glad I didn't call");
 			addToolTip("abbyTToolTip", "Abby");
 		});
@@ -49,19 +49,19 @@ function loadPersona(personaName){
 		var tImg = "<img id='TimPhoto' src='" + timSRC + "' alt='Tim Hopkins' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(tImg);
 		
-		sidebarBody().find(".timMTrigger").click(function (){
+		sidebarBody().find(".timMTrigger").unbind( "click" ).click(function (){
 			addToolTip("timMToolTip", "Tim");	
 		});
-		sidebarBody().find(".timIPSTrigger").click(function(){
+		sidebarBody().find(".timIPSTrigger").unbind( "click" ).click(function(){
 			addToolTip("timIPSToolTip", "Tim");
 		});
-		sidebarBody().find(".timSETrigger").click(function(){
+		sidebarBody().find(".timSETrigger").unbind( "click" ).click(function(){
 			addToolTip("timSEToolTip", "Tim");
 		});
-		sidebarBody().find(".timRTrigger").click(function(){
+		sidebarBody().find(".timRTrigger").unbind( "click" ).click(function(){
 			addToolTip("timRToolTip", "Tim");
 		});
-		sidebarBody().find(".timTTrigger").click(function(){
+		sidebarBody().find(".timTTrigger").unbind( "click" ).click(function(){
 			addToolTip("timTToolTip", "Tim");
 		});
 		
@@ -72,19 +72,19 @@ function loadPersona(personaName){
 		var patrickIMG= "<img id='PatrickPhoto' src='" + patrickSRC + "' alt='Patrick Jones' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(patrickIMG);
 		
-		sidebarBody().find(".patrickMTrigger").click(function (){
+		sidebarBody().find(".patrickMTrigger").unbind( "click" ).click(function (){
 			addToolTip("patrickMToolTip", "Patrick");	
 		});
-		sidebarBody().find(".patrickIPSTrigger").click(function(){
+		sidebarBody().find(".patrickIPSTrigger").unbind( "click" ).click(function(){
 			addToolTip("patrickIPSToolTip", "Patrick");
 		});
-		sidebarBody().find(".patrickSETrigger").click(function(){
+		sidebarBody().find(".patrickSETrigger").unbind( "click" ).click(function(){
 			addToolTip("patrickSEToolTip", "Patrick");
 		});
-		sidebarBody().find(".patrickRTrigger").click(function(){
+		sidebarBody().find(".patrickRTrigger").unbind( "click" ).click(function(){
 			addToolTip("patrickRToolTip", "Patrick");
 		});
-		sidebarBody().find(".patrickTTrigger").click(function(){
+		sidebarBody().find(".patrickTTrigger").unbind( "click" ).click(function(){
 			addToolTip("patrickTToolTip", "Patrick");
 		});		
 	}
@@ -94,19 +94,19 @@ function loadPersona(personaName){
 		var patriciaIMG= "<img id='PatriciaPhoto' src='" + patriciaSRC + "' alt='Patricia Jones' class='sidebarImg' width='100' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(patriciaIMG);
 		
-		sidebarBody().find(".patriciaMTrigger").click(function (){
+		sidebarBody().find(".patriciaMTrigger").unbind( "click" ).click(function (){
 			addToolTip("patriciaMToolTip", "Patricia");	
 		});
-		sidebarBody().find(".patriciaIPSTrigger").click(function(){
+		sidebarBody().find(".patriciaIPSTrigger").unbind( "click" ).click(function(){
 			addToolTip("patriciaIPSToolTip", "Patricia");
 		});
-		sidebarBody().find(".patriciaSETrigger").click(function(){
+		sidebarBody().find(".patriciaSETrigger").unbind( "click" ).click(function(){
 			addToolTip("patriciaSEToolTip", "Patricia");
 		});
-		sidebarBody().find(".patriciaRTrigger").click(function(){
+		sidebarBody().find(".patriciaRTrigger").unbind( "click" ).click(function(){
 			addToolTip("patriciaRToolTip", "Patricia");
 		});
-		sidebarBody().find(".patriciaTTrigger").click(function(){
+		sidebarBody().find(".patriciaTTrigger").unbind( "click" ).click(function(){
 			addToolTip("patriciaTToolTip", "Patricia");
 		});
 	}
