@@ -43,9 +43,10 @@ function addToSandwich(type, item){
 		var subArr = getSubgoalArrayFromLocal();
         //console.log("subArr rn: ", subArr);
 		drawSubgoal(item.id);
-		var sideSubgoal = '<div stateVar=1 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
+		//var sideSubgoal = '<div stateVar=1 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
         //[Ignore this commented stuff Chris] uncomment for adding arrow pic. Also: will have to expand when first action is drawn, cause the below version starts out with a collapsed subgoal
-        //var sideSubgoal = '<span> <img id="sideSubgoalImg' + item.id + '" src=""></img> <div stateVar=0 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div> </span>';
+        var arrowSRC=chrome.extension.getURL("images/arrow_collapsed.png");
+		var sideSubgoal = '<div stateVar=0 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '"> <img id="sideSubgoalImg' + item.id + '" src="' + arrowSRC + '"></img> Subgoal ' + item.id + ': ' + item.name + '</div>';
 		if (item.id >= subArr.length) {
             var foundIt = false;
             sidebarBody().find('#subgoalList').children().each(function () {
@@ -85,6 +86,7 @@ function addToSandwich(type, item){
 		if (!foundIt) {
 			sidebarBody().find("#subgoalList").append(sideAction);
 			console.log("added to sammich", item.actionId, item.name);
+			sideSubgoalExpandy(item.subgoalId, "expand");
             var actionNum = localStorage.getItem("numActions");
             actionNum++;
             localStorage.setItem("numActions", actionNum);
@@ -335,6 +337,9 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
     var sideList = sidebarBody().find('#subgoalList');
     
     if (whatToDo == "expand") {     //Just expand
+		//Change the arrow pic
+		var arrowSRC=chrome.extension.getURL("images/arrow_expanded.png");
+		sideList.find('#sideSubgoalImg' + subgoalId).attr("src", arrowSRC);
         sideList.children().each(function () {
             var currId = (this.getAttribute('supercoolattr'));
             //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to expand
@@ -343,10 +348,14 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
                 $(this).show();
             }
         });
+		sidebarBody().find('#sideSubgoal' + subgoalId).attr("stateVar", 1);
     }
     
     
     else if (whatToDo == "collapse") {      //Just collapse
+		//Change the arrow pic
+		var arrowSRC=chrome.extension.getURL("images/arrow_collapsed.png");
+		sideList.find('#sideSubgoalImg' + subgoalId).attr("src", arrowSRC);
         sideList.children().each(function () {
             var currId = (this.getAttribute('supercoolattr'));
             //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to collapse
@@ -355,6 +364,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
                 $(this).hide();
             }
         });
+		sidebarBody().find('#sideSubgoal' + subgoalId).attr("stateVar", 0);
     }
     
     
@@ -366,6 +376,9 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
         
         //If it's collapsed (stateVar == 0), expand and set the stateVar to 1
         if (stateVar == 0) {
+			//Change the arrow pic
+			var arrowSRC=chrome.extension.getURL("images/arrow_expanded.png");
+			sideList.find('#sideSubgoalImg' + subgoalId).attr("src", arrowSRC);
             sideList.children().each(function () {
                 var currId = (this.getAttribute('supercoolattr'));
                 //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to expand
@@ -379,6 +392,9 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
         
         //If it's expanded (stateVar == 1), collapse and set the stateVar to 0
         else if (stateVar == 1) {
+			//Change the arrow pic
+			var arrowSRC=chrome.extension.getURL("images/arrow_collapsed.png");
+			sideList.find('#sideSubgoalImg' + subgoalId).attr("src", arrowSRC);
             sideList.children().each(function () {
                 var currId = (this.getAttribute('supercoolattr'));
                 //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to collapse
