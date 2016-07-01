@@ -211,6 +211,13 @@ function glueActionsAndSave (preAction, postAction) {
         //console.log("sub with action: ", targetSubgoal);
         currArray[(currArray.length - 1)] = targetSubgoal;
         localStorage.setItem("subgoalArray", JSON.stringify(currArray));   //Update the subgoal array
+		
+		//Rebind the onclick of the side list action to show the answers
+		var sideActionIdToFind = "#sideAction" + targetSubgoal.id + "-" + idealAction.id;
+		console.log("Rebinding onclick to loadAnswers...");
+		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
+			loadActionAnswersTemplate(idealAction.id, targetSubgoal.id);
+		});
     }
 }
 
@@ -302,21 +309,30 @@ function reloadSandwich () {
 			else {
 				//It's an action
 				console.log("action", currId);
-				sidebarBody().find("#sideAction" + currId).unbind( "click" ).click(function(){
-                    var thisActionNum = Number(currId[currId.length-1]);
-                    var thisSubNum = Number(currId[0]);
-					drawAction(thisActionNum, thisSubNum);
-                    var subgoals = getSubgoalArrayFromLocal();
-                    var actionName = "";
-                    if (subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ]) {
-                        actionName = subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ].name;
-                    }
-                    else {
-                        actionName = "Lights, Camera";
-                    }
-					sidebarBody().find('#actionNameInput').html(actionName);
-					sidebarBody().find('#submitActionName').click();
-				});
+				var thisActionNum = Number(currId[currId.length-1]);
+                var thisSubNum = Number(currId[0]);
+				var subgoals = getSubgoalArrayFromLocal();
+				if (subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ]) {
+					console.log("binding to answers...");
+					sidebarBody().find("#sideAction" + currId).unbind( "click" ).click(function(){
+						loadActionAnswersTemplate(thisActionNum, thisSubNum);
+					});
+				}
+				else {				
+					sidebarBody().find("#sideAction" + currId).unbind( "click" ).click(function(){
+						drawAction(thisActionNum, thisSubNum);
+						var subgoals = getSubgoalArrayFromLocal();
+						var actionName = "";
+						if (subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ]) {
+							actionName = subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ].name;
+						}
+						else {
+							actionName = "Lights, Camera";
+						}
+						sidebarBody().find('#actionNameInput').html(actionName);
+						//sidebarBody().find('#submitActionName').click();
+					});
+				}
 				
 			}
 		});
@@ -413,4 +429,166 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
     }
     
 }
+
+
+//Loads the actionAnswers template with information about the passed in action, and puts it on the screen.
+function loadActionAnswersTemplate (actionId, subgoalId) {
+	
+	var subArr = getSubgoalArrayFromLocal();
+	
+	if (subgoalId > subArr.length) {
+		console.log("Can't draw those answers - the subgoal doesn't exist");
+	}
+	else if (subArr[subgoalId-1].actions.length == 0) {
+		console.log("Can't draw those answers - the actions array is empty");
+	}
+	else if (actionId > subArr[subgoalId-1].actions.length) {
+		console.log("Can't draw those answers - that action doesn't exist");
+	}
+	
+	else{		//All should be good for drawing if you got this far
+		
+		var el = sidebarBody().find('#containeryo');
+		file = "/templates/actionAnswers.html";
+		el.empty();
+		appendTemplateToElement(el,file);
+		
+		var targetAction = subArr[subgoalId-1].actions[actionId-1];
+		console.log("In loadAnswers", actionId, subgoalId, targetAction);
+		
+		sidebarBody().find('#answersActionNum').html(targetAction.id);
+		sidebarBody().find('#answersActionName').html(targetAction.name);
+		
+		//Image stuff goes here
+		
+		showMeTheStringYNM('#answersPreActionYNM', targetAction.preAction.ynm);
+		sidebarBody().find('#answersPreActionWhy').html(targetAction.preAction.why);
+		showMeTheStringFacets('#answersPreActionFacets', targetAction.preAction.facetValues);
+		
+		showMeTheStringYNM('#answersPostActionYNM', targetAction.postAction.ynm);
+		sidebarBody().find('#answersPostActionWhy').html(targetAction.postAction.why);
+		showMeTheStringFacets('#answersPostActionFacets', targetAction.postAction.facetValues);
+		
+	}
+	
+}
+
+
+
+//Iterates through the passed YNM object to see which values are true and puts the right string on the answers template in the passed id.
+function showMeTheStringYNM (targetId, targetObj) {
+	
+	var myString = "";
+	var propsFound = 0;
+	for (var prop in targetObj) {
+		if (targetObj[prop] == true) {
+			if (propsFound == 0) {
+				myString = myString.concat(prop);
+			}
+			else {
+				myString = myString.concat(", ", prop);
+			}
+			propsFound++;
+		}
+	}
+	console.log("Incoming YNM string", myString);
+	
+	sidebarBody().find(targetId).html(myString);
+	
+}
+
+//Iterates through the passed facets object to see which values are true and puts the right string on the answers template in the passed id.
+function showMeTheStringFacets (targetId, targetObj) {
+	
+	var myString = "";
+	var propsFound = 0;
+	var foundFacet = "";
+	for (var prop in targetObj) {
+		if (targetObj[prop] == true) {
+			foundFacet = prop;
+			propsFound++;
+		
+			//Switch statement-ish on the facet
+			if (foundFacet == "info") {
+				if (propsFound == 1) {
+					myString = myString.concat("Information Processing Style");
+				}
+				else {
+					myString = myString.concat(", Information Processing Style");
+				}
+			}
+			else if (foundFacet == "motiv") {
+				if (propsFound == 1) {
+					myString = myString.concat("Motivation");
+				}
+				else {
+					myString = myString.concat(", Motivation");
+				}
+			}
+			else if (foundFacet == "risk") {
+				if (propsFound == 1) {
+					myString = myString.concat("Attitude towards Risk");
+				}
+				else {
+					myString = myString.concat(", Attitude towards Risk");
+				}
+			}
+			else if (foundFacet == "self") {
+				if (propsFound == 1) {
+					myString = myString.concat("Computer Self-efficacies");
+				}
+				else {
+					myString = myString.concat(", Computer Self-efficacies");
+				}
+			}
+			else if (foundFacet == "tinker") {
+				if (propsFound == 1) {
+					myString = myString.concat("Willingness to Tinker");
+				}
+				else {
+					myString = myString.concat(", Wilingness To Tinker");
+				}
+			}
+		}
+		
+	}
+	if (propsFound == 0) {
+		myString = "none";
+	}
+	
+	
+	console.log("Incoming facets string", myString);
+	
+	sidebarBody().find(targetId).html(myString);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
