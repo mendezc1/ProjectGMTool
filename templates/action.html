@@ -3,12 +3,12 @@
     
         <div id="imageCanvasTemplate">
     
-            <div style="height:25px; background-color:#999999;text-align:center;">
+            <div style="height:25px; background-color:#0288d1;text-align:center;">
 				<!--span class="actionNameSpan" style="color:white;"> </span-->
-                <button id="imageBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
-                <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> Save and Continue</button>	
-				<button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> Annotate Image </button>
-				<button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#2E8DEF;color:white;"> Retake screen capture </button> 
+                <button id="imageBack" style="float:left; width:30px; height:25px;background-color:lawngreen;color:black;">&#8592 </button>
+                <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:150px; height:25px;background-color:orange;color:black;"> Save and Continue</button>	
+				<button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:lawngreen;color:black;"> Annotate Image </button>
+				<button id="retakeImage" style="float:right; width:150px; height:25px;background-color:lawngreen;color:black;"> Retake screen capture </button> 
             </div>
         
 			<p id="imageCaption" style="margin:10px">
@@ -23,10 +23,10 @@
         
             <div id="preActionQuestions">
             
-                <div style="height:25px; background-color:#999999;text-align:center;">
+                <div style="height:25px; background-color:#0288d1;text-align:center;">
 					<span class="actionNameSpan" style="color:white;"> </span>
-                    <button id="preActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>	
-                    <button id="preActionClose" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;">Save and Continue </button>
+                    <button id="preActionBack" style="float:left; width:30px; height:25px;background-color:lawngreen;color:black;">&#8592 </button>	
+                    <button id="preActionClose" style="float:right; width:180px; height:25px;background-color:lawngreen;color:black;">Save and Continue </button>
                 </div>
                 <br>
                 
@@ -56,10 +56,10 @@
         
         <div id="doActionPromptTemplate" style="display:none;">
         
-            <div style="height:25px; background-color:#999999;text-align:center;">
+            <div style="height:25px; background-color:#0288d1;text-align:center;">
 				<span class="actionNameSpan" style="color:white;"> </span>
-                <button id="doActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
-                <input id="postAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;">
+                <button id="doActionBack" style="float:left; width:30px; height:25px;background-color:lawngreen;color:black;">&#8592 </button>
+                <input id="postAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:lawngreen;color:black;">
             </div>
             <p>Once you've performed the ideal action, click to save and continue button.</p>
             
@@ -69,10 +69,10 @@
         
         <div id="postActionTemplate" style="display:none;">
             
-            <div style="height:25px; background-color:#999999;text-align:center;">
+            <div style="height:25px; background-color:#0288d1;text-align:center;">
 				<span class="actionNameSpan" style="color:white;"> </span>
-                <button id="postActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
-                <input id="submitPostAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#2E8DEF;color:white;">
+                <button id="postActionBack" style="float:left; width:30px; height:25px;background-color:lawngreen;color:black;">&#8592 </button>
+                <input id="submitPostAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:lawngreen;color:black;">
             </div>
             <br>
             
@@ -83,7 +83,7 @@
                 <span><input id="YNMmaybe" type="checkbox" name="maybe" value="maybe">Maybe</input></span>
             </div>
             
-            <textarea id="whyYes" rows="4" cols="40" class="responseBox" placeholder="Why, why not or why maybe?"></textarea>
+            <textarea id="postWhyYes" rows="4" cols="40" class="responseBox" placeholder="Why, why not or why maybe?"></textarea>
             <br>
             
             <span class="cwQuestion">Which of the persona's facets did you use to answer the above question?</span>
@@ -105,9 +105,9 @@
         
         <div id="actionLoopTemplate" style="display:none;">
             
-            <div style="height:25px; background-color:#999999;text-align:center;">
+            <div style="height:25px; background-color:#0288d1;text-align:center;">
 				<span class="actionNameSpan" style="color:white;"> </span>
-                <button id="loopActionBack" style="float:left; width:30px; height:25px;background-color:#2E8DEF;color:white;">&#8592 </button>
+                <button id="loopActionBack" style="float:left; width:30px; height:25px;background-color:lawngreen;color:black;">&#8592 </button>
             </div>
 
             <p> Are there more actions for this subgoal? </p>

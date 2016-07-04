@@ -67,7 +67,7 @@ function postActionQuestions(el){
         setPhasersToTrue("gotPostActionQuestions");
 		var actionName = localStorage.getItem("currActionName");
 		var yesNoMaybe = {"yes": $('#YNMyes').is(":checked"), "no": $('#YNMno').is(":checked"), "maybe": $('#YNMmaybe').is(":checked")};
-		var whyText = $('#whyYes').val();
+		var whyText = $('#postWhyYes').val();
 		var facets = {"motiv": $('#Q2motiv').is(":checked"), "info": $('#Q2info').is(":checked"), "self": $('#Q2self').is(":checked"), "risk": $('#Q2risk').is(":checked"), "tinker": $('#Q2tinker').is(":checked")};
 		savePostIdealAction(actionName, yesNoMaybe, whyText, facets);
         

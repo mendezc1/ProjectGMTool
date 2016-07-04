@@ -70,7 +70,7 @@ function overlayScreen(onlyDraw){
 		toolTip.style.height = "550px";
 		toolTip.style.width = "500px";
 		toolTip.style.zindex = "10002";	
-		toolTip.style.border ="3px solid #999999";
+		toolTip.style.border ="3px solid #0288d1";
 		toolTip.style.backgroundColor = "white";
 		toolTip.style.cursor="pointer";
 		toolTip.style.borderRadius="5px";
@@ -330,7 +330,7 @@ function renderImage(imgURL){
 	toolTip.style.height = "550px";
 	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	
-	toolTip.style.border ="3px solid #999999";
+	toolTip.style.border ="3px solid #0288d1";
 	toolTip.style.backgroundColor = "white";
 	toolTip.style.cursor="pointer";
 	toolTip.style.borderRadius="5px";

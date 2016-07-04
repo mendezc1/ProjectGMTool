@@ -75,7 +75,7 @@ function parseSubgoalArray(){
 				entry.push("\n, , , , , , , , ,"); 
 				
 				//pre action question
-				//console.log("action name", currI.actions[i].name, sanitizeString(currI.actions[i].name))
+				console.log("action name", currI.actions[i].preAction.why, currI.actions[i].postAction.why)
 				entry.push(currI.actions[i].name); //Somehow this is already been sanitized and doing it twice undos it... thanks obama
 				entry.push(sanitizeString(currI.actions[i].preAction.why));
 				entry.push(currI.actions[i].preAction.ynm["yes"]);
@@ -137,8 +137,7 @@ function createCSV(entries) {
 					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
 					sanitizeString("If Abby does the right thing, will she know that she did the right thing and is making progress toward her goal?"), 
 					"Yes", "No", "Maybe", 
-					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker", 
-					"Screen Capture Link"];
+					"Motivation", "Info Processing", "Self-Efficacy", "Risk", "Tinker"];
 	csvContent += header2.join(",") + "\n";
 		
 	entries.forEach(function(entry, index){
