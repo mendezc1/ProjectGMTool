@@ -187,7 +187,9 @@ function create_zip(csvContent) {
 	var zip = new JSZip();
 	zip.file("GenderMagSession"+".csv", csvContent);
 	var img = zip.folder("images");
-	img.file(imgList[0].name, imgList[0].uri, {base64: true});
+	for(var i in imgList){
+		img.file(imgList[i].name, imgList[i].uri, {base64: true});
+	}
 	zip.generateAsync({type:"blob"}).then(function(content) {
     // see FileSaver.js
 		saveAs(content, globName+".zip");
