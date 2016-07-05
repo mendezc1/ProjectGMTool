@@ -178,7 +178,7 @@ function drawAction(actionNum, subgoalId){
 	});
 	sidebarBody().find("#actionNameInput").keyup(function(event){
 		if(event.keyCode == 13){
-			sidebarBody().find("#submitActionName").click();
+			sidebarBody().find("#submitActionName").unbind( "click" ).click();
 		} 
 	});
 	sidebarBody().find('body').off('click', '#overlayTrigger').on('click', '#overlayTrigger', function() {

@@ -81,19 +81,19 @@ function overlayScreen(onlyDraw){
 		//addToolTip("imageCanvas");
 
 		appendTemplateToElement(toolTip ,"./templates/action.html");
-		$(".closeToolTip").click(function() {
+		$(".closeToolTip").unbind( "click" ).unbind( "click" ).click(function() {
 			//toolTip.remove();
 			//toolTip.innerHTML = " ";
 			setPhasersToTrue("gotScreenshot");
 			preActionQuestions(toolTip);
 		});
-		$("#retakeImage").click(function(){
+		$("#retakeImage").unbind( "click" ).unbind( "click" ).click(function(){
 			toolTip.remove();
 			setPhasersToFalse("drewToolTip");
 			overlayScreen();
 			overlayScreen();
 		});
-		$("#imageBack").click(function(){
+		$("#imageBack").unbind( "click" ).unbind( "click" ).click(function(){
 			openSlider();
 		});
 		var actionSpan = localStorage.getItem("currActionName");
@@ -142,7 +142,7 @@ function overlayScreen(onlyDraw){
 		else{
 			context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
 		}
- 			$(".previewTrigger").click(function(){ //#triggered
+ 			$(".previewTrigger").unbind( "click" ).click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
 		
@@ -165,20 +165,20 @@ function overlayScreen(onlyDraw){
 		
 			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
 			
-		$('#undoDraw').click(function() {
+		$('#undoDraw').unbind( "click" ).click(function() {
 			console.log("undo", annotationCanvas, ctx);
 			history.undo(annotationCanvas, ctx);
 		});
   
-		$('#redoDraw').click(function() {
+		$('#redoDraw').unbind( "click" ).click(function() {
 			console.log("redo ");
 			history.redo(annotationCanvas, ctx);
 		});
 			
-			$("#backLargePreview").click(function(){
+			$("#backLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
 			});
-			$("#closeLargePreview").click(function(){
+			$("#closeLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
 			});
 			
@@ -341,18 +341,18 @@ function renderImage(imgURL){
 	//addToolTip("imageCanvas");
 
 	appendTemplateToElement(toolTip ,"./templates/action.html");
-	$(".closeToolTip").click(function() {
+	$(".closeToolTip").unbind( "click" ).click(function() {
 		//toolTip.remove();
 		//toolTip.innerHTML = " ";
         setPhasersToTrue("gotScreenshot");
         preActionQuestions(toolTip);
 	});
-	$("#retakeImage").click(function(){
+	$("#retakeImage").unbind( "click" ).click(function(){
 		toolTip.remove();
         setPhasersToFalse("drewToolTip");
 		overlayScreen();
 	});
-	$("#imageBack").click(function(){
+	$("#imageBack").unbind( "click" ).click(function(){
 		openSlider();
 	});
 	var actionSpan = localStorage.getItem("currActionName");
@@ -505,7 +505,7 @@ function renderImage(imgURL){
     	var destY = canvas.height / 2 - destHeight / 2;
 		//console.log(globXY);
 			
-		$(".previewTrigger").click(function(){ //#triggered
+		$(".previewTrigger").unbind( "click" ).click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
 		
@@ -528,19 +528,19 @@ function renderImage(imgURL){
 		
 			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
 			
-		$('#undoDraw').click(function() {
+		$('#undoDraw').unbind( "click" ).click(function() {
 			console.log("undo", annotationCanvas, ctx);
 			var drawnOnURL = history.undo(annotationCanvas, ctx);
 			localStorage.setItem("currImgURL", drawnOnURL);
 		});
   
-		$('#redoDraw').click(function() {
+		$('#redoDraw').unbind( "click" ).click(function() {
 			console.log("redo ");
 			var drawnOnURL = history.redo(annotationCanvas, ctx);
 			localStorage.setItem("currImgURL", drawnOnURL);
 		});
 			
-			$("#backLargePreview").click(function(){
+			$("#backLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
 				var drawnOnURL = history.saveState(annotationCanvas);
 				localStorage.setItem("currImgURL", drawnOnURL);
@@ -548,7 +548,7 @@ function renderImage(imgURL){
 				context.clearRect(0,0,465, 150);
 				context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height)
 			});
-			$("#closeLargePreview").click(function(){
+			$("#closeLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
 				var drawnOnURL = history.saveState(annotationCanvas);
 				localStorage.setItem("currImgURL", drawnOnURL);

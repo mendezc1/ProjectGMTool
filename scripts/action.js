@@ -2,7 +2,7 @@ function preActionQuestions(el){
 	$(el).find("#imageCanvasTemplate").hide();
     $(el).find("#preActionTemplate").show();
 	$(el).find("#imageCaption2").show();
-	$("#preActionClose").click(function(){
+	$("#preActionClose").unbind( "click" ).click(function(){
 		//SAVE HERE ALANNAH!
 		var actionName = localStorage.getItem("currActionName"); //Currently save and then deletes this name before it can be called again
 		//var actionName = 
@@ -15,7 +15,7 @@ function preActionQuestions(el){
 	});
 	
 
-	$("#preActionBack").click(function(){
+	$("#preActionBack").unbind( "click" ).click(function(){
         if (statusIsTrue("drewToolTip")) {
             $(el).find("#preActionTemplate").hide();
             $(el).find("#imageCanvasTemplate").show();
@@ -26,19 +26,19 @@ function preActionQuestions(el){
             renderImage();
         }
 	})
-    $(".abbyMTrigger").click(function (){
+    $(".abbyMTrigger").unbind( "click" ).click(function (){
         addToolTip("abbyMToolTip", "Abby");	
     });
-    $(".abbyIPSTrigger").click(function(){
+    $(".abbyIPSTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyIPSToolTip", "Abby");
     });
-    $(".abbySETrigger").click(function(){
+    $(".abbySETrigger").unbind( "click" ).click(function(){
         addToolTip("abbySEToolTip", "Abby");
     });
-    $(".abbyRTrigger").click(function(){
+    $(".abbyRTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyRToolTip", "Abby");
     });
-    $(".abbyTTrigger").click(function(){
+    $(".abbyTTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyTToolTip", "Abby");
     });
 }
@@ -46,12 +46,12 @@ function preActionQuestions(el){
 function doActionPrompt(el){
 	$(el).find("#preActionTemplate").hide();
     $(el).find("#doActionPromptTemplate").show();
-	$("#postAction").click(function(){
+	$("#postAction").unbind( "click" ).click(function(){
 		//SAVE HERE ALANNAH!
         setPhasersToTrue("idealActionPerformed");
 		postActionQuestions(el);
 	});
-	$("#doActionBack").click(function(){
+	$("#doActionBack").unbind( "click" ).click(function(){
 		$(el).find("#doActionPromptTemplate").hide();
         $(el).find("#preActionTemplate").show();
         setPhasersToFalse("gotPreActionQuestions");
@@ -62,7 +62,7 @@ function doActionPrompt(el){
 function postActionQuestions(el){
 	$(el).find("#doActionPromptTemplate").hide();
     $(el).find("#postActionTemplate").show();
-	$("#submitPostAction").click(function(){
+	$("#submitPostAction").unbind( "click" ).click(function(){
 		//SAVE HERE ALANNAH!
         setPhasersToTrue("gotPostActionQuestions");
 		var actionName = localStorage.getItem("currActionName");
@@ -73,22 +73,22 @@ function postActionQuestions(el){
         
 		actionLoop(el);
 	});
-    $(".abbyMTrigger").click(function (){
+    $(".abbyMTrigger").unbind( "click" ).click(function (){
         addToolTip("abbyMToolTip", "Abby");	
     });
-    $(".abbyIPSTrigger").click(function(){
+    $(".abbyIPSTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyIPSToolTip", "Abby");
     });
-    $(".abbySETrigger").click(function(){
+    $(".abbySETrigger").unbind( "click" ).click(function(){
         addToolTip("abbySEToolTip", "Abby");
     });
-    $(".abbyRTrigger").click(function(){
+    $(".abbyRTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyRToolTip", "Abby");
     });
-    $(".abbyTTrigger").click(function(){
+    $(".abbyTTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyTToolTip", "Abby");
     });
-    $("#postActionBack").click(function(){
+    $("#postActionBack").unbind( "click" ).click(function(){
         $(el).find("#postActionTemplate").hide();
         $(el).find("#doActionPromptTemplate").show();
         setPhasersToFalse("idealActionPerformed");
@@ -103,7 +103,7 @@ function actionLoop(el){
 	$(el).find("#actionLoopTemplate").show();
 	
 	
-	$("#moreActions").click(function(){
+	$("#moreActions").unbind( "click" ).click(function(){
 		if ($(el).find("#actionNameInput").val() == ""){
 			alert("Please name your action before continuing");
 			
@@ -127,7 +127,7 @@ function actionLoop(el){
 		}
 	});
 	
-	$("#newSubgoal").click(function(){
+	$("#newSubgoal").unbind( "click" ).click(function(){
 		if($(el).find("#subgoalInput").val() == ""){
 			alert("Please name your subgoal before continuing")
 		}
@@ -158,7 +158,7 @@ function actionLoop(el){
 		}
 	});
 	
-	$("#saveAndExit").click(function(){
+	$("#saveAndExit").unbind( "click" ).click(function(){
 		//SAVE HERE ALANNAH!
 		//nuke
 		
@@ -172,7 +172,7 @@ function actionLoop(el){
 		//war war never changes...
 		
 	});	
-	$("#loopActionBack").click(function(){
+	$("#loopActionBack").unbind( "click" ).click(function(){
 		$(el).find("#actionLoopTemplate").hide();
         $(el).find("#postActionTemplate").show();
 		$(el).find("#imageCanvas").show();

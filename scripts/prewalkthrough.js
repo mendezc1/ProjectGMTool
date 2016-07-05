@@ -149,7 +149,7 @@ function handlePreWalkthroughInfo () {
 		console.log("no previous teamName");
 		sidebarBody().find("#teamInput").keyup(function(event){
 			if(event.keyCode == 13){
-				sidebarBody().find("#submitTeam").click();
+				sidebarBody().find("#submitTeam").unbind( "click" ).click();
 			} 
 		});
 		sidebarBody().find('body').off('click', '#submitTeam').on('click', '#submitTeam', function() {
@@ -258,7 +258,7 @@ function handlePreWalkthroughInfo () {
 			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
 			sidebarBody().find("#subgoalInput").keyup(function(event){
 				if(event.keyCode == 13){
-					sidebarBody().find("#submitSubgoal").click();
+					sidebarBody().find("#submitSubgoal").unbind( "click" ).click();
 				} 
 			});
 		}
@@ -267,7 +267,7 @@ function handlePreWalkthroughInfo () {
 	else {
 		sidebarBody().find("#scenarioInput").keyup(function(event){
 			if(event.keyCode == 13){
-				sidebarBody().find("#submitScenario").click();
+				sidebarBody().find("#submitScenario").unbind( "click" ).click();
 			} 
 		});
 		sidebarBody().find('body').off('click', '#submitScenario').on('click', '#submitScenario', function() {
@@ -296,7 +296,7 @@ function handlePreWalkthroughInfo () {
 			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
 			sidebarBody().find("#subgoalInput").keyup(function(event){
 				if(event.keyCode == 13){
-					sidebarBody().find("#submitSubgoal").click();
+					sidebarBody().find("#submitSubgoal").unbind( "click" ).click();
 				} 
 			});
 			
