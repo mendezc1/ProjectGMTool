@@ -148,8 +148,11 @@ function createCSV(entries) {
 	
 	return csvContent;
 }
-
+var imgList = [];
 function downloadCSV(csvContent) {
+	create_zip(csvContent);
+	return;
+/*
 	var encodedUri = encodeURI(csvContent);
 	var link = document.createElement("a");
 	link.setAttribute("href", encodedUri);
@@ -160,12 +163,33 @@ function downloadCSV(csvContent) {
 	link.click(); // This will download the data file named "globName.csv".	
 	localStorage.clear();
 //	location.reload();
+*/
 }
 
 function downloadURI(uri, name) {
-console.log("in image");
-  var link = document.createElement("a");
-  link.download = name;
-  link.href = uri;
-  link.click();
+	var safeName = name.slice(1, name.length-1)
+	var safeUri = uri.slice(22);
+//	data:image/png;base64,
+	console.log("in image", safeUri);
+	var imgObj = {
+		name: safeName+".png",
+		uri: safeUri
+	};
+	console.log("imgobj", imgObj);
+	imgList.push(imgObj)
+/*	var link = document.createElement("a");
+	link.download = name;
+	link.href = uri;
+	link.click();*/
+  }
+
+function create_zip(csvContent) {
+	var zip = new JSZip();
+	zip.file("GenderMagSession"+".csv", csvContent);
+	var img = zip.folder("images");
+	img.file(imgList[0].name, imgList[0].uri, {base64: true});
+	zip.generateAsync({type:"blob"}).then(function(content) {
+    // see FileSaver.js
+		saveAs(content, globName+".zip");
+	});
 }
