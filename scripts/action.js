@@ -51,11 +51,16 @@ function doActionPrompt(el){
         setPhasersToTrue("idealActionPerformed");
 		postActionQuestions(el);
 	});
+	//$("#postAction").prop("disabled",true);
 	$("#doActionBack").unbind( "click" ).click(function(){
 		$(el).find("#doActionPromptTemplate").hide();
         $(el).find("#preActionTemplate").show();
         setPhasersToFalse("gotPreActionQuestions");
 		preActionQuestions(el);
+	});
+	$(".continueTrigger").unbind("click").click(function(){
+		setPhasersToTrue("idealActionPerformed");
+		postActionQuestions(el);
 	});
 }
 
