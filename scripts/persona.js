@@ -8,6 +8,24 @@ function loadPersona(personaName){
 		sidebarBody().find(".abbyMTrigger").unbind( "click" ).click(function (){
 		//	console.log("Who you gonna call?");
 			addToolTip("abbyMToolTip", "Abby");	
+			$('#abbyMSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyMPreview").hide();
+					$("#abbyMComplete").show();
+					$("#abbyMSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyMPreview").show();
+					$("#abbyMComplete").hide();
+					$("#abbyMSeeMOAR").html("See more");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
 		});
 		sidebarBody().find(".abbyIPSTrigger").unbind( "click" ).click(function(){
 	//		console.log("Marco");
@@ -35,6 +53,24 @@ function loadPersona(personaName){
 		sidebarBody().find(".abbySETrigger").unbind( "click" ).click(function(){
 //			console.log("John-Jacob-Jingleheimer-Schmidt his name is my name too, whenever we go out, the people always shout");
 			addToolTip("abbySEToolTip", "Abby");
+			$('#abbySESeeMOAR').off('click').on('click', function() { //don't mock Abby's stutter
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbySEPreview").hide();
+					$("#abbySEComplete").show();
+					$("#abbySESeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbySEPreview").show();
+					$("#abbySEComplete").hide();
+					$("#abbySESeeMOAR").html("See more");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
 		});
 		sidebarBody().find(".abbyRTrigger").unbind( "click" ).click(function(){
 		/*	console.log("They call me `Bell`");
@@ -54,10 +90,46 @@ function loadPersona(personaName){
 			console.log("Thats not my name");
 			console.log("What is my name? Its: ");*/
 			addToolTip("abbyRToolTip", "Abby");
+			$('#abbyRSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyRPreview").hide();
+					$("#abbyRComplete").show();
+					$("#abbyRSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyRPreview").show();
+					$("#abbyRComplete").hide();
+					$("#abbyRSeeMOAR").html("See more");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
 		});
 		sidebarBody().find(".abbyTTrigger").unbind( "click" ).click(function(){
 			//console.log("Knock Knock, Whos there? Orange? Orange Who? Aren't you glad I didn't call");
 			addToolTip("abbyTToolTip", "Abby");
+			$('#abbyTSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyTPreview").hide();
+					$("#abbyTComplete").show();
+					$("#abbyTSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyTPreview").show();
+					$("#abbyTComplete").hide();
+					$("#abbyTSeeMOAR").html("See more");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
 		});
 		
 			
