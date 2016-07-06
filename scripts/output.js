@@ -113,7 +113,7 @@ function parseSubgoalArray(){
 					console.log("newname", newName)
 				}
 
-				downloadURI(currI.actions[i].imgURL, "S"+j+1+"A"+i+1+": "+newName);
+				downloadURI(currI.actions[i].imgURL, "S"+(1 + parseInt(j))+"A"+(1 + parseInt(i))+"_"+newName);
 			}
 			
 		if (entry.length != 0) {
