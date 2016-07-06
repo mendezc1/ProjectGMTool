@@ -70,7 +70,7 @@ function overlayScreen(onlyDraw){
 		toolTip.style.height = "550px";
 		toolTip.style.width = "500px";
 		toolTip.style.zindex = "10002";	
-		toolTip.style.border ="3px solid #146cf9";
+		toolTip.style.border ="3px solid #4A96AD";
 		toolTip.style.backgroundColor = "white";
 		toolTip.style.cursor="pointer";
 		toolTip.style.borderRadius="5px";
@@ -104,7 +104,7 @@ function overlayScreen(onlyDraw){
 		var canvas = document.getElementById("imageCanvas");
 		canvas.width = "465";
 		canvas.height=	"150";
-		canvas.style.border="2px solid black"
+		canvas.style.border="2px solid #4A96AD"
 		canvas.style.margin="10px";
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");
@@ -256,8 +256,8 @@ function overlayScreen(onlyDraw){
 			highlightClick.style.top = elm.offsetTop + "px";
 			highlightClick.style.height = elm.offsetHeight + "px";
 			highlightClick.style.width = elm.offsetWidth + "px";
-			highlightClick.style.border = "3px solid orange";
-			highlightClick.style.opacity = "0.5";
+			highlightClick.style.border = "3px solid #7D1935";
+			highlightClick.style.opacity = "1";
 			highlightClick.style.zindex = "10000";
 	
 			console.log("Clicked ", highlightClick)
@@ -303,8 +303,8 @@ function overlayScreen(onlyDraw){
 				highlightHover.style.top = rect.startY-20 + "px";
 				highlightHover.style.height = "50" + "px";
 				highlightHover.style.width = "100" + "px";
-				highlightHover.style.border = "3px solid orange";
-				highlightHover.style.opacity = "0.5";
+				highlightHover.style.border = "3px solid #7D1935";
+				highlightHover.style.opacity = "1";
 				highlightHover.style.zindex = "10000";
 				//console.log("Hovered if", hoverElm)
 			}
@@ -330,7 +330,7 @@ function renderImage(imgURL){
 	toolTip.style.height = "550px";
 	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	
-	toolTip.style.border ="3px solid #146cf9";
+	toolTip.style.border ="3px solid #4A96AD";
 	toolTip.style.backgroundColor = "white";
 	toolTip.style.cursor="pointer";
 	toolTip.style.borderRadius="5px";
@@ -360,7 +360,7 @@ function renderImage(imgURL){
 		var canvas = document.getElementById("imageCanvas");
 		canvas.width = "465";
 		canvas.height=	"150";
-		canvas.style.border="2px solid black"
+		canvas.style.border="2px solid #4A96AD"
 		canvas.style.margin="10px";
 		var context = canvas.getContext("2d");
 		var myImg = document.getElementById("previewImage");

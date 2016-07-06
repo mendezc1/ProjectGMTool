@@ -12,7 +12,7 @@ function addToolTip(toolTipName, folderName){
 		pageDiv.style.height = "200px";
 		pageDiv.style.width = "500px";
 		pageDiv.style.zindex = "10002";	
-		pageDiv.style.border ="3px solid #0288d1";
+		pageDiv.style.border ="3px solid #4A96AD";
 		pageDiv.style.cursor="pointer";
 		//pageDiv.style.boxShadow="10px 10px 5px black;";
 		pageDiv.style.borderRadius="5px";

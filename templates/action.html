@@ -3,12 +3,12 @@
     
         <div id="imageCanvasTemplate">
     
-            <div style="height:25px; background-color:#146cf9;text-align:center;">
+            <div style="height:25px; background-color:#4A96AD;text-align:center;">
 				<!--span class="actionNameSpan" style="color:white;"> </span-->
-                <button id="imageBack" style="float:left; width:30px; height:25px;background-color:#f9a114;color:black;">&#8592 </button>
-                <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:150px; height:25px;background-color:#f9a114;color:black;"> Save and Continue</button>	
-				<button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:#f9a114;color:black;"> Annotate Image </button>
-				<button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#f9a114;color:black;"> Retake screen capture </button> 
+                <button id="imageBack" style="float:left; width:30px; height:25px;background-color:#7D1935;color:white;">&#8592 </button>
+                <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Save and Continue</button>	
+				<button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Annotate Image </button>
+				<button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Retake screen capture </button> 
             </div>
         
 			<p id="imageCaption" style="margin:10px">
@@ -23,10 +23,10 @@
         
             <div id="preActionQuestions">
             
-                <div style="height:25px; background-color:#146cf9;text-align:center;">
+                <div style="height:25px; background-color:#4A96AD;text-align:center;">
 					<span class="actionNameSpan" style="color:white;"> </span>
-                    <button id="preActionBack" style="float:left; width:30px; height:25px;background-color:#f9a114;color:black;">&#8592 </button>	
-                    <button id="preActionClose" style="float:right; width:180px; height:25px;background-color:#f9a114;color:black;">Save and Continue </button>
+                    <button id="preActionBack" style="float:left; width:30px; height:25px;background-color:#7D1935;color:white;">&#8592 </button>	
+                    <button id="preActionClose" style="float:right; width:180px; height:25px;background-color:#7D1935;color:white;">Save and Continue </button>
                 </div>
                 <br>
                 
@@ -56,10 +56,10 @@
         
         <div id="doActionPromptTemplate" style="display:none;">
         
-            <div style="height:25px; background-color:#146cf9;text-align:center;">
+            <div style="height:25px; background-color:#4A96AD;text-align:center;">
 				<span class="actionNameSpan" style="color:white;"> </span>
-                <button id="doActionBack" style="float:left; width:30px; height:25px;background-color:#f9a114;color:black;">&#8592 </button>
-                <input id="postAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#f9a114;color:black;">
+                <button id="doActionBack" style="float:left; width:30px; height:25px;background-color:#7D1935;color:white;">&#8592 </button>
+                <input id="postAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#7D1935;color:white;">
             </div>
             <p>Once you've performed the ideal action, click to save and continue button.</p>
             
@@ -69,10 +69,10 @@
         
         <div id="postActionTemplate" style="display:none;">
             
-            <div style="height:25px; background-color:#146cf9;text-align:center;">
+            <div style="height:25px; background-color:#4A96AD;text-align:center;">
 				<span class="actionNameSpan" style="color:white;"> </span>
-                <button id="postActionBack" style="float:left; width:30px; height:25px;background-color:#f9a114;color:black;">&#8592 </button>
-                <input id="submitPostAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#f9a114;color:black;">
+                <button id="postActionBack" style="float:left; width:30px; height:25px;background-color:#7D1935;color:white;">&#8592 </button>
+                <input id="submitPostAction" type="submit" value="Save and Continue" style="float:right; width:180px; height:25px;background-color:#7D1935;color:white;">
             </div>
             <br>
             
@@ -105,22 +105,22 @@
         
         <div id="actionLoopTemplate" style="display:none;">
             
-            <div style="height:25px; background-color:#146cf9;text-align:center;">
+            <div style="height:25px; background-color:#4A96AD;text-align:center;">
 				<span class="actionNameSpan" style="color:white;"> </span>
-                <button id="loopActionBack" style="float:left; width:30px; height:25px;background-color:#f9a114;color:black;">&#8592 </button>
+                <button id="loopActionBack" style="float:left; width:30px; height:25px;background-color:#7D1935;color:white;">&#8592 </button>
             </div>
 
             <p> Are there more actions for this subgoal? </p>
 			<p>Yes, create a new Action</p>
 			<input id="actionNameInput" type="text" placeholder="ex Type 'Sue' in the search bar">
-			<input id="moreActions" type="submit" value="Add another action"></input><br>
+			<input id="moreActions" type="submit" value="Add another action" style="background-color:#7D1935;color:white;"></input><br>
 
 			<p>No, create a new Subgoal</p>
             <input id="subgoalInput" type="text" placeholder="ex Search for 'Sue' in the DB">
-			<input type="submit" id="newSubgoal" value="Create new subgoal">
+			<input type="submit" id="newSubgoal" value="Create new subgoal"style="background-color:#7D1935;color:white;">
 			
 			<p>No, please exit the tool</p>
-            <input id="saveAndExit" type="submit" value="Save and stop GenderMag session"></input><br>
+            <input id="saveAndExit" type="submit" value="Save and stop GenderMag session"style="background-color:#7D1935;color:white;"></input><br>
             
         </div>
         
