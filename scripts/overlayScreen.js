@@ -145,7 +145,6 @@ function overlayScreen(onlyDraw){
  			$(".previewTrigger").unbind( "click" ).click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
-			setTimeout(function(){
 		console.log($("#imageAnnotation").css("width"));
 		console.log($("#imageAnnotation").height());
 		$("#imageAnnotation").width(ratioWidth+10);
@@ -164,8 +163,6 @@ function overlayScreen(onlyDraw){
 			ctx = annotationCanvas.getContext("2d");
 		
 			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
-		}, 450);
-		
 			
 		$('#undoDraw').unbind( "click" ).click(function() {
 			console.log("undo", annotationCanvas, ctx);
@@ -528,11 +525,10 @@ function renderImage(imgURL){
 			var annotationCanvas = document.getElementById("annotationCanvas");
 			ctx = annotationCanvas.getContext("2d");
 	
-		setTimeout(function(){
 			console.log("Waiting for the rain to come")
 		
 			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
-		}, 450);
+	
 		$('#undoDraw').unbind( "click" ).click(function() {
 			console.log("undo", annotationCanvas, ctx);
 			var drawnOnURL = history.undo(annotationCanvas, ctx);
