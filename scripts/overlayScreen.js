@@ -369,7 +369,7 @@ function renderImage(imgURL){
 			//$myCanvas.draggable();
 			var $offset = $myCanvas.offset();
 			var $lineWidthVal = 2;
-			var lineColor = "#df4b26";
+			var lineColor = "#FF0000";
 			var isMouseDown = false;
 			var pos = {
 				x:0,
