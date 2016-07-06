@@ -125,13 +125,13 @@ function parseSubgoalArray(){
 
 var globName = "";
 function createCSV(entries) {
-	var csvContent = "data:text/csv;charset=utf-8,";
+	var csvContent = "";//"data:text/csv;charset=utf-8,";
 	
 	var header1 = ["Date", "Time", "Team", "Persona", "Scenario"];
 	csvContent += header1.join(",") + "\n";
 	var teamName = localStorage.getItem("teamName");
 	var persona5Delayed = localStorage.getItem("personaName");
-	var inAWorld = localStorage.getItem("scenarioName")
+	var inAWorld = localStorage.getItem("scenarioName");
 	var DTTPS = [today(), now(), teamName, persona5Delayed, inAWorld];																														//["Don't hate repopulate", "Its high noon", "We're all soldiers now", "5 Delayed", "IN A WORLD where our code doesn't suck"]	//not to be confused with HTTPS
 	globName += DTTPS[0];
 	globName += DTTPS[2];

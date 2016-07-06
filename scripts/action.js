@@ -2,6 +2,7 @@ function preActionQuestions(el){
 	$(el).find("#imageCanvasTemplate").hide();
     $(el).find("#preActionTemplate").show();
 	$(el).find("#imageCaption2").show();
+		$(el).find("#HRmorelikefunpolice").show();
 	$("#preActionClose").unbind( "click" ).click(function(){
 		//SAVE HERE ALANNAH!
 		var actionName = localStorage.getItem("currActionName"); //Currently save and then deletes this name before it can be called again
@@ -19,7 +20,9 @@ function preActionQuestions(el){
         if (statusIsTrue("drewToolTip")) {
             $(el).find("#preActionTemplate").hide();
             $(el).find("#imageCanvasTemplate").show();
+				$(el).find("#HRmorelikefunpolice").hide();
 			$(el).find("#imageCaption2").hide();
+		
             setPhasersToFalse("gotScreenshot");
         }
         else {
@@ -103,7 +106,8 @@ function postActionQuestions(el){
 
 function actionLoop(el){
 	$(el).find("#postActionTemplate").hide();
-    $(el).find("#imageCaption2").hide();
+    $(el).find("#imageCaption2").hide();	
+	$(el).find("#HRmorelikefunpolice").hide();
 	$(el).find("#imageCanvas").hide();
 	$(el).find("#actionLoopTemplate").show();
 	
@@ -182,6 +186,7 @@ function actionLoop(el){
         $(el).find("#postActionTemplate").show();
 		$(el).find("#imageCanvas").show();
 		$(el).find("#imageCaption2").show();
+			$(el).find("#HRmorelikefunpolice").show();
         setPhasersToFalse("gotPostActionQuestions");
 		postActionQuestions(el);
 	});

@@ -19,9 +19,7 @@
 	left:100px;
 	border:3px solid #4A96AD;
 	background-color : white;
-	transition: width 1s, height 1s, transform 1s;
-}
-#annotationCanvas{
+	transition-timing-function: ease;
 	transition: width 1s, height 1s, transform 1s;
 }
 /* uncomment for lulz

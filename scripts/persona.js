@@ -12,7 +12,26 @@ function loadPersona(personaName){
 		sidebarBody().find(".abbyIPSTrigger").unbind( "click" ).click(function(){
 	//		console.log("Marco");
 			addToolTip("abbyIPSToolTip", "Abby");
+			$('#abbyIPSSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyIPSPreview").hide();
+					$("#abbyIPSComplete").show();
+					$("#abbyIPSSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyIPSPreview").show();
+					$("#abbyIPSComplete").hide();
+					$("#abbyIPSSeeMOAR").html("See more");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
 		});
+	
 		sidebarBody().find(".abbySETrigger").unbind( "click" ).click(function(){
 //			console.log("John-Jacob-Jingleheimer-Schmidt his name is my name too, whenever we go out, the people always shout");
 			addToolTip("abbySEToolTip", "Abby");

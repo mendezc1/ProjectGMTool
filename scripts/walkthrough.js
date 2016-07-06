@@ -4,8 +4,10 @@ function drawSubgoal(subgoalId){
 	file = "/templates/subgoal.html";
 	
 	console.log("draw subgoal called, ", subgoalId);
-	
+
 	var isSetSubgoalQuestions = (statusIsTrue("gotSubgoalQuestions"));
+	
+
 	if (isSetSubgoalQuestions) {
 		console.log("in walkthrough if");
 		var subgoals = getSubgoalArrayFromLocal();
@@ -18,7 +20,7 @@ function drawSubgoal(subgoalId){
 		el.empty();
 		appendTemplateToElement(el,file);
 		sidebarBody().find('#subgoalHeading').html("Subgoal: " + subName);
-		sidebarBody().find("#editSubgoal").hide();
+		sidebarBody().find('#editSubgoal').hide();
 		if(subgoals){
 			var subgoal = subgoals[subgoalId-1];
 			console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
