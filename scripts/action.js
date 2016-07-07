@@ -47,6 +47,9 @@ function preActionQuestions(el){
 }
 
 function doActionPrompt(el){
+	$(el).find("#imageCaption3").hide();
+	$(el).find("#imageCaption2").show();	
+	$(el).find("#imageCanvas").show();
 	$(el).find("#preActionTemplate").hide();
     $(el).find("#doActionPromptTemplate").show();
 	$("#postAction").unbind( "click" ).click(function(){
@@ -70,6 +73,15 @@ function doActionPrompt(el){
 function postActionQuestions(el){
 	$(el).find("#doActionPromptTemplate").hide();
     $(el).find("#postActionTemplate").show();
+	$(el).find("#imageCaption2").hide();	
+	$(el).find("#imageCanvas").hide();
+	$(el).find("#imageCaption3").show();
+	$("#afterb44lyfe").unbind("click").click(function(){
+		console.log("Put some gators in the oven");
+		$(el).find("#imageCaption2").show();	
+		$(el).find("#imageCanvas").show();
+		$(el).find("#imageCaption3").hide();
+	});
 	$("#submitPostAction").unbind( "click" ).click(function(){
 		//SAVE HERE ALANNAH!
         setPhasersToTrue("gotPostActionQuestions");
@@ -109,6 +121,7 @@ function actionLoop(el){
     $(el).find("#imageCaption2").hide();	
 	$(el).find("#HRmorelikefunpolice").hide();
 	$(el).find("#imageCanvas").hide();
+	$(el).find("#imageCaption3").hide();
 	$(el).find("#actionLoopTemplate").show();
 	
 	
@@ -211,7 +224,7 @@ function reloadToolTipState () {
 		postActionQuestions(toolTip);
 	}
 	
-	else if (statusIsTrue("gotPreActionQuestions")) {	//This is the important one
+	else if (statusIsTrue("gotPreActionQuestions")) {	//This is the chosen one, and will bring balance to the force
 		$(toolTip).find("#imageCanvasTemplate").hide();
 		doActionPrompt(toolTip);
 	}
