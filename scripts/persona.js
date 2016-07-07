@@ -21,7 +21,7 @@ function loadPersona(personaName){
 				else{
 					$("#abbyMPreview").show();
 					$("#abbyMComplete").hide();
-					$("#abbyMSeeMOAR").html("See more");	
+					$("#abbyMSeeMOAR").html("See more...");	
 					$(this).attr("stateVar", 0);
 				}
 				
@@ -43,7 +43,7 @@ function loadPersona(personaName){
 				else{
 					$("#abbyIPSPreview").show();
 					$("#abbyIPSComplete").hide();
-					$("#abbyIPSSeeMOAR").html("See more");	
+					$("#abbyIPSSeeMOAR").html("See more...");	
 					$(this).attr("stateVar", 0);
 				}
 				
@@ -66,7 +66,7 @@ function loadPersona(personaName){
 				else{
 					$("#abbySEPreview").show();
 					$("#abbySEComplete").hide();
-					$("#abbySESeeMOAR").html("See more");	
+					$("#abbySESeeMOAR").html("See more...");	
 					$(this).attr("stateVar", 0);
 				}
 				
@@ -103,7 +103,7 @@ function loadPersona(personaName){
 				else{
 					$("#abbyRPreview").show();
 					$("#abbyRComplete").hide();
-					$("#abbyRSeeMOAR").html("See more");	
+					$("#abbyRSeeMOAR").html("See more...");	
 					$(this).attr("stateVar", 0);
 				}
 				
@@ -125,7 +125,7 @@ function loadPersona(personaName){
 				else{
 					$("#abbyTPreview").show();
 					$("#abbyTComplete").hide();
-					$("#abbyTSeeMOAR").html("See more");	
+					$("#abbyTSeeMOAR").html("See more...");	
 					$(this).attr("stateVar", 0);
 				}
 				
