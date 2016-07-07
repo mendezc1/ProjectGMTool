@@ -368,9 +368,9 @@ function actionLoop(el){
 		$(el).find("#theFinalCountDown").show();
 		
         setPhasersToTrue("finishedGM");
-		/*var entrees = parseSubgoalArray();
+		var entrees = parseSubgoalArray();
 		var scurvy = createCSV(entrees);
-		downloadCSV(scurvy);*/
+		downloadCSV(scurvy);
 		
 		$("#finalDownload").unbind("click").click(function () {
 			var entrees = parseSubgoalArray();
@@ -424,8 +424,13 @@ function reloadToolTipState () {
 	
 	var toolTip = document.getElementById("myToolTip");
 
+	if (statusIsTrue("finishedGM")) {
+		$(toolTip).find("#imageCanvasTemplate").hide();
+		actionLoop(toolTip);
+		$("#saveAndExit").click();
+	}
 	
-	if (statusIsTrue("gotPostActionQuestions")) {
+	else if (statusIsTrue("gotPostActionQuestions")) {
 		$(toolTip).find("#imageCanvasTemplate").hide();
 		actionLoop(toolTip);
 	}
