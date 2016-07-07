@@ -31,18 +31,108 @@ function preActionQuestions(el){
 	})
     $(".abbyMTrigger").unbind( "click" ).click(function (){
         addToolTip("abbyMToolTip", "Abby");	
+		$('#abbyMSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyMPreview").hide();
+					$("#abbyMComplete").show();
+					$("#abbyMSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyMPreview").show();
+					$("#abbyMComplete").hide();
+					$("#abbyMSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbyIPSTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyIPSToolTip", "Abby");
+			$('#abbyIPSSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyIPSPreview").hide();
+					$("#abbyIPSComplete").show();
+					$("#abbyIPSSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyIPSPreview").show();
+					$("#abbyIPSComplete").hide();
+					$("#abbyIPSSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbySETrigger").unbind( "click" ).click(function(){
         addToolTip("abbySEToolTip", "Abby");
+		$('#abbySESeeMOAR').off('click').on('click', function() { //don't mock Abby's stutter
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbySEPreview").hide();
+					$("#abbySEComplete").show();
+					$("#abbySESeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbySEPreview").show();
+					$("#abbySEComplete").hide();
+					$("#abbySESeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbyRTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyRToolTip", "Abby");
+			$('#abbyRSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyRPreview").hide();
+					$("#abbyRComplete").show();
+					$("#abbyRSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyRPreview").show();
+					$("#abbyRComplete").hide();
+					$("#abbyRSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbyTTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyTToolTip", "Abby");
+			$('#abbyTSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyTPreview").hide();
+					$("#abbyTComplete").show();
+					$("#abbyTSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyTPreview").show();
+					$("#abbyTComplete").hide();
+					$("#abbyTSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
 }
 
@@ -95,19 +185,109 @@ function postActionQuestions(el){
 	});
     $(".abbyMTrigger").unbind( "click" ).click(function (){
         addToolTip("abbyMToolTip", "Abby");	
+		$('#abbyMSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyMPreview").hide();
+					$("#abbyMComplete").show();
+					$("#abbyMSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyMPreview").show();
+					$("#abbyMComplete").hide();
+					$("#abbyMSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbyIPSTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyIPSToolTip", "Abby");
+			$('#abbyIPSSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyIPSPreview").hide();
+					$("#abbyIPSComplete").show();
+					$("#abbyIPSSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyIPSPreview").show();
+					$("#abbyIPSComplete").hide();
+					$("#abbyIPSSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbySETrigger").unbind( "click" ).click(function(){
         addToolTip("abbySEToolTip", "Abby");
-    });
+		$('#abbySESeeMOAR').off('click').on('click', function() { //don't mock Abby's stutter
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbySEPreview").hide();
+					$("#abbySEComplete").show();
+					$("#abbySESeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbySEPreview").show();
+					$("#abbySEComplete").hide();
+					$("#abbySESeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
+		});
     $(".abbyRTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyRToolTip", "Abby");
+			$('#abbyRSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyRPreview").hide();
+					$("#abbyRComplete").show();
+					$("#abbyRSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyRPreview").show();
+					$("#abbyRComplete").hide();
+					$("#abbyRSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
     });
     $(".abbyTTrigger").unbind( "click" ).click(function(){
         addToolTip("abbyTToolTip", "Abby");
-    });
+		$('#abbyTSeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#abbyTPreview").hide();
+					$("#abbyTComplete").show();
+					$("#abbyTSeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#abbyTPreview").show();
+					$("#abbyTComplete").hide();
+					$("#abbyTSeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+			});
+	});
     $("#postActionBack").unbind( "click" ).click(function(){
         $(el).find("#postActionTemplate").hide();
         $(el).find("#doActionPromptTemplate").show();
