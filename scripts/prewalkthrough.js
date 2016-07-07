@@ -72,8 +72,8 @@ function nukeButtonOnclick () {
         console.log("Resetting status object...");
 		localStorage.clear();
 		console.log("Clearing local...");
-		setPhasersToTrue('finishedGM');
-		reloadToolTipState();
+		//setPhasersToTrue('finishedGM');
+		//reloadToolTipState();
 	});
 	
 }
