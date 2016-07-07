@@ -368,9 +368,9 @@ function actionLoop(el){
 		$(el).find("#theFinalCountDown").show();
 		
         setPhasersToTrue("finishedGM");
-		/*var entrees = parseSubgoalArray();
+		var entrees = parseSubgoalArray();
 		var scurvy = createCSV(entrees);
-		downloadCSV(scurvy);*/
+		downloadCSV(scurvy);
 		
 		$("#finalDownload").unbind("click").click(function () {
 			var entrees = parseSubgoalArray();
