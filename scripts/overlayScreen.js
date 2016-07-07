@@ -145,8 +145,8 @@ function overlayScreen(onlyDraw){
  			$(".previewTrigger").unbind( "click" ).click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
-		console.log($("#imageAnnotation").css("width"));
-		console.log($("#imageAnnotation").height());
+		
+	//	document.getElementById("#imageAnnotation").style.transition = "all 2s";
 		$("#imageAnnotation").width(ratioWidth+10);
 		$("#imageAnnotation").height(ratioHeight+40);
 		$("#imageAnnotation").draggable();
@@ -155,9 +155,8 @@ function overlayScreen(onlyDraw){
 		$("#annotationCanvas").width(ratioWidth);
 		$("#annotationCanvas").height(ratioHeight);
 		$("#imageAnnotation").css("position", "absolute");
-		$("#imageAnnotation").css("top", "150px");
-		$("#imageAnnotation").css("left", "100px");
-	
+		$("#imageAnnotation").css("top", myToolTip.style.top);
+		$("#imageAnnotation").css("left", myToolTip.style.left);
 			//drawOnCanvas("#annotationCanvas");
 			var annotationCanvas = document.getElementById("annotationCanvas");
 			ctx = annotationCanvas.getContext("2d");
@@ -507,19 +506,19 @@ function renderImage(imgURL){
 		$(".previewTrigger").unbind( "click" ).click(function(){ //#triggered
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
-		
-		console.log($("#imageAnnotation").css("width"));
-		console.log($("#imageAnnotation").height());
+		//document.getElementById("#imageAnnotation").style.transition = "all 2s";	
+	//	console.log("mytooltip", myToolTip.style.top, myToolTip.style.left);
 		$("#imageAnnotation").width(ratioWidth+10);
 		$("#imageAnnotation").height(ratioHeight+40);
 		$("#imageAnnotation").draggable();
+	
 		$("#annotationCanvas").attr("width", ratioWidth);
 		$("#annotationCanvas").attr("height", ratioHeight);
 		$("#annotationCanvas").width(ratioWidth);
 		$("#annotationCanvas").height(ratioHeight);
 		$("#imageAnnotation").css("position", "absolute");
-		$("#imageAnnotation").css("top", "150px");
-		$("#imageAnnotation").css("left", "100px");
+		$("#imageAnnotation").css("top", myToolTip.style.top);
+		$("#imageAnnotation").css("left", myToolTip.style.left);
 			
 			drawOnCanvas("#annotationCanvas");
 			var annotationCanvas = document.getElementById("annotationCanvas");
