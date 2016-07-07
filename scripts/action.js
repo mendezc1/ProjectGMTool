@@ -385,7 +385,7 @@ function actionLoop(el){
 			}
 			else {
 				$('#finalYes').prop('disabled', true);
-				$("#finalYes").attr("style","background-color:#696969;color:gray;");
+				$("#finalYes").attr("style","background-color:#7D1935;color:white;opacity:0.5");
 			}
 		});	
 		
