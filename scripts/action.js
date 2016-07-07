@@ -364,14 +364,45 @@ function actionLoop(el){
 		//SAVE HERE ALANNAH!
 		//nuke
 		
-        setPhasersToTrue("finishedGM");
-		var entrees = parseSubgoalArray();
-		var scurvy = createCSV(entrees);
-		downloadCSV(scurvy);
+		$(el).find("#actionLoopTemplate").hide();
+		$(el).find("#theFinalCountDown").show();
 		
-		localStorage.clear(); //NUKED
-		//nuclear fallout
-		//war war never changes...
+        setPhasersToTrue("finishedGM");
+		/*var entrees = parseSubgoalArray();
+		var scurvy = createCSV(entrees);
+		downloadCSV(scurvy);*/
+		
+		$("#finalDownload").unbind("click").click(function () {
+			var entrees = parseSubgoalArray();
+			var scurvy = createCSV(entrees);
+			downloadCSV(scurvy);
+		});
+		
+		$("#finalYesCheckbox").unbind("click").click(function () {
+			if ($('#finalYesCheckbox').is(":checked")) {
+				$('#finalYes').prop('disabled', false);
+				$("#finalYes").attr("style","background-color:#7D1935;color:white;");
+			}
+			else {
+				$('#finalYes').prop('disabled', true);
+				$("#finalYes").attr("style","background-color:#696969;color:gray;");
+			}
+		});	
+		
+		$("#finalYes").unbind("click").click(function () {
+			localStorage.clear(); //NUKED
+			//nuclear fallout
+			//war war never changes...
+			location.reload();
+		});
+		
+		$("#finalNo").unbind("click").click(function () {
+			$('#theFinalCountDown').hide();
+			setPhasersToFalse('finishedGM');
+			$('#actionLoopTemplate').show();
+		});
+		
+		
 		
 	});	
 	$("#loopActionBack").unbind( "click" ).click(function(){
@@ -379,7 +410,7 @@ function actionLoop(el){
         $(el).find("#postActionTemplate").show();
 		$(el).find("#imageCanvas").show();
 		$(el).find("#imageCaption2").show();
-			$(el).find("#HRmorelikefunpolice").show();
+		$(el).find("#HRmorelikefunpolice").show();
         setPhasersToFalse("gotPostActionQuestions");
 		postActionQuestions(el);
 	});

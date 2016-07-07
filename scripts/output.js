@@ -187,7 +187,7 @@ function downloadURI(uri, name) {
 	var safeName = name//.slice(1, name.length-1)
 	var safeUri = uri.slice(22);
 //	data:image/png;base64,
-	console.log("in image", safeUri);
+	//console.log("in image", safeUri);
 	var imgObj = {
 		name:safeName+".png",
 		uri: safeUri
