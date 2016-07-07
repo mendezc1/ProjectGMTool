@@ -14,6 +14,7 @@ function overlayScreen(onlyDraw){
 	
 	if (onlyDraw == "onlyToolTip") {
 		closeSlider();
+		sidebarBody().find("#nukeStatus").show();
 		if(!document.getElementById('genderMagCanvasContainer')){
 			console.log("in if");
 			var canvasContainer = document.createElement('div');
@@ -185,6 +186,7 @@ function overlayScreen(onlyDraw){
 	
 	else {
 		closeSlider();
+		sidebarBody().find("#nukeStatus").show();
 	if(!document.getElementById('genderMagCanvasContainer')){
 		console.log("In overlayScreen");
 		var canvasContainer = document.createElement('div');
