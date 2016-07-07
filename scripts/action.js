@@ -424,8 +424,13 @@ function reloadToolTipState () {
 	
 	var toolTip = document.getElementById("myToolTip");
 
+	if (statusIsTrue("finishedGM")) {
+		$(toolTip).find("#imageCanvasTemplate").hide();
+		actionLoop(toolTip);
+		$("#saveAndExit").click();
+	}
 	
-	if (statusIsTrue("gotPostActionQuestions")) {
+	else if (statusIsTrue("gotPostActionQuestions")) {
 		$(toolTip).find("#imageCanvasTemplate").hide();
 		actionLoop(toolTip);
 	}
