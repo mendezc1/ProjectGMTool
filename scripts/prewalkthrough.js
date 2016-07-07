@@ -68,11 +68,10 @@ function seeMoreOnclick () {
 function nukeButtonOnclick () {
 	
 	sidebarBody().find('body').off('click', '#nukeStatus').on('click', '#nukeStatus', function() {
-		/*localStorage.setItem("statusObject", JSON.stringify(statusObject));
+		localStorage.setItem("statusObject", JSON.stringify(statusObject));
         console.log("Resetting status object...");
 		localStorage.clear();
-		console.log("Clearing local...");*/
-		//Why do we even let them stop before they've done anything? That seems dumb. Anyways.
+		console.log("Clearing local...");
 		setPhasersToTrue('finishedGM');
 		reloadToolTipState();
 	});
