@@ -1,4 +1,23 @@
+var persona5Delayed = localStorage.getItem("personaName");
+persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1)
+var personaName="";
+	if(persona5Delayed == "Abby"){
+		personaName = "abby";
+	}
+	else if(persona5Delayed == "Tim"){
+		personaName = "tim";
+	}
+	else if(persona5Delayed == "Patrick"){
+		personaName = "patrick";
+	}
+	else if("persona5Delayed" == "Patricia"){
+		personaName = "patricia";
+	}
+console.log("persona5Delayed", persona5Delayed, personaName);
+
 function preActionQuestions(el){
+	
+
 	$(el).find("#imageCanvasTemplate").hide();
     $(el).find("#preActionTemplate").show();
 	$(el).find("#imageCaption2").show();
@@ -30,22 +49,23 @@ function preActionQuestions(el){
         }
 	})
     $(".abbyMTrigger").unbind( "click" ).click(function (){
-        addToolTip("abbyMToolTip", "Abby");	
+        addToolTip(personaName+"MToolTip", persona5Delayed);	
+		
     });
     $(".abbyIPSTrigger").unbind( "click" ).click(function(){
-        addToolTip("abbyIPSToolTip", "Abby");
+        addToolTip(personaName+"IPSToolTip", persona5Delayed);
 
     });
     $(".abbySETrigger").unbind( "click" ).click(function(){
-        addToolTip("abbySEToolTip", "Abby");
+        addToolTip(personaName+"SEToolTip", persona5Delayed);
 
     });
     $(".abbyRTrigger").unbind( "click" ).click(function(){
-        addToolTip("abbyRToolTip", "Abby");
+        addToolTip(personaName+"RToolTip", persona5Delayed);
 
     });
     $(".abbyTTrigger").unbind( "click" ).click(function(){
-        addToolTip("abbyTToolTip", "Abby");
+        addToolTip(personaName+"TToolTip", persona5Delayed);
 	
     });
 }
