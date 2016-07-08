@@ -23,5 +23,23 @@ function addToolTip(toolTipName, folderName){
 		$("#" + toolTipName + "Button").off('click').on('click', function() {
 			$("#" + toolTipName + "Div").remove();
 		});
+		$('#'+toolTipName+'SeeMOAR').off('click').on('click', function() {
+				var isOpen = $(this).attr("stateVar");
+		
+				//The "see more" is expanded and needs to be closed
+				if (isOpen == 0) {
+					$("#"+toolTipName+"Preview").hide();
+					$("#"+toolTipName+"Complete").show();
+					$("#"+toolTipName+"SeeMOAR").html("See less");	
+					$(this).attr("stateVar", 1);
+				}
+				else{
+					$("#"+toolTipName+"Preview").show();
+					$("#"+toolTipName+"Complete").hide();
+					$("#"+toolTipName+"SeeMOAR").html("See more...");	
+					$(this).attr("stateVar", 0);
+				}
+				
+		});
 	
 }
