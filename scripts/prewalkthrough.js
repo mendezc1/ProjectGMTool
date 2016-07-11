@@ -68,12 +68,46 @@ function seeMoreOnclick () {
 function nukeButtonOnclick () {
 	
 	sidebarBody().find('body').off('click', '#nukeStatus').on('click', '#nukeStatus', function() {
-		localStorage.setItem("statusObject", JSON.stringify(statusObject));
-        console.log("Resetting status object...");
-		localStorage.clear();
-		console.log("Clearing local...");
-		//setPhasersToTrue('finishedGM');
-		//reloadToolTipState();
+		
+		var el = sidebarBody().find('#sideBySide');
+		el.contents().hide();
+		appendTemplateToElement(el, '/templates/sliderFinalWarning.html');
+		
+		var entrees = parseSubgoalArray();
+		var scurvy = createCSV(entrees);
+		downloadCSV(scurvy);
+		
+		sidebarBody().find("#sliderFinalDownload").unbind("click").click(function () {
+			var entrees = parseSubgoalArray();
+			var scurvy = createCSV(entrees);
+			downloadCSV(scurvy);
+		});
+		
+		sidebarBody().find("#sliderYesCheckbox").unbind("click").click(function () {
+			if (sidebarBody().find('#sliderYesCheckbox').is(":checked")) {
+				sidebarBody().find('#sliderFinalYes').prop('disabled', false);
+				sidebarBody().find("#sliderFinalYes").attr("style","background-color:#7D1935;color:white;");
+			}
+			else {
+				sidebarBody().find('#sliderFinalYes').prop('disabled', true);
+				sidebarBody().find("#sliderFinalYes").attr("style","background-color:#7D1935;color:white;opacity:0.5");
+			}
+		});	
+		
+		sidebarBody().find("#sliderFinalYes").unbind("click").click(function () {
+			localStorage.clear(); //NUKED
+			//nuclear fallout
+			//war war never changes...
+			location.reload();
+		});
+		
+		sidebarBody().find("#sliderFinalNo").unbind("click").click(function () {
+			sidebarBody().find('#sliderFinalCountdown').remove();
+			sidebarBody().find('#subgoalList').show();
+			sidebarBody().find('#containeryo').show();
+			sidebarBody().find('#personaInfo').show();
+		});
+
 	});
 	
 }
