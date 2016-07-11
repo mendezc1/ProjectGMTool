@@ -1,5 +1,5 @@
 var persona5Delayed = localStorage.getItem("personaName");
-persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1)
+if (persona5Delayed !== null ) {persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1);}
 var personaName="";
 	if(persona5Delayed == "Abby"){
 		personaName = "abby";
