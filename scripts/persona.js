@@ -1,5 +1,5 @@
 function loadPersona(personaName){
-	console.log("in load persona" , personaName);
+	//console.log("in load persona" , personaName);
 	if(personaName == "Abby"){
 		appendTemplateToElement(sidebarBody().find("#personaInfo"), "./templates/Abby/abbyPersona.html");
 		var abbySRC=chrome.extension.getURL("images/Abby_square.jpg");
@@ -112,6 +112,6 @@ function loadPersona(personaName){
 		});
 	}
 	else{
-		console.log("NO valid name");
+		//console.log("NO valid name");
 	}
 }

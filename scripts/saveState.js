@@ -10,7 +10,7 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 		facetValues: facets,
 		actions: []
 	};
-	console.log("incoming subgoal", subgoal, id, subgoalArray.length);
+	//console.log("incoming subgoal", subgoal, id, subgoalArray.length);
 	if(id > subgoalArray.length){
 		var subArr = getSubgoalArrayFromLocal();
 		if (!subArr) {
@@ -31,13 +31,13 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 		subArr[id-1] = subgoal;
 		//console.log("subgoalArray in else: ", subArr);
 		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
-		console.log("nothing to see here");
+		//console.log("nothing to see here");
 		
 	}
 }
 
 function addToSandwich(type, item){
-	console.log("servin' up a(n) " +type+ " sandwich");
+	//console.log("servin' up a(n) " +type+ " sandwich");
 	
 	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
 		var subArr = getSubgoalArrayFromLocal();
@@ -73,19 +73,19 @@ function addToSandwich(type, item){
 		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + item.subgoalId + '-' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		var sideActionIdToFind = item.subgoalId + "-" + item.actionId;
         var sideActionIdForClick = "#sideAction" + item.subgoalId + "-" + item.actionId;
-		console.log(sideActionIdToFind, typeof(sideActionIdToFind));
+		//console.log(sideActionIdToFind, typeof(sideActionIdToFind));
 		var foundIt = false;
 		sidebarBody().find('#subgoalList').children().each(function () {
 			var currId = this.getAttribute('supercoolattr');
-			console.log(currId, typeof(currId));
+			//console.log(currId, typeof(currId));
 			if (! sideActionIdToFind.localeCompare(currId)) {
-				console.log("in finding if");
+				//console.log("in finding if");
 				foundIt = true;
 			}
 		});
 		if (!foundIt) {
 			sidebarBody().find("#subgoalList").append(sideAction);
-			console.log("added to sammich", item.actionId, item.name);
+			//console.log("added to sammich", item.actionId, item.name);
 			sideSubgoalExpandy(item.subgoalId, "expand");
             var actionNum = localStorage.getItem("numActions");
             actionNum++;
@@ -99,12 +99,12 @@ function addToSandwich(type, item){
                 currArray[item.subgoalId - 1].actions[item.actionId - 1].name = item.name;
                 saveVarToLocal("subgoalArray", currArray);
             }*/
-            console.log("just changed the name");
+            //console.log("just changed the name");
         }
 		
 		
 		sidebarBody().find(sideActionIdForClick).unbind( "click" ).click(function(){
-			console.log("clicked the action", this.getAttribute('supercoolattr'));
+			//console.log("clicked the action", this.getAttribute('supercoolattr'));
 			drawAction(item.actionId, item.subgoalId);
 			//sidebarBody().find('#actionNameInput').html("Camera action");
 			//sidebarBody().find('#submitActionName').click();
@@ -116,7 +116,7 @@ function addToSandwich(type, item){
 		var actionName = localStorage.getItem("currActionName");
 		var sideAction = '<div superCoolAttr="' + subgoalId + '-' + actionId + '" style="border:1px solid CornFlowerBlue; margin:5px;" id="sideAction' + subgoalId + '-' + actionId + '">Action ' + actionId + ': ' + actionName + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
-		console.log("added to sammich", actionId, actionName);
+		//console.log("added to sammich", actionId, actionName);
 		var actionNum = localStorage.getItem("numActions");
 		actionNum++;
 		localStorage.setItem("numActions", actionNum);
@@ -152,7 +152,7 @@ function savePreIdealAction (name, yesnomaybe, whyText, facets) {
 		facetValues: facets
 	};
 	
-	console.log("incoming preAction", preIdealAction);
+	//console.log("incoming preAction", preIdealAction);
     //Save to local so that we can get it later and stick it in the array with its corresponding postAction
     saveVarToLocal("currPreAction", preIdealAction);
 	localStorage.setItem("inMiddleOfAction", "true");		//So we know to retrieve the in-between state
@@ -173,7 +173,7 @@ function savePostIdealAction (name, yesnomaybe, whyText, facets) {
 		facetValues: facets
 	};
 	
-	console.log("incoming postAction", postIdealAction);
+	//console.log("incoming postAction", postIdealAction);
     //Put them together and save
     glueActionsAndSave(currPreAction, postIdealAction);
 }
@@ -198,7 +198,7 @@ function glueActionsAndSave (preAction, postAction) {
         preAction: preAction,
         postAction: postAction
     }
-    console.log("incoming ideal action: ", idealAction);
+    //console.log("incoming ideal action: ", idealAction);
     
     //Save it to local
     var currArray = getSubgoalArrayFromLocal();
@@ -214,7 +214,7 @@ function glueActionsAndSave (preAction, postAction) {
 		
 		//Rebind the onclick of the side list action to show the answers
 		var sideActionIdToFind = "#sideAction" + targetSubgoal.id + "-" + idealAction.id;
-		console.log("Rebinding onclick to loadAnswers...");
+		//console.log("Rebinding onclick to loadAnswers...");
 		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
 			loadActionAnswersTemplate(idealAction.id, targetSubgoal.id);
 		});
@@ -229,7 +229,7 @@ function glueActionsAndSave (preAction, postAction) {
 */
 function saveVarToLocal (nameOfThingToSave, thingToSave) {
 	localStorage.setItem(nameOfThingToSave, JSON.stringify(thingToSave));
-	console.log("Saved: " + nameOfThingToSave + " " + thingToSave);
+	//console.log("Saved: " + nameOfThingToSave + " " + thingToSave);
 }
 
 
@@ -241,11 +241,11 @@ function saveVarToLocal (nameOfThingToSave, thingToSave) {
 function getVarFromLocal (nameOfThing) {
 	var item = JSON.parse(localStorage.getItem(nameOfThing));
 	if (item) {
-		console.log("Found: " + nameOfThing + " " + item);
+		//console.log("Found: " + nameOfThing + " " + item);
 		return item;
 	}
 	else {
-		console.log("Couldn't find variable " + nameOfThing + "in local storage");
+		//console.log("Couldn't find variable " + nameOfThing + "in local storage");
 		return "";
 	}
 }
@@ -258,7 +258,7 @@ function getVarFromLocal (nameOfThing) {
 function getSubgoalArrayFromLocal() {
     var currObj = JSON.parse(localStorage.getItem('subgoalArray'));
     if (!currObj) {
-        console.log("Couldn't find subgoalArray in local storage");
+        //console.log("Couldn't find subgoalArray in local storage");
         return null;
     }
     else{
@@ -281,16 +281,16 @@ function getSubgoalArrayFromLocal() {
 	
 //Happens before refresh
 $( window ).unload(function() {
-	console.log("UNLOCKED AND UNLOADED");
+	//console.log("UNLOCKED AND UNLOADED");
 	var sidebarHTML = sidebarBody().find('#subgoalList').html();
-	console.log(sidebarHTML);
+	//console.log(sidebarHTML);
 	localStorage.setItem('sidebarHTML', sidebarHTML);
 });
 
 
 //Happens after refresh
 function reloadSandwich () {
-	console.log("LOCKED AND LOADED");
+	//console.log("LOCKED AND LOADED");
 	var sidebarHTML = localStorage.getItem('sidebarHTML');
 	//console.log(sidebarHTML);
 	var subgoalDiv = sidebarBody().find('#subgoalList');
@@ -298,22 +298,22 @@ function reloadSandwich () {
 		subgoalDiv.html(sidebarHTML);
 		sidebarBody().find('#subgoalList').children().each(function () {
 			var currId = this.getAttribute('supercoolattr');
-			console.log(currId);
+			//console.log(currId);
 			if (currId.length == 1) {
 				//It's a subgoal
-				console.log("subgoal");
+				//console.log("subgoal");
 				sidebarBody().find("#sideSubgoal" + currId).unbind( "click" ).click(function(){
 					drawSubgoal(currId);
 				});
 			}
 			else {
 				//It's an action
-				console.log("action", currId);
+				//console.log("action", currId);
 				var thisActionNum = Number(currId[currId.length-1]);
                 var thisSubNum = Number(currId[0]);
 				var subgoals = getSubgoalArrayFromLocal();
 				if (subgoals[ thisSubNum-1 ].actions[ thisActionNum-1 ]) {
-					console.log("binding to answers...");
+					//console.log("binding to answers...");
 					sidebarBody().find("#sideAction" + currId).unbind( "click" ).click(function(){
 						loadActionAnswersTemplate(thisActionNum, thisSubNum);
 					});
@@ -339,7 +339,7 @@ function reloadSandwich () {
 		
 	}
 	else {
-		console.log("NOPE");
+		//console.log("NOPE");
 	}
 }
 
@@ -360,7 +360,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
             var currId = (this.getAttribute('supercoolattr'));
             //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to expand
             if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
-                console.log("showing ", currId);
+                //console.log("showing ", currId);
                 $(this).show();
             }
         });
@@ -376,7 +376,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
             var currId = (this.getAttribute('supercoolattr'));
             //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to collapse
             if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
-                console.log("hiding ", currId);
+                //console.log("hiding ", currId);
                 $(this).hide();
             }
         });
@@ -388,7 +388,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
     
         //Find the stateVar
         var stateVar = Number(sidebarBody().find('#sideSubgoal' + subgoalId).attr("stateVar"));
-        console.log('stateVar', stateVar);
+        //console.log('stateVar', stateVar);
         
         //If it's collapsed (stateVar == 0), expand and set the stateVar to 1
         if (stateVar == 0) {
@@ -399,7 +399,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
                 var currId = (this.getAttribute('supercoolattr'));
                 //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to expand
                 if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
-                    console.log("showing ", currId);
+                    //console.log("showing ", currId);
                     $(this).show();
                 }
             });
@@ -415,7 +415,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
                 var currId = (this.getAttribute('supercoolattr'));
                 //If the first part of the ID matches the subgoal number and the length of the ID is longer than 1, it's an action to collapse
                 if ( Number(currId[0]) == Number(subgoalId)  &&  currId.length > 1 ) {      
-                    console.log("hiding ", currId);
+                    //console.log("hiding ", currId);
                     $(this).hide();
                 }
             });
@@ -423,7 +423,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
         }
         
         else {
-            console.log("Something in expandy went wrong... check your stateVar or the function call");
+            //console.log("Something in expandy went wrong... check your stateVar or the function call");
         }
         
     }
@@ -437,13 +437,13 @@ function loadActionAnswersTemplate (actionId, subgoalId) {
 	var subArr = getSubgoalArrayFromLocal();
 	
 	if (subgoalId > subArr.length) {
-		console.log("Can't draw those answers - the subgoal doesn't exist");
+		//console.log("Can't draw those answers - the subgoal doesn't exist");
 	}
 	else if (subArr[subgoalId-1].actions.length == 0) {
-		console.log("Can't draw those answers - the actions array is empty");
+		//console.log("Can't draw those answers - the actions array is empty");
 	}
 	else if (actionId > subArr[subgoalId-1].actions.length) {
-		console.log("Can't draw those answers - that action doesn't exist");
+		//console.log("Can't draw those answers - that action doesn't exist");
 	}
 	
 	else{		//All should be good for drawing if you got this far
@@ -454,7 +454,7 @@ function loadActionAnswersTemplate (actionId, subgoalId) {
 		appendTemplateToElement(el,file);
 		
 		var targetAction = subArr[subgoalId-1].actions[actionId-1];
-		console.log("In loadAnswers", actionId, subgoalId, targetAction);
+		//console.log("In loadAnswers", actionId, subgoalId, targetAction);
 		
 		sidebarBody().find('#answersActionNum').html(targetAction.id);
 		sidebarBody().find('#answersActionName').html(targetAction.name);
@@ -491,7 +491,7 @@ function showMeTheStringYNM (targetId, targetObj) {
 			propsFound++;
 		}
 	}
-	console.log("Incoming YNM string", myString);
+	//console.log("Incoming YNM string", myString);
 	
 	sidebarBody().find(targetId).html(myString);
 	
@@ -557,7 +557,7 @@ function showMeTheStringFacets (targetId, targetObj) {
 	}
 	
 	
-	console.log("Incoming facets string", myString);
+	//console.log("Incoming facets string", myString);
 	
 	sidebarBody().find(targetId).html(myString);
 	

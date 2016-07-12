@@ -1,6 +1,6 @@
 
 function takeScreenShot() {
-	console.log("screen shot");
+	//console.log("screen shot");
 	chrome.windows.getCurrent(function (win) {    
     	chrome.tabs.captureVisibleTab(win.id,{"format": "png"}, function(imgUrl) {	
     	

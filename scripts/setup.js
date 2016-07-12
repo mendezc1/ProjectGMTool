@@ -13,7 +13,7 @@
 
 function setup (id, file) {
 	
-	console.log("In setup");
+	//console.log("In setup");
 	
 	//Restore the state of the HTML if it exists, and otherwise draw the normal starting state
 	var hasStartedWalkthrough = statusIsTrue("startedGM")
@@ -24,14 +24,14 @@ function setup (id, file) {
 		else {
 			closeSlider();
 		}
-        console.log("Found previous info. Skipping start screen");
+        //console.log("Found previous info. Skipping start screen");
         preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 		if (statusIsTrue('drewToolTip')) {
 			reloadToolTipState();
 		}
 	}
 	else {
-		console.log("Nothing to restore - starting as normal");
+		//console.log("Nothing to restore - starting as normal");
 		//Put the text and buttons on the screen
 		var el = $(id).contents().find('body');
 		appendTemplateToElement(el,file);
@@ -41,14 +41,5 @@ function setup (id, file) {
             setPhasersToTrue("startedGM");
 			preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 		});
-		
-		//Add the onclick to the "Learn More" button
-		$(id).contents().find('body').children('#learnMoreButton').off('click').on('click', function() {
-			console.log("Learn more button clicked");
-			overlayScreen();
-			overlayScreen();
-			//addToolTip("setupToolTip");
-		});
 	}
-	
 }

@@ -1,4 +1,4 @@
-console.log( 'Background.html starting!' );
+//console.log( 'Background.html starting!' );
 var screenShotURL;
 	/*Put page action icon on all tabs*/
 	chrome.tabs.onUpdated.addListener(function(tabId) {
@@ -32,10 +32,10 @@ var screenShotURL;
 					{callFunction: "toggleSidebar"}, 
 					//Optional callback function
 					function(response) {
-						console.log(response);
+						//console.log(response);
 					}
 				);
 			});
 		});
 	});
-console.log( 'Background.html done.' );
+//console.log( 'Background.html done.' );

@@ -171,18 +171,18 @@ function handlePreWalkthroughInfo () {
 	//If the state variable is set, reload previous input
 	var isSetTeam = statusIsTrue("gotTeamName");
 	if (isSetTeam) {		//Restore from previous state
-		console.log("Restoring team name...");
+		//console.log("Restoring team name...");
 		sidebarBody().find("#teamName").html("<b>Team:</b> "+ getVarFromLocal("teamName") );
 		sidebarBody().find("#editTeam").show();
 		sidebarBody().find("#getTeam").hide();
 		if( localStorage.getItem("inGetPersona") != "true") {
-			console.log("showing persona select...");
+			//console.log("showing persona select...");
 			sidebarBody().find("#getPersona").show();
 		}
 	}
 	
 	else {
-		console.log("no previous teamName");
+		//console.log("no previous teamName");
 		sidebarBody().find("#teamInput").keyup(function(event){
 			if(event.keyCode == 13){
 				sidebarBody().find("#submitTeam").unbind( "click" ).click();
@@ -208,7 +208,7 @@ function handlePreWalkthroughInfo () {
 	//If the state variable is set, reload previous input
 	var isSetPersona = statusIsTrue("gotPersonaName");
 	if (isSetPersona) {		//Restore from previous state
-		console.log("Restoring persona name...");
+		//console.log("Restoring persona name...");
 		var personaName = getVarFromLocal("personaName");
 		sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
 		loadPersona(personaName);
@@ -225,7 +225,7 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#editPersona").show();
 		personaShown = true;
 		if( localStorage.getItem("inGetScenario") != "true") {
-			console.log("showing scenario input...");
+			//console.log("showing scenario input...");
 			//Show Scenario
 			sidebarBody().find("#getScenario").show();
 			//sidebarBody().find("#getScenario").children().show();
@@ -271,7 +271,7 @@ function handlePreWalkthroughInfo () {
 	//If the state variable is set, reload previous input
 	var isSetScenario = statusIsTrue("gotScenarioName");
 	if (isSetScenario) {		//Restore from previous state
-		console.log("Restoring scenario...");
+		//console.log("Restoring scenario...");
 		//Get and save scenario name
 		var scenarioName = getVarFromLocal("scenarioName");
 		
@@ -283,7 +283,7 @@ function handlePreWalkthroughInfo () {
 		sidebarBody().find("#getScenario").hide();
 		
 		if( localStorage.getItem("inGetScenario") != "true") {
-			console.log("showing subgoal select...");
+			//console.log("showing subgoal select...");
 			//Show subgoal
 			sidebarBody().find("#getSubgoal").show();
 			sidebarBody().find("#setup").hide();
@@ -327,7 +327,7 @@ function handlePreWalkthroughInfo () {
 			
 			var personaName = getVarFromLocal("personaName");
 			if (!personaName) {
-				console.log("persona name was null. Check your save");
+				//console.log("persona name was null. Check your save");
 			}
 			sidebarBody().find("#subgoalPrompt").html("Now that you've completed the initial setup, enter a subgoal for " + personaName + " to perform");
 			sidebarBody().find("#subgoalInput").keyup(function(event){
@@ -343,7 +343,7 @@ function handlePreWalkthroughInfo () {
 	//If the state variable is set, reload previous input
 	var isSetSubName = statusIsTrue("gotSubgoalName");
 	if (isSetSubName) {		//Restore from previous state
-		console.log("Subgoal name flag was true...");
+		//console.log("Subgoal name flag was true...");
 		var subgoalArray = getSubgoalArrayFromLocal();
 		if (!subgoalArray) {		//They haven't saved any subgoals yet, but they have the name
 			var subName = localStorage.getItem("currSubgoalName");
@@ -374,7 +374,7 @@ function handlePreWalkthroughInfo () {
 				localStorage.setItem("numSubgoals", subgoalId);
 				
 			}
-			console.log("subName: ", subName, "subId: ", subgoalId);
+			//console.log("subName: ", subName, "subId: ", subgoalId);
 			drawSubgoal(subgoalId);
 		}			
 	}

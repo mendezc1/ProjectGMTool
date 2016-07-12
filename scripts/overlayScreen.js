@@ -1,7 +1,7 @@
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-  console.log("renderimage" , request);
+  //console.log("renderimage" , request);
     if (request.callFunction == "renderImage"){
 //    console.log("rendering image" , request.imgURL);
 		renderImage(request.imageUrl);
@@ -16,7 +16,7 @@ function overlayScreen(onlyDraw){
 		closeSlider();
 		sidebarBody().find("#nukeStatus").show();
 		if(!document.getElementById('genderMagCanvasContainer')){
-			console.log("in if");
+			//console.log("in if");
 			var canvasContainer = document.createElement('div');
 				// Add the div into the document
 		}
@@ -119,7 +119,7 @@ function overlayScreen(onlyDraw){
 		var imageRatio = myImg.width/myImg.height;
 		var ratioHeight = myImg.height * 0.75;
 		var ratioWidth = imageRatio*ratioHeight;
-		console.log("my image", myImg.height, myImg.width, imageRatio, ratioHeight, ratioWidth);
+		//console.log("my image", myImg.height, myImg.width, imageRatio, ratioHeight, ratioWidth);
 		var sourceY = localStorage.getItem("sourceY");
 		var sourceX = localStorage.getItem("sourceX");
 		
@@ -137,7 +137,7 @@ function overlayScreen(onlyDraw){
 		var sx = localStorage.getItem("sx");
 		var sy = localStorage.getItem("sy");
 		if(sx && sy){
-			console.log("in iff")
+			//console.log("in iff")
 			context.drawImage(myImg, sx, sy, myImg.width, myImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
 		}
 		else{
@@ -165,12 +165,12 @@ function overlayScreen(onlyDraw){
 			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
 			
 		$('#undoDraw').unbind( "click" ).click(function() {
-			console.log("undo", annotationCanvas, ctx);
+			//console.log("undo", annotationCanvas, ctx);
 			history.undo(annotationCanvas, ctx);
 		});
   
 		$('#redoDraw').unbind( "click" ).click(function() {
-			console.log("redo ");
+			//console.log("redo ");
 			history.redo(annotationCanvas, ctx);
 		});
 			
@@ -188,7 +188,7 @@ function overlayScreen(onlyDraw){
 		closeSlider();
 		sidebarBody().find("#nukeStatus").show();
 	if(!document.getElementById('genderMagCanvasContainer')){
-		console.log("In overlayScreen");
+		//console.log("In overlayScreen");
 		var canvasContainer = document.createElement('div');
 			// Add the div into the document
 	}
@@ -238,7 +238,7 @@ function overlayScreen(onlyDraw){
 		}			
 		function mouseUp(e) {
 			drag = false;
-			console.log(rect);
+			//console.log(rect);
 			globXY = [e.pageX,e.pageY];
 			elm = document.elementFromPoint(rect.startX, rect.startY);//elm can return undefined;
 			var elements = new Array();
@@ -247,7 +247,7 @@ function overlayScreen(onlyDraw){
 				elm.style.display = "none";
 				elm = document.elementFromPoint(rect.startX, rect.startY);
 			}
-			console.log("element" , elm.innerText, elm.textContent);
+			//console.log("element" , elm.innerText, elm.textContent);
 			var highlightClick = document.createElement("div");
 			highlightClick.id = "highlightClick";
 		//	document.body.appendChild(highlightClick);
@@ -260,10 +260,10 @@ function overlayScreen(onlyDraw){
 			highlightClick.style.opacity = "1";
 			highlightClick.style.zindex = "10000";
 	
-			console.log("Clicked ", highlightClick)
+			//console.log("Clicked ", highlightClick)
             setPhasersToTrue("highlightedAction");
 		
-			console.log(elements);
+			//console.log(elements);
 			for(var element in elements){
 				if(element.id == "genderMagCanvas" || element.id == "genderMagCanvasContainer" ){
 					element.style.display = "default";
@@ -274,7 +274,7 @@ function overlayScreen(onlyDraw){
 		});
 
 
-		console.log("sending message");
+		//console.log("sending message");
 		setTimeout(function(){
 		//	document.getElementById("highlightClick").remove();
 			$("#highlightHover").remove();
@@ -406,7 +406,7 @@ function renderImage(imgURL){
 				isMouseDown = true;
 				var drawnOnURL = history.saveState($myCanvas[0]);
 				localStorage.setItem("currImgURL", drawnOnURL);
-				console.log("time to save");
+				//console.log("time to save");
 			});
 
 			//On mouseup the painting functionality stops
@@ -467,7 +467,7 @@ function renderImage(imgURL){
 							
 						context.clearRect(0, 0,  canvas.width, canvas.height);
 						context.drawImage(img, 0, 0);  
-							console.log("should be drawn");
+							//console.log("should be drawn");
 						}
 						return img.src;
 					}
@@ -485,7 +485,7 @@ function renderImage(imgURL){
 		var imageRatio = myImg.width/myImg.height;
 		var ratioHeight = myImg.height * 0.75;
 		var ratioWidth = imageRatio*ratioHeight;
-		console.log("my image", myImg.height, myImg.width, imageRatio, ratioHeight, ratioWidth);
+		//console.log("my image", myImg.height, myImg.width, imageRatio, ratioHeight, ratioWidth);
 		var sourceY = elm.offsetTop;
 		var sourceX = elm.offsetLeft;
 		
@@ -496,7 +496,7 @@ function renderImage(imgURL){
 		localStorage.setItem("sourceX", sourceX);
 		localStorage.setItem("sourceY", sourceY);
 		
-    	console.log("Source x and y: ", elm.offsetLeft, elm.offsetTop, sourceX, sourceY);
+    	//console.log("Source x and y: ", elm.offsetLeft, elm.offsetTop, sourceX, sourceY);
     	var destWidth = myImg.width-ratioWidth;
     	var destHeight = myImg.height-ratioHeight;
 		var sourceWidth = myImg.width - destWidth;
@@ -526,18 +526,18 @@ function renderImage(imgURL){
 			var annotationCanvas = document.getElementById("annotationCanvas");
 			ctx = annotationCanvas.getContext("2d");
 	
-			console.log("Waiting for the rain to come")
+			//console.log("Waiting for the rain to come")
 		
 			ctx.drawImage(myImg,0,0,myImg.width, myImg.height,0,0,ratioWidth, ratioHeight);
 	
 		$('#undoDraw').unbind( "click" ).click(function() {
-			console.log("undo", annotationCanvas, ctx);
+			//console.log("undo", annotationCanvas, ctx);
 			var drawnOnURL = history.undo(annotationCanvas, ctx);
 			localStorage.setItem("currImgURL", drawnOnURL);
 		});
   
 		$('#redoDraw').unbind( "click" ).click(function() {
-			console.log("redo ");
+			//console.log("redo ");
 			var drawnOnURL = history.redo(annotationCanvas, ctx);
 			localStorage.setItem("currImgURL", drawnOnURL);
 		});
@@ -559,7 +559,7 @@ function renderImage(imgURL){
 					var oldWidth = myImg.width;
 					var oldHeight = myImg.height;
 					smallerImg.src = drawnOnURL
-					console.log("New height", oldWidth, oldHeight, smallerImg.width, smallerImg.height);
+					//console.log("New height", oldWidth, oldHeight, smallerImg.width, smallerImg.height);
 					context.clearRect(0,0,465, 150);
 				if(oldHeight > smallerImg.height){
 					var sx = sourceX *smallerImg.width/oldWidth;
@@ -571,17 +571,17 @@ function renderImage(imgURL){
 				else{
 					var sx = localStorage.getItem("sx");
 					var sy = localStorage.getItem("sy");
-					console.log("Newer height", myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+					//console.log("Newer height", myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
 					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
 				}
 			});
 			
 		});
-		console.log("old height", myImg.width, myImg.height);
+		//console.log("old height", myImg.width, myImg.height);
 		var sx = localStorage.getItem("sx");
 		var sy = localStorage.getItem("sy");
 		if(sx && sy){
-			console.log("in iff")
+			//console.log("in iff")
 			context.drawImage(myImg, sx, sy, myImg.width, myImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
 		}
 		else{

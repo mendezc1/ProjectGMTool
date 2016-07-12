@@ -13,7 +13,7 @@ var personaName="";
 	else if("persona5Delayed" == "Patricia"){
 		personaName = "patricia";
 	}
-console.log("persona5Delayed", persona5Delayed, personaName);
+//console.log("persona5Delayed", persona5Delayed, personaName);
 
 function preActionQuestions(el){
 	
@@ -101,7 +101,7 @@ function postActionQuestions(el){
 	$(el).find("#imageCanvas").hide();
 	$(el).find("#imageCaption3").show();
 	$("#afterb44lyfe").unbind("click").click(function(){
-		console.log("Put some gators in the oven");
+		//console.log("Put some gators in the oven");
 		$(el).find("#imageCaption2").show();	
 		$(el).find("#imageCanvas").show();
 		$(el).find("#imageCaption3").hide();
@@ -284,7 +284,7 @@ function actionLoop(el){
 }
 
 function reloadToolTipState () {
-	console.log("reloading toolTip state");
+	//console.log("reloading toolTip state");
 	
 	overlayScreen("onlyToolTip");
 	
@@ -318,11 +318,11 @@ function reloadToolTipState () {
 	
 	else if (statusIsTrue("highlightedAction")) {
 
-		console.log("on image");
+		//console.log("on image");
 		//renderImage()
 		//overlayScreen("onlyToolTip");
 	}
 	
-	console.log("Done reloading tooltip");
+	//console.log("Done reloading tooltip");
 }
 

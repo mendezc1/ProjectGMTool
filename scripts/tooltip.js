@@ -19,7 +19,7 @@ function addToolTip(toolTipName, folderName){
 		pageDiv.style.backgroundColor = "white";
 		appendTemplateToElement($("#"+toolTipName+"Div"), 'templates/'+folderName+ '/' +toolTipName +'.html');
 		$("#"+toolTipName+"Div").draggable();
-		console.log("HostBusters!");
+		//console.log("HostBusters!");
 		$("#" + toolTipName + "Button").off('click').on('click', function() {
 			$("#" + toolTipName + "Div").remove();
 		});

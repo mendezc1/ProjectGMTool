@@ -3,18 +3,18 @@ function drawSubgoal(subgoalId){
 	id = "#GenderMagFrame";
 	file = "/templates/subgoal.html";
 	
-	console.log("draw subgoal called, ", subgoalId);
+	//console.log("draw subgoal called, ", subgoalId);
 
 	var isSetSubgoalQuestions = (statusIsTrue("gotSubgoalQuestions"));
 	
 
 	if (isSetSubgoalQuestions) {
-		console.log("in walkthrough if");
+		//console.log("in walkthrough if");
 		var subgoals = getSubgoalArrayFromLocal();
 		var numActions = localStorage.getItem("numActions");
 
 		var subName = subgoals[subgoalId - 1].name;
-		console.log("subname", subName);
+		//console.log("subname", subName);
 
 		var el = $(id).contents().find('#containeryo');
 		el.empty();
@@ -23,8 +23,8 @@ function drawSubgoal(subgoalId){
 		sidebarBody().find('#editSubgoal').hide();
 		if(subgoals){
 			var subgoal = subgoals[subgoalId-1];
-			console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
-			console.log("in subgoal setting area", subName)
+			//console.log("in draw subgoals", subgoal, subgoalId, subgoal.ynm.yes, subgoal.name);
+			//console.log("in subgoal setting area", subName)
 			sidebarBody().find('#subgoalHeading').html("Subgoal: " + subgoal.name);
 			sidebarBody().find('#yes').prop("checked", subgoal.ynm.yes);
 			sidebarBody().find('#no').prop("checked", subgoal.ynm.no);
@@ -72,7 +72,7 @@ function drawSubgoal(subgoalId){
 	}
 	
 	else {
-		console.log("in walkthrough else");
+		//console.log("in walkthrough else");
 		var subName = localStorage.getItem("currSubgoalName");
 		var el = $(id).contents().find('#containeryo');
 		el.empty();
@@ -108,7 +108,7 @@ function drawSubgoal(subgoalId){
 
 function drawAction(actionNum, subgoalId){
 	
-	console.log("draw action called", actionNum, subgoalId);
+	//console.log("draw action called", actionNum, subgoalId);
 	id = "#GenderMagFrame";
 	file = "/templates/actionPrompt.html";
 	var el = $(id).contents().find('#containeryo');
@@ -118,7 +118,7 @@ function drawAction(actionNum, subgoalId){
 	var currArray = getSubgoalArrayFromLocal();
 		
 	if (statusIsTrue("gotActionName")) {
-		console.log("was true");
+		//console.log("was true");
 		if (actionNum >  currArray[subgoalId-1].actions.length) {
 			actionName = localStorage.getItem("currActionName");
 		}
@@ -131,7 +131,7 @@ function drawAction(actionNum, subgoalId){
 		sidebarBody().find("#promptAction").show();
 		setPhasersToTrue("actionPromptOnScreen");
 	}
-	console.log("action/subgoal", actionNum, subgoalId, actionName); 
+	//console.log("action/subgoal", actionNum, subgoalId, actionName); 
 	
 	
 	//Below is add onclicks - so if gotActionName wan't true, it doesn't do anything really
@@ -149,9 +149,9 @@ function drawAction(actionNum, subgoalId){
             };
             
             if(actionName==""){
-                console.log("STILL have a blank action name");
+                //console.log("STILL have a blank action name");
             }
-			console.log("actionname", actionName);
+			//console.log("actionname", actionName);
 			saveVarToLocal("currActionName", actionName);
 			setPhasersToTrue("gotActionName");
 			sidebarBody().find('#getActionName').hide();
@@ -161,12 +161,12 @@ function drawAction(actionNum, subgoalId){
 			setPhasersToTrue("actionPromptOnScreen");
             
             if(actionNum >  currArray[subgoalId-1].actions.length){
-                console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
+                //console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
                 addToSandwich("idealAction", actionItem);
                 
             }
             else{
-                console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
+                //console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
             }
             sidebarBody().find("#editAction").show();
             sidebarBody().find("#editAction").unbind( "click" ).click(function(){
@@ -194,7 +194,7 @@ function drawAction(actionNum, subgoalId){
 	sidebarBody().find("#promptActionBack").unbind( "click" ).click(function(){
 		el.empty();
 		var subgoalId = localStorage.getItem("numSubgoals");
-		console.log("get back", subgoalId);
+		//console.log("get back", subgoalId);
 		drawSubgoal(subgoalId);
 	})
 }

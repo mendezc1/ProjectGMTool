@@ -21,11 +21,11 @@ var statusObject = {							//Now we just need a priviledge object.
 function initStatusObject () {
     var obj = JSON.parse(localStorage.getItem("statusObject"));
     if (obj) {
-        console.log("statusObject found");
+        //console.log("statusObject found");
     }
     else {
         localStorage.setItem("statusObject", JSON.stringify(statusObject));
-        console.log("Initializing status object...");
+        //console.log("Initializing status object...");
     }
 }
 
@@ -49,7 +49,7 @@ function statusIsTrue(keyToCheck) {
         }
 	}
 	else {
-		console.log("statusObject doesn't exist in local");
+		//console.log("statusObject doesn't exist in local");
 	} 
 }
 
@@ -58,10 +58,10 @@ function setPhasersToTrue (keyToChange) {
 	if (obj) {
 		obj[keyToChange] = "true";
 		saveStatusObject(obj);
-        console.log("set " + keyToChange + " to true");
+        //console.log("set " + keyToChange + " to true");
 	}
 	else {
-		console.log("statusObject doesn't exist in local");
+		//console.log("statusObject doesn't exist in local");
 	} 
 }
 
@@ -70,10 +70,10 @@ function setPhasersToFalse (keyToChange) {
 	if (obj) {
 		obj[keyToChange] = "false";
 		saveStatusObject(obj);
-        console.log("set " + keyToChange + " to false");
+        //console.log("set " + keyToChange + " to false");
 	}
 	else {
-		console.log("statusObject doesn't exist in local");
+		//console.log("statusObject doesn't exist in local");
 	} 
 }
 
@@ -82,9 +82,9 @@ function setPhasersToStun (keyToChange) {			//Sets the key's value to an empty s
 	if (obj) {
 		obj[keyToChange] = "";
 		saveStatusObject(obj);
-        console.log("set " + keyToChange + " to stun");
+        //console.log("set " + keyToChange + " to stun");
 	}
 	else {
-		console.log("statusObject doesn't exist in local");
+		//console.log("statusObject doesn't exist in local");
 	} 
 }
