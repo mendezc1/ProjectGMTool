@@ -1,5 +1,6 @@
-var persona5Delayed = localStorage.getItem("personaName");
-if (persona5Delayed !== null ) {persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1);}
+/*var persona5Delayed = localStorage.getItem("personaName");
+//if (persona5Delayed !== null ) {persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1);}
+persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1)
 var personaName="";
 	if(persona5Delayed == "Abby"){
 		personaName = "abby";
@@ -12,8 +13,11 @@ var personaName="";
 	}
 	else if("persona5Delayed" == "Patricia"){
 		personaName = "patricia";
-	}
-//console.log("persona5Delayed", persona5Delayed, personaName);
+	} */
+	
+var personaName = localStorage.getItem("personaName");
+if (personaName !== null ) {personaName = personaName.slice(1, personaName.length-1);}
+else { personaName = "abby"; }
 
 function preActionQuestions(el){
 	
@@ -49,23 +53,23 @@ function preActionQuestions(el){
         }
 	})
     $(".abbyMTrigger").unbind( "click" ).click(function (){
-        addToolTip(personaName+"MToolTip", persona5Delayed);	
+        addToolTip(personaName+"MToolTip", personaName);	
 		
     });
     $(".abbyIPSTrigger").unbind( "click" ).click(function(){
-        addToolTip(personaName+"IPSToolTip", persona5Delayed);
+        addToolTip(personaName+"IPSToolTip", personaName);
 
     });
     $(".abbySETrigger").unbind( "click" ).click(function(){
-        addToolTip(personaName+"SEToolTip", persona5Delayed);
+        addToolTip(personaName+"SEToolTip", personaName);
 
     });
     $(".abbyRTrigger").unbind( "click" ).click(function(){
-        addToolTip(personaName+"RToolTip", persona5Delayed);
+        addToolTip(personaName+"RToolTip", personaName);
 
     });
     $(".abbyTTrigger").unbind( "click" ).click(function(){
-        addToolTip(personaName+"TToolTip", persona5Delayed);
+        addToolTip(personaName+"TToolTip", personaName);
 	
     });
 }
