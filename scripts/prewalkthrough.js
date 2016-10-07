@@ -360,7 +360,9 @@ function handlePreWalkthroughInfo () {
 				localStorage.setItem("numSubgoals", subgoalId);
 				
 			}
+			console.log("Before");
 			drawSubgoal(subgoalId);
+			console.log("Drawn");
 		}
 		else {			//They have subgoals
 			var subName = localStorage.getItem("currSubgoalName");
@@ -376,6 +378,7 @@ function handlePreWalkthroughInfo () {
 			}
 			//console.log("subName: ", subName, "subId: ", subgoalId);
 			drawSubgoal(subgoalId);
+			console.log("Drawn 2");
 		}			
 	}
 	
@@ -403,6 +406,7 @@ function handlePreWalkthroughInfo () {
                     
                 }
                 drawSubgoal(subgoalId);
+				console.log("Drawn 3");
             }
 		});
 	}

@@ -35,7 +35,9 @@ function drawSubgoal(subgoalId){
 			sidebarBody().find('#A0Q0selfE').prop("checked", subgoal.facetValues.selfE); //not to be confused with selfie
 			sidebarBody().find('#A0Q0risk').prop("checked", subgoal.facetValues.risk);   // not to be confused with risque
 			sidebarBody().find('#A0Q0tinker').prop("checked", subgoal.facetValues.tinker); //not to be confused with tinkle
+			sidebarBody().find('#A0Q0none').prop("checked", subgoal.facetValues.none); //not to be confused with nun
 			
+			console.log("Nun on board", subgoal.facetValues);
 			sidebarBody().find('#A0Q0Response').html(subgoal.why);
 			sidebarBody().find('#A0Q0whyYes').hide();
 			sidebarBody().find('#editSubgoal').show();
