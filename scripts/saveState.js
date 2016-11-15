@@ -114,7 +114,7 @@ function addToSandwich(type, item){
 		var subgoalId = localStorage.getItem("numSubgoals");
 		var actionId = localStorage.getItem("numActions");
 		var actionName = localStorage.getItem("currActionName");
-		var sideAction = '<div superCoolAttr="' + subgoalId + '-' + actionId + 'color:blue;text-decoration: underline; margin:5px;" id="sideAction' + subgoalId + '-' + actionId + '">Action ' + actionId + ': ' + actionName + '</div>';
+		var sideAction = '<div superCoolAttr="' + subgoalId + '-' + actionId + '"style=color:blue;text-decoration: underline; margin:5px;" id="sideAction' + subgoalId + '-' + actionId + '">Action ' + actionId + ': ' + actionName + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
 		//console.log("added to sammich", actionId, actionName);
 		var actionNum = localStorage.getItem("numActions");
