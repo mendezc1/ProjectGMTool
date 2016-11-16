@@ -21,7 +21,7 @@ function preWalkthrough (id, file) {
 	var el = $(id).contents().find('body');
 	el.empty();
 	appendTemplateToElement(el,file);
-	seeMoreOnclick();
+	//seeMoreOnclick();
 	nukeButtonOnclick();
 	makeEditable();
 	handlePreWalkthroughInfo();
@@ -39,7 +39,7 @@ function preWalkthrough (id, file) {
  */
 function seeMoreOnclick () {
 	
-	sidebarBody().find('body').off('click', '.moreOrLess').on('click', '.moreOrLess', function() {
+	/*sidebarBody().find('body').off('click', '.moreOrLess').on('click', '.moreOrLess', function() {
 		var isOpen = $(this).attr("stateVar");
 		
 		//The "see more" is expanded and needs to be closed
@@ -60,7 +60,7 @@ function seeMoreOnclick () {
 			sidebarBody().find(".complete").show();
 		}
 		
-	});
+	});*/
 	
 }
 

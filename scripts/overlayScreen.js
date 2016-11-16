@@ -66,8 +66,10 @@ function overlayScreen(onlyDraw){
 		var toolTip = document.createElement("div");
 		toolTip.id = "myToolTip";
 		toolTip.style.position = "absolute";
-		toolTip.style.left = elm.offsetLeft+100 + "px";
-		toolTip.style.top = elm.offsetTop+100 + "px";
+		//toolTip.style.left = elm.offsetLeft+100 + "px";
+		//toolTip.style.top = elm.offsetTop+100 + "px";
+		toolTip.style.left = 100 + "px";
+		toolTip.style.top = 100 + "px";
 		toolTip.style.height = "550px";
 		toolTip.style.width = "500px";
 		toolTip.style.zindex = "10002";	
@@ -325,8 +327,10 @@ function renderImage(imgURL){
 	var toolTip = document.createElement("div");
 	toolTip.id = "myToolTip";
 	toolTip.style.position = "absolute";
-	toolTip.style.left = elm.offsetLeft+100 + "px";
-	toolTip.style.top = elm.offsetTop+100 + "px";
+	//toolTip.style.left = elm.offsetLeft+100 + "px";
+	//toolTip.style.top = elm.offsetTop+100 + "px";
+	toolTip.style.left = 100 + "px";
+	toolTip.style.top = 100 + "px";	
 	toolTip.style.height = "550px";
 	toolTip.style.width = "500px";
 	toolTip.style.zindex = "10002";	

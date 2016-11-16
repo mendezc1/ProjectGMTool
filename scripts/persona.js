@@ -2,8 +2,8 @@ function loadPersona(personaName){
 	//console.log("in load persona" , personaName);
 	if(personaName == "Abby"){
 		appendTemplateToElement(sidebarBody().find("#personaInfo"), "./templates/Abby/abbyPersona.html");
-		var abbySRC=chrome.extension.getURL("images/Abby_square.jpg");
-		var abbyIMG= "<img id='AbbyPhoto' src='" + abbySRC + "' alt='Abby Jones' class='sidebarImg' width='100' height='100'/>";
+		var abbySRC=chrome.extension.getURL("images/abbymulti.png");
+		var abbyIMG= "<img id='AbbyPhoto' src='" + abbySRC + "' alt='Abby Jones' class='sidebarImg' width='120' height='100'/>";
 		sidebarBody().find("#picGoesHere").append(abbyIMG);
 		sidebarBody().find(".abbyMTrigger").unbind( "click" ).click(function (){
 		//	console.log("Who you gonna call?");
