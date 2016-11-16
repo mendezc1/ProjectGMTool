@@ -7,14 +7,13 @@
 				<!--span class="actionNameSpan" style="color:white;"> </span-->
                 <button id="imageBack" style="float:left; width:30px; height:25px;background-color:#7D1935;color:white;">&#8592 </button>
                 <button id="saveImageAndCloseButton" class="closeToolTip" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Save and Continue</button>	
-				<button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Annotate Image </button>
-				<button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Retake screen capture </button> 
             </div>
         
 			<p id="imageCaption" style="margin:10px">
 				This is a preview of your image. To see the full image select the view full image button. 
 				You may also retake your image if you aren't happy with it. Once you have an image you like, select the save and continue
     		</p>
+           
         
          </div>
             
@@ -108,10 +107,13 @@
 		<p id="imageCaption3" hidden> 
 			For a reminder of what the screen looked like before the action, <span id="afterb44lyfe" style="color:#0645AD; text-decoration: underline;">click here</span> 
 		</p>
+        <div>
         <canvas id="imageCanvas"> 
                 <img id="previewImage"></img>
            </canvas>
-        
+        <button id="annotateImage" class="previewTrigger" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Annotate Image </button>
+        <button id="retakeImage" style="float:right; width:150px; height:25px;background-color:#7D1935;color:white;"> Retake screen capture </button> 
+        </div>
         <div id="actionLoopTemplate" style="display:none;">
             
             <div style="height:25px; background-color:#4A96AD;text-align:center;">
