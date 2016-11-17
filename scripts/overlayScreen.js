@@ -178,6 +178,28 @@ function overlayScreen(onlyDraw){
 			
 			$("#backLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
+				var drawnOnURL = history.saveState(annotationCanvas);
+				localStorage.setItem("currImgURL", drawnOnURL);
+				
+				var smallerImg = document.getElementById("previewImage");
+					var oldWidth = myImg.width;
+					var oldHeight = myImg.height;
+					smallerImg.src = drawnOnURL
+					//console.log("New height", oldWidth, oldHeight, smallerImg.width, smallerImg.height);
+					context.clearRect(0,0,465, 150);
+				if(oldHeight > smallerImg.height){
+					var sx = sourceX *smallerImg.width/oldWidth;
+					var sy = sourceY *smallerImg.height/oldHeight;
+					localStorage.setItem("sx", sx);
+					localStorage.setItem("sy", sy);
+					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+				}
+				else{
+					var sx = localStorage.getItem("sx");
+					var sy = localStorage.getItem("sy");
+					//console.log("Newer height", myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+				}
 			});
 			$("#closeLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
@@ -550,9 +572,26 @@ function renderImage(imgURL){
 				$("#imageAnnotation").remove();
 				var drawnOnURL = history.saveState(annotationCanvas);
 				localStorage.setItem("currImgURL", drawnOnURL);
-				myImg.src = drawnOnURL
-				context.clearRect(0,0,465, 150);
-				context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height)
+				
+				var smallerImg = document.getElementById("previewImage");
+					var oldWidth = myImg.width;
+					var oldHeight = myImg.height;
+					smallerImg.src = drawnOnURL
+					//console.log("New height", oldWidth, oldHeight, smallerImg.width, smallerImg.height);
+					context.clearRect(0,0,465, 150);
+				if(oldHeight > smallerImg.height){
+					var sx = sourceX *smallerImg.width/oldWidth;
+					var sy = sourceY *smallerImg.height/oldHeight;
+					localStorage.setItem("sx", sx);
+					localStorage.setItem("sy", sy);
+					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+				}
+				else{
+					var sx = localStorage.getItem("sx");
+					var sy = localStorage.getItem("sy");
+					//console.log("Newer height", myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+					context.drawImage(myImg, sx, sy, smallerImg.width,smallerImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
+				}
 			});
 			$("#closeLargePreview").unbind( "click" ).click(function(){
 				$("#imageAnnotation").remove();
