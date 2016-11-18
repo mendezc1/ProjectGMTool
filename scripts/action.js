@@ -22,6 +22,8 @@ else { personaName = "abby"; }
 function preActionQuestions(el){
 	
 
+    $(el).find("#annotateImage").hide();
+    $(el).find("#retakeImage").hide();
 	$(el).find("#imageCanvasTemplate").hide();
     $(el).find("#preActionTemplate").show();
 	$(el).find("#imageCaption2").show();
@@ -43,6 +45,8 @@ function preActionQuestions(el){
         if (statusIsTrue("drewToolTip")) {
             $(el).find("#preActionTemplate").hide();
             $(el).find("#imageCanvasTemplate").show();
+            $(el).find("#retakeImage").show();
+            $(el).find("#annotateImage").show();
 				$(el).find("#HRmorelikefunpolice").hide();
 			$(el).find("#imageCaption2").hide();
 		
