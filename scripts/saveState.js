@@ -46,7 +46,7 @@ function addToSandwich(type, item){
 		//var sideSubgoal = '<div stateVar=1 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
         //[Ignore this commented stuff Chris] uncomment for adding arrow pic. Also: will have to expand when first action is drawn, cause the below version starts out with a collapsed subgoal
         var arrowSRC=chrome.extension.getURL("images/arrow_collapsed.png");
-		var sideSubgoal = '<div stateVar=0 superCoolAttr=' + item.id + ' style="color:blue;text-decoration:underline;margin:5px;" id="sideSubgoal' + item.id + '"> <img id="sideSubgoalImg' + item.id + '" src="' + arrowSRC + '"></img> Subgoal ' + item.id + ': ' + item.name + '</div>';
+		var sideSubgoal = '<div stateVar=0 superCoolAttr=' + item.id + ' style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:blue;text-decoration:underline;margin:5px;" id="sideSubgoal' + item.id + '"> <img id="sideSubgoalImg' + item.id + '" src="' + arrowSRC + '"></img> Subgoal ' + item.id + ': ' + item.name + '</div>';
 		if (item.id >= subArr.length) {
             var foundIt = false;
             sidebarBody().find('#subgoalList').children().each(function () {
@@ -70,7 +70,7 @@ function addToSandwich(type, item){
 			
 	}
 	else if(!type.localeCompare("idealAction") && item.name){ 	//It's an action that got its name from the slider
-		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="text-indent:25px;color:blue;text-decoration:underline;margin:5px;" id="sideAction' + item.subgoalId + '-' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
+		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent:25px;color:blue;text-decoration:underline;margin:5px;" id="sideAction' + item.subgoalId + '-' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		var sideActionIdToFind = item.subgoalId + "-" + item.actionId;
         var sideActionIdForClick = "#sideAction" + item.subgoalId + "-" + item.actionId;
 		//console.log(sideActionIdToFind, typeof(sideActionIdToFind));
@@ -114,7 +114,7 @@ function addToSandwich(type, item){
 		var subgoalId = localStorage.getItem("numSubgoals");
 		var actionId = localStorage.getItem("numActions");
 		var actionName = localStorage.getItem("currActionName");
-		var sideAction = '<div superCoolAttr="' + subgoalId + '-' + actionId + '"style=text-indent:25px;color:blue;text-decoration:underline;margin:5px;" id="sideAction' + subgoalId + '-' + actionId + '">Action ' + actionId + ': ' + actionName + '</div>';
+		var sideAction = '<div superCoolAttr="' + subgoalId + '-' + actionId + '"style=white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent:25px;color:blue;text-decoration:underline;margin:5px;" id="sideAction' + subgoalId + '-' + actionId + '">Action ' + actionId + ': ' + actionName + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
 		//console.log("added to sammich", actionId, actionName);
 		var actionNum = localStorage.getItem("numActions");
