@@ -281,7 +281,7 @@ function getSubgoalArrayFromLocal() {
 	
 //Happens before refresh
 $( window ).unload(function() {
-	//console.log("UNLOCKED AND UNLOADED");
+	console.log("UNLOCKED AND UNLOADED");
 	var sidebarHTML = sidebarBody().find('#subgoalList').html();
 	//console.log(sidebarHTML);
 	localStorage.setItem('sidebarHTML', sidebarHTML);
@@ -290,7 +290,7 @@ $( window ).unload(function() {
 
 //Happens after refresh
 function reloadSandwich () {
-	//console.log("LOCKED AND LOADED");
+	console.log("Reloading sandwich menu...");
 	var sidebarHTML = localStorage.getItem('sidebarHTML');
 	//console.log(sidebarHTML);
 	var subgoalDiv = sidebarBody().find('#subgoalList');
@@ -305,7 +305,9 @@ function reloadSandwich () {
 				sidebarBody().find("#sideSubgoal" + currId).unbind( "click" ).click(function(){
 					drawSubgoal(currId);
 				});
+                //todo: add collapse onclick function here.
 			}
+            
 			else {
 				//It's an action
 				//console.log("action", currId);
@@ -336,11 +338,12 @@ function reloadSandwich () {
 				
 			}
 		});
-		
+		console.log("Sandwich menu loaded");
 	}
 	else {
 		//console.log("NOPE");
 	}
+    
 }
 
 
