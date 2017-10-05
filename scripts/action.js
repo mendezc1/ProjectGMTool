@@ -1,19 +1,4 @@
-/*var persona5Delayed = localStorage.getItem("personaName");
-//if (persona5Delayed !== null ) {persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1);}
-persona5Delayed = persona5Delayed.slice(1, persona5Delayed.length-1)
-var personaName="";
-	if(persona5Delayed == "Abby"){
-		personaName = "abby";
-	}
-	else if(persona5Delayed == "Tim"){
-		personaName = "tim";
-	}
-	else if(persona5Delayed == "Patrick"){
-		personaName = "patrick";
-	}
-	else if("persona5Delayed" == "Patricia"){
-		personaName = "patricia";
-	} */
+
 	
 var personaName = localStorage.getItem("personaName");
 if (personaName !== null ) {personaName = personaName.slice(1, personaName.length-1);}
@@ -29,14 +14,12 @@ function preActionQuestions(el){
 	$(el).find("#imageCaption2").show();
 		$(el).find("#HRmorelikefunpolice").show();
 	$("#preActionClose").unbind( "click" ).click(function(){
-		//SAVE HERE ALANNAH!
 		var actionName = localStorage.getItem("currActionName"); //Currently save and then deletes this name before it can be called again
-		//var actionName = 
 		var yesNoMaybe = {"yes": $('#actionYes').is(":checked"), "no": $('#actionNo').is(":checked"), "maybe": $('#actionMaybe').is(":checked")};
 		var whyText = $('#whyYes').val();
 		var facets = {"motiv": $('#motiv').is(":checked"), "info": $('#info').is(":checked"), "self": $('#self').is(":checked"), "risk": $('#risk').is(":checked"), "tinker": $('#tinker').is(":checked")};
 		savePreIdealAction(actionName, yesNoMaybe, whyText, facets);
-        setPhasersToTrue("gotPreActionQuestions");
+        setStatusToTrue("gotPreActionQuestions");
 		doActionPrompt(el);
 	});
 	
@@ -50,12 +33,13 @@ function preActionQuestions(el){
 				$(el).find("#HRmorelikefunpolice").hide();
 			$(el).find("#imageCaption2").hide();
 		
-            setPhasersToFalse("gotScreenshot");
+            setStatusToFalse("gotScreenshot");
         }
         else {
             renderImage();
         }
 	})
+	//currently hard coded with Abby name, not sure how this will impact when selecting other personas but suspect things might break. 
     $(".abbyMTrigger").unbind( "click" ).click(function (){
         addToolTip(personaName+"MToolTip", personaName);	
 		
@@ -85,19 +69,17 @@ function doActionPrompt(el){
 	$(el).find("#preActionTemplate").hide();
     $(el).find("#doActionPromptTemplate").show();
 	$("#postAction").unbind( "click" ).click(function(){
-		//SAVE HERE ALANNAH!
-        setPhasersToTrue("idealActionPerformed");
+        setStatusToTrue("idealActionPerformed");
 		postActionQuestions(el);
 	});
-	//$("#postAction").prop("disabled",true);
 	$("#doActionBack").unbind( "click" ).click(function(){
 		$(el).find("#doActionPromptTemplate").hide();
         $(el).find("#preActionTemplate").show();
-        setPhasersToFalse("gotPreActionQuestions");
+        setStatusToFalse("gotPreActionQuestions");
 		preActionQuestions(el);
 	});
 	$(".continueTrigger").unbind("click").click(function(){
-		setPhasersToTrue("idealActionPerformed");
+		setStatusToTrue("idealActionPerformed");
 		postActionQuestions(el);
 	});
 }
@@ -109,14 +91,12 @@ function postActionQuestions(el){
 	$(el).find("#imageCanvas").hide();
 	$(el).find("#imageCaption3").show();
 	$("#afterb44lyfe").unbind("click").click(function(){
-		//console.log("Put some gators in the oven");
 		$(el).find("#imageCaption2").show();	
 		$(el).find("#imageCanvas").show();
 		$(el).find("#imageCaption3").hide();
 	});
 	$("#submitPostAction").unbind( "click" ).click(function(){
-		//SAVE HERE ALANNAH!
-        setPhasersToTrue("gotPostActionQuestions");
+	    setStatusToTrue("gotPostActionQuestions");
 		var actionName = localStorage.getItem("currActionName");
 		var yesNoMaybe = {"yes": $('#YNMyes').is(":checked"), "no": $('#YNMno').is(":checked"), "maybe": $('#YNMmaybe').is(":checked")};
 		var whyText = $('#postWhyYes').val();
@@ -165,7 +145,7 @@ function postActionQuestions(el){
     $("#postActionBack").unbind( "click" ).click(function(){
         $(el).find("#postActionTemplate").hide();
         $(el).find("#doActionPromptTemplate").show();
-        setPhasersToFalse("idealActionPerformed");
+        setStatusToFalse("idealActionPerformed");
         doActionPrompt(el);
     });
 }
@@ -185,21 +165,20 @@ function actionLoop(el){
 			
 		}
 		else{
-		//SAVE HERE ALANNAH!
 		localStorage.setItem("currActionName", $(el).find("#actionNameInput").val());
 		addToSandwich('idealAction', 0);
 		$(el).remove();
-        setPhasersToFalse("drewToolTip");
+        setStatusToFalse("drewToolTip");
 		overlayScreen(0);
-		overlayScreen(0); //Second time's the charm
+		overlayScreen(0); //Need to refactor overlay screen to not have to call it twice in certain instances
 		preActionQuestions(el);     
         
         //Reset action states                   
-        setPhasersToFalse("highlightedAction");
-        setPhasersToFalse("gotScreenshot");
-        setPhasersToFalse("gotPreActionQuestions");
-        setPhasersToFalse("idealActionPerformed");
-        setPhasersToFalse("gotPostActionQuestions");
+        setStatusToFalse("highlightedAction");
+        setStatusToFalse("gotScreenshot");
+        setStatusToFalse("gotPreActionQuestions");
+        setStatusToFalse("idealActionPerformed");
+        setStatusToFalse("gotPostActionQuestions");
 		}
 	});
 	
@@ -211,20 +190,20 @@ function actionLoop(el){
 		localStorage.setItem("numActions", 0 );
 		localStorage.setItem("currSubgoalName", $(el).find("#subgoalInput").val() );
 		$(el).remove();
-        setPhasersToFalse("drewToolTip");
+        setStatusToFalse("drewToolTip");
         
         //Reset action states
-        setPhasersToFalse("gotActionName");
-        setPhasersToFalse("actionPromptOnScreen");
-        setPhasersToFalse("drewToolTip");            
-        setPhasersToFalse("highlightedAction");
-        setPhasersToFalse("gotScreenshot");
-        setPhasersToFalse("gotPreActionQuestions");
-        setPhasersToFalse("idealActionPerformed");
-        setPhasersToFalse("gotPostActionQuestions");
+        setStatusToFalse("gotActionName");
+        setStatusToFalse("actionPromptOnScreen");
+        setStatusToFalse("drewToolTip");            
+        setStatusToFalse("highlightedAction");
+        setStatusToFalse("gotScreenshot");
+        setStatusToFalse("gotPreActionQuestions");
+        setStatusToFalse("idealActionPerformed");
+        setStatusToFalse("gotPostActionQuestions");
         //Reset subgoal states
-        setPhasersToFalse("gotSubgoalName");
-        setPhasersToFalse("gotSubgoalQuestions");
+        setStatusToFalse("gotSubgoalName");
+        setStatusToFalse("gotSubgoalQuestions");
         
 		openSlider();
 		var numSubgoals = Number(localStorage.getItem("numSubgoals"));
@@ -235,13 +214,11 @@ function actionLoop(el){
 	});
 	
 	$("#saveAndExit").unbind( "click" ).click(function(){
-		//SAVE HERE ALANNAH!
-		//nuke
 		
 		$(el).find("#actionLoopTemplate").hide();
 		$(el).find("#theFinalCountDown").show();
 		
-        setPhasersToTrue("finishedGM");
+        setStatusToTrue("finishedGM");
 		var entrees = parseSubgoalArray();
 		var scurvy = createCSV(entrees);
 		downloadCSV(scurvy);
@@ -264,15 +241,13 @@ function actionLoop(el){
 		});	
 		
 		$("#finalYes").unbind("click").click(function () {
-			localStorage.clear(); //NUKED
-			//nuclear fallout
-			//war war never changes...
+			localStorage.clear(); 
 			location.reload();
 		});
 		
 		$("#finalNo").unbind("click").click(function () {
 			$('#theFinalCountDown').hide();
-			setPhasersToFalse('finishedGM');
+			setStatusToFalse('finishedGM');
 			$('#actionLoopTemplate').show();
 		});
 		
@@ -285,14 +260,13 @@ function actionLoop(el){
 		$(el).find("#imageCanvas").show();
 		$(el).find("#imageCaption2").show();
 		$(el).find("#HRmorelikefunpolice").show();
-        setPhasersToFalse("gotPostActionQuestions");
+        setStatusToFalse("gotPostActionQuestions");
 		postActionQuestions(el);
 	});
 	
 }
 
 function reloadToolTipState () {
-	//console.log("reloading toolTip state");
 	
 	overlayScreen("onlyToolTip");
 	
@@ -314,7 +288,7 @@ function reloadToolTipState () {
 		postActionQuestions(toolTip);
 	}
 	
-	else if (statusIsTrue("gotPreActionQuestions")) {	//This is the chosen one, and will bring balance to the force
+	else if (statusIsTrue("gotPreActionQuestions")) {	
 		$(toolTip).find("#imageCanvasTemplate").hide();
 		doActionPrompt(toolTip);
 	}
@@ -326,11 +300,10 @@ function reloadToolTipState () {
 	
 	else if (statusIsTrue("highlightedAction")) {
 
-		//console.log("on image");
 		//renderImage()
+		//console.log("on image");
 		//overlayScreen("onlyToolTip");
 	}
 	
-	//console.log("Done reloading tooltip");
 }
 

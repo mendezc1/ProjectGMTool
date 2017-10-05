@@ -77,7 +77,7 @@ function overlayScreen(onlyDraw){
 		toolTip.style.backgroundColor = "white";
 		toolTip.style.cursor="pointer";
 		toolTip.style.borderRadius="5px";
-		setPhasersToTrue("drewToolTip");
+		setStatusToTrue("drewToolTip");
 		
 		document.body.appendChild(toolTip);
 		$('#myToolTip').draggable();
@@ -87,12 +87,12 @@ function overlayScreen(onlyDraw){
 		$(".closeToolTip").unbind( "click" ).unbind( "click" ).click(function() {
 			//toolTip.remove();
 			//toolTip.innerHTML = " ";
-			setPhasersToTrue("gotScreenshot");
+			setStatusToTrue("gotScreenshot");
 			preActionQuestions(toolTip);
 		});
 		$("#retakeImage").unbind( "click" ).unbind( "click" ).click(function(){
 			toolTip.remove();
-			setPhasersToFalse("drewToolTip");
+			setStatusToFalse("drewToolTip");
 			overlayScreen();
 			overlayScreen();
 		});
@@ -145,11 +145,10 @@ function overlayScreen(onlyDraw){
 		else{
 			context.drawImage(myImg,sourceX, sourceY,myImg.width, myImg.height,0,0,ratioWidth*9/10, ratioHeight*9/10);
 		}
- 			$(".previewTrigger").unbind( "click" ).click(function(){ //#triggered
+ 			$(".previewTrigger").unbind( "click" ).click(function(){ 
 		importStylesheet("head","/styles/overlayScreen.css");
 		appendTemplateToElement("body", "/templates/imageAnnotation.html");
 		
-	//	document.getElementById("#imageAnnotation").style.transition = "all 2s";
 		$("#imageAnnotation").width(ratioWidth+10);
 		$("#imageAnnotation").height(ratioHeight+40);
 		$("#imageAnnotation").draggable();
@@ -285,7 +284,7 @@ function overlayScreen(onlyDraw){
 			highlightClick.style.zindex = "10000";
 	
 			//console.log("Clicked ", highlightClick)
-            setPhasersToTrue("highlightedAction");
+            setStatusToTrue("highlightedAction");
 		
 			//console.log(elements);
 			for(var element in elements){
@@ -360,7 +359,7 @@ function renderImage(imgURL){
 	toolTip.style.backgroundColor = "white";
 	toolTip.style.cursor="pointer";
 	toolTip.style.borderRadius="5px";
-    setPhasersToTrue("drewToolTip");
+    setStatusToTrue("drewToolTip");
 	
 	document.body.appendChild(toolTip);
 	$('#myToolTip').draggable();
@@ -370,12 +369,12 @@ function renderImage(imgURL){
 	$(".closeToolTip").unbind( "click" ).click(function() {
 		//toolTip.remove();
 		//toolTip.innerHTML = " ";
-        setPhasersToTrue("gotScreenshot");
+        setStatusToTrue("gotScreenshot");
         preActionQuestions(toolTip);
 	});
 	$("#retakeImage").unbind( "click" ).click(function(){
 		toolTip.remove();
-        setPhasersToFalse("drewToolTip");
+        setStatusToFalse("drewToolTip");
 		overlayScreen();
 	});
 	$("#imageBack").unbind( "click" ).click(function(){
@@ -624,7 +623,6 @@ function renderImage(imgURL){
 		var sx = localStorage.getItem("sx");
 		var sy = localStorage.getItem("sy");
 		if(sx && sy){
-			//console.log("in iff")
 			context.drawImage(myImg, sx, sy, myImg.width, myImg.height,0,0, ratioWidth*9/10, ratioHeight*9/10);
 		}
 		else{

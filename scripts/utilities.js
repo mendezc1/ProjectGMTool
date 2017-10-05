@@ -70,15 +70,14 @@ function addOnClicks(){
 			$("#slideout").toggleClass("clicked");
 			$("#GenderMagFrame").toggleClass("clicked");
             if ($( "#slideout" ).hasClass( "clicked" ) ) {
-                setPhasersToTrue("sliderIsOpen");
+                setStatusToTrue("sliderIsOpen");
             }
             else {
-                setPhasersToFalse("sliderIsOpen");
+                setStatusToFalse("sliderIsOpen");
             }            
 		});
 	}
     
-	//console.log("Done adding clicks");
 }
 
 function sidebarBody(){
@@ -89,7 +88,7 @@ function openSlider(){
 	if(!$("#slideout").hasClass("clicked")){
 		$("#slideout").addClass("clicked");
 		$("#GenderMagFrame").addClass("clicked");
-        setPhasersToTrue("sliderIsOpen");
+        setStatusToTrue("sliderIsOpen");
 	}
 }
 
@@ -97,6 +96,6 @@ function closeSlider(){
 	if($("#slideout").hasClass("clicked")){
 		$("#slideout").toggleClass("clicked");
 		$("#GenderMagFrame").toggleClass("clicked");
-        setPhasersToFalse("sliderIsOpen");
+        setStatusToFalse("sliderIsOpen");
 	}
 }

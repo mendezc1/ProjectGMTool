@@ -36,8 +36,7 @@ function drawSubgoal(subgoalId){
 			sidebarBody().find('#A0Q0risk').prop("checked", subgoal.facetValues.risk);   // not to be confused with risque
 			sidebarBody().find('#A0Q0tinker').prop("checked", subgoal.facetValues.tinker); //not to be confused with tinkle
 			sidebarBody().find('#A0Q0none').prop("checked", subgoal.facetValues.none); //not to be confused with nun
-			
-			console.log("Nun on board", subgoal.facetValues);
+	
 			sidebarBody().find('#A0Q0Response').html(subgoal.why);
 			sidebarBody().find('#A0Q0whyYes').hide();
 			sidebarBody().find('#editSubgoal').show();
@@ -54,10 +53,9 @@ function drawSubgoal(subgoalId){
                 if (whyText == "") {
                     whyText = sidebarBody().find('#A0Q0Response').html();
                 }
-                //console.log("WHY", whyText);
                 var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
                 saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
-                setPhasersToTrue("gotSubgoalQuestions");
+                setStatusToTrue("gotSubgoalQuestions");
                 var numActions = localStorage.getItem("numActions");
                 if(numActions > 0){
                     drawAction(numActions, subgoalId);
@@ -90,7 +88,7 @@ function drawSubgoal(subgoalId){
             //console.log("WHY", whyText);
 			var facets = {"motiv": sidebarBody().find("#A0Q0motiv").is(":checked"), "info": sidebarBody().find("#A0Q0info").is(":checked"), "selfE": sidebarBody().find("#A0Q0selfE").is(":checked"), "risk": sidebarBody().find("#A0Q0risk").is(":checked"), "tinker": sidebarBody().find("#A0Q0tinker").is(":checked")};
 			saveSubgoal(subgoalId, subName, yesNoMaybe, whyText, facets);
-			setPhasersToTrue("gotSubgoalQuestions");
+			setStatusToTrue("gotSubgoalQuestions");
 			var numActions = localStorage.getItem("numActions");
 			if(numActions > 0){
 				
@@ -120,7 +118,7 @@ function drawAction(actionNum, subgoalId){
 	var currArray = getSubgoalArrayFromLocal();
 		
 	if (statusIsTrue("gotActionName")) {
-		//console.log("was true");
+
 		if (actionNum >  currArray[subgoalId-1].actions.length) {
 			actionName = localStorage.getItem("currActionName");
 		}
@@ -131,7 +129,7 @@ function drawAction(actionNum, subgoalId){
         sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
         sidebarBody().find('#actionNameGot').show();
 		sidebarBody().find("#promptAction").show();
-		setPhasersToTrue("actionPromptOnScreen");
+		setStatusToTrue("actionPromptOnScreen");
 	}
 	//console.log("action/subgoal", actionNum, subgoalId, actionName); 
 	
@@ -151,16 +149,15 @@ function drawAction(actionNum, subgoalId){
             };
             
             if(actionName==""){
-                //console.log("STILL have a blank action name");
             }
 			//console.log("actionname", actionName);
 			saveVarToLocal("currActionName", actionName);
-			setPhasersToTrue("gotActionName");
+			setStatusToTrue("gotActionName");
 			sidebarBody().find('#getActionName').hide();
 			sidebarBody().find('#actionNameGot').html("<b>Ideal Action: " + actionName + "</b>");
 			sidebarBody().find('#actionNameGot').show();
 			sidebarBody().find("#promptAction").show();
-			setPhasersToTrue("actionPromptOnScreen");
+			setStatusToTrue("actionPromptOnScreen");
             
             if(actionNum >  currArray[subgoalId-1].actions.length){
                 //console.log("sadness sandwhich", actionNum, currArray[subgoalId-1].actions.length, actionItem);
@@ -168,7 +165,6 @@ function drawAction(actionNum, subgoalId){
                 
             }
             else{
-                //console.log("NO SANDWICH TODAY!!!!!!!!!", actionItem);
             }
             sidebarBody().find("#editAction").show();
             sidebarBody().find("#editAction").unbind( "click" ).click(function(){
@@ -176,7 +172,7 @@ function drawAction(actionNum, subgoalId){
                 sidebarBody().find('#getActionName').show();
                 sidebarBody().find('#actionNamePrompt').hide();
                 sidebarBody().find("#promptAction").hide();
-                setPhasersToFalse("actionPromptOnScreen");
+                setStatusToFalse("actionPromptOnScreen");
             });
         }
 	});

@@ -38,7 +38,7 @@ function setup (id, file) {
 		
 		//Add the onclick to the "Start Walkthrough" button	
 		$(id).contents().find('body').children('#startGenderMagButton').off('click').on('click', function() {
-            setPhasersToTrue("startedGM");
+            setStatusToTrue("startedGM");
 			preWalkthrough("#GenderMagFrame", "./templates/popup.html");
 		});
 	}

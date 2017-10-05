@@ -12,12 +12,7 @@
  */
 
 function preWalkthrough (id, file) {
-	/*
-	QUALITY CODE INCOMING
-	localStorage.setItem("actionNum", Infinity);
-	var GRA= localStorage.getItem("actionNum");
-	console.log("get rekt alannah", GRA);
-	*/
+
 	var el = $(id).contents().find('body');
 	el.empty();
 	appendTemplateToElement(el,file);
@@ -95,9 +90,7 @@ function nukeButtonOnclick () {
 		});	
 		
 		sidebarBody().find("#sliderFinalYes").unbind("click").click(function () {
-			localStorage.clear(); //NUKED
-			//nuclear fallout
-			//war war never changes...
+			localStorage.clear(); 
 			location.reload();
 		});
 		
@@ -193,7 +186,7 @@ function handlePreWalkthroughInfo () {
 			//Get and save team name
 			var teamName = sidebarBody().find("#teamInput").val();
 			saveVarToLocal("teamName", teamName);
-            setPhasersToTrue("gotTeamName");
+            setStatusToTrue("gotTeamName");
 			
 			//Display team name and edit button
 			sidebarBody().find("#teamName").html("<b>Team:</b> "+ teamName);
@@ -241,7 +234,7 @@ function handlePreWalkthroughInfo () {
 			//Get and save persona selection
 			var personaName = sidebarBody().find("#personaSelection").val();
 			saveVarToLocal("personaName", personaName);
-            setPhasersToTrue("gotPersonaName");
+            setStatusToTrue("gotPersonaName");
 			
 			//Display persona selection and related info
 			sidebarBody().find("#personaName").html("<b>Persona:</b> " + personaName);
@@ -311,8 +304,8 @@ function handlePreWalkthroughInfo () {
 			//Get and save scenario name
 			var scenarioName = sidebarBody().find("#scenarioInput").val();
 			saveVarToLocal("scenarioName", scenarioName);
-            setPhasersToTrue("gotScenarioName");
-            setPhasersToTrue("finishedPrewalkthrough");
+            setStatusToTrue("gotScenarioName");
+            setStatusToTrue("finishedPrewalkthrough");
 			
 			//Display scenario and related info
 			sidebarBody().find("#scenarioName").html("<b>Scenario:</b> " + scenarioName);
@@ -393,7 +386,7 @@ function handlePreWalkthroughInfo () {
                 sidebarBody().find("#editPersona").hide();
                 sidebarBody().find("#editScenario").hide();
                 var subgoalId = localStorage.getItem("numSubgoals");
-                setPhasersToTrue("gotSubgoalName");
+                setStatusToTrue("gotSubgoalName");
                 var subName = sidebarBody().find("#subgoalInput").val();
                 localStorage.setItem("currSubgoalName", subName);;
                 if(subgoalId == undefined){

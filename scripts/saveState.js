@@ -10,41 +10,28 @@ function saveSubgoal (id, name, yesnomaybe, whyText, facets) {
 		facetValues: facets,
 		actions: []
 	};
-	//console.log("incoming subgoal", subgoal, id, subgoalArray.length);
+
 	if(id > subgoalArray.length){
 		var subArr = getSubgoalArrayFromLocal();
 		if (!subArr) {
 			subArr = subgoalArray;
 		}
 		subArr[id-1] = subgoal;
-		//console.log("subgoalArray in if: ", subArr);
-		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
-	
-	//Test that it worked
-	//var retrieved = JSON.parse(localStorage.getItem('subgoalArray'));
-	//console.log("subgoalArray local: ", retrieved);
-	
+		localStorage.setItem("subgoalArray", JSON.stringify(subArr));	
         addToSandwich("subgoal",subgoal);
 	}
 	else{
 		var subArr = getSubgoalArrayFromLocal();
 		subArr[id-1] = subgoal;
-		//console.log("subgoalArray in else: ", subArr);
-		localStorage.setItem("subgoalArray", JSON.stringify(subArr));
-		//console.log("nothing to see here");
-		
+		localStorage.setItem("subgoalArray", JSON.stringify(subArr));		
 	}
 }
 
 function addToSandwich(type, item){
-	//console.log("servin' up a(n) " +type+ " sandwich");
 	
-	if(!type.localeCompare("subgoal")){ 		//It's a subgoal
+	if(!type.localeCompare("subgoal")){ 		
 		var subArr = getSubgoalArrayFromLocal();
-        //console.log("subArr rn: ", subArr);
 		drawSubgoal(item.id);
-		//var sideSubgoal = '<div stateVar=1 superCoolAttr=' + item.id + ' style="border:2px solid CornFlowerBlue; margin:5px;" id="sideSubgoal' + item.id + '">Subgoal ' + item.id + ': ' + item.name + '</div>';
-        //[Ignore this commented stuff Chris] uncomment for adding arrow pic. Also: will have to expand when first action is drawn, cause the below version starts out with a collapsed subgoal
         var arrowSRC=chrome.extension.getURL("images/arrow_collapsed.png");
 		var sideSubgoal = '<div stateVar=0 superCoolAttr=' + item.id + ' style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:blue;text-decoration:underline;margin:5px;" id="sideSubgoal' + item.id + '"> <img id="sideSubgoalImg' + item.id + '" src="' + arrowSRC + '"></img> Subgoal ' + item.id + ': ' + item.name + '</div>';
 		if (item.id >= subArr.length) {
@@ -52,11 +39,9 @@ function addToSandwich(type, item){
             sidebarBody().find('#subgoalList').children().each(function () {
                 var currId = Number(this.getAttribute('supercoolattr'));
                 if (item.id == currId) {
-                    //console.log("in finding if", currId, typeof(currId));
                     foundIt = true;
                 }
             });
-            //console.log("found: ", foundIt);
             if (!foundIt) {
                 sidebarBody().find("#subgoalList").append(sideSubgoal);
             }
@@ -69,62 +54,47 @@ function addToSandwich(type, item){
 
 			
 	}
-	else if(!type.localeCompare("idealAction") && item.name){ 	//It's an action that got its name from the slider
+	else if(!type.localeCompare("idealAction") && item.name){ 	
 		var sideAction = '<div superCoolAttr="' + item.subgoalId + '-' + item.actionId + '" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent:25px;color:blue;text-decoration:underline;margin:5px;" id="sideAction' + item.subgoalId + '-' + item.actionId + '">Action ' + item.actionId + ': ' + item.name + '</div>';
 		var sideActionIdToFind = item.subgoalId + "-" + item.actionId;
         var sideActionIdForClick = "#sideAction" + item.subgoalId + "-" + item.actionId;
-		//console.log(sideActionIdToFind, typeof(sideActionIdToFind));
 		var foundIt = false;
 		sidebarBody().find('#subgoalList').children().each(function () {
 			var currId = this.getAttribute('supercoolattr');
-			//console.log(currId, typeof(currId));
 			if (! sideActionIdToFind.localeCompare(currId)) {
-				//console.log("in finding if");
 				foundIt = true;
 			}
 		});
 		if (!foundIt) {
 			sidebarBody().find("#subgoalList").append(sideAction);
-			//console.log("added to sammich", item.actionId, item.name);
 			sideSubgoalExpandy(item.subgoalId, "expand");
             var actionNum = localStorage.getItem("numActions");
             actionNum++;
             localStorage.setItem("numActions", actionNum);
 		}
         else {
-            //Just change the name of the action in the sandwich menu and the subgoal array (if it exists)
             sidebarBody().find(sideActionIdForClick).html('Action ' + item.actionId + ': ' + item.name);
             var currArray = getSubgoalArrayFromLocal();
-            /*if (currArray[item.subgoalId - 1].actions.length > 0) {
-                currArray[item.subgoalId - 1].actions[item.actionId - 1].name = item.name;
-                saveVarToLocal("subgoalArray", currArray);
-            }*/
-            //console.log("just changed the name");
         }
 		
 		
 		sidebarBody().find(sideActionIdForClick).unbind( "click" ).click(function(){
-			//console.log("clicked the action", this.getAttribute('supercoolattr'));
 			drawAction(item.actionId, item.subgoalId);
-			//sidebarBody().find('#actionNameInput').html("Camera action");
-			//sidebarBody().find('#submitActionName').click();
 		});
 	}
-	else if(!type.localeCompare("idealAction") && !item){ 	//It's an action that got its name from the tooltip prompt
+	else if(!type.localeCompare("idealAction") && !item){ 	
 		var subgoalId = localStorage.getItem("numSubgoals");
 		var actionId = localStorage.getItem("numActions");
 		var actionName = localStorage.getItem("currActionName");
 		var sideAction = '<div superCoolAttr="' + subgoalId + '-' + actionId + '"style=white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent:25px;color:blue;text-decoration:underline;margin:5px;" id="sideAction' + subgoalId + '-' + actionId + '">Action ' + actionId + ': ' + actionName + '</div>';
 		sidebarBody().find("#subgoalList").append(sideAction);
-		//console.log("added to sammich", actionId, actionName);
 		var actionNum = localStorage.getItem("numActions");
 		actionNum++;
 		localStorage.setItem("numActions", actionNum);
         var sideActionIdToFind = "#sideAction" + subgoalId + "-" + actionId;
 		sidebarBody().find(sideActionIdToFind).unbind( "click" ).click(function(){
 			drawAction(actionId, subgoalId);
-			//sidebarBody().find('#actionNameInput').html("Camera action");
-			//sidebarBody().find('#submitActionName').click();
+		
 		});
 	}
     
@@ -140,11 +110,9 @@ function addToSandwich(type, item){
 function savePreIdealAction (name, yesnomaybe, whyText, facets) {
     
 	var currArray = getSubgoalArrayFromLocal();
-    //console.log(currArray);
 	var targetSubgoal = currArray[(currArray.length - 1)];
-	//console.log("targetSubgoal", targetSubgoal);
 	var preIdealAction = {
-		actionId: targetSubgoal.actions.length + 1, //Check this when done
+		actionId: targetSubgoal.actions.length + 1, 
 		name: name,
 		subgoalId: targetSubgoal.id, 
 		ynm: yesnomaybe,
@@ -152,8 +120,7 @@ function savePreIdealAction (name, yesnomaybe, whyText, facets) {
 		facetValues: facets
 	};
 	
-	//console.log("incoming preAction", preIdealAction);
-    //Save to local so that we can get it later and stick it in the array with its corresponding postAction
+   //Save to local so that we can get it later and stick it in the array with its corresponding postAction
     saveVarToLocal("currPreAction", preIdealAction);
 	localStorage.setItem("inMiddleOfAction", "true");		//So we know to retrieve the in-between state
     
@@ -163,7 +130,6 @@ function savePreIdealAction (name, yesnomaybe, whyText, facets) {
 //Pre: subgoalArray isn't empty, and the current preAction isn't null
 function savePostIdealAction (name, yesnomaybe, whyText, facets) {
     var currPreAction = getVarFromLocal("currPreAction");
-    //console.log("incoming preAction", currPreAction);
 	var postIdealAction = {
 		actionId: currPreAction.actionId,  //Check this when done
 		name: name,
@@ -173,8 +139,7 @@ function savePostIdealAction (name, yesnomaybe, whyText, facets) {
 		facetValues: facets
 	};
 	
-	//console.log("incoming postAction", postIdealAction);
-    //Put them together and save
+	//Put them together and save
     glueActionsAndSave(currPreAction, postIdealAction);
 }
 
@@ -187,9 +152,7 @@ function savePostIdealAction (name, yesnomaybe, whyText, facets) {
 function glueActionsAndSave (preAction, postAction) {
     
     //Get the associated image's URL from local
-    var currImgURL = localStorage.getItem("currImgURL");
-    //console.log(currImgURL);
-    
+    var currImgURL = localStorage.getItem("currImgURL"); 
     //Make the object
     var idealAction = {
         id: preAction.actionId,
@@ -281,7 +244,6 @@ function getSubgoalArrayFromLocal() {
 	
 //Happens before refresh
 $( window ).unload(function() {
-	console.log("UNLOCKED AND UNLOADED");
 	var sidebarHTML = sidebarBody().find('#subgoalList').html();
 	//console.log(sidebarHTML);
 	localStorage.setItem('sidebarHTML', sidebarHTML);
@@ -341,7 +303,6 @@ function reloadSandwich () {
 		console.log("Sandwich menu loaded");
 	}
 	else {
-		//console.log("NOPE");
 	}
     
 }
@@ -426,7 +387,7 @@ function sideSubgoalExpandy (subgoalId, whatToDo) {
         }
         
         else {
-            //console.log("Something in expandy went wrong... check your stateVar or the function call");
+        
         }
         
     }
@@ -493,9 +454,7 @@ function showMeTheStringYNM (targetId, targetObj) {
 			}
 			propsFound++;
 		}
-	}
-	//console.log("Incoming YNM string", myString);
-	
+	}	
 	sidebarBody().find(targetId).html(myString);
 	
 }
@@ -559,8 +518,6 @@ function showMeTheStringFacets (targetId, targetObj) {
 		myString = "none";
 	}
 	
-	
-	//console.log("Incoming facets string", myString);
 	
 	sidebarBody().find(targetId).html(myString);
 	

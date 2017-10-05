@@ -1,4 +1,4 @@
-var statusObject = {							//Now we just need a priviledge object. 
+var statusObject = {							
 	sliderIsOpen: "",                           //set for first time in utilities.js
 	startedGM: "",                              //set in setup.js
 	gotTeamName: "",                            //set in prewalkthrough.js
@@ -53,7 +53,7 @@ function statusIsTrue(keyToCheck) {
 	} 
 }
 
-function setPhasersToTrue (keyToChange) {
+function setStatusToTrue (keyToChange) {
 	var obj = getStatusObject();
 	if (obj) {
 		obj[keyToChange] = "true";
@@ -65,7 +65,7 @@ function setPhasersToTrue (keyToChange) {
 	} 
 }
 
-function setPhasersToFalse (keyToChange) {
+function setStatusToFalse (keyToChange) {
 	var obj = getStatusObject();
 	if (obj) {
 		obj[keyToChange] = "false";
@@ -77,13 +77,12 @@ function setPhasersToFalse (keyToChange) {
 	} 
 }
 
-function setPhasersToStun (keyToChange) {			//Sets the key's value to an empty string. This one's for you, Chris.
+function setStatusToStop (keyToChange) {			
 	var obj = getStatusObject();
 	if (obj) {
 		obj[keyToChange] = "";
 		saveStatusObject(obj);
-        //console.log("set " + keyToChange + " to stun");
-	}
+ 	}
 	else {
 		//console.log("statusObject doesn't exist in local");
 	} 
